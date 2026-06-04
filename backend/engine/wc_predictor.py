@@ -22,9 +22,10 @@ from collections import Counter
 sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 from data.mysql_client import query
 from engine.wc_data import (
-    analyze_squad, _country_name, COUNTRY_MAP,
+    _country_name, COUNTRY_MAP,
     LEAGUE_QUALITY, DOMESTIC_LEAGUE,
 )
+from engine.wc_elo_adapter import analyze_squad_elo, clear_elo_cache
 
 # ============================================================
 # Constants
@@ -192,6 +193,11 @@ def decompose_elo(combined_elo, attack_quality, defense_quality):
 
 # Module-level cache for form data (cleared manually if needed)
 _FORM_CACHE = {}
+
+def clear_all_caches():
+    """Clear all caches (form + Elo)."""
+    clear_form_cache()
+    clear_elo_cache()
 
 def clear_form_cache():
     """Clear the form cache (e.g., after updating match results)."""
@@ -566,8 +572,8 @@ def predict_wc_match(home_team, away_team, context=None,
         context = {"stage": "group", "matchday": 1, "is_host": False, "in_host_country": True}
 
     # === Layer 1: Player Elo ===
-    analysis_h = analysis_home if analysis_home else analyze_squad(home_team)
-    analysis_a = analysis_away if analysis_away else analyze_squad(away_team)
+    analysis_h = analysis_home if analysis_home else analyze_squad_elo(home_team)
+    analysis_a = analysis_away if analysis_away else analyze_squad_elo(away_team)
 
     player_elo_h = analysis_h["elo_bonus"]
     player_elo_a = analysis_a["elo_bonus"]
@@ -655,7 +661,7 @@ def predict_wc_match(home_team, away_team, context=None,
         "away_team": away_team,
         "stage": context.get("stage", "group"),
         "matchday": context.get("matchday", 1),
-        "model_version": "wc_v2_calibrated",
+        "model_version": "wc_v3_elo",
 
         "expected_goals": result["expected_goals"],
         "wdl": {
@@ -813,5 +819,7 @@ def predict_all_group_matches():
             print(f"[WC_PREDICTOR] Error predicting {home} vs {away}: {e}")
 
     return predictions
+
+
 
 
