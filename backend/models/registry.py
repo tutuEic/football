@@ -1,6 +1,8 @@
 # -*- coding: utf-8 -*-
-"""
-Model Registry — version management, loading, and A/B testing.
+"""Model Registry — version management, loading, and A/B testing.
+
+Paths are stored as filenames relative to MODEL_DIR so the registry
+is portable across machines and git-friendly.
 """
 import json, os, time
 from pathlib import Path
@@ -17,6 +19,12 @@ class ModelRegistry:
         self.model_dir = Path(model_dir) if model_dir else MODEL_DIR
         self.model_dir.mkdir(parents=True, exist_ok=True)
         self.registry = self._load_registry()
+        self._migrate_paths()
+        self._ensure_active()
+
+    # ------------------------------------------------------------------
+    # Persistence
+    # ------------------------------------------------------------------
 
     def _load_registry(self):
         if REGISTRY_FILE.exists():
@@ -29,9 +37,56 @@ class ModelRegistry:
             encoding='utf-8'
         )
 
+    # ------------------------------------------------------------------
+    # Path helpers
+    # ------------------------------------------------------------------
+
+    @staticmethod
+    def _to_filename(path: str) -> str:
+        """Store only the filename, never an absolute path."""
+        return Path(path).name
+
+    def resolve(self, filename: str) -> Path:
+        """Resolve a registry filename back to an absolute path."""
+        return self.model_dir / filename
+
+    def _migrate_paths(self):
+        """One-time migration: convert legacy absolute paths to filenames."""
+        changed = False
+        for key, versions in self.registry.get("models", {}).items():
+            for entry in versions:
+                old = entry.get("path", "")
+                if old and (Path(old).is_absolute() or "/" in old or "\\" in old):
+                    entry["path"] = self._to_filename(old)
+                    changed = True
+        for key, entry in list(self.registry.get("active", {}).items()):
+            old = entry.get("path", "")
+            if old and (Path(old).is_absolute() or "/" in old or "\\" in old):
+                entry["path"] = self._to_filename(old)
+                changed = True
+        if changed:
+            self._save_registry()
+            print("[registry] Migrated absolute paths to filenames")
+
+    def _ensure_active(self):
+        """Auto-activate the latest version for any key that has no active model."""
+        changed = False
+        for key, versions in self.registry.get("models", {}).items():
+            if key not in self.registry["active"] and versions:
+                latest = versions[-1]
+                self.registry["active"][key] = latest
+                changed = True
+        if changed:
+            self._save_registry()
+            print("[registry] Auto-activated latest models for keys without an active entry")
+
+    # ------------------------------------------------------------------
+    # Core operations
+    # ------------------------------------------------------------------
+
     def register_model(self, model_type: str, league: str, path: str,
                        metrics: dict, metadata: dict = None):
-        """Register a trained model."""
+        """Register a trained model.  *path* may be absolute or a filename."""
         version = datetime.now().strftime("%Y%m%d_%H%M%S")
         key = f"{model_type}_{league}"
 
@@ -40,7 +95,7 @@ class ModelRegistry:
 
         entry = {
             "version": version,
-            "path": str(path),
+            "path": self._to_filename(path),
             "metrics": metrics,
             "metadata": metadata or {},
             "registered_at": datetime.now().isoformat(),

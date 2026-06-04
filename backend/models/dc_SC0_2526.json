@@ -1,0 +1,63 @@
+{
+  "league": "SC0",
+  "seasons": [
+    "2425",
+    "2526"
+  ],
+  "model_type": "dixon_coles",
+  "teams": [
+    "Aberdeen",
+    "Celtic",
+    "Dundee",
+    "Dundee United",
+    "Falkirk",
+    "Hearts",
+    "Hibernian",
+    "Kilmarnock",
+    "Livingston",
+    "Motherwell",
+    "Rangers",
+    "Ross County",
+    "St Johnstone",
+    "St Mirren"
+  ],
+  "params": {
+    "attack": {
+      "Aberdeen": 0.8551673016602231,
+      "Celtic": 1.580505801657326,
+      "Dundee": 0.9797418994286398,
+      "Dundee United": 0.9169321799036961,
+      "Falkirk": 1.0071394677078982,
+      "Hearts": 1.133047451048743,
+      "Hibernian": 1.1694119500613818,
+      "Kilmarnock": 0.9322048524816201,
+      "Livingston": 0.7800777221789429,
+      "Motherwell": 1.029261843369591,
+      "Rangers": 1.4244002790107821,
+      "Ross County": 0.6878163877653639,
+      "St Johnstone": 0.7157741009813121,
+      "St Mirren": 0.7885187627444797
+    },
+    "defence": {
+      "Aberdeen": -0.8111566788906017,
+      "Celtic": -1.29770570222441,
+      "Dundee": -0.610008649179488,
+      "Dundee United": -0.8251090037308826,
+      "Falkirk": -0.7740951672381103,
+      "Hearts": -1.1553369317032607,
+      "Hibernian": -1.019524617139596,
+      "Kilmarnock": -0.6571836088736466,
+      "Livingston": -0.558435471500846,
+      "Motherwell": -0.9677976164885644,
+      "Rangers": -1.0998037517837116,
+      "Ross County": -0.6808503057543088,
+      "St Johnstone": -0.6385326027019596,
+      "St Mirren": -0.8327596423713511
+    },
+    "rho": -0.005233258213138818,
+    "gamma": 0.28700495530320097,
+    "log_likelihood": -1317.877286811314,
+    "n_teams": 14.0,
+    "n_matches": 456.0
+  }
+}

@@ -2,11 +2,13 @@
 """Prediction API v3 with caching and confidence scores."""
 from fastapi import APIRouter, Query
 from pydantic import BaseModel
-import sys, os, time, hashlib, json
+import sys, os, time, hashlib, json, logging, uuid
 
 sys.path.insert(0, os.path.dirname(os.path.dirname(__file__)))
 from engine.predictor import predict_match as dc_predict, calibrate_wdl
 from engine.full_predictor import full_prediction_v3
+
+logger = logging.getLogger(__name__)
 # CL ????? (????????)
 def _cl_predict(home_team, away_team):
     """?? Elo + ???????"""
@@ -98,6 +100,25 @@ def _set_cached(key: str, data: dict):
             del _cache[k]
 
 
+def _prediction_error(message: str, exc: Exception, **context) -> dict:
+    """Log a prediction failure with a stable id and return a client-safe error."""
+    error_id = uuid.uuid4().hex[:12]
+    logger.exception(
+        "%s error_id=%s context=%s",
+        message,
+        error_id,
+        context,
+        exc_info=exc,
+    )
+    return {
+        "status": "error",
+        "message": message,
+        "error_id": error_id,
+        "error_type": type(exc).__name__,
+        "detail": str(exc),
+    }
+
+
 class PredictRequest(BaseModel):
     home_team: str
     away_team: str
@@ -144,7 +165,16 @@ def predict(req: PredictRequest):
                     "models_used": ens.get("models_used", []),
                     "weights": ens.get("weights", {}),
                 }
-        except Exception:
+        except Exception as e:
+            logger.warning(
+                "Ensemble prediction failed; falling back to Dixon-Coles. "
+                "home=%s away=%s league=%s error=%s",
+                req.home_team,
+                req.away_team,
+                req.league,
+                e,
+                exc_info=True,
+            )
             result = dc_predict(req.home_team, req.away_team, req.league)
         # Apply probability calibration
         result["raw_home_win"] = result["home_win"]
@@ -156,7 +186,14 @@ def predict(req: PredictRequest):
         _set_cached(key, response)
         return response
     except Exception as e:
-        return {"status": "error", "message": "Prediction failed"}
+        return _prediction_error(
+            "Prediction failed",
+            e,
+            endpoint="/predict",
+            home_team=req.home_team,
+            away_team=req.away_team,
+            league=req.league,
+        )
 
 
 @router.post("/predict/full")
@@ -182,13 +219,28 @@ def predict_full(req: PredictRequest, simulations: int = Query(default=2000, ge=
             odds_hist = find_similar_odds_matches(req.home_team, req.away_team, req.league)
             if odds_hist:
                 result["odds_history"] = odds_hist
-        except:
-            pass
+        except Exception as e:
+            logger.warning(
+                "Odds history lookup failed. home=%s away=%s league=%s error=%s",
+                req.home_team,
+                req.away_team,
+                req.league,
+                e,
+                exc_info=True,
+            )
         response = {"status": "ok", **result}
         _set_cached(key, response)
         return response
     except Exception as e:
-        return {"status": "error", "message": "Full prediction failed"}
+        return _prediction_error(
+            "Full prediction failed",
+            e,
+            endpoint="/predict/full",
+            home_team=req.home_team,
+            away_team=req.away_team,
+            league=req.league,
+            simulations=simulations,
+        )
 
 
 

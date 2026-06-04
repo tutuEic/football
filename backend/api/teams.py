@@ -1,6 +1,6 @@
 """球队 API — 阵容 / 统计 / 对比"""
 from fastapi import APIRouter, Query
-import sys, os
+import sys, os, logging, uuid
 sys.path.insert(0, os.path.dirname(os.path.dirname(__file__)))
 from data.match_repo import get_team_names
 from engine.predictor import load_model
@@ -8,6 +8,7 @@ from engine.player_ratings import get_club_squad_rated
 from data.tm_repo import search_club
 
 router = APIRouter()
+logger = logging.getLogger(__name__)
 
 
 @router.get("/teams")
@@ -29,7 +30,8 @@ def team_stats(team_name: str, league: str = Query(default="E0")):
         if strength:
             result["attack"] = round(strength["attack"], 3)
             result["defence"] = round(strength["defence"], 3)
-    except Exception:
+    except Exception as e:
+        logger.warning("Strength calc failed for %s: %s", team_name, e, exc_info=True)
         result["attack"] = None
         result["defence"] = None
 

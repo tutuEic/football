@@ -14,14 +14,18 @@ sys.path.insert(0, PROJECT_ROOT)
 
 import requests
 import json
+import logging
+import re
 import time
 import threading
 from datetime import datetime, date
 from data.mysql_client import query, execute
+from data.http_utils import safe_get
 import mysql.connector
 
 DB = "football_pred"
 HEADERS = {}  # Deprecated: use http_utils.get_session()
+logger = logging.getLogger(__name__)
 
 # ============================================================
 #  Phase 1: TheSportsDB API  (free tier, key required)
@@ -41,6 +45,8 @@ def fetch_livescore_api():
     url = f"{SPORTSDB_BASE}/{SPORTSDB_API_KEY}/latestsoccer.php"
     try:
         r = safe_get(url, label="thesportsdb")
+        if r is None:
+            return []
         if r.status_code != 200:
             print(f"[live] API error: {r.status_code}")
             return []
@@ -70,7 +76,7 @@ def fetch_flashscore_live():
         r = safe_get(url, headers={
             "X-Requested-With": "XMLHttpRequest",
         }, label="flashscore-live")
-        if r.status_code == 200:
+        if r is not None and r.status_code == 200:
             return parse_flashscore_response(r.text)
     except Exception as e:
         print(f"[live] FlashScore fetch failed: {e}")
@@ -100,6 +106,105 @@ def parse_flashscore_response(text):
     return matches
 
 
+def _safe_int(value, default=None):
+    if value is None or value == "":
+        return default
+    try:
+        return int(float(str(value).strip().replace("'", "")))
+    except (TypeError, ValueError):
+        return default
+
+
+def _normalize_team_name(name: str) -> str:
+    return re.sub(r"[^a-z0-9]+", "", (name or "").lower())
+
+
+def _parse_minute(value):
+    if value is None:
+        return 0
+    text = str(value)
+    if text.lower() in {"ht", "half time"}:
+        return 45
+    if text.lower() in {"ft", "full time", "match finished"}:
+        return 90
+    match = re.search(r"\d+", text)
+    return _safe_int(match.group(0), 0) if match else 0
+
+
+def _status_from_source(raw_status, minute, home_score, away_score):
+    status = (raw_status or "").strip().lower()
+    if status in {"match finished", "finished", "ft", "full time", "after extra time"}:
+        return "finished"
+    if status in {"not started", "scheduled", "ns"}:
+        return "scheduled"
+    if status in {"postponed", "cancelled", "canceled", "abandoned"}:
+        return "postponed"
+    if minute > 0 or home_score is not None or away_score is not None:
+        return "live"
+    return "today"
+
+
+def _extract_live_match(raw: dict) -> dict | None:
+    """Normalize a live-score provider row into the local shape."""
+    home = raw.get("home_team") or raw.get("strHomeTeam") or raw.get("AE")
+    away = raw.get("away_team") or raw.get("strAwayTeam") or raw.get("AF")
+    if not home or not away:
+        return None
+
+    home_score = _safe_int(
+        raw.get("home_score", raw.get("intHomeScore", raw.get("AG")))
+    )
+    away_score = _safe_int(
+        raw.get("away_score", raw.get("intAwayScore", raw.get("AH")))
+    )
+    raw_status = (
+        raw.get("status")
+        or raw.get("strStatus")
+        or raw.get("strProgress")
+        or raw.get("AX")
+        or ""
+    )
+    minute = _parse_minute(raw.get("minute") or raw.get("intMinute") or raw.get("strProgress") or raw.get("AX"))
+    status = _status_from_source(raw_status, minute, home_score, away_score)
+
+    return {
+        "home_team": home,
+        "away_team": away,
+        "home_key": _normalize_team_name(home),
+        "away_key": _normalize_team_name(away),
+        "home_score": home_score,
+        "away_score": away_score,
+        "minute": minute,
+        "status": status,
+        "raw_status": raw_status,
+    }
+
+
+def _best_live_match(fixture: dict, live_matches: list[dict]) -> dict | None:
+    home_key = _normalize_team_name(fixture.get("home_team"))
+    away_key = _normalize_team_name(fixture.get("away_team"))
+    for match in live_matches:
+        if match["home_key"] == home_key and match["away_key"] == away_key:
+            return match
+        # Provider naming often includes suffixes; allow contained-name matching.
+        if (
+            home_key and away_key
+            and (home_key in match["home_key"] or match["home_key"] in home_key)
+            and (away_key in match["away_key"] or match["away_key"] in away_key)
+        ):
+            return match
+    return None
+
+
+def _has_fixture_changed(fixture: dict, live_match: dict) -> bool:
+    return (
+        fixture.get("home_score") != live_match["home_score"]
+        or fixture.get("away_score") != live_match["away_score"]
+        or fixture.get("minute") != live_match["minute"]
+        or fixture.get("status") != live_match["status"]
+    )
+
+
 # ============================================================
 #  Main polling loop
 # ============================================================
@@ -127,25 +232,41 @@ def poll_live_scores():
     if not live_data:
         live_data = fetch_flashscore_live()
 
-    #  4. Update DB with scores (some may already be finished)
-    conn = mysql.connector.connect(
-        host=os.getenv("MYSQL_HOST", "127.0.0.1"), port=int(os.getenv("MYSQL_PORT", "3306")),
-        user=os.getenv("MYSQL_USER", "root"), password=os.getenv("MYSQL_PASS", ""),
-        database=DB, charset="utf8mb4"
-    )
-    cur = conn.cursor()
+    normalized_live = []
+    for row in live_data:
+        match = _extract_live_match(row)
+        if match:
+            normalized_live.append(match)
+
     updated = []
 
     for fix in fixtures:
-        #  Simulate score progression for now (when no real data available)
-        # In production, match fix['home_team'] with live_data
-        pass
+        live_match = _best_live_match(fix, normalized_live)
+        if not live_match:
+            continue
+        if live_match["home_score"] is None or live_match["away_score"] is None:
+            continue
+        if _has_fixture_changed(fix, live_match):
+            check_and_update_status(
+                fix["id"],
+                live_match["home_score"],
+                live_match["away_score"],
+                live_match["minute"],
+                live_match["status"],
+            )
+            updated.append({
+                **fix,
+                "home_score": live_match["home_score"],
+                "away_score": live_match["away_score"],
+                "minute": live_match["minute"],
+                "status": live_match["status"],
+            })
 
-    conn.commit()
-    cur.close()
-    conn.close()
+    if updated:
+        logger.info("[live] Updated %d live fixtures", len(updated))
 
-    #  If no live data available, at least return today's fixture list return fixtures
+    # Always return the latest local state so WebSocket clients stay in sync.
+    return get_today_status()
 
 
 def check_and_update_status(fixture_id, home_score, away_score, minute, status):
@@ -207,13 +328,7 @@ class LiveScorePoller:
     def _poll_loop(self):
         while self.running:
             try:
-                today = date.today().isoformat()
-                fixtures = query("""
-                    SELECT id, league_code, home_team, away_team, match_time,
-                           home_score, away_score, status, minute
-                    FROM fixtures
-                    WHERE match_date = %s AND status IN ('scheduled', 'today', 'live')
-                """, [today], db=DB)
+                fixtures = poll_live_scores()
 
                 if fixtures:
                     #  Notify WebSocket clients with current state
@@ -233,7 +348,7 @@ class LiveScorePoller:
 
 
 # Singleton
-poller = LiveScorePoller(interval=60)
+poller = LiveScorePoller(interval=int(os.getenv("LIVE_POLL_INTERVAL", "300")))
 
 
 def get_today_status():

@@ -7,18 +7,42 @@ Fixtures API - ???? + ?? + ??
 from fastapi import APIRouter, Query
 from pydantic import BaseModel
 from typing import Optional
-import sys, os
+import sys, os, logging, uuid
 
 sys.path.insert(0, os.path.dirname(os.path.dirname(__file__)))
 from data.mysql_client import query
 
 router = APIRouter()
+logger = logging.getLogger(__name__)
+
+def _api_error(message, exc, **context):
+    """Log a failure with a stable id and return a client-safe error."""
+    error_id = uuid.uuid4().hex[:12]
+    logger.exception("%s error_id=%s context=%s", message, error_id, context, exc_info=exc)
+    return {"status": "error", "message": message, "error_id": error_id,
+            "error_type": type(exc).__name__, "detail": str(exc)}
 
 
 def _get_prediction(home_team, away_team, league):
-    """?????"""
+    """Predict a fixture using the appropriate model for the league."""
     try:
-        if league == "CL":
+        if league == "WC2026":
+            from engine.wc_predictor import predict_wc_match
+            pred = predict_wc_match(home_team, away_team, {
+                "stage": "group", "matchday": 1,
+                "is_host": False, "in_host_country": True,
+            })
+            wdl = pred["wdl"]
+            eg = pred["expected_goals"]
+            return {
+                "home_win": wdl["home_win"],
+                "draw": wdl["draw"],
+                "away_win": wdl["away_win"],
+                "exp_home_goals": eg["home"],
+                "exp_away_goals": eg["away"],
+                "model": "wc_predictor",
+            }
+        elif league == "CL":
             from api.predict import _cl_predict
             return _cl_predict(home_team, away_team)
         else:
@@ -34,6 +58,10 @@ def _get_prediction(home_team, away_team, league):
                 "models_used": ens.get("models_used", []),
             }
     except Exception as e:
+        logger.warning(
+            "Fixture prediction failed for %s vs %s [%s]: %s",
+            home_team, away_team, league, e, exc_info=True,
+        )
         return None
 
 

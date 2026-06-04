@@ -1,0 +1,69 @@
+{
+  "league": "G1",
+  "seasons": [
+    "2425",
+    "2526"
+  ],
+  "model_type": "dixon_coles",
+  "teams": [
+    "AEK",
+    "Aris",
+    "Asteras Tripolis",
+    "Athens Kallithea",
+    "Atromitos",
+    "Kifisia",
+    "Lamia",
+    "Larisa",
+    "Levadeiakos",
+    "OFI Crete",
+    "Olympiakos",
+    "PAOK",
+    "Panathinaikos",
+    "Panetolikos",
+    "Panserraikos",
+    "Volos NFC"
+  ],
+  "params": {
+    "attack": {
+      "AEK": 1.3825359907658823,
+      "Aris": 0.9884112319163507,
+      "Asteras Tripolis": 0.8739200955742444,
+      "Athens Kallithea": 0.7530691014049761,
+      "Atromitos": 1.073772196901292,
+      "Kifisia": 0.9429009547294123,
+      "Lamia": 0.3093645116045171,
+      "Larisa": 0.7780109241301846,
+      "Levadeiakos": 1.3107640742548208,
+      "OFI Crete": 1.1334636584340785,
+      "Olympiakos": 1.4127439899468877,
+      "PAOK": 1.5612438855819557,
+      "Panathinaikos": 1.2479577853418273,
+      "Panetolikos": 0.6656445393883665,
+      "Panserraikos": 0.7485622828403983,
+      "Volos NFC": 0.8176347771848054
+    },
+    "defence": {
+      "AEK": -1.5205313772605233,
+      "Aris": -1.1790863219118626,
+      "Asteras Tripolis": -0.8891506063768159,
+      "Athens Kallithea": -0.7255283221292783,
+      "Atromitos": -0.9769679522978565,
+      "Kifisia": -0.7774133005622381,
+      "Lamia": -0.5902528722939747,
+      "Larisa": -0.7054567993707113,
+      "Levadeiakos": -0.8248332219706926,
+      "OFI Crete": -0.6898561745216675,
+      "Olympiakos": -1.715671684185859,
+      "PAOK": -1.2177742825461524,
+      "Panathinaikos": -1.2347203227739265,
+      "Panetolikos": -0.9951916776234274,
+      "Panserraikos": -0.5100192677087922,
+      "Volos NFC": -0.725288360691667
+    },
+    "rho": -0.10298852883273539,
+    "gamma": 0.16340025667846061,
+    "log_likelihood": -1261.5746344943193,
+    "n_teams": 16.0,
+    "n_matches": 469.0
+  }
+}

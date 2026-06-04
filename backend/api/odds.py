@@ -1,11 +1,19 @@
 """赔率 API — 赔率对比 + EV 扫描"""
 from fastapi import APIRouter, Query
-import sys, os
+import sys, os, logging, uuid
 sys.path.insert(0, os.path.dirname(os.path.dirname(__file__)))
 from data.match_repo import get_match_by_id, query
 from engine.predictor import predict_match as do_predict
 
 router = APIRouter()
+logger = logging.getLogger(__name__)
+
+def _api_error(message, exc, **context):
+    """Log a failure with a stable id and return a client-safe error."""
+    error_id = uuid.uuid4().hex[:12]
+    logger.exception("%s error_id=%s context=%s", message, error_id, context, exc_info=exc)
+    return {"status": "error", "message": message, "error_id": error_id,
+            "error_type": type(exc).__name__, "detail": str(exc)}
 
 
 @router.get("/odds/compare")
@@ -21,7 +29,7 @@ def compare_odds(match_id: int = Query(..., description="比赛 ID")):
     try:
         pred = do_predict(match["home_team"], match["away_team"], match["league_code"])
     except Exception as e:
-        return {"status": "error", "message": "Processing failed"}
+        return _api_error("Odds processing failed", e, match_id=match_id)
 
     # 计算 EV
     comparisons = []
@@ -74,7 +82,8 @@ def scan_ev(
     for m in matches:
         try:
             pred = do_predict(m["home_team"], m["away_team"], m["league_code"])
-        except Exception:
+        except Exception as e:
+            logger.warning("Prediction failed for match %s vs %s: %s", m.get("home_team"), m.get("away_team"), e, exc_info=True)
             continue
 
         for outcome, prob_key, book_key in [

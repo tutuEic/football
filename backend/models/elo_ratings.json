@@ -1,0 +1,26 @@
+{
+  "ratings": {
+    "Volos NFC": 1391.7,
+    "Lamia": 1322.3,
+    "Giannina": 1417.3,
+    "Kifisia": 1441.5,
+    "OFI Crete": 1466.6,
+    "Aris": 1571.4,
+    "PAOK": 1687.8,
+    "Asteras Tripolis": 1447.4,
+    "Olympiakos": 1733.1,
+    "Panserraikos": 1371.3,
+    "Panetolikos": 1418.6,
+    "Panathinaikos": 1632.4,
+    "AEK": 1718.8,
+    "Atromitos": 1494.5,
+    "Levadeiakos": 1545.5,
+    "Athens Kallithea": 1433.7,
+    "Larisa": 1406.1
+  },
+  "metadata": {
+    "k_base": 20,
+    "home_advantage": 65,
+    "matches_processed": 709
+  }
+}

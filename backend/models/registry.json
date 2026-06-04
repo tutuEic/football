@@ -1,0 +1,1763 @@
+{
+  "models": {
+    "poisson_E0": [
+      {
+        "version": "20260529_221532",
+        "path": "poisson_E0.json",
+        "metrics": {
+          "val": {
+            "accuracy": 0.5976,
+            "brier": 0.1739,
+            "n_samples": 169
+          },
+          "test": {
+            "accuracy": 0.5503,
+            "brier": 0.1868,
+            "n_samples": 169
+          }
+        },
+        "metadata": {
+          "seasons": null,
+          "n_features": 21
+        },
+        "registered_at": "2026-05-29T22:15:32.880329",
+        "status": "registered"
+      },
+      {
+        "version": "20260603_214417",
+        "path": "poisson_E0.json",
+        "metrics": {
+          "val": {
+            "accuracy": 0.5858,
+            "brier": 0.1769,
+            "n_samples": 169
+          },
+          "test": {
+            "accuracy": 0.5385,
+            "brier": 0.1954,
+            "n_samples": 169
+          }
+        },
+        "metadata": {
+          "seasons": null,
+          "n_features": 24
+        },
+        "registered_at": "2026-06-03T21:44:17.409717",
+        "status": "registered"
+      },
+      {
+        "version": "20260603_234433",
+        "path": "poisson_E0.json",
+        "metrics": {
+          "val": {
+            "accuracy": 0.5858,
+            "brier": 0.1769,
+            "n_samples": 169
+          },
+          "test": {
+            "accuracy": 0.5385,
+            "brier": 0.1954,
+            "n_samples": 169
+          }
+        },
+        "metadata": {
+          "seasons": null,
+          "n_features": 25
+        },
+        "registered_at": "2026-06-03T23:44:33.503978",
+        "status": "registered"
+      },
+      {
+        "version": "20260603_235130",
+        "path": "poisson_E0.json",
+        "metrics": {
+          "val": {
+            "accuracy": 0.5799,
+            "brier": 0.1762,
+            "n_samples": 169
+          },
+          "test": {
+            "accuracy": 0.5325,
+            "brier": 0.195,
+            "n_samples": 169
+          }
+        },
+        "metadata": {
+          "seasons": null,
+          "n_features": 31
+        },
+        "registered_at": "2026-06-03T23:51:30.445165",
+        "status": "registered"
+      }
+    ],
+    "xgboost_E0": [
+      {
+        "version": "20260529_222513",
+        "path": "xgboost_E0.json",
+        "metrics": {
+          "val": {
+            "accuracy": 0.6154,
+            "brier": 0.1743,
+            "n_samples": 169
+          },
+          "test": {
+            "accuracy": 0.5207,
+            "brier": 0.2124,
+            "n_samples": 169
+          }
+        },
+        "metadata": {},
+        "registered_at": "2026-05-29T22:25:13.698496",
+        "status": "registered"
+      },
+      {
+        "version": "20260603_214418",
+        "path": "xgboost_E0.json",
+        "metrics": {
+          "val": {
+            "accuracy": 0.5976,
+            "brier": 0.1781,
+            "n_samples": 169
+          },
+          "test": {
+            "accuracy": 0.4497,
+            "brier": 0.2237,
+            "n_samples": 169
+          }
+        },
+        "metadata": {},
+        "registered_at": "2026-06-03T21:44:18.277455",
+        "status": "registered"
+      },
+      {
+        "version": "20260603_234434",
+        "path": "xgboost_E0.json",
+        "metrics": {
+          "val": {
+            "accuracy": 0.5858,
+            "brier": 0.1762,
+            "n_samples": 169
+          },
+          "test": {
+            "accuracy": 0.4793,
+            "brier": 0.2221,
+            "n_samples": 169
+          }
+        },
+        "metadata": {},
+        "registered_at": "2026-06-03T23:44:34.525708",
+        "status": "registered"
+      },
+      {
+        "version": "20260603_235131",
+        "path": "xgboost_E0.json",
+        "metrics": {
+          "val": {
+            "accuracy": 0.5976,
+            "brier": 0.1766,
+            "n_samples": 169
+          },
+          "test": {
+            "accuracy": 0.4615,
+            "brier": 0.2234,
+            "n_samples": 169
+          }
+        },
+        "metadata": {},
+        "registered_at": "2026-06-03T23:51:31.284579",
+        "status": "registered"
+      }
+    ],
+    "poisson_SP1": [
+      {
+        "version": "20260604_001751",
+        "path": "poisson_SP1.json",
+        "metrics": {
+          "val": {
+            "accuracy": 0.6095,
+            "brier": 0.1696,
+            "n_samples": 169
+          },
+          "test": {
+            "accuracy": 0.5799,
+            "brier": 0.1869,
+            "n_samples": 169
+          }
+        },
+        "metadata": {
+          "seasons": null,
+          "n_features": 31
+        },
+        "registered_at": "2026-06-04T00:17:51.025675",
+        "status": "registered"
+      }
+    ],
+    "xgboost_SP1": [
+      {
+        "version": "20260604_001751",
+        "path": "xgboost_SP1.json",
+        "metrics": {
+          "val": {
+            "accuracy": 0.568,
+            "brier": 0.1849,
+            "n_samples": 169
+          },
+          "test": {
+            "accuracy": 0.5325,
+            "brier": 0.206,
+            "n_samples": 169
+          }
+        },
+        "metadata": {},
+        "registered_at": "2026-06-04T00:17:51.837250",
+        "status": "registered"
+      }
+    ],
+    "poisson_D1": [
+      {
+        "version": "20260604_001758",
+        "path": "poisson_D1.json",
+        "metrics": {
+          "val": {
+            "accuracy": 0.6204,
+            "brier": 0.1732,
+            "n_samples": 137
+          },
+          "test": {
+            "accuracy": 0.5912,
+            "brier": 0.1762,
+            "n_samples": 137
+          }
+        },
+        "metadata": {
+          "seasons": null,
+          "n_features": 31
+        },
+        "registered_at": "2026-06-04T00:17:58.388272",
+        "status": "registered"
+      }
+    ],
+    "xgboost_D1": [
+      {
+        "version": "20260604_001758",
+        "path": "xgboost_D1.json",
+        "metrics": {
+          "val": {
+            "accuracy": 0.5036,
+            "brier": 0.2133,
+            "n_samples": 137
+          },
+          "test": {
+            "accuracy": 0.5985,
+            "brier": 0.182,
+            "n_samples": 137
+          }
+        },
+        "metadata": {},
+        "registered_at": "2026-06-04T00:17:58.960086",
+        "status": "registered"
+      }
+    ],
+    "poisson_I1": [
+      {
+        "version": "20260604_001805",
+        "path": "poisson_I1.json",
+        "metrics": {
+          "val": {
+            "accuracy": 0.568,
+            "brier": 0.1793,
+            "n_samples": 169
+          },
+          "test": {
+            "accuracy": 0.6272,
+            "brier": 0.1701,
+            "n_samples": 169
+          }
+        },
+        "metadata": {
+          "seasons": null,
+          "n_features": 31
+        },
+        "registered_at": "2026-06-04T00:18:05.595252",
+        "status": "registered"
+      }
+    ],
+    "xgboost_I1": [
+      {
+        "version": "20260604_001806",
+        "path": "xgboost_I1.json",
+        "metrics": {
+          "val": {
+            "accuracy": 0.5621,
+            "brier": 0.1904,
+            "n_samples": 169
+          },
+          "test": {
+            "accuracy": 0.5207,
+            "brier": 0.202,
+            "n_samples": 169
+          }
+        },
+        "metadata": {},
+        "registered_at": "2026-06-04T00:18:06.295809",
+        "status": "registered"
+      }
+    ],
+    "poisson_F1": [
+      {
+        "version": "20260604_001813",
+        "path": "poisson_F1.json",
+        "metrics": {
+          "val": {
+            "accuracy": 0.5766,
+            "brier": 0.1783,
+            "n_samples": 137
+          },
+          "test": {
+            "accuracy": 0.5547,
+            "brier": 0.1927,
+            "n_samples": 137
+          }
+        },
+        "metadata": {
+          "seasons": null,
+          "n_features": 31
+        },
+        "registered_at": "2026-06-04T00:18:13.063499",
+        "status": "registered"
+      }
+    ],
+    "xgboost_F1": [
+      {
+        "version": "20260604_001813",
+        "path": "xgboost_F1.json",
+        "metrics": {
+          "val": {
+            "accuracy": 0.5036,
+            "brier": 0.2097,
+            "n_samples": 137
+          },
+          "test": {
+            "accuracy": 0.4672,
+            "brier": 0.2186,
+            "n_samples": 137
+          }
+        },
+        "metadata": {},
+        "registered_at": "2026-06-04T00:18:13.651226",
+        "status": "registered"
+      }
+    ],
+    "poisson_E1": [
+      {
+        "version": "20260604_003430",
+        "path": "poisson_E1.json",
+        "metrics": {
+          "val": {
+            "accuracy": 0.5565,
+            "brier": 0.1868,
+            "n_samples": 248
+          },
+          "test": {
+            "accuracy": 0.5403,
+            "brier": 0.1799,
+            "n_samples": 248
+          }
+        },
+        "metadata": {
+          "seasons": null,
+          "n_features": 31
+        },
+        "registered_at": "2026-06-04T00:34:30.905274",
+        "status": "registered"
+      }
+    ],
+    "xgboost_E1": [
+      {
+        "version": "20260604_003432",
+        "path": "xgboost_E1.json",
+        "metrics": {
+          "val": {
+            "accuracy": 0.5726,
+            "brier": 0.1868,
+            "n_samples": 248
+          },
+          "test": {
+            "accuracy": 0.496,
+            "brier": 0.2003,
+            "n_samples": 248
+          }
+        },
+        "metadata": {},
+        "registered_at": "2026-06-04T00:34:32.004380",
+        "status": "registered"
+      }
+    ],
+    "poisson_N1": [
+      {
+        "version": "20260604_003441",
+        "path": "poisson_N1.json",
+        "metrics": {
+          "val": {
+            "accuracy": 0.562,
+            "brier": 0.178,
+            "n_samples": 137
+          },
+          "test": {
+            "accuracy": 0.562,
+            "brier": 0.18,
+            "n_samples": 137
+          }
+        },
+        "metadata": {
+          "seasons": null,
+          "n_features": 31
+        },
+        "registered_at": "2026-06-04T00:34:41.420097",
+        "status": "registered"
+      }
+    ],
+    "xgboost_N1": [
+      {
+        "version": "20260604_003442",
+        "path": "xgboost_N1.json",
+        "metrics": {
+          "val": {
+            "accuracy": 0.5401,
+            "brier": 0.2056,
+            "n_samples": 137
+          },
+          "test": {
+            "accuracy": 0.5547,
+            "brier": 0.2077,
+            "n_samples": 137
+          }
+        },
+        "metadata": {},
+        "registered_at": "2026-06-04T00:34:42.009959",
+        "status": "registered"
+      }
+    ],
+    "poisson_P1": [
+      {
+        "version": "20260604_003448",
+        "path": "poisson_P1.json",
+        "metrics": {
+          "val": {
+            "accuracy": 0.6715,
+            "brier": 0.1573,
+            "n_samples": 137
+          },
+          "test": {
+            "accuracy": 0.562,
+            "brier": 0.1701,
+            "n_samples": 137
+          }
+        },
+        "metadata": {
+          "seasons": null,
+          "n_features": 31
+        },
+        "registered_at": "2026-06-04T00:34:48.452366",
+        "status": "registered"
+      }
+    ],
+    "xgboost_P1": [
+      {
+        "version": "20260604_003449",
+        "path": "xgboost_P1.json",
+        "metrics": {
+          "val": {
+            "accuracy": 0.6058,
+            "brier": 0.1663,
+            "n_samples": 137
+          },
+          "test": {
+            "accuracy": 0.6204,
+            "brier": 0.1757,
+            "n_samples": 137
+          }
+        },
+        "metadata": {},
+        "registered_at": "2026-06-04T00:34:49.105947",
+        "status": "registered"
+      }
+    ],
+    "poisson_B1": [
+      {
+        "version": "20260604_003455",
+        "path": "poisson_B1.json",
+        "metrics": {
+          "val": {
+            "accuracy": 0.518,
+            "brier": 0.1973,
+            "n_samples": 139
+          },
+          "test": {
+            "accuracy": 0.554,
+            "brier": 0.1964,
+            "n_samples": 139
+          }
+        },
+        "metadata": {
+          "seasons": null,
+          "n_features": 31
+        },
+        "registered_at": "2026-06-04T00:34:55.272986",
+        "status": "registered"
+      }
+    ],
+    "xgboost_B1": [
+      {
+        "version": "20260604_003455",
+        "path": "xgboost_B1.json",
+        "metrics": {
+          "val": {
+            "accuracy": 0.4604,
+            "brier": 0.222,
+            "n_samples": 139
+          },
+          "test": {
+            "accuracy": 0.4101,
+            "brier": 0.2259,
+            "n_samples": 139
+          }
+        },
+        "metadata": {},
+        "registered_at": "2026-06-04T00:34:55.916813",
+        "status": "registered"
+      }
+    ],
+    "poisson_T1": [
+      {
+        "version": "20260604_003502",
+        "path": "poisson_T1.json",
+        "metrics": {
+          "val": {
+            "accuracy": 0.539,
+            "brier": 0.182,
+            "n_samples": 154
+          },
+          "test": {
+            "accuracy": 0.6234,
+            "brier": 0.1691,
+            "n_samples": 154
+          }
+        },
+        "metadata": {
+          "seasons": null,
+          "n_features": 31
+        },
+        "registered_at": "2026-06-04T00:35:02.995844",
+        "status": "registered"
+      }
+    ],
+    "xgboost_T1": [
+      {
+        "version": "20260604_003503",
+        "path": "xgboost_T1.json",
+        "metrics": {
+          "val": {
+            "accuracy": 0.5779,
+            "brier": 0.1879,
+            "n_samples": 154
+          },
+          "test": {
+            "accuracy": 0.5519,
+            "brier": 0.2024,
+            "n_samples": 154
+          }
+        },
+        "metadata": {},
+        "registered_at": "2026-06-04T00:35:03.665400",
+        "status": "registered"
+      }
+    ],
+    "poisson_D2": [
+      {
+        "version": "20260604_003650",
+        "path": "poisson_D2.json",
+        "metrics": {
+          "val": {
+            "accuracy": 0.5109,
+            "brier": 0.194,
+            "n_samples": 137
+          },
+          "test": {
+            "accuracy": 0.5182,
+            "brier": 0.1879,
+            "n_samples": 137
+          }
+        },
+        "metadata": {
+          "seasons": null,
+          "n_features": 31
+        },
+        "registered_at": "2026-06-04T00:36:50.018568",
+        "status": "registered"
+      }
+    ],
+    "xgboost_D2": [
+      {
+        "version": "20260604_003650",
+        "path": "xgboost_D2.json",
+        "metrics": {
+          "val": {
+            "accuracy": 0.5182,
+            "brier": 0.2067,
+            "n_samples": 137
+          },
+          "test": {
+            "accuracy": 0.4818,
+            "brier": 0.2038,
+            "n_samples": 137
+          }
+        },
+        "metadata": {},
+        "registered_at": "2026-06-04T00:36:50.740275",
+        "status": "registered"
+      }
+    ],
+    "poisson_E2": [
+      {
+        "version": "20260604_003700",
+        "path": "poisson_E2.json",
+        "metrics": {
+          "val": {
+            "accuracy": 0.5968,
+            "brier": 0.1727,
+            "n_samples": 248
+          },
+          "test": {
+            "accuracy": 0.6169,
+            "brier": 0.1732,
+            "n_samples": 248
+          }
+        },
+        "metadata": {
+          "seasons": null,
+          "n_features": 31
+        },
+        "registered_at": "2026-06-04T00:37:00.417479",
+        "status": "registered"
+      }
+    ],
+    "xgboost_E2": [
+      {
+        "version": "20260604_003701",
+        "path": "xgboost_E2.json",
+        "metrics": {
+          "val": {
+            "accuracy": 0.6169,
+            "brier": 0.1706,
+            "n_samples": 248
+          },
+          "test": {
+            "accuracy": 0.5847,
+            "brier": 0.1754,
+            "n_samples": 248
+          }
+        },
+        "metadata": {},
+        "registered_at": "2026-06-04T00:37:01.516183",
+        "status": "registered"
+      }
+    ],
+    "poisson_E3": [
+      {
+        "version": "20260604_003713",
+        "path": "poisson_E3.json",
+        "metrics": {
+          "val": {
+            "accuracy": 0.5282,
+            "brier": 0.1919,
+            "n_samples": 248
+          },
+          "test": {
+            "accuracy": 0.6129,
+            "brier": 0.1725,
+            "n_samples": 248
+          }
+        },
+        "metadata": {
+          "seasons": null,
+          "n_features": 31
+        },
+        "registered_at": "2026-06-04T00:37:13.360034",
+        "status": "registered"
+      }
+    ],
+    "xgboost_E3": [
+      {
+        "version": "20260604_003714",
+        "path": "xgboost_E3.json",
+        "metrics": {
+          "val": {
+            "accuracy": 0.504,
+            "brier": 0.1879,
+            "n_samples": 248
+          },
+          "test": {
+            "accuracy": 0.5645,
+            "brier": 0.1748,
+            "n_samples": 248
+          }
+        },
+        "metadata": {},
+        "registered_at": "2026-06-04T00:37:14.377359",
+        "status": "registered"
+      }
+    ],
+    "poisson_F2": [
+      {
+        "version": "20260604_003725",
+        "path": "poisson_F2.json",
+        "metrics": {
+          "val": {
+            "accuracy": 0.5878,
+            "brier": 0.1823,
+            "n_samples": 148
+          },
+          "test": {
+            "accuracy": 0.5946,
+            "brier": 0.1736,
+            "n_samples": 148
+          }
+        },
+        "metadata": {
+          "seasons": null,
+          "n_features": 31
+        },
+        "registered_at": "2026-06-04T00:37:25.337904",
+        "status": "registered"
+      }
+    ],
+    "xgboost_F2": [
+      {
+        "version": "20260604_003726",
+        "path": "xgboost_F2.json",
+        "metrics": {
+          "val": {
+            "accuracy": 0.5541,
+            "brier": 0.1906,
+            "n_samples": 148
+          },
+          "test": {
+            "accuracy": 0.5811,
+            "brier": 0.1685,
+            "n_samples": 148
+          }
+        },
+        "metadata": {},
+        "registered_at": "2026-06-04T00:37:26.019106",
+        "status": "registered"
+      }
+    ],
+    "poisson_I2": [
+      {
+        "version": "20260604_003734",
+        "path": "poisson_I2.json",
+        "metrics": {
+          "val": {
+            "accuracy": 0.5824,
+            "brier": 0.1768,
+            "n_samples": 170
+          },
+          "test": {
+            "accuracy": 0.6353,
+            "brier": 0.1718,
+            "n_samples": 170
+          }
+        },
+        "metadata": {
+          "seasons": null,
+          "n_features": 31
+        },
+        "registered_at": "2026-06-04T00:37:34.118942",
+        "status": "registered"
+      }
+    ],
+    "xgboost_I2": [
+      {
+        "version": "20260604_003734",
+        "path": "xgboost_I2.json",
+        "metrics": {
+          "val": {
+            "accuracy": 0.6412,
+            "brier": 0.1562,
+            "n_samples": 170
+          },
+          "test": {
+            "accuracy": 0.5706,
+            "brier": 0.175,
+            "n_samples": 170
+          }
+        },
+        "metadata": {},
+        "registered_at": "2026-06-04T00:37:34.920108",
+        "status": "registered"
+      }
+    ],
+    "poisson_SP2": [
+      {
+        "version": "20260604_003744",
+        "path": "poisson_SP2.json",
+        "metrics": {
+          "val": {
+            "accuracy": 0.5147,
+            "brier": 0.1895,
+            "n_samples": 204
+          },
+          "test": {
+            "accuracy": 0.6078,
+            "brier": 0.1715,
+            "n_samples": 204
+          }
+        },
+        "metadata": {
+          "seasons": null,
+          "n_features": 31
+        },
+        "registered_at": "2026-06-04T00:37:44.326533",
+        "status": "registered"
+      }
+    ],
+    "xgboost_SP2": [
+      {
+        "version": "20260604_003745",
+        "path": "xgboost_SP2.json",
+        "metrics": {
+          "val": {
+            "accuracy": 0.5049,
+            "brier": 0.2055,
+            "n_samples": 204
+          },
+          "test": {
+            "accuracy": 0.6373,
+            "brier": 0.1584,
+            "n_samples": 204
+          }
+        },
+        "metadata": {},
+        "registered_at": "2026-06-04T00:37:45.169417",
+        "status": "registered"
+      }
+    ],
+    "poisson_SC0": [
+      {
+        "version": "20260604_003752",
+        "path": "poisson_SC0.json",
+        "metrics": {
+          "val": {
+            "accuracy": 0.5392,
+            "brier": 0.1876,
+            "n_samples": 102
+          },
+          "test": {
+            "accuracy": 0.6078,
+            "brier": 0.1648,
+            "n_samples": 102
+          }
+        },
+        "metadata": {
+          "seasons": null,
+          "n_features": 31
+        },
+        "registered_at": "2026-06-04T00:37:52.261669",
+        "status": "registered"
+      }
+    ],
+    "xgboost_SC0": [
+      {
+        "version": "20260604_003752",
+        "path": "xgboost_SC0.json",
+        "metrics": {
+          "val": {
+            "accuracy": 0.5588,
+            "brier": 0.2044,
+            "n_samples": 102
+          },
+          "test": {
+            "accuracy": 0.6078,
+            "brier": 0.1809,
+            "n_samples": 102
+          }
+        },
+        "metadata": {},
+        "registered_at": "2026-06-04T00:37:52.778619",
+        "status": "registered"
+      }
+    ],
+    "poisson_SC1": [
+      {
+        "version": "20260604_003757",
+        "path": "poisson_SC1.json",
+        "metrics": {
+          "val": {
+            "accuracy": 0.4691,
+            "brier": 0.2044,
+            "n_samples": 81
+          },
+          "test": {
+            "accuracy": 0.5185,
+            "brier": 0.1941,
+            "n_samples": 81
+          }
+        },
+        "metadata": {
+          "seasons": null,
+          "n_features": 31
+        },
+        "registered_at": "2026-06-04T00:37:57.038558",
+        "status": "registered"
+      }
+    ],
+    "xgboost_SC1": [
+      {
+        "version": "20260604_003757",
+        "path": "xgboost_SC1.json",
+        "metrics": {
+          "val": {
+            "accuracy": 0.4568,
+            "brier": 0.2188,
+            "n_samples": 81
+          },
+          "test": {
+            "accuracy": 0.4198,
+            "brier": 0.234,
+            "n_samples": 81
+          }
+        },
+        "metadata": {},
+        "registered_at": "2026-06-04T00:37:57.416390",
+        "status": "registered"
+      }
+    ],
+    "poisson_G1": [
+      {
+        "version": "20260604_003801",
+        "path": "poisson_G1.json",
+        "metrics": {
+          "val": {
+            "accuracy": 0.6604,
+            "brier": 0.1549,
+            "n_samples": 106
+          },
+          "test": {
+            "accuracy": 0.5094,
+            "brier": 0.1991,
+            "n_samples": 106
+          }
+        },
+        "metadata": {
+          "seasons": null,
+          "n_features": 31
+        },
+        "registered_at": "2026-06-04T00:38:01.694829",
+        "status": "registered"
+      }
+    ],
+    "xgboost_G1": [
+      {
+        "version": "20260604_003802",
+        "path": "xgboost_G1.json",
+        "metrics": {
+          "val": {
+            "accuracy": 0.6415,
+            "brier": 0.1747,
+            "n_samples": 106
+          },
+          "test": {
+            "accuracy": 0.4057,
+            "brier": 0.237,
+            "n_samples": 106
+          }
+        },
+        "metadata": {},
+        "registered_at": "2026-06-04T00:38:02.287774",
+        "status": "registered"
+      }
+    ]
+  },
+  "active": {
+    "poisson_E0": {
+      "version": "20260603_235130",
+      "path": "poisson_E0.json",
+      "metrics": {
+        "val": {
+          "accuracy": 0.5799,
+          "brier": 0.1762,
+          "n_samples": 169
+        },
+        "test": {
+          "accuracy": 0.5325,
+          "brier": 0.195,
+          "n_samples": 169
+        }
+      },
+      "metadata": {
+        "seasons": null,
+        "n_features": 31
+      },
+      "registered_at": "2026-06-03T23:51:30.445165",
+      "status": "registered"
+    },
+    "xgboost_E0": {
+      "version": "20260603_235131",
+      "path": "xgboost_E0.json",
+      "metrics": {
+        "val": {
+          "accuracy": 0.5976,
+          "brier": 0.1766,
+          "n_samples": 169
+        },
+        "test": {
+          "accuracy": 0.4615,
+          "brier": 0.2234,
+          "n_samples": 169
+        }
+      },
+      "metadata": {},
+      "registered_at": "2026-06-03T23:51:31.284579",
+      "status": "registered"
+    },
+    "poisson_SP1": {
+      "version": "20260604_001751",
+      "path": "poisson_SP1.json",
+      "metrics": {
+        "val": {
+          "accuracy": 0.6095,
+          "brier": 0.1696,
+          "n_samples": 169
+        },
+        "test": {
+          "accuracy": 0.5799,
+          "brier": 0.1869,
+          "n_samples": 169
+        }
+      },
+      "metadata": {
+        "seasons": null,
+        "n_features": 31
+      },
+      "registered_at": "2026-06-04T00:17:51.025675",
+      "status": "registered"
+    },
+    "xgboost_SP1": {
+      "version": "20260604_001751",
+      "path": "xgboost_SP1.json",
+      "metrics": {
+        "val": {
+          "accuracy": 0.568,
+          "brier": 0.1849,
+          "n_samples": 169
+        },
+        "test": {
+          "accuracy": 0.5325,
+          "brier": 0.206,
+          "n_samples": 169
+        }
+      },
+      "metadata": {},
+      "registered_at": "2026-06-04T00:17:51.837250",
+      "status": "registered"
+    },
+    "poisson_D1": {
+      "version": "20260604_001758",
+      "path": "poisson_D1.json",
+      "metrics": {
+        "val": {
+          "accuracy": 0.6204,
+          "brier": 0.1732,
+          "n_samples": 137
+        },
+        "test": {
+          "accuracy": 0.5912,
+          "brier": 0.1762,
+          "n_samples": 137
+        }
+      },
+      "metadata": {
+        "seasons": null,
+        "n_features": 31
+      },
+      "registered_at": "2026-06-04T00:17:58.388272",
+      "status": "registered"
+    },
+    "xgboost_D1": {
+      "version": "20260604_001758",
+      "path": "xgboost_D1.json",
+      "metrics": {
+        "val": {
+          "accuracy": 0.5036,
+          "brier": 0.2133,
+          "n_samples": 137
+        },
+        "test": {
+          "accuracy": 0.5985,
+          "brier": 0.182,
+          "n_samples": 137
+        }
+      },
+      "metadata": {},
+      "registered_at": "2026-06-04T00:17:58.960086",
+      "status": "registered"
+    },
+    "poisson_I1": {
+      "version": "20260604_001805",
+      "path": "poisson_I1.json",
+      "metrics": {
+        "val": {
+          "accuracy": 0.568,
+          "brier": 0.1793,
+          "n_samples": 169
+        },
+        "test": {
+          "accuracy": 0.6272,
+          "brier": 0.1701,
+          "n_samples": 169
+        }
+      },
+      "metadata": {
+        "seasons": null,
+        "n_features": 31
+      },
+      "registered_at": "2026-06-04T00:18:05.595252",
+      "status": "registered"
+    },
+    "xgboost_I1": {
+      "version": "20260604_001806",
+      "path": "xgboost_I1.json",
+      "metrics": {
+        "val": {
+          "accuracy": 0.5621,
+          "brier": 0.1904,
+          "n_samples": 169
+        },
+        "test": {
+          "accuracy": 0.5207,
+          "brier": 0.202,
+          "n_samples": 169
+        }
+      },
+      "metadata": {},
+      "registered_at": "2026-06-04T00:18:06.295809",
+      "status": "registered"
+    },
+    "poisson_F1": {
+      "version": "20260604_001813",
+      "path": "poisson_F1.json",
+      "metrics": {
+        "val": {
+          "accuracy": 0.5766,
+          "brier": 0.1783,
+          "n_samples": 137
+        },
+        "test": {
+          "accuracy": 0.5547,
+          "brier": 0.1927,
+          "n_samples": 137
+        }
+      },
+      "metadata": {
+        "seasons": null,
+        "n_features": 31
+      },
+      "registered_at": "2026-06-04T00:18:13.063499",
+      "status": "registered"
+    },
+    "xgboost_F1": {
+      "version": "20260604_001813",
+      "path": "xgboost_F1.json",
+      "metrics": {
+        "val": {
+          "accuracy": 0.5036,
+          "brier": 0.2097,
+          "n_samples": 137
+        },
+        "test": {
+          "accuracy": 0.4672,
+          "brier": 0.2186,
+          "n_samples": 137
+        }
+      },
+      "metadata": {},
+      "registered_at": "2026-06-04T00:18:13.651226",
+      "status": "registered"
+    },
+    "poisson_E1": {
+      "version": "20260604_003430",
+      "path": "poisson_E1.json",
+      "metrics": {
+        "val": {
+          "accuracy": 0.5565,
+          "brier": 0.1868,
+          "n_samples": 248
+        },
+        "test": {
+          "accuracy": 0.5403,
+          "brier": 0.1799,
+          "n_samples": 248
+        }
+      },
+      "metadata": {
+        "seasons": null,
+        "n_features": 31
+      },
+      "registered_at": "2026-06-04T00:34:30.905274",
+      "status": "registered"
+    },
+    "xgboost_E1": {
+      "version": "20260604_003432",
+      "path": "xgboost_E1.json",
+      "metrics": {
+        "val": {
+          "accuracy": 0.5726,
+          "brier": 0.1868,
+          "n_samples": 248
+        },
+        "test": {
+          "accuracy": 0.496,
+          "brier": 0.2003,
+          "n_samples": 248
+        }
+      },
+      "metadata": {},
+      "registered_at": "2026-06-04T00:34:32.004380",
+      "status": "registered"
+    },
+    "poisson_N1": {
+      "version": "20260604_003441",
+      "path": "poisson_N1.json",
+      "metrics": {
+        "val": {
+          "accuracy": 0.562,
+          "brier": 0.178,
+          "n_samples": 137
+        },
+        "test": {
+          "accuracy": 0.562,
+          "brier": 0.18,
+          "n_samples": 137
+        }
+      },
+      "metadata": {
+        "seasons": null,
+        "n_features": 31
+      },
+      "registered_at": "2026-06-04T00:34:41.420097",
+      "status": "registered"
+    },
+    "xgboost_N1": {
+      "version": "20260604_003442",
+      "path": "xgboost_N1.json",
+      "metrics": {
+        "val": {
+          "accuracy": 0.5401,
+          "brier": 0.2056,
+          "n_samples": 137
+        },
+        "test": {
+          "accuracy": 0.5547,
+          "brier": 0.2077,
+          "n_samples": 137
+        }
+      },
+      "metadata": {},
+      "registered_at": "2026-06-04T00:34:42.009959",
+      "status": "registered"
+    },
+    "poisson_P1": {
+      "version": "20260604_003448",
+      "path": "poisson_P1.json",
+      "metrics": {
+        "val": {
+          "accuracy": 0.6715,
+          "brier": 0.1573,
+          "n_samples": 137
+        },
+        "test": {
+          "accuracy": 0.562,
+          "brier": 0.1701,
+          "n_samples": 137
+        }
+      },
+      "metadata": {
+        "seasons": null,
+        "n_features": 31
+      },
+      "registered_at": "2026-06-04T00:34:48.452366",
+      "status": "registered"
+    },
+    "xgboost_P1": {
+      "version": "20260604_003449",
+      "path": "xgboost_P1.json",
+      "metrics": {
+        "val": {
+          "accuracy": 0.6058,
+          "brier": 0.1663,
+          "n_samples": 137
+        },
+        "test": {
+          "accuracy": 0.6204,
+          "brier": 0.1757,
+          "n_samples": 137
+        }
+      },
+      "metadata": {},
+      "registered_at": "2026-06-04T00:34:49.105947",
+      "status": "registered"
+    },
+    "poisson_B1": {
+      "version": "20260604_003455",
+      "path": "poisson_B1.json",
+      "metrics": {
+        "val": {
+          "accuracy": 0.518,
+          "brier": 0.1973,
+          "n_samples": 139
+        },
+        "test": {
+          "accuracy": 0.554,
+          "brier": 0.1964,
+          "n_samples": 139
+        }
+      },
+      "metadata": {
+        "seasons": null,
+        "n_features": 31
+      },
+      "registered_at": "2026-06-04T00:34:55.272986",
+      "status": "registered"
+    },
+    "xgboost_B1": {
+      "version": "20260604_003455",
+      "path": "xgboost_B1.json",
+      "metrics": {
+        "val": {
+          "accuracy": 0.4604,
+          "brier": 0.222,
+          "n_samples": 139
+        },
+        "test": {
+          "accuracy": 0.4101,
+          "brier": 0.2259,
+          "n_samples": 139
+        }
+      },
+      "metadata": {},
+      "registered_at": "2026-06-04T00:34:55.916813",
+      "status": "registered"
+    },
+    "poisson_T1": {
+      "version": "20260604_003502",
+      "path": "poisson_T1.json",
+      "metrics": {
+        "val": {
+          "accuracy": 0.539,
+          "brier": 0.182,
+          "n_samples": 154
+        },
+        "test": {
+          "accuracy": 0.6234,
+          "brier": 0.1691,
+          "n_samples": 154
+        }
+      },
+      "metadata": {
+        "seasons": null,
+        "n_features": 31
+      },
+      "registered_at": "2026-06-04T00:35:02.995844",
+      "status": "registered"
+    },
+    "xgboost_T1": {
+      "version": "20260604_003503",
+      "path": "xgboost_T1.json",
+      "metrics": {
+        "val": {
+          "accuracy": 0.5779,
+          "brier": 0.1879,
+          "n_samples": 154
+        },
+        "test": {
+          "accuracy": 0.5519,
+          "brier": 0.2024,
+          "n_samples": 154
+        }
+      },
+      "metadata": {},
+      "registered_at": "2026-06-04T00:35:03.665400",
+      "status": "registered"
+    },
+    "poisson_D2": {
+      "version": "20260604_003650",
+      "path": "poisson_D2.json",
+      "metrics": {
+        "val": {
+          "accuracy": 0.5109,
+          "brier": 0.194,
+          "n_samples": 137
+        },
+        "test": {
+          "accuracy": 0.5182,
+          "brier": 0.1879,
+          "n_samples": 137
+        }
+      },
+      "metadata": {
+        "seasons": null,
+        "n_features": 31
+      },
+      "registered_at": "2026-06-04T00:36:50.018568",
+      "status": "registered"
+    },
+    "xgboost_D2": {
+      "version": "20260604_003650",
+      "path": "xgboost_D2.json",
+      "metrics": {
+        "val": {
+          "accuracy": 0.5182,
+          "brier": 0.2067,
+          "n_samples": 137
+        },
+        "test": {
+          "accuracy": 0.4818,
+          "brier": 0.2038,
+          "n_samples": 137
+        }
+      },
+      "metadata": {},
+      "registered_at": "2026-06-04T00:36:50.740275",
+      "status": "registered"
+    },
+    "poisson_E2": {
+      "version": "20260604_003700",
+      "path": "poisson_E2.json",
+      "metrics": {
+        "val": {
+          "accuracy": 0.5968,
+          "brier": 0.1727,
+          "n_samples": 248
+        },
+        "test": {
+          "accuracy": 0.6169,
+          "brier": 0.1732,
+          "n_samples": 248
+        }
+      },
+      "metadata": {
+        "seasons": null,
+        "n_features": 31
+      },
+      "registered_at": "2026-06-04T00:37:00.417479",
+      "status": "registered"
+    },
+    "xgboost_E2": {
+      "version": "20260604_003701",
+      "path": "xgboost_E2.json",
+      "metrics": {
+        "val": {
+          "accuracy": 0.6169,
+          "brier": 0.1706,
+          "n_samples": 248
+        },
+        "test": {
+          "accuracy": 0.5847,
+          "brier": 0.1754,
+          "n_samples": 248
+        }
+      },
+      "metadata": {},
+      "registered_at": "2026-06-04T00:37:01.516183",
+      "status": "registered"
+    },
+    "poisson_E3": {
+      "version": "20260604_003713",
+      "path": "poisson_E3.json",
+      "metrics": {
+        "val": {
+          "accuracy": 0.5282,
+          "brier": 0.1919,
+          "n_samples": 248
+        },
+        "test": {
+          "accuracy": 0.6129,
+          "brier": 0.1725,
+          "n_samples": 248
+        }
+      },
+      "metadata": {
+        "seasons": null,
+        "n_features": 31
+      },
+      "registered_at": "2026-06-04T00:37:13.360034",
+      "status": "registered"
+    },
+    "xgboost_E3": {
+      "version": "20260604_003714",
+      "path": "xgboost_E3.json",
+      "metrics": {
+        "val": {
+          "accuracy": 0.504,
+          "brier": 0.1879,
+          "n_samples": 248
+        },
+        "test": {
+          "accuracy": 0.5645,
+          "brier": 0.1748,
+          "n_samples": 248
+        }
+      },
+      "metadata": {},
+      "registered_at": "2026-06-04T00:37:14.377359",
+      "status": "registered"
+    },
+    "poisson_F2": {
+      "version": "20260604_003725",
+      "path": "poisson_F2.json",
+      "metrics": {
+        "val": {
+          "accuracy": 0.5878,
+          "brier": 0.1823,
+          "n_samples": 148
+        },
+        "test": {
+          "accuracy": 0.5946,
+          "brier": 0.1736,
+          "n_samples": 148
+        }
+      },
+      "metadata": {
+        "seasons": null,
+        "n_features": 31
+      },
+      "registered_at": "2026-06-04T00:37:25.337904",
+      "status": "registered"
+    },
+    "xgboost_F2": {
+      "version": "20260604_003726",
+      "path": "xgboost_F2.json",
+      "metrics": {
+        "val": {
+          "accuracy": 0.5541,
+          "brier": 0.1906,
+          "n_samples": 148
+        },
+        "test": {
+          "accuracy": 0.5811,
+          "brier": 0.1685,
+          "n_samples": 148
+        }
+      },
+      "metadata": {},
+      "registered_at": "2026-06-04T00:37:26.019106",
+      "status": "registered"
+    },
+    "poisson_I2": {
+      "version": "20260604_003734",
+      "path": "poisson_I2.json",
+      "metrics": {
+        "val": {
+          "accuracy": 0.5824,
+          "brier": 0.1768,
+          "n_samples": 170
+        },
+        "test": {
+          "accuracy": 0.6353,
+          "brier": 0.1718,
+          "n_samples": 170
+        }
+      },
+      "metadata": {
+        "seasons": null,
+        "n_features": 31
+      },
+      "registered_at": "2026-06-04T00:37:34.118942",
+      "status": "registered"
+    },
+    "xgboost_I2": {
+      "version": "20260604_003734",
+      "path": "xgboost_I2.json",
+      "metrics": {
+        "val": {
+          "accuracy": 0.6412,
+          "brier": 0.1562,
+          "n_samples": 170
+        },
+        "test": {
+          "accuracy": 0.5706,
+          "brier": 0.175,
+          "n_samples": 170
+        }
+      },
+      "metadata": {},
+      "registered_at": "2026-06-04T00:37:34.920108",
+      "status": "registered"
+    },
+    "poisson_SP2": {
+      "version": "20260604_003744",
+      "path": "poisson_SP2.json",
+      "metrics": {
+        "val": {
+          "accuracy": 0.5147,
+          "brier": 0.1895,
+          "n_samples": 204
+        },
+        "test": {
+          "accuracy": 0.6078,
+          "brier": 0.1715,
+          "n_samples": 204
+        }
+      },
+      "metadata": {
+        "seasons": null,
+        "n_features": 31
+      },
+      "registered_at": "2026-06-04T00:37:44.326533",
+      "status": "registered"
+    },
+    "xgboost_SP2": {
+      "version": "20260604_003745",
+      "path": "xgboost_SP2.json",
+      "metrics": {
+        "val": {
+          "accuracy": 0.5049,
+          "brier": 0.2055,
+          "n_samples": 204
+        },
+        "test": {
+          "accuracy": 0.6373,
+          "brier": 0.1584,
+          "n_samples": 204
+        }
+      },
+      "metadata": {},
+      "registered_at": "2026-06-04T00:37:45.169417",
+      "status": "registered"
+    },
+    "poisson_SC0": {
+      "version": "20260604_003752",
+      "path": "poisson_SC0.json",
+      "metrics": {
+        "val": {
+          "accuracy": 0.5392,
+          "brier": 0.1876,
+          "n_samples": 102
+        },
+        "test": {
+          "accuracy": 0.6078,
+          "brier": 0.1648,
+          "n_samples": 102
+        }
+      },
+      "metadata": {
+        "seasons": null,
+        "n_features": 31
+      },
+      "registered_at": "2026-06-04T00:37:52.261669",
+      "status": "registered"
+    },
+    "xgboost_SC0": {
+      "version": "20260604_003752",
+      "path": "xgboost_SC0.json",
+      "metrics": {
+        "val": {
+          "accuracy": 0.5588,
+          "brier": 0.2044,
+          "n_samples": 102
+        },
+        "test": {
+          "accuracy": 0.6078,
+          "brier": 0.1809,
+          "n_samples": 102
+        }
+      },
+      "metadata": {},
+      "registered_at": "2026-06-04T00:37:52.778619",
+      "status": "registered"
+    },
+    "poisson_SC1": {
+      "version": "20260604_003757",
+      "path": "poisson_SC1.json",
+      "metrics": {
+        "val": {
+          "accuracy": 0.4691,
+          "brier": 0.2044,
+          "n_samples": 81
+        },
+        "test": {
+          "accuracy": 0.5185,
+          "brier": 0.1941,
+          "n_samples": 81
+        }
+      },
+      "metadata": {
+        "seasons": null,
+        "n_features": 31
+      },
+      "registered_at": "2026-06-04T00:37:57.038558",
+      "status": "registered"
+    },
+    "xgboost_SC1": {
+      "version": "20260604_003757",
+      "path": "xgboost_SC1.json",
+      "metrics": {
+        "val": {
+          "accuracy": 0.4568,
+          "brier": 0.2188,
+          "n_samples": 81
+        },
+        "test": {
+          "accuracy": 0.4198,
+          "brier": 0.234,
+          "n_samples": 81
+        }
+      },
+      "metadata": {},
+      "registered_at": "2026-06-04T00:37:57.416390",
+      "status": "registered"
+    },
+    "poisson_G1": {
+      "version": "20260604_003801",
+      "path": "poisson_G1.json",
+      "metrics": {
+        "val": {
+          "accuracy": 0.6604,
+          "brier": 0.1549,
+          "n_samples": 106
+        },
+        "test": {
+          "accuracy": 0.5094,
+          "brier": 0.1991,
+          "n_samples": 106
+        }
+      },
+      "metadata": {
+        "seasons": null,
+        "n_features": 31
+      },
+      "registered_at": "2026-06-04T00:38:01.694829",
+      "status": "registered"
+    },
+    "xgboost_G1": {
+      "version": "20260604_003802",
+      "path": "xgboost_G1.json",
+      "metrics": {
+        "val": {
+          "accuracy": 0.6415,
+          "brier": 0.1747,
+          "n_samples": 106
+        },
+        "test": {
+          "accuracy": 0.4057,
+          "brier": 0.237,
+          "n_samples": 106
+        }
+      },
+      "metadata": {},
+      "registered_at": "2026-06-04T00:38:02.287774",
+      "status": "registered"
+    }
+  }
+}

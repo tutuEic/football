@@ -104,7 +104,7 @@ def train_poisson_regression(league_code: str, seasons: list[str] = None):
     # Register
     registry = ModelRegistry()
     registry.register_model(
-        'poisson', league_code, str(model_path),
+        'poisson', league_code, model_path.name,
         metrics={"val": val_metrics, "test": test_metrics},
         metadata={"seasons": seasons, "n_features": model.n_features}
     )
@@ -178,7 +178,7 @@ def train_xgboost(league_code: str, seasons: list[str] = None):
     model.save(model_path)
 
     registry = ModelRegistry()
-    registry.register_model('xgboost', league_code, str(model_path),
+    registry.register_model('xgboost', league_code, model_path.name,
                            metrics={"val": val_metrics, "test": test_metrics})
 
     print(f"Val metrics:  acc={val_metrics['accuracy']:.3f}, brier={val_metrics['brier']:.4f}")

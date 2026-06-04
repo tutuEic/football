@@ -1,0 +1,60 @@
+{
+  "league": "SC1",
+  "seasons": [
+    "2425",
+    "2526"
+  ],
+  "model_type": "dixon_coles",
+  "teams": [
+    "Airdrie Utd",
+    "Arbroath",
+    "Ayr",
+    "Dunfermline",
+    "Falkirk",
+    "Hamilton",
+    "Livingston",
+    "Morton",
+    "Partick",
+    "Queens Park",
+    "Raith Rvs",
+    "Ross County",
+    "St Johnstone"
+  ],
+  "params": {
+    "attack": {
+      "Airdrie Utd": 0.747911920235302,
+      "Arbroath": 0.9510781014157026,
+      "Ayr": 1.0482886344209283,
+      "Dunfermline": 0.869904976469475,
+      "Falkirk": 1.448734955341427,
+      "Hamilton": 0.8842502784525026,
+      "Livingston": 1.1643100165856028,
+      "Morton": 0.8736334722413546,
+      "Partick": 1.0566867747350976,
+      "Queens Park": 0.7825326136125553,
+      "Raith Rvs": 1.0058097427994281,
+      "Ross County": 0.8058647710928436,
+      "St Johnstone": 1.3609937425977834
+    },
+    "defence": {
+      "Airdrie Utd": -0.7062660532454216,
+      "Arbroath": -0.9490847088230506,
+      "Ayr": -0.936322788204896,
+      "Dunfermline": -0.9752897156826333,
+      "Falkirk": -1.159962849704193,
+      "Hamilton": -0.5827634501676565,
+      "Livingston": -1.3983046746111814,
+      "Morton": -0.7904890780787514,
+      "Partick": -1.0812803635903512,
+      "Queens Park": -0.7752049853201963,
+      "Raith Rvs": -0.9443278385970663,
+      "Ross County": -0.6459995909285031,
+      "St Johnstone": -1.3861948371806072
+    },
+    "rho": -0.13168270118906747,
+    "gamma": 0.23933435941343886,
+    "log_likelihood": -1011.1381552427432,
+    "n_teams": 13.0,
+    "n_matches": 360.0
+  }
+}

@@ -1,0 +1,63 @@
+{
+  "league": "AUT",
+  "seasons": [
+    "2425",
+    "2526"
+  ],
+  "model_type": "dixon_coles",
+  "teams": [
+    "A. Klagenfurt",
+    "A. Lustenau",
+    "Altach",
+    "Austria Vienna",
+    "BW Linz",
+    "Grazer AK",
+    "Hartberg",
+    "LASK",
+    "Ried",
+    "SK Rapid",
+    "Salzburg",
+    "Sturm Graz",
+    "Tirol",
+    "Wolfsberger AC"
+  ],
+  "params": {
+    "attack": {
+      "A. Klagenfurt": 0.8563597856754364,
+      "A. Lustenau": 0.5722058585278739,
+      "Altach": 0.7291314788614575,
+      "Austria Vienna": 1.0980917581106724,
+      "BW Linz": 0.8757806799509946,
+      "Grazer AK": 0.9363556051840365,
+      "Hartberg": 1.0079807241894632,
+      "LASK": 1.2020099540914866,
+      "Ried": 0.9295993454505583,
+      "SK Rapid": 0.9607203699739794,
+      "Salzburg": 1.4113245200673192,
+      "Sturm Graz": 1.3715483148903755,
+      "Tirol": 0.9017694782946436,
+      "Wolfsberger AC": 1.1471221267317042
+    },
+    "defence": {
+      "A. Klagenfurt": -0.47906182527867724,
+      "A. Lustenau": -0.7526454194070801,
+      "Altach": -0.8731993203972583,
+      "Austria Vienna": -0.9769111055935233,
+      "BW Linz": -0.8220572606902737,
+      "Grazer AK": -0.6895553238250545,
+      "Hartberg": -0.8671215312082737,
+      "LASK": -0.9652706986291584,
+      "Ried": -0.8585413084452383,
+      "SK Rapid": -1.0158194865778825,
+      "Salzburg": -0.9932557863696705,
+      "Sturm Graz": -1.133045122444114,
+      "Tirol": -0.6688930953136761,
+      "Wolfsberger AC": -0.9486868088255039
+    },
+    "rho": -0.10432064439831422,
+    "gamma": 0.19000251546388366,
+    "log_likelihood": -1435.5981034059807,
+    "n_teams": 14.0,
+    "n_matches": 500.0
+  }
+}

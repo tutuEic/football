@@ -1,0 +1,60 @@
+{
+  "league": "IRL",
+  "seasons": [
+    "2425",
+    "2526"
+  ],
+  "model_type": "dixon_coles",
+  "teams": [
+    "Bohemians",
+    "Bray",
+    "Cork City",
+    "Derry City",
+    "Drogheda",
+    "Dundalk",
+    "Galway",
+    "Shamrock Rovers",
+    "Shelbourne",
+    "Sligo Rovers",
+    "St. Patricks",
+    "UC Dublin",
+    "Waterford"
+  ],
+  "params": {
+    "attack": {
+      "Bohemians": 1.1397071752976051,
+      "Bray": 0.6521421738573889,
+      "Cork City": 0.8202092547022476,
+      "Derry City": 1.2799899513497648,
+      "Drogheda": 1.0925624162266594,
+      "Dundalk": 1.0753185892637203,
+      "Galway": 0.9916609069149576,
+      "Shamrock Rovers": 1.339055965894334,
+      "Shelbourne": 1.1828517616499827,
+      "Sligo Rovers": 0.9527944775329863,
+      "St. Patricks": 1.2275757282919806,
+      "UC Dublin": 0.14381974967272915,
+      "Waterford": 1.1023118493456445
+    },
+    "defence": {
+      "Bohemians": -1.176750310855508,
+      "Bray": 0.006087563247704905,
+      "Cork City": -0.7607784659191688,
+      "Derry City": -1.297226046896409,
+      "Drogheda": -0.9314919450873649,
+      "Dundalk": -0.9757315397214348,
+      "Galway": -1.2071704361453484,
+      "Shamrock Rovers": -1.397640958679443,
+      "Shelbourne": -1.2963192964543346,
+      "Sligo Rovers": -0.9215629481612626,
+      "St. Patricks": -1.3090392906723265,
+      "UC Dublin": -0.24900256466675788,
+      "Waterford": -0.8212079051102272
+    },
+    "rho": -0.08688317731940873,
+    "gamma": 0.2792823268368533,
+    "log_likelihood": -1361.8008316773562,
+    "n_teams": 13.0,
+    "n_matches": 500.0
+  }
+}

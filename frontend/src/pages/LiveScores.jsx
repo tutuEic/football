@@ -1,5 +1,5 @@
 import { useState, useEffect, useCallback } from 'react';
-import { get } from '../api';
+import { get, WS_BASE } from '../api';
 
 const LEAGUES = [
   { code: '', name: '全部联赛' },
@@ -47,7 +47,7 @@ export default function LiveScores() {
 
   // WebSocket for live updates
   useEffect(() => {
-    const ws = new WebSocket('ws://localhost:8000/ws/live');
+    const ws = new WebSocket(WS_BASE + '/live');
     ws.onmessage = (e) => {
       try {
         const data = JSON.parse(e.data);
