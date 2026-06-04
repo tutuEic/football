@@ -1,6 +1,6 @@
-# -*- coding: utf-8 -*-
+﻿# -*- coding: utf-8 -*-
 """
-World Cup Prediction Engine — 6-Layer Model
+World Cup Prediction Engine 鈥?6-Layer Model
 ============================================
 Predicts WC matches using:
   Layer 1: Player Elo (from wc_data.py)
@@ -11,7 +11,7 @@ Predicts WC matches using:
   Layer 6: Match Context (home advantage, stage, fatigue)
 
 Model: Adapted Dixon-Coles with rho = -0.15 (more conservative than leagues)
-No trained DC model — all strength derived from Elo + player data.
+No trained DC model 鈥?all strength derived from Elo + player data.
 """
 import math
 import sys
@@ -97,7 +97,7 @@ WC_HISTORY = {
     "Netherlands":     15, "Croatia":          8, "Czechia":          8,
     "Hungary":         8,  "Sweden":           8, "Poland":           3,
     "Belgium":         3,  "Portugal":         3, "Turkey":           3,
-    "Türkiye":         3,  "Korea Republic":   3, "USA":              3,
+    "T眉rkiye":         3,  "Korea Republic":   3, "USA":              3,
     "Chile":           3,  "Bulgaria":         3, "Austria":          3,
     "Russia":          3,  "Senegal":          3, "Morocco":          3,
     "Mexico":          1,  "Switzerland":      1, "Japan":            1,
@@ -215,11 +215,11 @@ def get_international_form(fifa_country_name):
         SELECT g.game_id, g.date, g.competition_id, g.home_club_name, g.away_club_name,
                g.home_club_goals, g.away_club_goals
         FROM tm_games g
-        WHERE g.competition_id IN ('FIWC', 'EURO', 'COPA', 'AFAC', 'AFCN', 'WCQL', 'EUCON')
-          AND g.date >= '2023-01-01'
+        WHERE g.competition_id IN ('FIWC', 'EURO', 'COPA', 'AFAC', 'AFCN', 'WCQL', 'EUCON', 'AFQL', 'ACQL', 'UNL', 'CNL', 'GC', 'FR')
+          AND g.date >= '2022-01-01'
           AND (g.home_club_name LIKE %s OR g.away_club_name LIKE %s)
         ORDER BY g.date DESC
-        LIMIT 20
+        LIMIT 30
     """, [f"%{fifa_country_name}%", f"%{fifa_country_name}%"], db="football_pred")
 
     if not rows:
@@ -228,11 +228,11 @@ def get_international_form(fifa_country_name):
             SELECT g.game_id, g.date, g.competition_id, g.home_club_name, g.away_club_name,
                    g.home_club_goals, g.away_club_goals
             FROM tm_games g
-            WHERE g.competition_id IN ('FIWC', 'EURO', 'COPA', 'AFAC', 'AFCN', 'WCQL', 'EUCON')
-              AND g.date >= '2023-01-01'
+            WHERE g.competition_id IN ('FIWC', 'EURO', 'COPA', 'AFAC', 'AFCN', 'WCQL', 'EUCON', 'AFQL', 'ACQL', 'UNL', 'CNL', 'GC', 'FR')
+              AND g.date >= '2022-01-01'
               AND (g.home_club_name LIKE %s OR g.away_club_name LIKE %s)
             ORDER BY g.date DESC
-            LIMIT 20
+            LIMIT 30
         """, [f"%{country}%", f"%{country}%"], db="football_pred")
 
     if not rows:
@@ -813,3 +813,5 @@ def predict_all_group_matches():
             print(f"[WC_PREDICTOR] Error predicting {home} vs {away}: {e}")
 
     return predictions
+
+
