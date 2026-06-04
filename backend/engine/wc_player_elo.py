@@ -126,8 +126,8 @@ DECAY_HALF_LIFE_DAYS = 540
 DECAY_LAMBDA = math.log(2) / DECAY_HALF_LIFE_DAYS
 
 # Minimum appearances to be considered
-MIN_APPEARANCES = 5
-MIN_MINUTES = 450  # 5 full matches
+MIN_APPEARANCES = 15
+MIN_MINUTES = 1500  # ~17 full matches
 
 
 # ============================================================
@@ -378,13 +378,17 @@ def calculate_player_elo(player_id, appearances, player_meta=None):
     perf_adjustment = avg_score * 2.0
     
     # Consistency bonus (more appearances = more reliable)
-    consistency = min(total_apps / 30.0, 1.0) * 5.0
+    consistency = min(total_apps / 40.0, 1.0) * 5.0
     
     # Volume bonus (significant minutes played)
-    volume = min(total_minutes / 3000.0, 1.0) * 5.0
+    volume = min(total_minutes / 4000.0, 1.0) * 5.0
+    
+    # Sample reliability: penalize players with few minutes
+    # Full reliability at 3000+ minutes, steep drop below 1500
+    sample_reliability = min(total_minutes / 3000.0, 1.0) ** 0.5
     
     # Final Elo (0-99 scale)
-    raw_elo = base_elo + perf_adjustment + consistency + volume
+    raw_elo = base_elo + (perf_adjustment + consistency + volume) * sample_reliability
     elo = round(max(0, min(99, raw_elo)), 1)
     
     # League-only and international-only Elo
@@ -600,3 +604,4 @@ if __name__ == "__main__":
     else:
         print("Usage: python wc_player_elo.py <country_name>")
         print("Example: python wc_player_elo.py Brazil")
+
