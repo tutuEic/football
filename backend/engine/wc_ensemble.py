@@ -24,6 +24,7 @@ from engine.wc_bayes_dc import BayesianDixonColes, MODEL_DIR
 from engine.wc_poisson_reg import PoissonRegression
 from engine.wc_elo_poisson import predict_elo_poisson
 from engine.wc_features import compute_match_features, FEATURE_NAMES
+from engine.wc_stacking import StackingEnsemble
 
 # Model weights (can be tuned via cross-validation)
 DEFAULT_WEIGHTS = {
@@ -72,6 +73,17 @@ class WCPredictionEnsemble:
         # Elo-Poisson (always available)
         self.models['elo_poisson'] = True  # Just a flag
         print(f"Loaded Elo-Poisson (always available)")
+        
+        # Stacking meta-learner
+        try:
+            stacking_path = MODEL_DIR / 'stacking_intl_latest.json'
+            if stacking_path.exists():
+                stacking = StackingEnsemble()
+                stacking.load(stacking_path)
+                self.models['stacking'] = stacking
+                print(f"Loaded Stacking ensemble")
+        except Exception as e:
+            print(f"Warning: Could not load Stacking: {e}")
     
     def predict(self, home_team, away_team, context=None):
         """
@@ -134,7 +146,42 @@ class WCPredictionEnsemble:
             _cache[cache_key] = (time.time(), result)
             return result
         
-        # Weighted average
+        # Try stacking first
+        if 'stacking' in self.models and len(predictions) >= 2:
+            try:
+                dc_wdl = predictions.get('bayes_dc', {}).get('wdl', [0.45, 0.25, 0.30])
+                pr_wdl = predictions.get('poisson_reg', {}).get('wdl', [0.45, 0.25, 0.30])
+                ep_wdl = predictions.get('elo_poisson', {}).get('wdl', [0.45, 0.25, 0.30])
+                
+                stacking_pred = self.models['stacking'].predict(dc_wdl, pr_wdl, ep_wdl)
+                
+                # Compute expected goals from weighted base models
+                final_xg_h = sum(pred['xg']['home'] for pred in predictions.values()) / len(predictions)
+                final_xg_a = sum(pred['xg']['away'] for pred in predictions.values()) / len(predictions)
+                
+                result = {
+                    'wdl': {
+                        'home_win': stacking_pred['home_win'],
+                        'draw': stacking_pred['draw'],
+                        'away_win': stacking_pred['away_win'],
+                    },
+                    'expected_goals': {
+                        'home': round(final_xg_h, 2),
+                        'away': round(final_xg_a, 2),
+                    },
+                    'models': {name: {
+                        'wdl': [round(p, 4) for p in pred['wdl']],
+                        'xg': pred['xg'],
+                    } for name, pred in predictions.items()},
+                    'weights': {name: self.weights.get(name, 0) for name in predictions},
+                    'method': 'stacking',
+                }
+                _cache[cache_key] = (time.time(), result)
+                return result
+            except Exception:
+                pass  # Fall through to weighted average
+        
+        # Weighted average fallback
         final_wdl = [0.0, 0.0, 0.0]
         final_xg_h = 0.0
         final_xg_a = 0.0
@@ -231,3 +278,4 @@ if __name__ == '__main__':
             mxg = m['xg']
             print(f"  {name:15s}  {mwdl[0]:.1%} / {mwdl[1]:.1%} / {mwdl[2]:.1%}  "
                   f"xG: {mxg['home']:.2f}-{mxg['away']:.2f}")
+
