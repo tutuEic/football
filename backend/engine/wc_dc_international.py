@@ -6,8 +6,10 @@ Based on:
 - Dixon & Coles (1997): "Modelling Association Football Scores"
 - Groll et al. (2015): "Prediction of major international soccer tournaments"
 
-Trains on all 10,000+ international matches with full team coverage.
-Uses analytical gradient for fast optimization.
+Data cleaning:
+- Normalize team names (China -> China PR, etc.)
+- Exclude non-FIFA teams from friendlies
+- Only include matches between verified FIFA teams
 """
 import json
 import os
@@ -25,6 +27,43 @@ from data.mysql_client import query
 MODEL_DIR = Path(__file__).resolve().parent.parent / 'wc_models'
 MODEL_DIR.mkdir(exist_ok=True)
 
+# ============================================================
+# Data Cleaning
+# ============================================================
+
+# Team name normalization
+TEAM_NAME_MAP = {
+    'China':                    'China PR',
+    'Bosnia-Herzegovina':       'Bosnia and Herzegovina',
+    'Democratic Republic of the Congo': 'DR Congo',
+    'Côte d\'Ivoire':           'Ivory Coast',
+    'Cote d\'Ivoire':           'Ivory Coast',
+    'Korea Republic':           'South Korea',
+    'IR Iran':                  'Iran',
+    'Turkiye':                  'Turkey',
+    'Cabo Verde':               'Cape Verde',
+    'USA':                      'United States',
+}
+
+# Non-FIFA teams (from data analysis)
+NON_FIFA_TEAMS = {
+    'Abkhazia', 'Alderney', 'Barawa', 'Basque Country', 'Cascadia',
+    'Catalonia', 'Chagos Islands', 'Corsica', 'Donetsk PR',
+    'East Turkestan', 'Elba Island', 'Ellan Vannin', 'Franconia',
+    'Galicia', 'Greenland', 'Jersey', 'Kernow', 'Luhansk PR',
+    'Monaco', 'Occitania', 'Padania', 'Panjab', 'Parishes of Jersey',
+    'Raetia', 'Romani people', 'Ryūkyū', 'Saint Barthélemy',
+    'Saint Helena', 'Sealand', 'Seborga', 'Somaliland', 'South Ossetia',
+    'Surrey', 'Székely Land', 'Tamil Eelam', 'Tibet', 'Ticino',
+    'United Koreans in Japan', 'Vatican City', 'West Papua',
+    'Ynys Môn', 'Yorkshire',
+}
+
+
+def normalize_team(name):
+    """Normalize team name."""
+    return TEAM_NAME_MAP.get(name, name)
+
 
 class InternationalDixonColes:
     """Dixon-Coles model for international football with analytical gradient."""
@@ -35,7 +74,6 @@ class InternationalDixonColes:
         self.fitted = False
 
     def _rho_tau(self, x, y, lam, mu, rho):
-        """Tau correction and its partial derivatives."""
         if x == 0 and y == 0:
             tau = max(1 - lam * mu * rho, 1e-10)
             dtau_dlam = -mu * rho
@@ -59,13 +97,11 @@ class InternationalDixonColes:
         return tau, dtau_dlam, dtau_dmu
 
     def ll_and_grad(self, params, matches, n_teams):
-        """Compute negative log-likelihood and its gradient analytically."""
         attack  = params[:n_teams]
         defence = params[n_teams:2*n_teams]
         rho     = params[-2]
         gamma   = params[-1]
 
-        # Gradient accumulator
         g_attack  = np.zeros(n_teams)
         g_defence = np.zeros(n_teams)
         g_rho = 0.0
@@ -93,14 +129,9 @@ class InternationalDixonColes:
             py = poisson.pmf(y, mu)
 
             tau, dtau_dlam, dtau_dmu = self._rho_tau(x, y, lam, mu, rho)
-
             prob = max(tau * px * py, 1e-10)
             ll += w * np.log(prob)
 
-            # d(log prob)/d(params) via chain rule
-            # d(log prob)/d(lam) = d(log(tau*px*py))/d(lam)
-            #                    = (dtau/dlam * px*py + tau * dpx/dlam * py) / prob
-            # dpx/dlam = px * (x/lam - 1)  for Poisson
             if lam > 0:
                 dpx_dlam = px * (x / lam - 1)
             else:
@@ -110,23 +141,18 @@ class InternationalDixonColes:
             else:
                 dpy_dmu = 0
 
-            # d(log_prob)/d(lam) and d(log_prob)/d(mu)
             d_logp_dlam = (dtau_dlam * px * py + tau * dpx_dlam * py) / prob
             d_logp_dmu  = (dtau_dmu * px * py + tau * px * dpy_dmu) / prob
 
-            # Chain rule: d(lam)/d(a_h) = lam, d(lam)/d(d_a) = lam
-            #            d(mu)/d(a_a) = mu, d(mu)/d(d_h) = mu
-            w_dlogp_dlam = w * d_logp_dlam
-            w_dlogp_dmu  = w * d_logp_dmu
+            w_dlam = w * d_logp_dlam
+            w_dmu  = w * d_logp_dmu
 
-            g_attack[hi]  += w_dlogp_dlam * lam
-            g_defence[ai] += w_dlogp_dlam * lam
-            g_attack[ai]  += w_dlogp_dmu * mu
-            g_defence[hi] += w_dlogp_dmu * mu
-            g_gamma       += w_dlogp_dlam * lam
+            g_attack[hi]  += w_dlam * lam
+            g_defence[ai] += w_dlam * lam
+            g_attack[ai]  += w_dmu * mu
+            g_defence[hi] += w_dmu * mu
+            g_gamma       += w_dlam * lam
 
-            # d(log_prob)/d(rho)
-            # tau depends on rho: for (0,0): dtau = -lam*mu, (0,1): dtau = lam, (1,0): dtau = mu, (1,1): dtau = -1
             if x == 0 and y == 0:
                 dtau_drho = -lam * mu
             elif x == 0 and y == 1:
@@ -138,10 +164,8 @@ class InternationalDixonColes:
             else:
                 dtau_drho = 0
 
-            d_logp_drho = (dtau_drho * px * py) / prob
-            g_rho += w * d_logp_drho
+            g_rho += w * (dtau_drho * px * py) / prob
 
-        # Add L2 regularization gradient
         g_attack  -= 2 * 0.005 * attack
         g_defence -= 2 * 0.005 * defence
 
@@ -157,7 +181,6 @@ class InternationalDixonColes:
         n_teams = len(self.teams)
         team_idx = {t: i for i, t in enumerate(self.teams)}
 
-        # Pre-index
         indexed = []
         for m in matches:
             indexed.append({
@@ -175,11 +198,9 @@ class InternationalDixonColes:
         x0[-1] = 0.20
 
         result = minimize(
-            self.ll_and_grad,
-            x0,
+            self.ll_and_grad, x0,
             args=(indexed, n_teams),
-            method='L-BFGS-B',
-            jac=True,
+            method='L-BFGS-B', jac=True,
             options={'maxiter': max_iter, 'ftol': 1e-7}
         )
 
@@ -282,16 +303,33 @@ class InternationalDixonColes:
 
 
 def load_training_data(start_date='2014-01-01'):
+    """Load international matches with data cleaning."""
+    # Step 1: Get FIFA teams from competitive matches
+    fifa_rows = query(
+        "SELECT DISTINCT team FROM ("
+        "SELECT home_club_name as team FROM tm_games "
+        "WHERE competition_id IN ('FIWC','EURO','COPA','AFAC','AFCN','WCQL','EUCON','UNL','CNL','AFQL','ACQL','GC') "
+        "AND date >= %s "
+        "UNION "
+        "SELECT away_club_name as team FROM tm_games "
+        "WHERE competition_id IN ('FIWC','EURO','COPA','AFAC','AFCN','WCQL','EUCON','UNL','CNL','AFQL','ACQL','GC') "
+        "AND date >= %s "
+        ") t",
+        [start_date, start_date], db='football_pred'
+    )
+    fifa_teams = {normalize_team(r['team']) for r in fifa_rows}
+    print(f"FIFA teams: {len(fifa_teams)}")
+
+    # Step 2: Load all matches
     rows = query(
-        """SELECT home_club_name as home, away_club_name as away,
-                  home_club_goals as home_goals, away_club_goals as away_goals,
-                  competition_id, date
-           FROM tm_games
-           WHERE competition_id IN ('FIWC','EURO','COPA','AFAC','AFCN','WCQL','EUCON','AFQL','ACQL','UNL','CNL','GC','FR')
-             AND home_club_goals IS NOT NULL
-             AND date >= %s
-           ORDER BY date""",
-        [start_date], db='football_pred')
+        "SELECT home_club_name as home, away_club_name as away, "
+        "home_club_goals as home_goals, away_club_goals as away_goals, "
+        "competition_id, date "
+        "FROM tm_games "
+        "WHERE competition_id IN ('FIWC','EURO','COPA','AFAC','AFCN','WCQL','EUCON','AFQL','ACQL','UNL','CNL','GC','FR') "
+        "AND home_club_goals IS NOT NULL AND date >= %s ORDER BY date",
+        [start_date], db='football_pred'
+    )
 
     comp_weight = {
         'FIWC': 1.0, 'EURO': 0.95, 'COPA': 0.95, 'AFAC': 0.90, 'AFCN': 0.85,
@@ -302,28 +340,46 @@ def load_training_data(start_date='2014-01-01'):
     today = date.today()
 
     matches = []
+    skipped = 0
     for r in rows:
+        home = normalize_team(r['home'])
+        away = normalize_team(r['away'])
+        comp = r['competition_id']
+
+        # Filter: both teams must be FIFA members
+        if home not in fifa_teams or away not in fifa_teams:
+            skipped += 1
+            continue
+
+        # Filter: no non-FIFA teams
+        if home in NON_FIFA_TEAMS or away in NON_FIFA_TEAMS:
+            skipped += 1
+            continue
+
         m_date = r['date']
         if isinstance(m_date, str):
             m_date = datetime.strptime(m_date, '%Y-%m-%d').date()
+
         days_ago = (today - m_date).days
         recency = math.exp(-decay_lambda * days_ago)
-        comp = r.get('competition_id', 'FR')
         cw = comp_weight.get(comp, 0.5)
         weight = cw * recency
+
         matches.append({
-            'home': r['home'], 'away': r['away'],
-            'home_goals': int(r['home_goals']), 'away_goals': int(r['away_goals']),
+            'home': home, 'away': away,
+            'home_goals': int(r['home_goals']),
+            'away_goals': int(r['away_goals']),
             'competition': comp, 'date': str(m_date),
             'weight': round(weight, 4),
         })
-    print(f"Loaded {len(matches)} matches for training")
+
+    print(f"Loaded {len(matches)} matches (skipped {skipped} non-FIFA/noise)")
     return matches
 
 
 def train_and_save():
     print("=" * 60)
-    print("Training International Dixon-Coles Model (analytical grad)")
+    print("Training International Dixon-Coles Model (cleaned data)")
     print("=" * 60)
     matches = load_training_data()
     model = InternationalDixonColes()
@@ -340,6 +396,7 @@ if __name__ == '__main__':
         ('Brazil', 'Croatia'), ('France', 'Morocco'),
         ('Argentina', 'Saudi Arabia'), ('England', 'Iran'),
         ('Germany', 'Japan'), ('Spain', 'Italy'),
+        ('France', 'Brazil'), ('Argentina', 'France'),
     ]
     for home, away in tests:
         pred = model.get_match_probs(home, away)
