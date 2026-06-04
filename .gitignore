@@ -1,0 +1,19 @@
+node_modules/
+__pycache__/
+*.pyc
+.venv/
+venv/
+*.log
+frontend/dist/
+
+# Model files (large, regenerate from training)
+backend/models/*.json
+
+# Data cache (keep code, ignore cache)
+backend/data/sofifa_cache/
+
+# Env
+.env
+
+.env.local
+.env.*
