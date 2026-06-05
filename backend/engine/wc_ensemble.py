@@ -28,9 +28,9 @@ from engine.wc_stacking import StackingEnsemble
 
 # Model weights (can be tuned via cross-validation)
 DEFAULT_WEIGHTS = {
-    'bayes_dc':    0.35,  # Best overall accuracy
-    'poisson_reg': 0.30,  # Good feature-based predictions
-    'elo_poisson': 0.35,  # Elo-based, primary factor
+    'bayes_dc':    0.40,  # Best overall accuracy
+    'poisson_reg': 0.15,  # Reduced - model coefficients have issues
+    'elo_poisson': 0.45,  # Elo-based, primary factor
 }
 
 # Cache
@@ -74,16 +74,16 @@ class WCPredictionEnsemble:
         self.models['elo_poisson'] = True  # Just a flag
         print(f"Loaded Elo-Poisson (always available)")
         
-        # Stacking meta-learner
-        try:
-            stacking_path = MODEL_DIR / 'stacking_intl_latest.json'
-            if stacking_path.exists():
-                stacking = StackingEnsemble()
-                stacking.load(stacking_path)
-                self.models['stacking'] = stacking
-                print(f"Loaded Stacking ensemble")
-        except Exception as e:
-            print(f"Warning: Could not load Stacking: {e}")
+        # Stacking meta-learner - DISABLED (model coefficients corrupted)
+        # try:
+        #     stacking_path = MODEL_DIR / 'stacking_intl_latest.json'
+        #     if stacking_path.exists():
+        #         stacking = StackingEnsemble()
+        #         stacking.load(stacking_path)
+        #         self.models['stacking'] = stacking
+        #         print(f"Loaded Stacking ensemble")
+        # except Exception as e:
+        #     print(f"Warning: Could not load Stacking: {e}")
     
     def predict(self, home_team, away_team, context=None):
         """

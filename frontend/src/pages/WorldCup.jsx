@@ -7,6 +7,8 @@ const SUB_TABS = [
   { key: 'matches',   label: '赛程' },
   { key: 'custom',    label: '自定义预测' },
   { key: 'sandbox',   label: '沙盘模拟' },
+  { key: 'knockout',    label: '淘汰赛预测' },
+  { key: 'goldenball',  label: '金球奖' },
   { key: 'simulate',  label: '蒙特卡洛' },
 ];
 

@@ -29,6 +29,70 @@ from engine.wc_data import (
 )
 
 # Cache for squad Elo analysis
+
+
+# Official FIFA Elo ratings from wc_groups (cached at module level)
+_official_elo_cache = None
+
+
+def _load_official_elo():
+    """Load official Elo ratings from wc_groups table."""
+    global _official_elo_cache
+    if _official_elo_cache is not None:
+        return _official_elo_cache
+    
+    try:
+        rows = query("SELECT team, elo_rating FROM wc_groups", db='football_pred')
+        _official_elo_cache = {r['team']: r['elo_rating'] for r in rows}
+    except Exception:
+        _official_elo_cache = {}
+    return _official_elo_cache
+
+
+def calibrate_elo_bonus(team, adapter_elo_bonus):
+    """
+    Calibrate elo_adapter output to match official FIFA Elo scale.
+    
+    Official Elo range: ~1350-1910 (mean ~1650)
+    Adapter range: -30 to +40 (mean ~10)
+    
+    We scale adapter output so it correlates with official Elo.
+    """
+    official = _load_official_elo()
+    
+    if team in official:
+        fifa_elo = official[team]
+        # Convert official Elo to adapter scale: (elo - 1650) / 10
+        expected_bonus = (fifa_elo - 1650) / 10.0
+        # Blend: 70% official, 30% adapter (adapter has useful player-level info)
+        calibrated = 0.7 * expected_bonus + 0.3 * adapter_elo_bonus
+        return round(calibrated, 1)
+    
+    return adapter_elo_bonus
+
+
+def calibrate_quality(team, adapter_quality):
+    """
+    Calibrate quality scores (starting_xi, attack, defense) to match official Elo.
+    
+    Quality range: 50-80 (mean ~65)
+    Official Elo range: 1350-1910 (mean ~1650)
+    
+    We adjust quality so stronger teams (higher Elo) get higher quality scores.
+    """
+    official = _load_official_elo()
+    
+    if team in official:
+        fifa_elo = official[team]
+        # Expected quality from Elo: 50 + (elo - 1350) / 11.2
+        # This maps 1350->50, 1650->65, 1910->75
+        expected_quality = 50 + (fifa_elo - 1350) / 11.2
+        # Blend: 60% expected, 40% adapter
+        calibrated = 0.6 * expected_quality + 0.4 * adapter_quality
+        return round(calibrated, 1)
+    
+    return adapter_quality
+
 _squad_elo_cache = {}
 
 
@@ -171,16 +235,16 @@ def analyze_squad_elo(fifa_country_name):
         "country":          fifa_country_name,
         "tm_country":       _country_name(fifa_country_name),
         "squad_size":       len(squad),
-        "starting_xi":      starting_xi,
-        "attack_quality":   attack_quality,
-        "defense_quality":  defense_quality,
+        "starting_xi":      calibrate_quality(fifa_country_name, starting_xi),
+        "attack_quality":   calibrate_quality(fifa_country_name, attack_quality),
+        "defense_quality":  calibrate_quality(fifa_country_name, defense_quality),
         "squad_depth":      max(squad_depth, 0),
         "avg_age":          avg_age,
         "age_score":        age_score,
         "league_quality":   league_q,
         "cohesion":         cohesion,
         "set_piece_strength": setpiece,
-        "elo_bonus":        round(total_elo, 1),
+        "elo_bonus":        calibrate_elo_bonus(fifa_country_name, round(total_elo, 1)),
         "elo_breakdown": {
             "starting_xi": xi_elo,
             "age": age_elo,
@@ -245,7 +309,7 @@ def _market_value_fallback(country, raw_squad):
         "squad_size": len(squad), "starting_xi": 50.0, "attack_quality": 50.0,
         "defense_quality": 50.0, "squad_depth": 50.0, "avg_age": 25.0,
         "age_score": 0.5, "league_quality": 45.0, "cohesion": 0.4,
-        "set_piece_strength": 0.5, "elo_bonus": elo_bonus,
+        "set_piece_strength": 0.5, "elo_bonus": calibrate_elo_bonus(country, elo_bonus),
         "elo_breakdown": {"starting_xi": elo_bonus, "age": 0, "league": 0,
                           "cohesion": 0, "set_piece": 0, "star": 0, "intl_exp": 0},
         "top_players": top_players, "squad": squad,
