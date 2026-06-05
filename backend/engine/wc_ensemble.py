@@ -153,7 +153,20 @@ class WCPredictionEnsemble:
                 pr_wdl = predictions.get('poisson_reg', {}).get('wdl', [0.45, 0.25, 0.30])
                 ep_wdl = predictions.get('elo_poisson', {}).get('wdl', [0.45, 0.25, 0.30])
                 
-                stacking_pred = self.models['stacking'].predict(dc_wdl, pr_wdl, ep_wdl)
+                # Get Elo diff and cohesion for stacking
+                try:
+                    from engine.wc_elo_adapter import analyze_squad_elo
+                    analysis_h = analyze_squad_elo(home_team)
+                    analysis_a = analyze_squad_elo(away_team)
+                    elo_diff = (analysis_h.get('elo_bonus', 0) - analysis_a.get('elo_bonus', 0)) / 100.0
+                    cohesion_h = analysis_h.get('cohesion', 0.5)
+                    cohesion_a = analysis_a.get('cohesion', 0.5)
+                except:
+                    elo_diff = 0.0
+                    cohesion_h = 0.5
+                    cohesion_a = 0.5
+                
+                stacking_pred = self.models['stacking'].predict(dc_wdl, pr_wdl, ep_wdl, elo_diff, cohesion_h, cohesion_a)
                 
                 # Compute expected goals from weighted base models
                 final_xg_h = sum(pred['xg']['home'] for pred in predictions.values()) / len(predictions)
@@ -278,4 +291,5 @@ if __name__ == '__main__':
             mxg = m['xg']
             print(f"  {name:15s}  {mwdl[0]:.1%} / {mwdl[1]:.1%} / {mwdl[2]:.1%}  "
                   f"xG: {mxg['home']:.2f}-{mxg['away']:.2f}")
+
 

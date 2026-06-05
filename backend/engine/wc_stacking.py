@@ -1,4 +1,4 @@
-﻿# -*- coding: utf-8 -*-
+# -*- coding: utf-8 -*-
 """
 Stacking Ensemble for WC Prediction.
 
@@ -23,17 +23,19 @@ from engine.wc_dc_international import InternationalDixonColes, normalize_team, 
 from engine.wc_poisson_reg import PoissonRegression
 from engine.wc_elo_poisson import predict_elo_poisson
 from engine.wc_features import compute_match_features, FEATURE_NAMES
+from engine.wc_elo_adapter import analyze_squad_elo
 
 
 class StackingEnsemble:
     """Logistic Regression meta-learner for combining base models."""
     
-    def __init__(self):
+    def __init__(self, n_features=13):
         # Weights for [home_win, draw, away_win] prediction
-        # Each row: [bias, dc_h, dc_d, dc_a, pr_h, pr_d, pr_a, ep_h, ep_d, ep_a]
-        self.beta_hw = np.zeros(10)  # home_win coefficients
-        self.beta_dr = np.zeros(10)  # draw coefficients
-        self.beta_aw = np.zeros(10)  # away_win coefficients
+        # Features: [bias, dc_h, dc_d, dc_a, pr_h, pr_d, pr_a, ep_h, ep_d, ep_a, elo_diff, cohesion_h, cohesion_a]
+        self.n_features = n_features
+        self.beta_hw = np.zeros(n_features)  # home_win coefficients
+        self.beta_dr = np.zeros(n_features)  # draw coefficients
+        self.beta_aw = np.zeros(n_features)  # away_win coefficients
         self.fitted = False
     
     def _softmax(self, x):
@@ -55,7 +57,7 @@ class StackingEnsemble:
     
     def _log_loss(self, params, X, y):
         """Negative log-likelihood for 3-class classification."""
-        n = 10
+        n = self.n_features
         self.beta_hw = params[:n]
         self.beta_dr = params[n:2*n]
         self.beta_aw = params[2*n:3*n]
@@ -74,11 +76,11 @@ class StackingEnsemble:
         """Train the stacking model."""
         print(f"Training Stacking: {X.shape[0]} samples, {X.shape[1]} features")
         
-        x0 = np.zeros(30)
+        x0 = np.zeros(3 * self.n_features)
         # Initialize biases
         x0[0] = 0.0   # home_win bias
-        x0[10] = -0.5  # draw bias (lower prior)
-        x0[20] = 0.0   # away_win bias
+        x0[self.n_features] = -0.5  # draw bias (lower prior)
+        x0[2 * self.n_features] = 0.0  # away_win bias
         
         result = minimize(
             self._log_loss, x0,
@@ -87,7 +89,7 @@ class StackingEnsemble:
             options={'maxiter': max_iter, 'ftol': 1e-7}
         )
         
-        n = 10
+        n = self.n_features
         self.beta_hw = result.x[:n]
         self.beta_dr = result.x[n:2*n]
         self.beta_aw = result.x[2*n:3*n]
@@ -103,18 +105,19 @@ class StackingEnsemble:
     
     def _print_weights(self):
         """Print learned stacking weights."""
-        labels = ['bias', 'dc_H', 'dc_D', 'dc_A', 'pr_H', 'pr_D', 'pr_A', 'ep_H', 'ep_D', 'ep_A']
+        labels = ['bias', 'dc_H', 'dc_D', 'dc_A', 'pr_H', 'pr_D', 'pr_A', 
+                  'ep_H', 'ep_D', 'ep_A', 'elo_diff', 'coh_H', 'coh_A']
         print("\nStacking weights:")
-        print(f"  {'':8s} {'HomeWin':>8s} {'Draw':>8s} {'AwayWin':>8s}")
-        for i, label in enumerate(labels):
-            print(f"  {label:8s} {self.beta_hw[i]:>+8.3f} {self.beta_dr[i]:>+8.3f} {self.beta_aw[i]:>+8.3f}")
+        print(f"  {'':10s} {'HomeWin':>8s} {'Draw':>8s} {'AwayWin':>8s}")
+        for i, label in enumerate(labels[:self.n_features]):
+            print(f"  {label:10s} {self.beta_hw[i]:>+8.3f} {self.beta_dr[i]:>+8.3f} {self.beta_aw[i]:>+8.3f}")
     
-    def predict(self, dc_wdl, pr_wdl, ep_wdl):
+    def predict(self, dc_wdl, pr_wdl, ep_wdl, elo_diff=0.0, cohesion_h=0.5, cohesion_a=0.5):
         """Predict using stacking."""
         if not self.fitted:
             raise RuntimeError("Stacking not fitted")
         
-        features = np.array([1.0] + dc_wdl + pr_wdl + ep_wdl)
+        features = np.array([1.0] + dc_wdl + pr_wdl + ep_wdl + [elo_diff, cohesion_h, cohesion_a])
         probs = self._predict_proba(features)
         
         return {
@@ -129,6 +132,7 @@ class StackingEnsemble:
         with open(filepath, 'w') as f:
             json.dump({
                 'model_type': 'stacking_ensemble',
+                'n_features': self.n_features,
                 'beta_hw': self.beta_hw.tolist(),
                 'beta_dr': self.beta_dr.tolist(),
                 'beta_aw': self.beta_aw.tolist(),
@@ -138,6 +142,7 @@ class StackingEnsemble:
     def load(self, filepath):
         with open(filepath) as f:
             data = json.load(f)
+        self.n_features = data.get('n_features', 10)
         self.beta_hw = np.array(data['beta_hw'])
         self.beta_dr = np.array(data['beta_dr'])
         self.beta_aw = np.array(data['beta_aw'])
@@ -193,6 +198,7 @@ def prepare_stacking_dataset(split_date='2024-01-01'):
     train_count = 0
     test_count = 0
     
+    team_cache = {}  # Cache team analyses to avoid recomputation
     for i, r in enumerate(rows):
         home = normalize_team(r['home'])
         away = normalize_team(r['away'])
@@ -232,8 +238,26 @@ def prepare_stacking_dataset(split_date='2024-01-01'):
         except:
             ep_wdl = [0.45, 0.25, 0.30]
         
-        # Features: [bias, dc_h, dc_d, dc_a, pr_h, pr_d, pr_a, ep_h, ep_d, ep_a]
-        x = [1.0] + dc_wdl + pr_wdl + ep_wdl
+        # Features: [bias, dc_h, dc_d, dc_a, pr_h, pr_d, pr_a, ep_h, ep_d, ep_a, elo_diff, cohesion_h, cohesion_a]
+        # Use pre-computed team analysis cache
+        if home not in team_cache:
+            try:
+                team_cache[home] = analyze_squad_elo(home)
+            except:
+                team_cache[home] = {'elo_bonus': 0, 'cohesion': 0.5}
+        if away not in team_cache:
+            try:
+                team_cache[away] = analyze_squad_elo(away)
+            except:
+                team_cache[away] = {'elo_bonus': 0, 'cohesion': 0.5}
+        
+        analysis_h = team_cache[home]
+        analysis_a = team_cache[away]
+        elo_diff = (analysis_h.get('elo_bonus', 0) - analysis_a.get('elo_bonus', 0)) / 100.0
+        cohesion_h = analysis_h.get('cohesion', 0.5)
+        cohesion_a = analysis_a.get('cohesion', 0.5)
+        
+        x = [1.0] + dc_wdl + pr_wdl + ep_wdl + [elo_diff, cohesion_h, cohesion_a]
         X.append(x)
         y.append(result)
         
@@ -299,4 +323,7 @@ def train_and_save():
 
 if __name__ == '__main__':
     model = train_and_save()
+
+
+
 
