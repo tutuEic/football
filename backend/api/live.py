@@ -6,12 +6,14 @@ from security import API_KEY, DEV_MODE
 sys.path.insert(0, os.path.dirname(os.path.dirname(__file__)))
 
 import asyncio
+import logging
 from fastapi import APIRouter, WebSocket, WebSocketDisconnect
 from datetime import date, timedelta
 from data.pipeline_fixtures import get_upcoming_matches
 from data.service_live import get_today_status, poller
 
 router = APIRouter(tags=["live"])
+logger = logging.getLogger(__name__)
 
 # WebSocket connections
 _ws_clients: list[WebSocket] = []
@@ -19,7 +21,7 @@ _ws_clients: list[WebSocket] = []
 
 @router.get("/fixtures/upcoming")
 def api_upcoming(league_code: str = None, days: int = 7, limit: int = 100):
-    """(see source)"""
+    """Upcoming fixtures."""
     matches = get_upcoming_matches(league_code=league_code, days=days, limit=limit)
     return {"matches": matches, "count": len(matches)}
 
@@ -41,7 +43,7 @@ def api_today():
 
 @router.get("/fixtures/league/{league_code}")
 def api_league_fixtures(league_code: str, days: int = 30):
-    """某联赛近期赛程"""
+    """League fixtures for the coming period."""
     matches = get_upcoming_matches(league_code=league_code, days=days, limit=500)
     return {"league_code": league_code, "matches": matches, "count": len(matches)}
 
@@ -67,7 +69,7 @@ async def websocket_live(ws: WebSocket, token: str = None):
                 loop,
             )
         except Exception:
-            pass
+            logger.debug("Failed to push live update to ws client", exc_info=True)
 
     poller.register_callback(_on_poll)
 

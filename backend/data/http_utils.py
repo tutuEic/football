@@ -27,7 +27,9 @@ def build_session() -> requests.Session:
     retry = Retry(
         total=COLLECT_MAX_RETRIES,
         backoff_factor=COLLECT_BACKOFF,
-        status_forcelist=[429, 500, 502, 503, 504],
+        # 429 deliberately excluded ¡ª retrying on rate-limit backfires
+        # by amplifying the load on the upstream service.
+        status_forcelist=[500, 502, 503, 504],
         allowed_methods=["GET"],
         raise_on_status=False,
     )

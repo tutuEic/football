@@ -1,4 +1,5 @@
-"""比赛统计 API — 近期战绩 / H2H / 积分榜"""
+# -*- coding: utf-8 -*-
+"""Match statistics API - recent form, H2H, standings."""
 from fastapi import APIRouter, Query
 import sys, os
 sys.path.insert(0, os.path.dirname(os.path.dirname(__file__)))
@@ -10,22 +11,31 @@ router = APIRouter()
 
 @router.get("/matches/leagues")
 def list_leagues():
-    """联赛列表"""
+    """League list."""
     from data.match_repo import get_all_leagues
     return {"leagues": get_all_leagues()}
 
 
 @router.get("/matches/recent")
 def recent_form(team: str = Query(...), league: str = "E0", limit: int = 10):
-    """球队近期战绩"""
+    """Recent results for a team."""
+    # SQL has 4 placeholders: league_code, home_team, away_team, limit.
+    # 'team' appears twice because the WHERE clause matches
+    # on EITHER home_team or away_team.
     rows = query("""
         SELECT match_date, home_team, away_team, fthg, ftag, ftr
         FROM matches
-        WHERE league_code=%s AND (home_team=%s OR away_team=%s)
+        WHERE league_code=%s
+          AND (home_team=%s OR away_team=%s)
           AND fthg IS NOT NULL
         ORDER BY match_date DESC
         LIMIT %s
-    """, [league, team, team, limit])
+    """, [
+        league,   # -> league_code=%s
+        team,     # -> home_team=%s
+        team,     # -> away_team=%s
+        limit,    # -> LIMIT %s
+    ])
     
     results = []
     for r in rows:
@@ -45,16 +55,18 @@ def recent_form(team: str = Query(...), league: str = "E0", limit: int = 10):
         })
     
     wins = sum(1 for r in results if r["outcome"] == "W")
+    draws = sum(1 for r in results if r["outcome"] == "D")
+    losses = sum(1 for r in results if r["outcome"] == "L")
     return {
         "team": team, "league": league,
         "recent": results,
-        "summary": f"{wins}W {sum(1 for r in results if r['outcome']=='D')}D {sum(1 for r in results if r['outcome']=='L')}L"
+        "summary": f"{wins}W {draws}D {losses}L"
     }
 
 
 @router.get("/matches/h2h")
 def head_to_head(team1: str, team2: str, league: str = "E0", limit: int = 10):
-    """两队历史交锋"""
+    """Head-to-head history between two teams."""
     rows = query("""
         SELECT match_date, home_team, away_team, fthg, ftag
         FROM matches
@@ -78,7 +90,7 @@ def head_to_head(team1: str, team2: str, league: str = "E0", limit: int = 10):
 
 @router.get("/matches/standings")
 def standings(league: str = "E0", season: str = None):
-    """联赛积分榜（从 matches 表实时计算）"""
+    """League table computed in real-time from matches table."""
     if season is None:
         seasons = query(
             "SELECT DISTINCT season FROM matches WHERE league_code=%s ORDER BY season DESC LIMIT 1",
@@ -92,7 +104,6 @@ def standings(league: str = "E0", season: str = None):
         WHERE league_code=%s AND season=%s AND fthg IS NOT NULL
     """, [league, season])
     
-    # 计算积分
     table = {}
     for r in rows:
         for team, gf, ga in [
@@ -117,7 +128,7 @@ def standings(league: str = "E0", season: str = None):
 
 @router.get("/matches/upcoming")
 def upcoming_fixtures(league: str = Query(None), limit: int = Query(20, ge=1, le=100)):
-    """?????"""
+    """Upcoming fixtures."""
     where = "WHERE (status IS NULL OR status != 'finished')"
     params = []
     if league:
@@ -132,7 +143,6 @@ def upcoming_fixtures(league: str = Query(None), limit: int = Query(20, ge=1, le
         LIMIT %s
     """, params + [limit], db="football_pred")
     
-    # ???
     results = []
     for r in rows:
         results.append({

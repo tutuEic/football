@@ -1,4 +1,4 @@
-"""Docstring."""
+"""Dixon-Coles model training."""
 import json, os
 from engine.dixon_coles import DixonColes
 from config import MODEL_DIR
@@ -6,10 +6,12 @@ from data.match_repo import get_matches_for_training, get_seasons
 
 os.makedirs(MODEL_DIR, exist_ok=True)
 
+# Maximum matches used for training.  Override with TRAIN_MAX_MATCHES env var.
+MAX_TRAINING_MATCHES = int(os.getenv("TRAIN_MAX_MATCHES", "2000"))
+
 
 def train_league(league_code, seasons=None, model_type="dixon_coles"):
-    """Docstring."""
-    #  鑷姩閫夎禌瀛?
+    """Train a Dixon-Coles model for one league."""
     if seasons is None:
         all_seasons = get_seasons(league_code)
         if not all_seasons:
@@ -17,13 +19,14 @@ def train_league(league_code, seasons=None, model_type="dixon_coles"):
         seasons = all_seasons[-2:] if len(all_seasons) >= 2 else all_seasons
         print(f"Auto-selected seasons: {seasons}")
 
-    # 鑾峰彇璁粌鏁版嵁
     matches = get_matches_for_training(league_code, seasons)
     
-    #  鏁版嵁澶浼氳缁冩瀬鎱⑩€斺€旈檺鍒跺埌鏈€杩?500 鍦?
-    if len(matches) > 500:
-        matches = matches[-500:]
-        print(f"Using last 500 matches")
+    # Cap to the most recent N matches to keep training tractable.
+    # Default raised from 500 to 2000; override via TRAIN_MAX_MATCHES env var.
+    if len(matches) > MAX_TRAINING_MATCHES:
+        total_available = len(matches)
+        matches = matches[-MAX_TRAINING_MATCHES:]
+        print(f"Using last {MAX_TRAINING_MATCHES} matches (of {total_available} available)")
     if len(matches) < 30:
         raise ValueError(
             f"Not enough data: {len(matches)} matches for {league_code} "
@@ -32,7 +35,6 @@ def train_league(league_code, seasons=None, model_type="dixon_coles"):
 
     print(f"Training on {len(matches)} matches, {seasons}")
 
-    # 璁粌
     model = DixonColes()
     success = model.fit(matches)
 
@@ -50,7 +52,6 @@ def train_league(league_code, seasons=None, model_type="dixon_coles"):
     if ll == 0:
         print("Warning: log-likelihood is 0, model may not have converged")
 
-    # 淇濆瓨
     model_file = os.path.join(
         MODEL_DIR, f"dc_{league_code}_{seasons[-1]}.json"
     )
@@ -66,11 +67,11 @@ def train_league(league_code, seasons=None, model_type="dixon_coles"):
             }
         }, f, indent=2, ensure_ascii=False)
 
-    print(f"Model saved 鈫?{model_file}")
+    print(f"Model saved -> {model_file}")
     print(f"  Teams: {len(model.teams)}")
     print(f"  LL: {model.params['log_likelihood']:.2f}")
-    print(f"  蟻: {model.params['rho']:.4f}")
-    print(f"  纬: {model.params['gamma']:.4f}")
+    print(f"  rho: {model.params['rho']:.4f}")
+    print(f"  gamma: {model.params['gamma']:.4f}")
 
     return model, model_file
 
@@ -144,8 +145,8 @@ def train_weighted_league(league_code, seasons=None, alpha=0.5):
             'weight': round(weight, 4),
         })
 
-    if len(weighted) > 500:
-        weighted = weighted[-500:]
+    if len(weighted) > MAX_TRAINING_MATCHES:
+        weighted = weighted[-MAX_TRAINING_MATCHES:]
 
     model = DixonColes()
     model.fit(weighted)
@@ -210,8 +211,8 @@ def train_bayesian_league(league_code, seasons=None, alpha=0.7):
             "weight": round(w, 4),
         })
 
-    if len(weighted) > 500:
-        weighted = weighted[-500:]
+    if len(weighted) > MAX_TRAINING_MATCHES:
+        weighted = weighted[-MAX_TRAINING_MATCHES:]
 
     print(f"Training Bayesian DC-TW for {league_code}: {len(weighted)} matches, alpha={alpha}")
     model = BayesianDixonColes()

@@ -1,12 +1,16 @@
 """
-球队强度计算器
-输入: 11 个球员 + 阵型 → 输出: (attack_strength, defense_strength)
+Team strength calculator.
+Input: 11 players + formation -> Output: (attack_strength, defense_strength)
 
-核心公式:
-  attack_strength  = Σ (球员攻击值 × 位置攻击权重) / 100 × 阵型攻击加成
-  defense_strength = Σ (球员防守值 × 位置防守权重) / 100 × 阵型防守加成
+Core formulas:
+  attack_strength  = sum(player_attack * position_attack_weight) / 100 * formation_attack_bonus
+  defense_strength = sum(player_defense * position_defense_weight) / 100 * formation_defense_bonus
 
-返回的对数值用于 Dixon-Coles: λ = exp(attack_home - defense_away + γ)
+Attack rating (default):  shooting*0.45 + dribbling*0.25 + passing*0.20 + pace*0.05 + physical*0.05
+Defense rating (default): defending*0.65 + physical*0.20 + passing*0.10 + dribbling*0.05
+
+Passing contributes to attack (creative play) and defense (interceptions/pressing).
+Physical contributes to both (strength in duels, hold-up play).
 """
 import sys, os
 sys.path.insert(0, os.path.dirname(__file__))
@@ -18,7 +22,7 @@ def calc_team_strength(squad: dict) -> tuple:
         formation: "4-3-3",
         players: [{name, position, attack_rating, defense_rating, att:{...}}, ...]
     }
-    返回 (attack_strength, defense_strength) — 对数空间
+    Returns (attack_strength, defense_strength) in log-space.
     """
     formation = get_formation(squad.get("formation", "4-4-2"))
     weights = formation["position_weights"]
@@ -29,33 +33,34 @@ def calc_team_strength(squad: dict) -> tuple:
     total_defense = 0.0
 
     for i, player in enumerate(players):
-        # 确定该位置的实际角色
         actual_pos = player.get("position", positions[i] if i < len(positions) else "CM")
         w = weights.get(actual_pos, {"attack": 0.5, "defense": 0.5})
 
-        # 获取球员属性
         att = player.get("att") or {}
         if player.get("attack_rating") is not None:
             att_val = player["attack_rating"]
         else:
             att_val = (
-                att.get("shooting", 50) * 0.6 +
-                att.get("dribbling", 50) * 0.3 +
-                att.get("pace", 50) * 0.1
+                att.get("shooting", 50) * 0.45 +
+                att.get("dribbling", 50) * 0.25 +
+                att.get("passing", 50) * 0.20 +
+                att.get("pace", 50) * 0.05 +
+                att.get("physical", 50) * 0.05
             )
 
         if player.get("defense_rating") is not None:
             def_val = player["defense_rating"]
         else:
             def_val = (
-                att.get("defending", 50) * 0.8 +
-                att.get("physical", 50) * 0.2
+                att.get("defending", 50) * 0.65 +
+                att.get("physical", 50) * 0.20 +
+                att.get("passing", 50) * 0.10 +
+                att.get("dribbling", 50) * 0.05
             )
 
         total_attack += att_val * w["attack"] / 100
         total_defense += def_val * w["defense"] / 100
 
-    # 阵型全局加成
     total_attack *= formation["attack_bonus"]
     total_defense *= formation["defense_bonus"]
 
@@ -63,7 +68,7 @@ def calc_team_strength(squad: dict) -> tuple:
 
 
 def squad_summary(squad: dict) -> dict:
-    """生成球队摘要信息"""
+    """Generate team summary."""
     att, deff = calc_team_strength(squad)
     formation = get_formation(squad.get("formation", "4-4-2"))
     players = squad.get("players", [])

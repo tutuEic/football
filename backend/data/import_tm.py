@@ -1,5 +1,6 @@
+# -*- coding: utf-8 -*-
 """
-Transfermarkt 数据导入管线 (v2 — 修复 NaN 处理)
+Transfermarkt data import pipeline (v2 - improved NaN handling)
 """
 import mysql.connector
 import pandas as pd
@@ -16,6 +17,9 @@ DB_CONFIG = {
     "charset": "utf8mb4",
     "allow_local_infile": True,
 }
+
+# Tables managed by this importer - used by verify() to avoid SQL injection.
+_MANAGED_TABLES = {"tm_clubs", "tm_players", "tm_games", "tm_appearances"}
 
 def get_conn():
     return mysql.connector.connect(**DB_CONFIG)
@@ -168,8 +172,8 @@ def import_appearances():
 
 def verify():
     conn = get_conn(); cur = conn.cursor()
-    for t in ["tm_clubs","tm_players","tm_games","tm_appearances"]:
-        cur.execute(f"SELECT COUNT(*) FROM {t}")
+    for t in sorted(_MANAGED_TABLES):
+        cur.execute("SELECT COUNT(*) FROM `{}`".format(t))
         print(f"  {t}: {cur.fetchone()[0]:,}")
     cur.close(); conn.close()
 
