@@ -106,6 +106,70 @@ class MonteCarloSimulator:
             adjusted /= total
         return adjusted
 
+    def simulate_from_params(self, lam: float, mu: float,
+                              n: int = 1000, match_context: str = "league") -> dict:
+        """Simulate using pre-computed expected goals (lambda/mu).
+
+        This allows callers like full_predictor to reuse the simulator's
+        context adjustments and tau-corrected sampling without going through
+        squad_strength, which uses a different formula.
+        """
+        t0 = time.time()
+
+        prob_matrix = self._build_prob_matrix(lam, mu)
+        prob_matrix = self._apply_context(prob_matrix, match_context)
+
+        flat = prob_matrix.flatten()
+        flat = np.maximum(flat, 0)
+        flat /= flat.sum()
+        grid_size = prob_matrix.shape[0]
+
+        indices = np.random.choice(len(flat), size=n, p=flat)
+        home_goals = indices // grid_size
+        away_goals = indices % grid_size
+
+        results = []
+        for h, a in zip(home_goals, away_goals):
+            if h > a: results.append("H")
+            elif a > h: results.append("A")
+            else: results.append("D")
+
+        wdl = {
+            "home_win": round(results.count("H") / n, 4),
+            "draw":     round(results.count("D") / n, 4),
+            "away_win": round(results.count("A") / n, 4),
+        }
+
+        scores = [f"{h}-{a}" for h, a in zip(home_goals, away_goals)]
+        score_counts = Counter(scores)
+        score_dist = {s: round(c / n, 4) for s, c in score_counts.most_common(15)}
+        most_likely = max(score_counts, key=score_counts.get) if score_counts else "0-0"
+
+        elapsed_ms = round((time.time() - t0) * 1000)
+        ctx_info = get_context_info(match_context)
+
+        return {
+            "wdl": wdl,
+            "avg_goals": {
+                "home": round(float(np.mean(home_goals)), 2),
+                "away": round(float(np.mean(away_goals)), 2),
+                "total": round(float(np.mean(home_goals + away_goals)), 2),
+            },
+            "expected_goals": {"home": round(float(lam), 2), "away": round(float(mu), 2)},
+            "most_likely_score": most_likely,
+            "score_distribution": score_dist,
+            "sim_count": n,
+            "duration_ms": elapsed_ms,
+            "model": "dixon_coles_tau",
+            "rho": self.rho,
+            "match_context": {
+                "type": match_context,
+                "label": ctx_info["label"],
+                "goal_factor": ctx_info["goal_mult"],
+                "draw_shift": ctx_info["draw_shift"],
+            },
+        }
+
     def run(self, squad_a: dict, squad_b: dict,
             n: int = 1000, home_advantage: bool = True,
             match_context: str = "league") -> dict:

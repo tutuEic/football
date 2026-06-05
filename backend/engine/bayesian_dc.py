@@ -112,18 +112,6 @@ class BayesianDixonColes:
         
         return -(log_lik + log_prior)
 
-    def _neg_log_posterior_grad(self, theta, matches, weights=None):
-        """Gradient of negative log-posterior (numerical for now)."""
-        # Use finite differences
-        eps = 1e-5
-        grad = np.zeros_like(theta)
-        f0 = self._neg_log_posterior(theta, matches, weights)
-        for i in range(len(theta)):
-            theta_plus = theta.copy()
-            theta_plus[i] += eps
-            grad[i] = (self._neg_log_posterior(theta_plus, matches, weights) - f0) / eps
-        return grad
-
     def fit(self, matches, max_iter=3000):
         """
         Fit the Bayesian DC model using Laplace approximation.
@@ -172,8 +160,10 @@ class BayesianDixonColes:
         # Bounds
         bounds = [(-3.0, 3.0)] * (2 * n) + [(-1.0, 1.0), (-0.5, 0.5)]
         # Fix first team attack at 0 (identifiability)
-        x0[0] = 0.0
+        x0[0] = 0.0  # fix first team attack (identifiability)
+        x0[n] = 0.0    # fix first team defence (identifiability)
         bounds[0] = (-0.001, 0.001)
+        bounds[n] = (-0.001, 0.001)
         
         result = minimize(
             self._neg_log_posterior,

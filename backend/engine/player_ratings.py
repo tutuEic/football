@@ -83,7 +83,7 @@ def get_player_rating(player_id):
     raw_overall = (attack_rating + defense_rating) / 2
 
     if market_val > 0:
-        mv_bonus = max(min(math.log10(max(market_val, 1)) * 2.0 - 10, 10), 0)
+        mv_bonus = max(min(math.log10(max(market_val, 1)) * 1.0 - 5, 5), 0)
         raw_overall += mv_bonus
 
     overall = min(round(raw_overall), 99)

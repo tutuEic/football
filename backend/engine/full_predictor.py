@@ -648,78 +648,23 @@ def full_prediction_v3(home_team, away_team, league="E0", simulations=2000):
     }
 
 
+
 def _cl_full_prediction(home_team, away_team, simulations=2000):
-    """??????? (?? Elo + ?? + ????)"""
-    import math
-    from features.elo import get_elo_rating
-    from data.tm_repo import search_club
-    from data.mysql_client import query
-    from collections import Counter
-    
-    t0 = time.time()
-    
-    elo_h = get_elo_rating(home_team)
-    elo_a = get_elo_rating(away_team)
-    
-    # ????
-    def get_market_value(team_name):
-        try:
-            clubs = search_club(team_name)
-            if clubs:
-                return int(clubs[0].get("total_market_value", 0) or 0)
-        except:
-            pass
-        return 0
-    
-    mv_h = get_market_value(home_team)
-    mv_a = get_market_value(away_team)
-    mv_bonus_h = math.log10(max(mv_h, 1e6)) * 10 - 60 if mv_h > 0 else 0
-    mv_bonus_a = math.log10(max(mv_a, 1e6)) * 10 - 60 if mv_a > 0 else 0
-    
-    # ???? (? CL ??)
-    def get_cl_form(team):
-        rows = query("""
-            SELECT home_team, away_team, home_score, away_score
-            FROM fixtures
-            WHERE league_code='CL' AND (home_team=%s OR away_team=%s)
-              AND home_score IS NOT NULL
-            ORDER BY match_date DESC LIMIT 5
-        """, [team, team], db="football_pred")
-        
-        if not rows:
-            return 0.0
-        
-        score = 0
-        for r in rows:
-            is_home = r["home_team"] == team
-            gf = r["home_score"] if is_home else r["away_score"]
-            ga = r["away_score"] if is_home else r["home_score"]
-            gd = gf - ga
-            if gd > 0: score += 1 + min(gd * 0.2, 0.5)
-            elif gd == 0: score += 0.3
-            else: score -= 0.5 + min(abs(gd) * 0.1, 0.3)
-        return max(min(score / len(rows), 0.8), -0.8)
-    
-    form_h = get_cl_form(home_team)
-    form_a = get_cl_form(away_team)
-    
-    # ???
-    total_h = elo_h + mv_bonus_h + 30 + form_h * 50  # ????
-    total_a = elo_a + mv_bonus_a + form_a * 50
-    
-    diff = total_h - total_a
-    
-    # ????
-    lam = max(0.3, 1.3 + diff / 600 + form_h * 0.2)
-    mu = max(0.2, 1.1 - diff / 600 + form_a * 0.15)
-    
-    # Monte Carlo ??
-    from engine.dixon_coles import DixonColes
+    """CL prediction: delegates probabilities to predict._cl_predict, adds MC score distribution."""
+    from api.predict import _cl_predict
     from scipy.stats import poisson as sp_poisson
-    
+    from engine.dixon_coles import DixonColes
+
+    t0 = time.time()
+
+    # Reuse the shared CL probability/xG computation
+    base = _cl_predict(home_team, away_team)
+    lam = base["exp_home_goals"]
+    mu = base["exp_away_goals"]
+
+    # Monte Carlo for score distribution (tau-corrected)
     dc = DixonColes()
     rho = -0.13
-    
     max_goals = 10
     gn = max_goals + 1
     prob_matrix = np.zeros((gn, gn))
@@ -731,37 +676,32 @@ def _cl_full_prediction(home_team, away_team, simulations=2000):
     total = prob_matrix.sum()
     if total > 0:
         prob_matrix /= total
-    
+
     flat = prob_matrix.flatten()
     flat = np.maximum(flat, 0)
     flat /= flat.sum()
-    
     indices = np.random.choice(len(flat), size=simulations, p=flat)
     hg = indices // gn
     ag = indices % gn
-    
-    results = ["H" if h > a else "A" if a > h else "D" for h, a in zip(hg, ag)]
-    wdl = {
-        "home_win": round(results.count("H") / simulations, 4),
-        "draw": round(results.count("D") / simulations, 4),
-        "away_win": round(results.count("A") / simulations, 4),
-    }
-    
+
     scores = [f"{int(h)}-{int(a)}" for h, a in zip(hg, ag)]
     sc = Counter(scores)
     score_dist = {s: round(c / simulations, 4) for s, c in sc.most_common(20)}
     most_likely = max(sc, key=sc.get) if sc else "0-0"
-    
+
     total_goals = hg + ag
     over25 = round(float(np.mean(total_goals > 2.5)), 4)
-    
     elapsed = round((time.time() - t0) * 1000)
-    
+
     return {
         "home_team": home_team, "away_team": away_team, "league": "CL",
         "model_version": "cl-cross-league",
         "expected_goals": {"home": round(float(lam), 2), "away": round(float(mu), 2)},
-        "wdl": wdl,
+        "wdl": {
+            "home_win": base["home_win"],
+            "draw": base["draw"],
+            "away_win": base["away_win"],
+        },
         "avg_goals": {
             "home": round(float(np.mean(hg)), 2),
             "away": round(float(np.mean(ag)), 2),
@@ -773,18 +713,8 @@ def _cl_full_prediction(home_team, away_team, simulations=2000):
         "top_5_scores": [{"score": s, "probability": p} for s, p in list(score_dist.items())[:5]],
         "key_players": {"home": [], "away": []},
         "injuries": {"home": None, "away": None},
-        "factors": {
-            "elo_home": round(elo_h), "elo_away": round(elo_a),
-            "market_value_home": mv_h, "market_value_away": mv_a,
-            "form_home": round(form_h, 3), "form_away": round(form_a, 3),
-        },
-        "parameters": {
-            "lam": round(float(lam), 2), "mu": round(float(mu), 2),
-            "elo_diff": round(diff), "home_advantage": 30,
-        },
+        "factors": {"model": base["model"]},
+        "parameters": {"lam": round(float(lam), 2), "mu": round(float(mu), 2)},
         "simulations": simulations,
         "duration_ms": elapsed,
     }
-
-
-

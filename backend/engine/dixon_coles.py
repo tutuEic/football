@@ -96,7 +96,10 @@ class DixonColes:
             lb=[-3.0] * n_teams + [-3.0] * n_teams + [-0.5, -1.0],
             ub=[3.0] * n_teams + [3.0] * n_teams + [0.5, 1.0],
         )
-        x0[0] = 0.0  # fix first team attack
+        x0[0] = 0.0  # fix first team attack (identifiability)
+        x0[n_teams] = 0.0  # fix first team defence (identifiability)
+        bounds.lb[0] = -0.001; bounds.ub[0] = 0.001
+        bounds.lb[n_teams] = -0.001; bounds.ub[n_teams] = 0.001
 
         result = minimize(
             self.log_likelihood, x0,
