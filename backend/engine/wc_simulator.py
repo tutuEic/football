@@ -201,25 +201,54 @@ def get_best_thirds(all_group_standings):
 
 def build_knockout_bracket(group_winners, group_runners_up, best_thirds, groups):
     """
-    Build R32 bracket for 48-team format.
+    Build R32 bracket for 48-team FIFA format.
     32 teams = 12 winners + 12 runners-up + 8 best thirds.
     16 R32 matches.
+
+    Per FIFA rules, best thirds are assigned to face specific group winners
+    based on which groups the advancing thirds came from. We use the
+    simplified bracket: 8 best thirds each face a group winner from
+    paired groups, and runners-up fill the remaining slots.
     """
     group_names = sorted(groups.keys())
     r32 = []
-
-    # Pair adjacent groups: 1st vs 2nd cross
-    for i in range(0, len(group_names), 2):
-        if i + 1 < len(group_names):
-            g1, g2 = group_names[i], group_names[i + 1]
-            r32.append((group_winners[g1], group_runners_up[g2], "r32"))
-            r32.append((group_winners[g2], group_runners_up[g1], "r32"))
-
-    # Remaining 4 matches: best thirds paired among themselves
     third_teams = list(best_thirds)
-    for i in range(0, min(len(third_teams), 8), 2):
-        if i + 1 < len(third_teams):
-            r32.append((third_teams[i], third_teams[i + 1], "r32"))
+    third_idx = 0
+
+    # Process groups in pairs (A-B, C-D, E-F, G-H, I-J, K-L)
+    for i in range(0, len(group_names), 2):
+        if i + 1 >= len(group_names):
+            break
+        g1, g2 = group_names[i], group_names[i + 1]
+        w1, w2 = group_winners[g1], group_winners[g2]
+        r1, r2 = group_runners_up[g1], group_runners_up[g2]
+
+        # Each pair of groups contributes up to 4 R32 matches:
+        #   Match 1: Winner G1 vs Runner-up G2
+        #   Match 2: Winner G2 vs Runner-up G1
+        # If a third from these groups (or assigned slot) qualifies,
+        #   Match 3/4: Best third vs Winner from opposite group pair
+        r32.append((w1, r2, "r32"))
+        r32.append((w2, r1, "r32"))
+
+        # Assign 1-2 best thirds to face group winners from this pair
+        # FIFA assigns thirds to specific winner slots; we approximate
+        # by giving each pair of groups 1 third match if available.
+        if third_idx < len(third_teams):
+            # Third faces winner of the "stronger" group in the pair
+            if third_idx < len(third_teams):
+                r32.append((third_teams[third_idx], w1, "r32") if i % 4 == 0
+                           else (w2, third_teams[third_idx], "r32"))
+                third_idx += 1
+
+    # Any remaining thirds fill slots against remaining group winners
+    used_winners = {m[0] for m in r32} | {m[1] for m in r32}
+    remaining_winners = [group_winners[g] for g in group_names
+                         if group_winners[g] not in used_winners]
+    for tw in remaining_winners:
+        if third_idx < len(third_teams):
+            r32.append((tw, third_teams[third_idx], "r32"))
+            third_idx += 1
 
     return r32
 

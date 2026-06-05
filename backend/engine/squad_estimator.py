@@ -39,7 +39,7 @@ def _get_team_strength(team_name):
 def generate_squad_from_fixtures(club_name):
     """Generate a realistic squad using team performance data"""
     atk_str, def_str, games = _get_team_strength(club_name)
-    random.seed(hash(club_name) % 10000)  # Deterministic per club
+    random.seed(int(__import__("hashlib").md5(club_name.encode()).hexdigest(), 16) % 10000)  # Deterministic per club
     
     players = []
     name_pools = {"GK": GK_NAMES, "DF": DF_NAMES, "MF": MF_NAMES, "FW": FW_NAMES}

@@ -141,14 +141,13 @@ def get_ensemble_wdl(home_team, away_team, league):
     features = compute_match_features(home_team, away_team, league)
 
     predictions = {}
-    xg_h, xg_a = 1.3, 1.1
+    xg_sources = {}
 
     # DC (always available)
     try:
         dc = dc_predict(home_team, away_team, league)
         predictions["dc"] = [dc["home_win"], dc["draw"], dc["away_win"]]
-        xg_h = dc["exp_home_goals"]
-        xg_a = dc["exp_away_goals"]
+        xg_sources = {"dc": (dc["exp_home_goals"], dc["exp_away_goals"])}
     except Exception:
         pass
 
@@ -169,9 +168,7 @@ def get_ensemble_wdl(home_team, away_team, league):
             if home_team in bdc.teams and away_team in bdc.teams:
                 bdc_probs = bdc.get_match_probs(home_team, away_team)
                 predictions["bayes_dc"] = [bdc_probs["home_win"], bdc_probs["draw"], bdc_probs["away_win"]]
-                # Use Bayesian xG as primary (more robust)
-                xg_h = bdc_probs["expected_goals"]["home"]
-                xg_a = bdc_probs["expected_goals"]["away"]
+                xg_sources["bayes_dc"] = (bdc_probs["expected_goals"]["home"], bdc_probs["expected_goals"]["away"])
         except Exception:
             pass
 
@@ -180,8 +177,7 @@ def get_ensemble_wdl(home_team, away_team, league):
         try:
             pr_pred = models["poisson"].predict(features)
             predictions["pr"] = [pr_pred["home_win"], pr_pred["draw"], pr_pred["away_win"]]
-            xg_h = pr_pred["expected_goals"]["home"]
-            xg_a = pr_pred["expected_goals"]["away"]
+            xg_sources["pr"] = (pr_pred["expected_goals"]["home"], pr_pred["expected_goals"]["away"])
         except Exception:
             pass
 
@@ -221,6 +217,15 @@ def get_ensemble_wdl(home_team, away_team, league):
         predictions["skellam"] = [sk_pred["home_win"], sk_pred["draw"], sk_pred["away_win"]]
     except Exception:
         pass
+
+    # Compute weighted xG from all models that provide it
+    if xg_sources:
+        xg_weights = {"dc": 0.3, "bayes_dc": 0.4, "pr": 0.3}
+        total_w = sum(xg_weights.get(k, 0.2) for k in xg_sources)
+        xg_h = sum(v[0] * xg_weights.get(k, 0.2) for k, v in xg_sources.items()) / total_w
+        xg_a = sum(v[1] * xg_weights.get(k, 0.2) for k, v in xg_sources.items()) / total_w
+    else:
+        xg_h, xg_a = 1.3, 1.1
 
     if not predictions:
         result = {"home_win": 0.45, "draw": 0.25, "away_win": 0.30,

@@ -44,16 +44,13 @@ class StackingEnsemble:
         return e / e.sum()
     
     def _predict_proba(self, features):
-        """Predict WDL probabilities from stacking features."""
-        hw = 1.0 / (1.0 + np.exp(-features @ self.beta_hw))
-        dr = 1.0 / (1.0 + np.exp(-features @ self.beta_dr))
-        aw = 1.0 / (1.0 + np.exp(-features @ self.beta_aw))
-        
-        # Normalize to sum to 1
-        total = hw + dr + aw
-        if total > 0:
-            return np.array([hw/total, dr/total, aw/total])
-        return np.array([0.33, 0.33, 0.34])
+        """Predict WDL probabilities using softmax over class logits."""
+        logits = np.array([
+            features @ self.beta_hw,
+            features @ self.beta_dr,
+            features @ self.beta_aw,
+        ])
+        return self._softmax(logits)
     
     def _log_loss(self, params, X, y):
         """Negative log-likelihood for 3-class classification."""
