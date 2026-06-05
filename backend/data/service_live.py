@@ -270,23 +270,16 @@ def poll_live_scores():
 
 
 def check_and_update_status(fixture_id, home_score, away_score, minute, status):
-    """Update a single fixture's live status"""
-    conn = mysql.connector.connect(
-        host=os.getenv("MYSQL_HOST", "127.0.0.1"), port=int(os.getenv("MYSQL_PORT", "3306")),
-        user=os.getenv("MYSQL_USER", "root"), password=os.getenv("MYSQL_PASS", ""),
-        database=DB, charset="utf8mb4"
-    )
-    cur = conn.cursor()
-
-    cur.execute("""
+    """Update a single fixture's live status using connection pool."""
+    execute("""
         UPDATE fixtures SET
             home_score = %s, away_score = %s, minute = %s, status = %s,
             updated_at = NOW()
         WHERE id = %s
     """, [home_score, away_score, minute, status, fixture_id])
 
-    #  Also insert/update live_matches for detailed stats
-    cur.execute("""
+    # Also insert/update live_matches for detailed stats
+    execute("""
         INSERT INTO live_matches (fixture_id, home_score, away_score, minute, status, last_updated)
         VALUES (%s, %s, %s, %s, %s, NOW())
         ON DUPLICATE KEY UPDATE
@@ -296,10 +289,6 @@ def check_and_update_status(fixture_id, home_score, away_score, minute, status):
             status = VALUES(status),
             last_updated = NOW()
     """, [fixture_id, home_score, away_score, minute, status])
-
-    conn.commit()
-    cur.close()
-    conn.close()
 
 
 # ============================================================

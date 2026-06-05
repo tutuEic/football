@@ -6,7 +6,7 @@ import pandas as pd
 import numpy as np
 import sys, os, time
 
-DATA_DIR = r"D:\xiaoli\data\transfermarkt"
+DATA_DIR = os.getenv("TRANSFERMARKT_DATA_DIR", os.path.join(os.path.dirname(__file__), "..", "..", "data", "transfermarkt"))
 DB_CONFIG = {
     "host": os.getenv("MYSQL_HOST", "127.0.0.1"),
     "port": int(os.getenv("MYSQL_PORT", "3306")),

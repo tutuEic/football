@@ -131,9 +131,10 @@ def import_to_tm_games(matches):
         home = m["home_team"]
         away = m["away_team"]
 
-        # Simple hash for unique ID
-        hash_val = hash(f"{date_str}_{home}_{away}") % 10000000
-        game_id = 900000000 + abs(hash_val)
+        # Deterministic hash for unique ID (hash() is randomized in Python 3.3+)
+        hash_str = f"{date_str}_{home}_{away}".encode('utf-8')
+        hash_val = int(hashlib.md5(hash_str).hexdigest(), 16) % 10000000
+        game_id = 900000000 + hash_val
 
         # Check if already exists
         existing = query(

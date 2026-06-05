@@ -14,11 +14,12 @@ DEV_MODE = os.getenv("DEV_MODE", "").lower() in ("1", "true", "yes")
 # so write endpoints are never accidentally exposed.
 if not API_KEY and not DEV_MODE:
     API_KEY = secrets.token_urlsafe(24)
+    masked_key = API_KEY[:4] + "..." + API_KEY[-4:]
     logger.warning(
         "[security] No API_KEY configured and DEV_MODE is off. "
         "Auto-generated key: %s  "
         "Set API_KEY in .env to make it persistent.",
-        API_KEY,
+        masked_key,
     )
 
 

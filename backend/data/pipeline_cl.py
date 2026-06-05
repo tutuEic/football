@@ -133,66 +133,66 @@ def fetch_cl_fixtures():
 
 
 def save_to_db(results, fixtures):
-    """????"""
+    """Save results and fixtures to database."""
     conn = get_conn()
     cursor = conn.cursor()
     
     saved_results = 0
     saved_fixtures = 0
     
-    # ??????? (?? fixture + ?????)
-    for m in results:
-        try:
-            # ???????
-            cursor.execute(
-                "SELECT id FROM fixtures WHERE league_code=%s AND match_date=%s AND home_team=%s AND away_team=%s",
-                [LEAGUE_CODE, m["date"], m["home_team"], m["away_team"]]
-            )
-            existing = cursor.fetchone()
-            
-            if existing:
-                # ????
+    try:
+        # Save match results
+        for m in results:
+            try:
                 cursor.execute(
-                    "UPDATE fixtures SET home_score=%s, away_score=%s, status='finished' WHERE id=%s",
-                    [m["score_h"], m["score_a"], existing[0]]
+                    "SELECT id FROM fixtures WHERE league_code=%s AND match_date=%s AND home_team=%s AND away_team=%s",
+                    [LEAGUE_CODE, m["date"], m["home_team"], m["away_team"]]
                 )
-            else:
-                # ?????
+                existing = cursor.fetchone()
+                
+                if existing:
+                    cursor.execute(
+                        "UPDATE fixtures SET home_score=%s, away_score=%s, status='finished' WHERE id=%s",
+                        [m["score_h"], m["score_a"], existing[0]]
+                    )
+                else:
+                    cursor.execute(
+                        """INSERT INTO fixtures (league_code, season, match_date, home_team, away_team, 
+                           home_score, away_score, status, source)
+                           VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s)""",
+                        [LEAGUE_CODE, "2526", m["date"], m["home_team"], m["away_team"],
+                         m["score_h"], m["score_a"], "finished", "flashscore"]
+                    )
+                    saved_results += 1
+            except Exception as e:
+                print(f"[CL] Error saving result {m['home_team']} vs {m['away_team']}: {e}")
+        
+        # Save upcoming fixtures
+        for m in fixtures:
+            try:
                 cursor.execute(
-                    """INSERT INTO fixtures (league_code, season, match_date, home_team, away_team, 
-                       home_score, away_score, status, source)
-                       VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s)""",
-                    [LEAGUE_CODE, "2526", m["date"], m["home_team"], m["away_team"],
-                     m["score_h"], m["score_a"], "finished", "flashscore"]
+                    "SELECT id FROM fixtures WHERE league_code=%s AND match_date=%s AND home_team=%s AND away_team=%s",
+                    [LEAGUE_CODE, m["date"], m["home_team"], m["away_team"]]
                 )
-                saved_results += 1
-        except Exception as e:
-            print(f"[CL] Error saving result {m['home_team']} vs {m['away_team']}: {e}")
-    
-    # ??????
-    for m in fixtures:
-        try:
-            cursor.execute(
-                "SELECT id FROM fixtures WHERE league_code=%s AND match_date=%s AND home_team=%s AND away_team=%s",
-                [LEAGUE_CODE, m["date"], m["home_team"], m["away_team"]]
-            )
-            existing = cursor.fetchone()
-            
-            if not existing:
-                cursor.execute(
-                    """INSERT INTO fixtures (league_code, season, match_date, home_team, away_team, source)
-                       VALUES (%s, %s, %s, %s, %s, %s)""",
-                    [LEAGUE_CODE, "2526", m["date"], m["home_team"], m["away_team"], "flashscore"]
-                )
-                saved_fixtures += 1
-        except Exception as e:
-            print(f"[CL] Error saving fixture {m['home_team']} vs {m['away_team']}: {e}")
-    
-    conn.commit()
-    cursor.close()
-    conn.close()
+                existing = cursor.fetchone()
+                
+                if not existing:
+                    cursor.execute(
+                        """INSERT INTO fixtures (league_code, season, match_date, home_team, away_team, source)
+                           VALUES (%s, %s, %s, %s, %s, %s)""",
+                        [LEAGUE_CODE, "2526", m["date"], m["home_team"], m["away_team"], "flashscore"]
+                    )
+                    saved_fixtures += 1
+            except Exception as e:
+                print(f"[CL] Error saving fixture {m['home_team']} vs {m['away_team']}: {e}")
+        
+        conn.commit()
+    finally:
+        cursor.close()
+        conn.close()
     
     return saved_results, saved_fixtures
+
 
 
 def run_pipeline():

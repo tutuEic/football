@@ -13,7 +13,7 @@ import time
 sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 from data.mysql_client import query, execute
 
-DATA_DIR = r"D:\xiaoli\data\transfermarkt"
+DATA_DIR = os.getenv("TRANSFERMARKT_DATA_DIR", os.path.join(os.path.dirname(__file__), "..", "..", "data", "transfermarkt"))
 
 # International competition_ids to process
 INTL_COMPS = ['FIWC', 'EURO', 'AFAC', 'COPA', 'AFCN']

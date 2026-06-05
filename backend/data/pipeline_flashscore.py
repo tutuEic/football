@@ -103,7 +103,7 @@ def parse_flashscore_data(raw, league_code):
         current["league_code"] = league_code
         matches.append(current)
 
-    # return matches
+    return matches
 
 
 def fill_missing_fixtures():
@@ -140,7 +140,7 @@ def fill_missing_fixtures():
         for m in matches:
             # Check if exists
             cur.execute("""
-                # SELECT id FROM fixtures
+                SELECT id FROM fixtures
                 WHERE league_code=%s AND home_team=%s AND away_team=%s AND match_date=%s
             """, [lc, m.get("home_team"), m.get("away_team"), m.get("match_date")])
 

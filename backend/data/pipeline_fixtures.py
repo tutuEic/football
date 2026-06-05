@@ -194,7 +194,7 @@ def upsert_fixtures(league_code, season, rows):
             """, (
                 league_code, season, match_date, time_str or None,
                 home, away, status, home_score, away_score, minute, winner,
-                # avgh, avgd, avga, over25, under25,
+                avgh, avgd, avga, over25, under25,
                 "football-data.co.uk"
             ))
 
