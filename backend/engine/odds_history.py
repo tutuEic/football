@@ -4,7 +4,12 @@
 """
 import sys, os
 sys.path.insert(0, os.path.dirname(os.path.dirname(__file__)))
+import time as _time
 from data.mysql_client import query
+
+_odds_cache = {}
+_ODDS_TTL = 600  # 10 minutes
+
 
 
 def find_similar_odds_matches(home_team, away_team, league, threshold=0.08):
@@ -23,6 +28,13 @@ def find_similar_odds_matches(home_team, away_team, league, threshold=0.08):
         matches: [{home, away, score, odds}]
     }
     """
+    # Check cache
+    cache_key = (home_team, away_team, league)
+    if cache_key in _odds_cache:
+        ts, data = _odds_cache[cache_key]
+        if _time.time() - ts < _ODDS_TTL:
+            return data
+
     # 1. 获取当前比赛的赔率
     current = query("""
         SELECT m.id, o.b365h, o.b365d, o.b365a, o.psh, o.psd, o.psa
@@ -107,7 +119,7 @@ def find_similar_odds_matches(home_team, away_team, league, threshold=0.08):
         for m in similar
     ) / (n * 3)), 3)
 
-    return {
+    result = {
         "current_odds": {
             "home": round(b365h, 2),
             "draw": round(b365d, 2),
@@ -141,3 +153,5 @@ def find_similar_odds_matches(home_team, away_team, league, threshold=0.08):
             for m in similar[:8]
         ],
     }
+    _odds_cache[cache_key] = (_time.time(), result)
+    return result

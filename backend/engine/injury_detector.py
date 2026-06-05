@@ -2,7 +2,7 @@
 import sys, os
 sys.path.insert(0, os.path.dirname(os.path.dirname(__file__)))
 from data.mysql_client import query
-from data.tm_repo import get_club_squad, get_player_recent_games
+from data.tm_repo import get_club_squad
 
 def get_team_injuries(team_name, league="E0"):
     """
@@ -29,15 +29,39 @@ def get_team_injuries(team_name, league="E0"):
     injured = []
     available = []
 
-    for p in squad[:22]:  # check top 22
+    # Batch-query recent appearances for all top-22 players (1 query instead of 22)
+    top22 = squad[:22]
+    player_ids = []
+    for p in top22:
+        pid = int(p["id"].split(":")[1]) if ":" in p["id"] else None
+        if pid:
+            player_ids.append(pid)
+
+    recent_by_player = {}
+    if player_ids:
+        placeholders = ",".join(["%s"] * len(player_ids))
+        rows = query(f"""
+            SELECT a.player_id, g.date, a.minutes_played
+            FROM tm_appearances a
+            JOIN tm_games g ON a.game_id = g.game_id
+            WHERE a.player_id IN ({placeholders})
+            ORDER BY g.date DESC
+        """, player_ids, db="football_pred")
+        for r in rows:
+            pid = r["player_id"]
+            if pid not in recent_by_player:
+                recent_by_player[pid] = []
+            if len(recent_by_player[pid]) < 5:
+                recent_by_player[pid].append(r)
+
+    for p in top22:
         pid = int(p["id"].split(":")[1]) if ":" in p["id"] else None
         if not pid:
             continue
 
-        recent = get_player_recent_games(pid, 5)
+        recent = recent_by_player.get(pid, [])
         last_played = recent[0]["date"] if recent else None
 
-        # Heuristic: <2 appearances in last 5 and overall >= 65 => likely injured
         appearances_in_last_5 = len([r for r in recent if r["minutes_played"] > 0]) if recent else 0
 
         if appearances_in_last_5 < 2 and p.get("overall", 0) >= 65:

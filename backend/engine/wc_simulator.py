@@ -14,6 +14,7 @@ import random
 import math
 import sys
 import os
+import time as _time
 from collections import defaultdict
 from datetime import date
 
@@ -39,8 +40,15 @@ DEFAULT_N_SIMS = 5000
 # Group Stage Simulation
 # ============================================================
 
+_groups_cache = None
+_groups_cache_time = 0
+_GROUPS_TTL = 3600  # 1 hour
+
 def load_groups():
-    """Load all WC groups from database."""
+    """Load all WC groups from database (cached for 1 hour)."""
+    global _groups_cache, _groups_cache_time
+    if _groups_cache is not None and _time.time() - _groups_cache_time < _GROUPS_TTL:
+        return _groups_cache
     rows = query(
         "SELECT group_name, team, confederation, fifa_ranking, elo_rating, is_host "
         "FROM wc_groups ORDER BY group_name, fifa_ranking",
@@ -55,7 +63,10 @@ def load_groups():
             "elo_rating": r["elo_rating"],
             "is_host": bool(r["is_host"]),
         })
-    return dict(groups)
+    result = dict(groups)
+    _groups_cache = result
+    _groups_cache_time = _time.time()
+    return result
 
 
 def load_group_fixtures():
