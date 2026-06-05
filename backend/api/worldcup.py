@@ -28,12 +28,54 @@ from engine.wc_knockout import simulate_bracket_n_times, get_golden_ball_candida
 
 router = APIRouter(prefix="/worldcup")
 
-# Module-level caches
-_simulation_result = None
-_simulation_time = None
-_rankings_cache = None
-_rankings_time = None
+# Simulation results are stored in the database so they survive
+# multi-worker deployments and server restarts.
+_RANKINGS_CACHE = None
+_RANKINGS_TIME = None
 
+
+
+def _ensure_sim_table():
+    """Create the simulation results table if it doesn't exist."""
+    from data.mysql_client import execute
+    execute("""
+        CREATE TABLE IF NOT EXISTS wc_simulation_results (
+            id INT AUTO_INCREMENT PRIMARY KEY,
+            result_json LONGTEXT NOT NULL,
+            n_simulations INT NOT NULL,
+            duration_seconds FLOAT,
+            created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+        ) ENGINE=InnoDB
+    """, db="football_pred")
+
+def _save_simulation_result(result, n_sims, duration):
+    """Persist simulation result to DB (visible to all workers)."""
+    import json
+    _ensure_sim_table()
+    from data.mysql_client import execute
+    execute(
+        "INSERT INTO wc_simulation_results (result_json, n_simulations, duration_seconds) VALUES (%s, %s, %s)",
+        [json.dumps(result, ensure_ascii=False), n_sims, round(duration, 1)],
+        db="football_pred",
+    )
+
+def _load_simulation_result():
+    """Load the most recent simulation result from DB."""
+    import json
+    _ensure_sim_table()
+    rows = query(
+        "SELECT result_json, n_simulations, duration_seconds, created_at FROM wc_simulation_results ORDER BY id DESC LIMIT 1",
+        db="football_pred",
+    )
+    if not rows:
+        return None
+    r = rows[0]
+    return {
+        "result": json.loads(r["result_json"]),
+        "n_simulations": r["n_simulations"],
+        "duration_seconds": r["duration_seconds"],
+        "created_at": str(r["created_at"]),
+    }
 
 # ============================================================
 # Request Models
@@ -337,20 +379,20 @@ def get_upset_alerts():
 @router.post("/simulate")
 def run_simulation(req: SimulateRequest):
     """Run full tournament Monte Carlo simulation."""
-    global _simulation_result, _simulation_time
-
     n_sims = min(max(req.n_sims, 100), 5000)
 
     try:
         start = time.time()
-        _simulation_result = simulate_tournament(n_sims=n_sims)
-        _simulation_time = time.time() - start
+        result = simulate_tournament(n_sims=n_sims)
+        duration = time.time() - start
+
+        _save_simulation_result(result, n_sims, duration)
 
         return {
             "status": "ok",
             "n_simulations": n_sims,
-            "duration_seconds": round(_simulation_time, 1),
-            "result": _simulation_result,
+            "duration_seconds": round(duration, 1),
+            "result": result,
         }
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
@@ -358,8 +400,9 @@ def run_simulation(req: SimulateRequest):
 
 @router.get("/simulate/result")
 def get_simulation_result():
-    """Get the latest simulation result."""
-    if _simulation_result is None:
+    """Get the latest simulation result (from DB, works across workers)."""
+    stored = _load_simulation_result()
+    if stored is None:
         return {
             "status": "no_data",
             "message": "No simulation has been run yet. POST /worldcup/simulate first.",
@@ -367,9 +410,10 @@ def get_simulation_result():
 
     return {
         "status": "ok",
-        "n_simulations": _simulation_result["n_simulations"],
-        "duration_seconds": round(_simulation_time, 1) if _simulation_time else None,
-        "result": _simulation_result,
+        "n_simulations": stored["n_simulations"],
+        "duration_seconds": stored["duration_seconds"],
+        "created_at": stored["created_at"],
+        "result": stored["result"],
     }
 
 
@@ -380,11 +424,11 @@ def get_simulation_result():
 @router.get("/rankings")
 def get_rankings():
     """Get all 48 WC teams ranked by official FIFA Elo rating."""
-    global _rankings_cache, _rankings_time
+    global _RANKINGS_CACHE, _RANKINGS_TIME
 
     # Cache for 1 hour
-    if _rankings_cache and _rankings_time and (time.time() - _rankings_time < 3600):
-        return _rankings_cache
+    if _RANKINGS_CACHE and _RANKINGS_TIME and (time.time() - _RANKINGS_TIME < 3600):
+        return _RANKINGS_CACHE
 
     try:
         # Get all WC teams with official data
@@ -422,8 +466,8 @@ def get_rankings():
             "rankings": rankings,
         }
 
-        _rankings_cache = result
-        _rankings_time = time.time()
+        _RANKINGS_CACHE = result
+        _RANKINGS_TIME = time.time()
 
         return result
     except Exception as e:
