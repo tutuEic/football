@@ -1,8 +1,7 @@
 """
-Fixtures & Results Pipeline 鈥?football-data.co.uk 鏁版嵁閲囬泦
-==========================================================
-鏁版嵁婧? https://www.football-data.co.uk/ (鍏嶈垂, 32瀹跺崥褰╁叕鍙歌禂鐜? 30+鑱旇禌)
-鏇存柊棰戠巼: 姣忓懆2娆★紙鍛ㄤ腑+鍛ㄦ湯璧涘悗锛?
+Fixtures & Results Pipeline - football-data.co.uk
+
+Fetches live match data from football-data.co.uk and upserts into the fixtures table.
 """
 import requests
 from data.http_utils import safe_get
@@ -18,10 +17,11 @@ sys.path.insert(0, PROJECT_ROOT)
 
 from data.mysql_client import query, execute
 import mysql.connector
+from config import MYSQL_HOST, MYSQL_PORT, MYSQL_USER, MYSQL_PASS, CURRENT_SEASON
 
 DB = "football_pred"
 
-#  All available leagues from football-data.co.uk
+# All available leagues from football-data.co.uk
 LEAGUE_CODES = {
     # England
     "E0": "EPL", "E1": "Championship", "E2": "League One", "E3": "League Two", "EC": "Conference",
@@ -50,7 +50,9 @@ LEAGUE_CODES = {
     "JPN": "J1 League",
 }
 
-SEASONS = ["2526", "2425"]  # Current + last season
+# Derive season strings dynamically from the current season.
+# Football seasons span two calendar years (e.g. 2025/2026).
+SEASONS = [CURRENT_SEASON, CURRENT_SEASON - 1]
 BASE_URL = "https://www.football-data.co.uk/mmz4281"
 
 # User-Agent is set globally by http_utils.get_session()
@@ -59,10 +61,10 @@ HEADERS = None
 
 def get_conn():
     return mysql.connector.connect(
-        host=os.getenv("MYSQL_HOST", "127.0.0.1"),
-        port=int(os.getenv("MYSQL_PORT", "3306")),
-        user=os.getenv("MYSQL_USER", "root"),
-        password=os.getenv("MYSQL_PASS", ""),
+        host=MYSQL_HOST,
+        port=MYSQL_PORT,
+        user=MYSQL_USER,
+        password=MYSQL_PASS,
         database=DB,
         charset="utf8mb4",
     )
@@ -87,7 +89,7 @@ def safe_int(val, default=None):
 
 
 def fetch_csv(league_code, season):
-    """涓嬭浇鍗曚釜鑱旇禌CSV"""
+    """Download CSV for a league and season."""
     url = f"{BASE_URL}/{season}/{league_code}.csv"
     try:
         r = safe_get(url, headers=HEADERS, label="football-data")
@@ -109,104 +111,104 @@ def upsert_fixtures(league_code, season, rows):
 
     try:
         for row in rows:
-        try:
-            home = row.get("HomeTeam", "").strip()
-            away = row.get("AwayTeam", "").strip()
-            date_str = row.get("Date", "").strip()
-            time_str = row.get("Time", "").strip()
-
-            if not home or not away or not date_str:
-                continue
-
-            # Parse date (formats: dd/mm/yyyy or dd/mm/yy)
             try:
-                parts = date_str.split("/")
-                if len(parts) == 3:
-                    day, month, year = int(parts[0]), int(parts[1]), int(parts[2])
-                    if year < 100:
-                        year += 2000
-                    match_date = date(year, month, day)
+                home = row.get("HomeTeam", "").strip()
+                away = row.get("AwayTeam", "").strip()
+                date_str = row.get("Date", "").strip()
+                time_str = row.get("Time", "").strip()
+
+                if not home or not away or not date_str:
+                    continue
+
+                # Parse date (formats: dd/mm/yyyy or dd/mm/yy)
+                try:
+                    parts = date_str.split("/")
+                    if len(parts) == 3:
+                        day, month, year = int(parts[0]), int(parts[1]), int(parts[2])
+                        if year < 100:
+                            year += 2000
+                        match_date = date(year, month, day)
+                    else:
+                        match_date = datetime.strptime(date_str, "%Y-%m-%d").date()
+                except (ValueError, IndexError):
+                    continue
+
+                home_goals = safe_int(row.get("FTHG"))
+                away_goals = safe_int(row.get("FTAG"))
+                result = row.get("FTR", "").strip()
+
+                # Determine status
+                if result:
+                    status = "finished"
+                elif match_date > date.today():
+                    status = "scheduled"
+                elif match_date == date.today():
+                    status = "today"
                 else:
-                    match_date = datetime.strptime(date_str, "%Y-%m-%d").date()
-            except (ValueError, IndexError):
+                    status = "postponed"  # should have result but doesn't
+
+                # Sanity: truncate status to 30 chars
+                status = status[:30]
+
+                if status == "finished" or status == "postponed":
+                    minute = 90
+                    home_score = home_goals
+                    away_score = away_goals
+                    winner = result
+                else:
+                    minute = 0
+                    home_score = None
+                    away_score = None
+                    winner = None
+
+                # Odds
+                b365h = safe_float(row.get("B365H"))
+                b365d = safe_float(row.get("B365D"))
+                b365a = safe_float(row.get("B365A"))
+
+                # Average odds (safer than single bookmaker)
+                avgh = safe_float(row.get("AvgH")) or safe_float(row.get("BbAvH")) or b365h
+                avgd = safe_float(row.get("AvgD")) or safe_float(row.get("BbAvD")) or b365d
+                avga = safe_float(row.get("AvgA")) or safe_float(row.get("BbAvA")) or b365a
+
+                # Over/Under 2.5
+                over25 = safe_float(row.get("BbAv>2.5")) or safe_float(row.get("Avg>2.5"))
+                under25 = safe_float(row.get("BbAv<2.5")) or safe_float(row.get("Avg<2.5"))
+
+                cur.execute("""
+                    INSERT INTO fixtures (league_code, season, match_date, match_time,
+                        home_team, away_team, status, home_score, away_score, minute, winner,
+                        odds_home, odds_draw, odds_away, odds_over25, odds_under25, source)
+                    VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)
+                    ON DUPLICATE KEY UPDATE
+                        match_time = VALUES(match_time),
+                        status = VALUES(status),
+                        home_score = COALESCE(VALUES(home_score), home_score),
+                        away_score = COALESCE(VALUES(away_score), away_score),
+                        minute = VALUES(minute),
+                        winner = COALESCE(VALUES(winner), winner),
+                        odds_home = COALESCE(VALUES(odds_home), odds_home),
+                        odds_draw = COALESCE(VALUES(odds_draw), odds_draw),
+                        odds_away = COALESCE(VALUES(odds_away), odds_away),
+                        odds_over25 = COALESCE(VALUES(odds_over25), odds_over25),
+                        odds_under25 = COALESCE(VALUES(odds_under25), odds_under25),
+                        source = 'football-data.co.uk',
+                        updated_at = CURRENT_TIMESTAMP
+                """, (
+                    league_code, season, match_date, time_str or None,
+                    home, away, status, home_score, away_score, minute, winner,
+                    avgh, avgd, avga, over25, under25,
+                    "football-data.co.uk"
+                ))
+
+                if cur.rowcount == 1:
+                    inserted += 1
+                elif cur.rowcount == 2:
+                    updated += 1
+
+            except Exception as e:
+                print(f"  Row error: {e} | {row.get('HomeTeam','?')} vs {row.get('AwayTeam','?')}")
                 continue
-
-            home_goals = safe_int(row.get("FTHG"))
-            away_goals = safe_int(row.get("FTAG"))
-            result = row.get("FTR", "").strip()
-
-            # Determine status
-            if result:
-                status = "finished"
-            elif match_date > date.today():
-                status = "scheduled"
-            elif match_date == date.today():
-                status = "today"
-            else:
-                status = "postponed"  # should have result but doesn't
-
-            # Sanity: truncate status to 30 chars
-            status = status[:30]
-
-            if status == "finished" or status == "postponed":
-                minute = 90
-                home_score = home_goals
-                away_score = away_goals
-                winner = result
-            else:
-                minute = 0
-                home_score = None
-                away_score = None
-                winner = None
-
-            # Odds
-            b365h = safe_float(row.get("B365H"))
-            b365d = safe_float(row.get("B365D"))
-            b365a = safe_float(row.get("B365A"))
-
-            # Average odds (safer than single bookmaker)
-            avgh = safe_float(row.get("AvgH")) or safe_float(row.get("BbAvH")) or b365h
-            avgd = safe_float(row.get("AvgD")) or safe_float(row.get("BbAvD")) or b365d
-            avga = safe_float(row.get("AvgA")) or safe_float(row.get("BbAvA")) or b365a
-
-            # Over/Under 2.5
-            over25 = safe_float(row.get("BbAv>2.5")) or safe_float(row.get("Avg>2.5"))
-            under25 = safe_float(row.get("BbAv<2.5")) or safe_float(row.get("Avg<2.5"))
-
-            cur.execute("""
-                INSERT INTO fixtures (league_code, season, match_date, match_time,
-                    home_team, away_team, status, home_score, away_score, minute, winner,
-                    odds_home, odds_draw, odds_away, odds_over25, odds_under25, source)
-                VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)
-                ON DUPLICATE KEY UPDATE
-                    match_time = VALUES(match_time),
-                    status = VALUES(status),
-                    home_score = COALESCE(VALUES(home_score), home_score),
-                    away_score = COALESCE(VALUES(away_score), away_score),
-                    minute = VALUES(minute),
-                    winner = COALESCE(VALUES(winner), winner),
-                    odds_home = COALESCE(VALUES(odds_home), odds_home),
-                    odds_draw = COALESCE(VALUES(odds_draw), odds_draw),
-                    odds_away = COALESCE(VALUES(odds_away), odds_away),
-                    odds_over25 = COALESCE(VALUES(odds_over25), odds_over25),
-                    odds_under25 = COALESCE(VALUES(odds_under25), odds_under25),
-                    source = 'football-data.co.uk',
-                    updated_at = CURRENT_TIMESTAMP
-            """, (
-                league_code, season, match_date, time_str or None,
-                home, away, status, home_score, away_score, minute, winner,
-                avgh, avgd, avga, over25, under25,
-                "football-data.co.uk"
-            ))
-
-            if cur.rowcount == 1:
-                inserted += 1
-            elif cur.rowcount == 2:
-                updated += 1
-
-        except Exception as e:
-            print(f"  Row error: {e} | {row.get('HomeTeam','?')} vs {row.get('AwayTeam','?')}")
-            continue
 
         conn.commit()
     finally:
@@ -216,14 +218,14 @@ def upsert_fixtures(league_code, season, rows):
 
 
 def sync_odds_to_football_odds(league_code, season, rows):
-    """涔熸妸鏈€鏂拌禂鐜囧悓姝ュ洖 football_odds.matches 琛紙淇濇寔鍏煎锛"""
-    # This is optional 鈥?football_odds already has historical data
+    """Optional: sync matches into football_odds.matches if needed."""
+    # This is optional - football_odds already has historical data
     # Only sync if there are matches not yet in that DB
     pass
 
 
 def refresh_all(leagues=None):
-    """瀹屾暣鍒锋柊锛氭媺鍙栨墍鏈夎仈璧涙渶鏂版暟鎹"""
+    """Refresh all leagues from football-data.co.uk."""
     t0 = time.time()
     total_inserted = 0
     total_updated = 0
@@ -262,10 +264,10 @@ def refresh_all(leagues=None):
 
     # Log to data_refresh_log
     conn = mysql.connector.connect(
-        host=os.getenv("MYSQL_HOST", "127.0.0.1"),
-        port=int(os.getenv("MYSQL_PORT", "3306")),
-        user=os.getenv("MYSQL_USER", "root"),
-        password=os.getenv("MYSQL_PASS", ""),
+        host=MYSQL_HOST,
+        port=MYSQL_PORT,
+        user=MYSQL_USER,
+        password=MYSQL_PASS,
         database=DB,
         charset="utf8mb4",
     )
@@ -290,7 +292,7 @@ def refresh_all(leagues=None):
 
 
 def get_today_matches():
-    """鑾峰彇浠婂ぉ鎵€鏈夋瘮璧涳紙渚涘疄鏃舵湇鍔′娇鐢級"""
+    """Get today's matches."""
     today = date.today().isoformat()
     return query(
         """SELECT * FROM fixtures
@@ -301,7 +303,7 @@ def get_today_matches():
 
 
 def get_upcoming_matches(league_code=None, days=7, limit=100):
-    """鑾峰彇鏈潵N澶╄禌绋"""
+    """Get upcoming matches."""
     start = date.today().isoformat()
     end = (date.today() + timedelta(days=days)).isoformat()
 

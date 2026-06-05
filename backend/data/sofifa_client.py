@@ -5,6 +5,7 @@ from config import SOFIFA_CACHE
 import pandas as pd
 import json
 import glob
+import re
 import time
 
 # Cache for player data (refresh every 30 minutes)
@@ -53,7 +54,8 @@ def search_player(name, league=None):
     # Use cached data
     df = _load_players_cached()
     if not df.empty:
-        matches = df[df["name"].str.contains(name, case=False, na=False)]
+        escaped = re.escape(name)
+        matches = df[df["name"].str.contains(escaped, case=False, na=False)]
         if not matches.empty:
             return _row_to_playercard(matches.iloc[0], "sofifa")
 

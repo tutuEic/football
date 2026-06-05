@@ -1,7 +1,9 @@
 # -*- coding: utf-8 -*-
-"""Football Sandbox API — FastAPI 主入口"""
-import sys, os, asyncio
-sys.path.insert(0, os.path.dirname(__file__))
+"""Football Sandbox API - FastAPI main entry."""
+import sys, os, asyncio, logging
+# Ensure the backend package is importable when running main.py directly.
+if os.path.dirname(__file__) not in sys.path:
+    sys.path.insert(0, os.path.dirname(__file__))
 
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
@@ -9,11 +11,14 @@ from fastapi.middleware.cors import CORSMiddleware
 from api import players, predict, sandbox, odds, models, matches, teams, clubs, live, fixtures, worldcup
 from security import APIKeyMiddleware
 from rate_limit import RateLimitMiddleware
+from config import MYSQL_USER, MYSQL_PASS
+
+logger = logging.getLogger(__name__)
 
 app = FastAPI(
     title="Football Prediction Sandbox API",
     version="0.3.1",
-    description="足球预测沙盘系统 — 实时赛程 + 蒙特卡洛模拟 + 概率输出"
+    description="Football prediction sandbox system with Monte Carlo simulation."
 )
 
 app.add_middleware(
@@ -48,10 +53,12 @@ async def startup():
     from data.service_live import poller
     poller.start()
     print("[api] Live score poller started")
-    
 
-
-
+    # Warn about insecure MySQL credentials
+    if MYSQL_USER == "root":
+        logger.warning("[security] MYSQL_USER is set to 'root'. Use a dedicated application user instead.")
+    if not MYSQL_PASS:
+        logger.warning("[security] MYSQL_PASS is empty. Set a strong password in .env.")
 
 
 @app.post("/api/refresh/cl")

@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
 """
 Champions League Data Pipeline - FlashScore
-============================================
-????????????????? fixtures ??
+
+Fetches Champions League fixtures and results from FlashScore.
 """
 import sys, os, re, json, time
 from datetime import datetime, date
@@ -12,14 +12,17 @@ sys.path.insert(0, PROJECT_ROOT)
 
 from data.http_utils import safe_get
 import mysql.connector
-from config import MYSQL_HOST, MYSQL_PORT, MYSQL_USER, MYSQL_PASS
+from config import MYSQL_HOST, MYSQL_PORT, MYSQL_USER, MYSQL_PASS, CURRENT_SEASON
 
 DB = "football_pred"
 LEAGUE_CODE = "CL"
 
-# FlashScore ????
+# Derive season string dynamically (e.g. "2526" for the 2025/2026 season).
+SEASON_STR = f"{CURRENT_SEASON % 100:02d}{(CURRENT_SEASON + 1) % 100:02d}"
+
+# FlashScore field separators
 FIELD_SEP = "\u00AC"  # ?
-KV_SEP = "\u00F7"     # ?
+KV_SEP = "\u00F7"     # ¡Â
 
 FLASHSCORE_URLS = {
     "results": "https://www.flashscore.com/football/europe/champions-league/results/",
@@ -36,7 +39,7 @@ def get_conn():
 
 
 def _parse_flashscore_data(raw):
-    """?? FlashScore ???"""
+    """Parse FlashScore data."""
     records = []
     parts = raw.split("~")
     
@@ -77,7 +80,7 @@ def _parse_flashscore_data(raw):
 
 
 def fetch_cl_results():
-    """????????"""
+    """Fetch completed Champions League matches."""
     url = FLASHSCORE_URLS["results"]
     headers = {"User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36"}
     
@@ -87,7 +90,7 @@ def fetch_cl_results():
             print(f"[CL] Results fetch failed: {r.status_code if r else 'None'}")
             return []
         
-        match = re.search(r'initialFeeds\["summary-results"\]\s*=\s*\{[^}]*data:\s*`([^`]+)`', r.text)
+        match = re.search(r'initialFeeds\["summary-results"\]\s*=\s*\{[^}]*data:\s*([^]+)', r.text)
         if not match:
             print("[CL] No results data found")
             return []
@@ -101,7 +104,7 @@ def fetch_cl_results():
 
 
 def fetch_cl_fixtures():
-    """???????"""
+    """Fetch upcoming Champions League matches."""
     url = FLASHSCORE_URLS["fixtures"]
     headers = {"User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36"}
     
@@ -111,18 +114,18 @@ def fetch_cl_fixtures():
             print(f"[CL] Fixtures fetch failed: {r.status_code if r else 'None'}")
             return []
         
-        # ?? summary-fixtures
-        match = re.search(r'initialFeeds\["summary-fixtures"\]\s*=\s*\{[^}]*data:\s*`([^`]+)`', r.text)
+        # Try summary-fixtures first
+        match = re.search(r'initialFeeds\["summary-fixtures"\]\s*=\s*\{[^}]*data:\s*([^]+)', r.text)
         if not match:
-            # ???? future feed?? results ???
-            match = re.search(r'initialFeeds\["summary-results"\]\s*=\s*\{[^}]*data:\s*`([^`]+)`', r.text)
+            # Fall back to future feed or results feed
+            match = re.search(r'initialFeeds\["summary-results"\]\s*=\s*\{[^}]*data:\s*([^]+)', r.text)
         
         if not match:
             print("[CL] No fixtures data found")
             return []
         
         fixtures = _parse_flashscore_data(match.group(1))
-        # ????????
+        # Filter to future matches only
         today = date.today().strftime("%Y-%m-%d")
         future = [f for f in fixtures if f["date"] >= today]
         print(f"[CL] Fetched {len(future)} upcoming fixtures")
@@ -146,7 +149,7 @@ def save_to_db(results, fixtures):
             values = []
             for m in results:
                 values.append((
-                    LEAGUE_CODE, "2526", m["date"], m["home_team"], m["away_team"],
+                    LEAGUE_CODE, SEASON_STR, m["date"], m["home_team"], m["away_team"],
                     m["score_h"], m["score_a"], "finished", "flashscore"
                 ))
             
@@ -168,7 +171,7 @@ def save_to_db(results, fixtures):
             values = []
             for m in fixtures:
                 values.append((
-                    LEAGUE_CODE, "2526", m["date"], m["home_team"], m["away_team"], "flashscore"
+                    LEAGUE_CODE, SEASON_STR, m["date"], m["home_team"], m["away_team"], "flashscore"
                 ))
             
             cursor.executemany(
@@ -188,7 +191,7 @@ def save_to_db(results, fixtures):
 
 
 def run_pipeline():
-    """???????"""
+    """Run Champions League pipeline."""
     print("\n" + "=" * 60)
     print("Champions League Data Pipeline")
     print("=" * 60)

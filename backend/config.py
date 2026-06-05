@@ -3,6 +3,7 @@
 import os
 import sys
 from pathlib import Path
+from datetime import datetime
 
 from dotenv import load_dotenv
 
@@ -16,7 +17,7 @@ load_dotenv(_ENV_FILE)
 # MySQL
 MYSQL_HOST = os.getenv("MYSQL_HOST", "127.0.0.1")
 MYSQL_PORT = int(os.getenv("MYSQL_PORT", "3306"))
-MYSQL_USER = os.getenv("MYSQL_USER", "root")
+MYSQL_USER = os.getenv("MYSQL_USER", "football_app")
 MYSQL_PASS = os.getenv("MYSQL_PASS", "")
 MYSQL_DB_SOURCE = os.getenv("MYSQL_DB_SOURCE", "football_odds")
 MYSQL_DB_PRED  = os.getenv("MYSQL_DB_PRED", "football_pred")
@@ -38,7 +39,21 @@ SPORTSDB_API_KEY = os.getenv("SPORTSDB_API_KEY", "")
 # FIFA dataset (optional, used by squad_fifa fallback)
 FIFA_PATH = os.getenv("FIFA_PATH", "")
 
-# League name mapping (code -> Chinese name)
+# Current season derived from the calendar.
+# Football seasons span two calendar years (e.g. 2025/2026).
+# If we're in the second half of the year (July¨CDecember) the season started this year,
+# otherwise it started last year.
+now = datetime.now()
+CURRENT_SEASON = now.year if now.month >= 7 else now.year - 1
+
+# SoFIFA works with the most recent three completed/current seasons.
+SO_FIFA_SEASONS = [
+    CURRENT_SEASON - 2,
+    CURRENT_SEASON - 1,
+    CURRENT_SEASON,
+]
+
+# League name mapping (code -> English name)
 LEAGUE_NAMES = {
     "E0": "Premier League", "E1": "Championship", "E2": "League One", "E3": "League Two",
     "D1": "Bundesliga", "D2": "2. Bundesliga",

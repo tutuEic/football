@@ -42,8 +42,8 @@ class RateLimitMiddleware(BaseHTTPMiddleware):
         path = request.url.path
         now = time.time()
 
-        #  Use a stricter key for search-like endpoints
-        if "/search" in path:
+        # Use stricter key for search-like endpoints
+        if path.startswith("/search"):
             key = f"{ip}:search"
             limit = self.search_limit
         else:
@@ -53,7 +53,7 @@ class RateLimitMiddleware(BaseHTTPMiddleware):
         self._clean(key, now)
         count = len(self._hits[key])
 
-        logger.info("[rate-limit] ip=%s path=%s key=%s count=%d limit=%d", ip, path, key, count, limit)
+        logger.debug("[rate-limit] ip=%s path=%s key=%s count=%d limit=%d", ip, path, key, count, limit)
 
         if count >= limit:
             return JSONResponse(
