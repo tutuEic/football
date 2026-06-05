@@ -219,12 +219,14 @@ def simulate_bracket_n_times(n_sims=100):
 
 def get_golden_ball_candidates():
     """Get Golden Ball candidates based on player Elo and team strength."""
+    # Filter: elo > 70, age <= 35 at WC2026 (born after 1991-06-01)
     rows = query(
         "SELECT p.player_id, p.name, p.country_of_citizenship, p.elo_rating, "
-        "p.position, p.current_club_name, p.market_value_in_eur "
+        "p.position, p.current_club_name, p.market_value_in_eur, p.date_of_birth "
         "FROM tm_players p "
         "INNER JOIN wc_groups g ON p.country_of_citizenship = g.team COLLATE utf8mb4_unicode_ci "
         "WHERE p.elo_rating IS NOT NULL AND p.elo_rating > 70 "
+        "AND p.date_of_birth > '1991-06-01' "
         "ORDER BY p.elo_rating DESC LIMIT 30",
         db="football_pred",
     )
