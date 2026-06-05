@@ -197,7 +197,7 @@ def predict_wc_match(home_team, away_team, context=None):
     away_team = normalize_team(away_team)
     
     # Check cache
-    cache_key = f"{home_team}_{away_team}_{context.get('stage','group')}"
+    cache_key = f"{home_team}_{away_team}_{context.get('stage','group')}_{context.get('is_host',False)}"
     if cache_key in _prediction_cache:
         ts, data = _prediction_cache[cache_key]
         if time.time() - ts < _CACHE_TTL:
@@ -233,6 +233,23 @@ def predict_wc_match(home_team, away_team, context=None):
     }
     adj = stage_adjustments.get(stage, stage_adjustments['group'])
     
+    # Apply goal multiplier to xG (lower goals in knockout stages)
+    if adj['goal_mult'] != 1.0:
+        xg['home'] = round(xg['home'] * adj['goal_mult'], 2)
+        xg['away'] = round(xg['away'] * adj['goal_mult'], 2)
+    
+    # Apply host advantage bonus (significant boost for host nation)
+    is_host = context.get('is_host', False)
+    if is_host:
+        # Host advantage: +8% win probability, -4% away win
+        host_bonus = 0.08
+        wdl['home_win'] = round(min(wdl['home_win'] + host_bonus, 0.95), 4)
+        wdl['away_win'] = round(max(wdl['away_win'] - host_bonus * 0.5, 0.01), 4)
+        wdl['draw'] = round(max(1.0 - wdl['home_win'] - wdl['away_win'], 0.01), 4)
+        # Also boost xG slightly for host
+        xg['home'] = round(xg['home'] * 1.08, 2)
+    
+    # Apply draw shift for knockout stages
     if adj['draw_shift'] != 0:
         total_non_draw = wdl['home_win'] + wdl['away_win']
         if total_non_draw > 0:
