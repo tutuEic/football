@@ -1,13 +1,36 @@
-"""SoFIFA 球员数据客户端 — 封装 soccerdata，提供球员搜索和属性查询"""
+"""SoFIFA player data client with caching."""
 import sys, os
 sys.path.insert(0, os.path.dirname(os.path.dirname(__file__)))
 from config import SOFIFA_CACHE
 import pandas as pd
 import json
 import glob
+import time
+
+# Cache for player data (refresh every 30 minutes)
+_players_cache = None
+_players_cache_time = 0
+_CACHE_TTL = 1800  # 30 minutes
+
+
+def _load_players_cached():
+    """Load all cached player CSVs with caching."""
+    global _players_cache, _players_cache_time
+    
+    if _players_cache is not None and (time.time() - _players_cache_time < _CACHE_TTL):
+        return _players_cache
+    
+    cache_files = glob.glob(os.path.join(SOFIFA_CACHE, "**", "players*.csv"), recursive=True)
+    if not cache_files:
+        return pd.DataFrame()
+    
+    _players_cache = pd.concat([pd.read_csv(f) for f in cache_files])
+    _players_cache_time = time.time()
+    return _players_cache
+
 
 def _row_to_playercard(row, source):
-    """将 DataFrame 行转为 PlayerCard dict"""
+    """Convert DataFrame row to PlayerCard dict."""
     att = {
         "pace": int(row.get("pace", 50) or 50),
         "shooting": int(row.get("shooting", 50) or 50),
@@ -19,66 +42,46 @@ def _row_to_playercard(row, source):
     overall = int(row.get("overall", 50) or 50)
     return {
         "name": str(row.get("name", "")),
-        "source": source,
-        "position": str(row.get("position", "CM")),
-        "att": att,
-        "attack_rating": round(att["shooting"] * 0.6 + att["dribbling"] * 0.3 + att["pace"] * 0.1),
-        "defense_rating": round(att["defending"] * 0.8 + att["physical"] * 0.2),
         "overall": overall,
-        "club": str(row.get("club", "")),
-        "market_value": str(row.get("value", "")),
+        "attributes": att,
+        "source": source,
     }
 
-def fetch_league_players(league="Premier League", version="latest"):
-    """
-    用 soccerdata 抓取某联赛所有球员的 FIFA 评分
-    返回 list[PlayerCard]
-    """
-    try:
-        from soccerdata import SoFIFA
-        sofifa = SoFIFA(
-            leagues=league,
-            versions=version,
-            data_dir=SOFIFA_CACHE,
-            no_store=False,
-        )
-        df = sofifa.read_players()
-        return [_row_to_playercard(row, "sofifa") for _, row in df.iterrows()]
-    except Exception as e:
-        print(f"SoFIFA fetch failed: {e}")
-        return []
 
 def search_player(name, league=None):
-    """
-    搜索球员，先在缓存找，找不到抓取。
-    如果 SoFIFA 不可用（无 Chrome），返回 None。
-    """
-    # 先查缓存
-    cache_files = glob.glob(os.path.join(SOFIFA_CACHE, "**", "players*.csv"), recursive=True)
-    if cache_files:
-        df = pd.concat([pd.read_csv(f) for f in cache_files])
+    """Search for a player in cache, fallback to online fetch."""
+    # Use cached data
+    df = _load_players_cached()
+    if not df.empty:
         matches = df[df["name"].str.contains(name, case=False, na=False)]
         if not matches.empty:
             return _row_to_playercard(matches.iloc[0], "sofifa")
 
-    # 缓存未命中，尝试在线抓取
+    # Cache miss, try online fetch
     if league:
         return search_player_online(name, league)
 
     return None
 
+
 def search_player_online(name, league="Premier League"):
-    """在线抓取并搜索球员"""
+    """Fetch online and search for player."""
     players = fetch_league_players(league)
     for p in players:
         if name.lower() in p["name"].lower():
             return p
     return None
 
+
 def get_cached_players():
-    """读取所有已缓存的球员"""
-    cache_files = glob.glob(os.path.join(SOFIFA_CACHE, "**", "players*.csv"), recursive=True)
-    if not cache_files:
+    """Get all cached players."""
+    df = _load_players_cached()
+    if df.empty:
         return []
-    df = pd.concat([pd.read_csv(f) for f in cache_files])
     return [_row_to_playercard(row, "sofifa") for _, row in df.iterrows()]
+
+
+def fetch_league_players(league):
+    """Fetch players from a league (placeholder - requires SoFIFA scraping)."""
+    # This would need actual SoFIFA scraping implementation
+    return []

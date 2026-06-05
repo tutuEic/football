@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 """Football Sandbox API — FastAPI 主入口"""
-import sys, os
+import sys, os, asyncio
 sys.path.insert(0, os.path.dirname(__file__))
 
 from fastapi import FastAPI
@@ -55,10 +55,11 @@ async def startup():
 
 
 @app.post("/api/refresh/cl")
-def refresh_cl():
-    """???????"""
+async def refresh_cl():
+    """Run CL pipeline in background thread."""
     from data.pipeline_cl import run_pipeline
-    results, fixtures = run_pipeline()
+    loop = asyncio.get_event_loop()
+    results, fixtures = await loop.run_in_executor(None, run_pipeline)
     return {
         "status": "ok",
         "completed": len(results),
@@ -67,10 +68,11 @@ def refresh_cl():
 
 
 @app.post("/api/refresh/fixtures")
-def refresh_fixtures():
-    """?????????"""
+async def refresh_fixtures():
+    """Run fixtures pipeline in background thread."""
     from data.pipeline_fixtures import run_pipeline
-    run_pipeline()
+    loop = asyncio.get_event_loop()
+    await loop.run_in_executor(None, run_pipeline)
     return {"status": "ok"}
 
 @app.get("/api/health")

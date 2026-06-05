@@ -59,6 +59,7 @@ def search_club(name, limit=10):
     return _search_fixture_teams(name, limit)
 
 def _search_tm_clubs(name, limit=10):
+    # Try exact match first
     results = query(
         """SELECT club_id, name, domestic_competition_id, squad_size,
                   total_market_value, average_age, stadium_name, coach_name
@@ -71,26 +72,23 @@ def _search_tm_clubs(name, limit=10):
             r["source"] = "transfermarkt"
         return results
 
+    # Multi-word search: single query with OR conditions
     words = [w for w in name.split() if len(w) >= 3]
     if len(words) > 1:
-        best = []
-        for word in words:
-            r = query(
-                """SELECT club_id, name, domestic_competition_id, squad_size,
-                          total_market_value, average_age, stadium_name, coach_name
-                   FROM tm_clubs WHERE name LIKE %s LIMIT %s""",
-                [f"%{word}%", limit], db="football_pred"
-            )
-            best.extend(r)
-        if best:
-            from collections import Counter
-            counts = Counter(c["club_id"] for c in best)
-            best.sort(key=lambda c: (-counts[c["club_id"]], -(c.get("total_market_value",0) or 0)))
-            seen = set(); unique = []
-            for c in best:
-                if c["club_id"] not in seen:
-                    seen.add(c["club_id"]); c["source"] = "transfermarkt"; unique.append(c)
-            return unique[:limit]
+        conditions = " OR ".join(["name LIKE %s"] * len(words))
+        params = [f"%{w}%" for w in words]
+        params.append(limit)
+        results = query(
+            f"""SELECT club_id, name, domestic_competition_id, squad_size,
+                      total_market_value, average_age, stadium_name, coach_name
+               FROM tm_clubs WHERE {conditions}
+               ORDER BY total_market_value DESC LIMIT %s""",
+            params, db="football_pred"
+        )
+        if results:
+            for r in results:
+                r["source"] = "transfermarkt"
+            return results
     return []
 
 def _search_fixture_teams(name, limit=10):

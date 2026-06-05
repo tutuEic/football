@@ -133,7 +133,7 @@ def fetch_cl_fixtures():
 
 
 def save_to_db(results, fixtures):
-    """Save results and fixtures to database."""
+    """Save results and fixtures to database using batch operations."""
     conn = get_conn()
     cursor = conn.cursor()
     
@@ -141,50 +141,42 @@ def save_to_db(results, fixtures):
     saved_fixtures = 0
     
     try:
-        # Save match results
-        for m in results:
-            try:
-                cursor.execute(
-                    "SELECT id FROM fixtures WHERE league_code=%s AND match_date=%s AND home_team=%s AND away_team=%s",
-                    [LEAGUE_CODE, m["date"], m["home_team"], m["away_team"]]
-                )
-                existing = cursor.fetchone()
-                
-                if existing:
-                    cursor.execute(
-                        "UPDATE fixtures SET home_score=%s, away_score=%s, status='finished' WHERE id=%s",
-                        [m["score_h"], m["score_a"], existing[0]]
-                    )
-                else:
-                    cursor.execute(
-                        """INSERT INTO fixtures (league_code, season, match_date, home_team, away_team, 
-                           home_score, away_score, status, source)
-                           VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s)""",
-                        [LEAGUE_CODE, "2526", m["date"], m["home_team"], m["away_team"],
-                         m["score_h"], m["score_a"], "finished", "flashscore"]
-                    )
-                    saved_results += 1
-            except Exception as e:
-                print(f"[CL] Error saving result {m['home_team']} vs {m['away_team']}: {e}")
+        # Batch upsert match results (INSERT ... ON DUPLICATE KEY UPDATE)
+        if results:
+            values = []
+            for m in results:
+                values.append((
+                    LEAGUE_CODE, "2526", m["date"], m["home_team"], m["away_team"],
+                    m["score_h"], m["score_a"], "finished", "flashscore"
+                ))
+            
+            cursor.executemany(
+                """INSERT INTO fixtures (league_code, season, match_date, home_team, away_team, 
+                   home_score, away_score, status, source)
+                   VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s)
+                   ON DUPLICATE KEY UPDATE
+                       home_score = VALUES(home_score),
+                       away_score = VALUES(away_score),
+                       status = VALUES(status),
+                       updated_at = NOW()""",
+                values
+            )
+            saved_results = cursor.rowcount
         
-        # Save upcoming fixtures
-        for m in fixtures:
-            try:
-                cursor.execute(
-                    "SELECT id FROM fixtures WHERE league_code=%s AND match_date=%s AND home_team=%s AND away_team=%s",
-                    [LEAGUE_CODE, m["date"], m["home_team"], m["away_team"]]
-                )
-                existing = cursor.fetchone()
-                
-                if not existing:
-                    cursor.execute(
-                        """INSERT INTO fixtures (league_code, season, match_date, home_team, away_team, source)
-                           VALUES (%s, %s, %s, %s, %s, %s)""",
-                        [LEAGUE_CODE, "2526", m["date"], m["home_team"], m["away_team"], "flashscore"]
-                    )
-                    saved_fixtures += 1
-            except Exception as e:
-                print(f"[CL] Error saving fixture {m['home_team']} vs {m['away_team']}: {e}")
+        # Batch insert upcoming fixtures (ignore duplicates)
+        if fixtures:
+            values = []
+            for m in fixtures:
+                values.append((
+                    LEAGUE_CODE, "2526", m["date"], m["home_team"], m["away_team"], "flashscore"
+                ))
+            
+            cursor.executemany(
+                """INSERT IGNORE INTO fixtures (league_code, season, match_date, home_team, away_team, source)
+                   VALUES (%s, %s, %s, %s, %s, %s)""",
+                values
+            )
+            saved_fixtures = cursor.rowcount
         
         conn.commit()
     finally:
