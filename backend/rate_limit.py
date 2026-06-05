@@ -22,10 +22,23 @@ class RateLimitMiddleware(BaseHTTPMiddleware):
 
     def _clean(self, key: str, now: float):
         cutoff = now - self.window
-        self._hits[key] = [t for t in self._hits[key] if t > cutoff]
+        filtered = [t for t in self._hits[key] if t > cutoff]
+        if filtered:
+            self._hits[key] = filtered
+        else:
+            # Remove empty entries to prevent memory leak
+            self._hits.pop(key, None)
+
+    def _get_client_ip(self, request: Request) -> str:
+        """Get real client IP, respecting X-Forwarded-For behind reverse proxy."""
+        forwarded = request.headers.get("x-forwarded-for")
+        if forwarded:
+            # Take first IP (original client)
+            return forwarded.split(",")[0].strip()
+        return request.client.host if request.client else "unknown"
 
     async def dispatch(self, request: Request, call_next):
-        ip = request.client.host if request.client else "unknown"
+        ip = self._get_client_ip(request)
         path = request.url.path
         now = time.time()
 

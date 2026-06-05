@@ -24,19 +24,23 @@ if not API_KEY and not DEV_MODE:
 
 
 class APIKeyMiddleware(BaseHTTPMiddleware):
-    """Enforce X-API-Key on write endpoints."""
+    """Enforce X-API-Key on all endpoints except health check."""
 
     async def dispatch(self, request: Request, call_next):
-        # Explicit dev mode => allow everything
+        # Health check always accessible
+        if request.url.path in ("/health", "/api/health", "/docs", "/openapi.json"):
+            return await call_next(request)
+
+        # DEV_MODE: log warning but allow (for local development only)
         if DEV_MODE:
+            if not hasattr(self, '_dev_warned'):
+                logger.warning("[security] DEV_MODE is ON ? all API endpoints are unprotected!")
+                self._dev_warned = True
             return await call_next(request)
 
-        # Read-only methods pass without a key
-        if request.method in ("GET", "HEAD", "OPTIONS"):
-            return await call_next(request)
-
+        # All methods require API key (including GET)
         key = request.headers.get("x-api-key", "")
-        if key != API_KEY:
+        if not API_KEY or not key or not secrets.compare_digest(key, API_KEY):
             return JSONResponse(
                 {"status": "error", "message": "Missing or invalid API key"},
                 status_code=401,
