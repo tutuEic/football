@@ -1,4 +1,4 @@
-﻿# -*- coding: utf-8 -*-
+# -*- coding: utf-8 -*-
 """
 WC Prediction Ensemble - combines multiple models.
 
@@ -28,9 +28,9 @@ from engine.wc_stacking import StackingEnsemble
 
 # Model weights (can be tuned via cross-validation)
 DEFAULT_WEIGHTS = {
-    'bayes_dc':    0.40,  # Best overall accuracy
-    'poisson_reg': 0.35,  # Good feature-based predictions
-    'elo_poisson': 0.25,  # Cold-start friendly, Elo-based
+    'bayes_dc':    0.35,  # Best overall accuracy
+    'poisson_reg': 0.30,  # Good feature-based predictions
+    'elo_poisson': 0.35,  # Elo-based, primary factor
 }
 
 # Cache
