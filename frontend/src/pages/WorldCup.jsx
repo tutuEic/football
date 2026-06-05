@@ -32,6 +32,8 @@ export default function WorldCup() {
       {subTab === 'matches'   && <Matches />}
       {subTab === 'custom'    && <CustomPredict />}
       {subTab === 'sandbox'   && <WCSandbox />}
+      {subTab === 'knockout'  && <KnockoutBracket />}
+      {subTab === 'goldenball' && <GoldenBall />}
       {subTab === 'simulate'  && <Simulate />}
     </div>
   );
@@ -777,6 +779,191 @@ function PredictionCard({ pred, full }) {
           </div>
         </div>
       )}
+    </div>
+  );
+}
+
+
+// ============================================================
+// Knockout Bracket Simulation
+// ============================================================
+
+function KnockoutBracket() {
+  const [nSims, setNSims] = useState(100);
+  const [result, setResult] = useState(null);
+  const [loading, setLoading] = useState(false);
+  const [sampleIdx, setSampleIdx] = useState(0);
+
+  async function runSimulation() {
+    setLoading(true);
+    setResult(null);
+    try {
+      const d = await post('/worldcup/knockout', { n_sims: nSims });
+      setResult(d);
+    } catch (err) {
+      setResult({ status: 'error', message: err.message });
+    }
+    setLoading(false);
+  }
+
+  if (!result || result.status === 'error') {
+    return (
+      <div>
+        <h2 style={{ color: 'var(--fg-primary)', fontSize: 16, marginBottom: 16 }}>Knockout Bracket Prediction</h2>
+        <p style={{ color: 'var(--fg-muted)', fontSize: 13, marginBottom: 16 }}>
+          Simulate the full knockout bracket from Round of 32 to Final. Each simulation runs group stage to determine qualifiers, then knockout rounds.
+        </p>
+        <div style={{ display: 'flex', gap: 8, alignItems: 'center', marginBottom: 16 }}>
+          {[50, 100, 200, 500].map(n => (
+            <button key={n} onClick={() => setNSims(n)}
+              style={{
+                background: nSims === n ? 'var(--accent)' : 'var(--bg-input)',
+                color: nSims === n ? '#fff' : 'var(--fg-muted)',
+                border: 'none', padding: '8px 16px', borderRadius: 6, cursor: 'pointer', fontSize: 12
+              }}>
+              {n} sims
+            </button>
+          ))}
+          <button onClick={runSimulation} disabled={loading}
+            style={{ background: loading ? 'var(--bg-input)' : 'var(--green)', color: '#fff', border: 'none', padding: '10px 24px', borderRadius: 6, cursor: 'pointer', fontSize: 13, fontWeight: 'bold' }}>
+            {loading ? 'Simulating...' : 'Start Simulation'}
+          </button>
+        </div>
+        {result?.message && <div style={{ color: 'var(--red)', padding: 12, background: 'rgba(248,81,73,0.1)', borderRadius: 6 }}>{result.message}</div>}
+      </div>
+    );
+  }
+
+  const r = result.result;
+  const bracket = r.sample_bracket;
+
+  const stageLabels = { r32: 'Round of 32', r16: 'Round of 16', qf: 'Quarter-Finals', sf: 'Semi-Finals', final: 'Final' };
+  const stages = ['r32', 'r16', 'qf', 'sf', 'final'];
+
+  return (
+    <div>
+      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 16 }}>
+        <h2 style={{ color: 'var(--fg-primary)', fontSize: 16 }}>Knockout Bracket ({result.n_simulations} simulations)</h2>
+        <button onClick={() => setResult(null)}
+          style={{ background: 'var(--bg-input)', color: 'var(--fg-muted)', border: 'none', padding: '6px 12px', borderRadius: 6, cursor: 'pointer', fontSize: 12 }}>
+          Reset
+        </button>
+      </div>
+
+      {/* Champion & Finalist Probs */}
+      <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 12, marginBottom: 20 }}>
+        <div style={{ background: 'var(--bg-card)', border: '1px solid var(--border)', borderRadius: 8, padding: 16 }}>
+          <div style={{ color: 'var(--fg-muted)', fontSize: 11, marginBottom: 8 }}>Champion Probability</div>
+          {r.champion_probs.slice(0, 8).map((t, i) => (
+            <div key={i} style={{ display: 'flex', alignItems: 'center', gap: 8, marginBottom: 4 }}>
+              <span style={{ color: i === 0 ? 'var(--green)' : 'var(--fg-body)', fontSize: 12, width: 140, fontWeight: i === 0 ? 'bold' : 'normal' }}>{t.team}</span>
+              <div style={{ flex: 1, height: 8, background: 'var(--bg-input)', borderRadius: 4, overflow: 'hidden' }}>
+                <div style={{ width: `${t.prob * 100}%`, height: '100%', background: i === 0 ? 'var(--green)' : 'var(--accent)', borderRadius: 4 }} />
+              </div>
+              <span style={{ color: 'var(--fg-muted)', fontSize: 11, width: 40, textAlign: 'right' }}>{(t.prob * 100).toFixed(1)}%</span>
+            </div>
+          ))}
+        </div>
+        <div style={{ background: 'var(--bg-card)', border: '1px solid var(--border)', borderRadius: 8, padding: 16 }}>
+          <div style={{ color: 'var(--fg-muted)', fontSize: 11, marginBottom: 8 }}>Reach Final Probability</div>
+          {r.reach_final.slice(0, 8).map((t, i) => (
+            <div key={i} style={{ display: 'flex', alignItems: 'center', gap: 8, marginBottom: 4 }}>
+              <span style={{ color: 'var(--fg-body)', fontSize: 12, width: 140 }}>{t.team}</span>
+              <div style={{ flex: 1, height: 8, background: 'var(--bg-input)', borderRadius: 4, overflow: 'hidden' }}>
+                <div style={{ width: `${t.prob * 100}%`, height: '100%', background: 'var(--yellow)', borderRadius: 4 }} />
+              </div>
+              <span style={{ color: 'var(--fg-muted)', fontSize: 11, width: 40, textAlign: 'right' }}>{(t.prob * 100).toFixed(1)}%</span>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      {/* Sample Bracket */}
+      <div style={{ background: 'var(--bg-card)', border: '1px solid var(--border)', borderRadius: 8, padding: 16 }}>
+        <div style={{ color: 'var(--fg-muted)', fontSize: 11, marginBottom: 12 }}>Sample Bracket (one simulation)</div>
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(5, 1fr)', gap: 8 }}>
+          {stages.map(stage => (
+            <div key={stage}>
+              <div style={{ color: 'var(--fg-primary)', fontSize: 12, fontWeight: 'bold', marginBottom: 8, textAlign: 'center' }}>{stageLabels[stage]}</div>
+              {bracket[stage]?.map((m, i) => (
+                <div key={i} style={{ background: 'var(--bg-hover)', borderRadius: 4, padding: '4px 6px', marginBottom: 4, fontSize: 11 }}>
+                  <div style={{ color: m.winner === m.home ? 'var(--green)' : 'var(--fg-body)', fontWeight: m.winner === m.home ? 'bold' : 'normal' }}>{m.home}</div>
+                  <div style={{ color: m.winner === m.away ? 'var(--green)' : 'var(--fg-body)', fontWeight: m.winner === m.away ? 'bold' : 'normal' }}>{m.away}</div>
+                  <div style={{ color: 'var(--fg-muted)', fontSize: 9, textAlign: 'center' }}>{m.method}</div>
+                </div>
+              ))}
+            </div>
+          ))}
+        </div>
+        {bracket.champion && (
+          <div style={{ textAlign: 'center', marginTop: 12, padding: 12, background: 'rgba(63,185,80,0.1)', borderRadius: 8 }}>
+            <span style={{ color: 'var(--green)', fontSize: 16, fontWeight: 'bold' }}>Champion: {bracket.champion}</span>
+          </div>
+        )}
+      </div>
+    </div>
+  );
+}
+
+
+// ============================================================
+// Golden Ball Prediction
+// ============================================================
+
+function GoldenBall() {
+  const [candidates, setCandidates] = useState([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    get('/worldcup/golden-ball').then(d => {
+      setCandidates(d.candidates || []);
+      setLoading(false);
+    }).catch(() => setLoading(false));
+  }, []);
+
+  if (loading) return <div style={{ color: 'var(--fg-muted)' }}>Loading...</div>;
+
+  return (
+    <div>
+      <h2 style={{ color: 'var(--fg-primary)', fontSize: 16, marginBottom: 8 }}>Golden Ball Predictions</h2>
+      <p style={{ color: 'var(--fg-muted)', fontSize: 12, marginBottom: 16 }}>
+        Top players from WC2026 qualified teams, ranked by Elo rating. The Golden Ball award goes to the best player of the tournament.
+      </p>
+
+      <div style={{ display: 'grid', gap: 6 }}>
+        {candidates.map((c, i) => {
+          const medal = i === 0 ? '??' : i === 1 ? '??' : i === 2 ? '??' : `${i + 1}`;
+          const eloColor = c.elo > 85 ? 'var(--green)' : c.elo > 75 ? 'var(--accent)' : 'var(--fg-muted)';
+          return (
+            <div key={i} style={{
+              display: 'grid', gridTemplateColumns: '32px 1fr 100px 80px 120px 80px',
+              alignItems: 'center', gap: 8,
+              background: i < 3 ? 'rgba(63,185,80,0.05)' : 'var(--bg-card)',
+              border: '1px solid var(--border)', borderRadius: 6, padding: '8px 12px',
+              fontSize: 12,
+            }}>
+              <span style={{ fontSize: i < 3 ? 18 : 12, textAlign: 'center' }}>{medal}</span>
+              <div>
+                <div style={{ color: 'var(--fg-primary)', fontWeight: 'bold' }}>{c.player}</div>
+                <div style={{ color: 'var(--fg-muted)', fontSize: 11 }}>{c.team} ? {c.club}</div>
+              </div>
+              <div style={{ textAlign: 'center' }}>
+                <span style={{ color: eloColor, fontWeight: 'bold', fontSize: 14 }}>{c.elo?.toFixed(0)}</span>
+                <div style={{ color: 'var(--fg-muted)', fontSize: 9 }}>Elo Rating</div>
+              </div>
+              <div style={{ color: 'var(--fg-muted)', textAlign: 'center', fontSize: 11 }}>{c.position}</div>
+              <div style={{ color: 'var(--fg-muted)', textAlign: 'center', fontSize: 11 }}>
+                {c.market_value ? `?${(c.market_value / 1000000).toFixed(0)}M` : '-'}
+              </div>
+              <div style={{ width: 60 }}>
+                <div style={{ height: 4, background: 'var(--bg-input)', borderRadius: 2, overflow: 'hidden' }}>
+                  <div style={{ width: `${Math.min(100, (c.elo / 100) * 100)}%`, height: '100%', background: eloColor, borderRadius: 2 }} />
+                </div>
+              </div>
+            </div>
+          );
+        })}
+      </div>
     </div>
   );
 }

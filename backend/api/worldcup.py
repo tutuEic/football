@@ -23,6 +23,7 @@ from data.mysql_client import query
 from engine.wc_data import analyze_squad, analyze_all_wc_teams
 from engine.wc_predictor import predict_wc_match
 from engine.wc_simulator import simulate_tournament, format_simulation_report, load_groups
+from engine.wc_knockout import simulate_bracket_n_times, get_golden_ball_candidates
 
 router = APIRouter(prefix="/worldcup")
 
@@ -43,6 +44,10 @@ class PredictRequest(BaseModel):
     stage: str = "group"
     matchday: int = 1
     is_host: bool = False
+
+
+class KnockoutRequest(BaseModel):
+    n_sims: int = 100
 
 
 class SimulateRequest(BaseModel):
@@ -296,6 +301,27 @@ def predict_custom(req: PredictRequest):
 # ============================================================
 # Simulation
 # ============================================================
+
+@router.post("/knockout")
+def simulate_knockout(req: KnockoutRequest):
+    """Simulate knockout bracket from R32 to Final."""
+    n_sims = min(max(req.n_sims, 10), 1000)
+    try:
+        result = simulate_bracket_n_times(n_sims)
+        return {"status": "ok", "n_simulations": n_sims, "result": result}
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))
+
+
+@router.get("/golden-ball")
+def get_golden_ball():
+    """Get Golden Ball candidates."""
+    try:
+        candidates = get_golden_ball_candidates()
+        return {"status": "ok", "candidates": candidates}
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))
+
 
 @router.post("/simulate")
 def run_simulation(req: SimulateRequest):
