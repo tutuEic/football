@@ -86,6 +86,8 @@ def _dc_prob_matrix(lam, mu, rho=None, stage="group", max_goals=8):
         "away_win": round(away_win, 4),
         "expected_goals": {"home": round(lam, 2), "away": round(mu, 2)},
         "most_likely_score": f"{best_score[0]}-{best_score[1]}",
+        "over_25": round(over_25, 4),
+        "under_25": round(under_25, 4),
         "prob_matrix": prob,
     }
 
@@ -252,6 +254,7 @@ def predict_wc_match(home_team, away_team, context=None):
         'expected_goals': xg,
         'most_likely_score': _estimate_score(wdl, xg),
         'confidence': _calc_confidence(wdl),
+        'over_under': _compute_over_under(xg),
         
         'player_analysis': {
             'home': {
@@ -271,6 +274,23 @@ def predict_wc_match(home_team, away_team, context=None):
     
     _prediction_cache[cache_key] = (time.time(), result)
     return result
+
+
+def _compute_over_under(xg):
+    """Compute over/under 2.5 probabilities from expected goals."""
+    from scipy.stats import poisson
+    lam_h = xg['home']
+    lam_a = xg['away']
+    
+    # P(total goals > 2.5) = 1 - P(0,1,2 total goals)
+    over_25 = 0.0
+    for i in range(10):
+        for j in range(10):
+            if i + j > 2:
+                over_25 += poisson.pmf(i, lam_h) * poisson.pmf(j, lam_a)
+    
+    under_25 = 1.0 - over_25
+    return {'over_25': round(over_25, 4), 'under_25': round(under_25, 4)}
 
 
 def _estimate_score(wdl, xg):
@@ -399,4 +419,5 @@ if __name__ == '__main__':
         print(f"  xG:  {xg['home']:.2f} - {xg['away']:.2f}")
         print(f"  Score: {pred['most_likely_score']}")
         print(f"  Method: {pred['method']}")
-        print(f"  Confidence: {pred['confidence']}")
+        print(f"  Confidence: {pred['confidence']}")
+
