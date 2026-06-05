@@ -792,7 +792,15 @@ function KnockoutBracket() {
   const [nSims, setNSims] = useState(100);
   const [result, setResult] = useState(null);
   const [loading, setLoading] = useState(false);
-  const [sampleIdx, setSampleIdx] = useState(0);
+  const [upsets, setUpsets] = useState(null);
+  const [upsetsLoading, setUpsetsLoading] = useState(true);
+
+  useEffect(() => {
+    get('/worldcup/upset-alerts').then(d => {
+      setUpsets(d);
+      setUpsetsLoading(false);
+    }).catch(() => setUpsetsLoading(false));
+  }, []);
 
   async function runSimulation() {
     setLoading(true);
@@ -810,6 +818,64 @@ function KnockoutBracket() {
     return (
       <div>
         <h2 style={{ color: 'var(--fg-primary)', fontSize: 16, marginBottom: 16 }}>Knockout Bracket Prediction</h2>
+        
+        {/* Upset Alerts Section */}
+        {upsets && (upsets.upset_alerts?.length > 0 || upsets.tanking_scenarios?.length > 0) && (
+          <div style={{ marginBottom: 20 }}>
+            <h3 style={{ color: 'var(--yellow)', fontSize: 14, marginBottom: 12 }}>Group Stage Upset Alerts</h3>
+            
+            {/* Close Matchup Alerts */}
+            {upsets.upset_alerts?.length > 0 && (
+              <div style={{ marginBottom: 12 }}>
+                <div style={{ color: 'var(--fg-muted)', fontSize: 11, marginBottom: 8 }}>Potential Upsets (20%+ chance)</div>
+                <div style={{ display: 'grid', gap: 6 }}>
+                  {upsets.upset_alerts.slice(0, 8).map((a, i) => (
+                    <div key={i} style={{ 
+                      display: 'flex', alignItems: 'center', gap: 12,
+                      background: 'var(--bg-card)', border: '1px solid var(--border)', borderRadius: 6, padding: '8px 12px',
+                      fontSize: 12
+                    }}>
+                      <span style={{ color: 'var(--fg-muted)', fontSize: 10, width: 40 }}>Group {a.group}</span>
+                      <span style={{ color: 'var(--fg-body)', flex: 1 }}>{a.description}</span>
+                      <span style={{ 
+                        color: a.upset_prob > 0.30 ? 'var(--red)' : 'var(--yellow)', 
+                        fontWeight: 'bold', fontSize: 13, width: 45, textAlign: 'right'
+                      }}>
+                        {(a.upset_prob * 100).toFixed(0)}%
+                      </span>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            )}
+            
+            {/* Tanking Scenarios */}
+            {upsets.tanking_scenarios?.length > 0 && (
+              <div>
+                <div style={{ color: 'var(--fg-muted)', fontSize: 11, marginBottom: 8 }}>Teams Likely to Rest Players (Strategic Rotation)</div>
+                <div style={{ display: 'grid', gap: 6 }}>
+                  {upsets.tanking_scenarios.map((t, i) => (
+                    <div key={i} style={{ 
+                      display: 'flex', alignItems: 'center', gap: 12,
+                      background: 'var(--bg-card)', border: '1px solid var(--border)', borderRadius: 6, padding: '8px 12px',
+                      fontSize: 12
+                    }}>
+                      <span style={{ color: 'var(--fg-muted)', fontSize: 10, width: 40 }}>Group {t.group}</span>
+                      <span style={{ color: 'var(--fg-body)', flex: 1 }}>{t.reason}</span>
+                      <span style={{ 
+                        color: t.risk === 'high' ? 'var(--red)' : 'var(--yellow)', 
+                        fontSize: 10, fontWeight: 'bold'
+                      }}>
+                        {t.risk.toUpperCase()}
+                      </span>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            )}
+          </div>
+        )}
+        
         <p style={{ color: 'var(--fg-muted)', fontSize: 13, marginBottom: 16 }}>
           Simulate the full knockout bracket from Round of 32 to Final. Each simulation runs group stage to determine qualifiers, then knockout rounds.
         </p>
@@ -977,6 +1043,13 @@ function Simulate() {
   const [result, setResult] = useState(null);
   const [loading, setLoading] = useState(false);
   const [nSims, setNSims] = useState(500);
+
+  useEffect(() => {
+    get('/worldcup/upset-alerts').then(d => {
+      setUpsets(d);
+      setUpsetsLoading(false);
+    }).catch(() => setUpsetsLoading(false));
+  }, []);
 
   async function runSimulation() {
     setLoading(true);

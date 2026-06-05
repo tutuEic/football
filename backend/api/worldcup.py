@@ -23,7 +23,7 @@ from data.mysql_client import query
 from engine.wc_data import analyze_squad, analyze_all_wc_teams
 from engine.wc_predictor import predict_wc_match
 from engine.wc_simulator import simulate_tournament, format_simulation_report, load_groups
-from engine.wc_knockout import simulate_bracket_n_times, get_golden_ball_candidates
+from engine.wc_knockout import simulate_bracket_n_times, get_golden_ball_candidates, analyze_group_upsets
 
 router = APIRouter(prefix="/worldcup")
 
@@ -319,6 +319,16 @@ def get_golden_ball():
     try:
         candidates = get_golden_ball_candidates()
         return {"status": "ok", "candidates": candidates}
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))
+
+
+@router.get("/upset-alerts")
+def get_upset_alerts():
+    """Get group stage upset alerts and tanking scenarios."""
+    try:
+        result = analyze_group_upsets()
+        return {"status": "ok", **result}
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
 

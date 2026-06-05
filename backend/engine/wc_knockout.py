@@ -239,3 +239,81 @@ def get_golden_ball_candidates():
             "market_value": r["market_value_in_eur"],
         })
     return candidates
+
+
+def analyze_group_upsets():
+    """Analyze potential upsets and strategic tanking scenarios in group stage."""
+    rows = query(
+        "SELECT group_name, team, elo_rating, fifa_ranking, is_host FROM wc_groups ORDER BY group_name, elo_rating DESC",
+        db="football_pred"
+    )
+    groups = {}
+    for r in rows:
+        g = r["group_name"]
+        if g not in groups:
+            groups[g] = []
+        groups[g].append(r)
+
+    upset_alerts = []
+    tanking_scenarios = []
+    
+    for g, teams in sorted(groups.items()):
+        top = teams[0]
+        second = teams[1]
+        third = teams[2]
+        fourth = teams[3]
+        
+        elo_gap = top["elo_rating"] - second["elo_rating"]
+        
+        # Analyze top vs second match
+        try:
+            pred = predict_wc_match(top["team"], second["team"], {"stage": "group", "matchday": 1, "is_host": False})
+            wdl = pred["wdl"]
+            
+            # Close matchup alert
+            if wdl["away_win"] > 0.20:
+                upset_alerts.append({
+                    "group": g,
+                    "match": f"{top['team']} vs {second['team']}",
+                    "favorite": top["team"],
+                    "underdog": second["team"],
+                    "upset_prob": round(wdl["away_win"], 3),
+                    "type": "close_matchup",
+                    "description": f"{second['team']} has {wdl['away_win']:.0%} chance to beat {top['team']}",
+                    "impact": "Could determine group winner - affects knockout bracket seeding",
+                })
+            
+            # Tanking scenario: top team rests players
+            if elo_gap > 80 and third["elo_rating"] > 1550:
+                rest_pred = predict_wc_match(top["team"], third["team"], {"stage": "group", "matchday": 3, "is_host": False})
+                if rest_pred["wdl"]["away_win"] > 0.12:
+                    tanking_scenarios.append({
+                        "group": g,
+                        "team": top["team"],
+                        "opponent": third["team"],
+                        "upset_if_rest": round(rest_pred["wdl"]["away_win"], 3),
+                        "reason": f"{top['team']} may rest players after securing qualification",
+                        "risk": "high" if rest_pred["wdl"]["away_win"] > 0.20 else "medium",
+                    })
+            
+            # Third team upset potential
+            if third["elo_rating"] > 1580:
+                third_pred = predict_wc_match(second["team"], third["team"], {"stage": "group", "matchday": 2, "is_host": False})
+                if third_pred["wdl"]["away_win"] > 0.20:
+                    upset_alerts.append({
+                        "group": g,
+                        "match": f"{second['team']} vs {third['team']}",
+                        "favorite": second["team"],
+                        "underdog": third["team"],
+                        "upset_prob": round(third_pred["wdl"]["away_win"], 3),
+                        "type": "third_team_threat",
+                        "description": f"{third['team']} could take 2nd place from {second['team']}",
+                        "impact": "Could eliminate a stronger team from the group",
+                    })
+        except Exception:
+            pass
+    
+    return {
+        "upset_alerts": sorted(upset_alerts, key=lambda x: x["upset_prob"], reverse=True),
+        "tanking_scenarios": sorted(tanking_scenarios, key=lambda x: x["upset_if_rest"], reverse=True),
+    }
