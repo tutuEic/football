@@ -656,39 +656,127 @@ function PredictionCard({ pred, full }) {
   const p = pred.prediction || pred;
   const wdl = p.wdl || {};
   const xg = p.expected_goals || {};
+  const models = p.models || {};
+  const playerH = p.player_analysis?.home || {};
+  const playerA = p.player_analysis?.away || {};
+  const confidence = p.confidence || 0;
+
+  const confColor = confidence > 0.6 ? 'var(--green)' : confidence > 0.3 ? 'var(--yellow)' : 'var(--red)';
 
   return (
-    <div style={{ display: 'grid', gap: 8, fontSize: 12 }}>
-      <div style={{ display: 'flex', justifyContent: 'center', gap: 16, alignItems: 'center' }}>
+    <div style={{ display: 'grid', gap: 12, fontSize: 12 }}>
+      {/* Header: Teams + xG */}
+      <div style={{ display: 'flex', justifyContent: 'center', gap: 24, alignItems: 'center' }}>
         <div style={{ textAlign: 'center' }}>
-          <div style={{ color: 'var(--fg-primary)', fontWeight: 'bold', fontSize: 14 }}>{pred.home_team || p.home_team}</div>
-          <div style={{ color: 'var(--accent)', fontSize: 18, fontWeight: 'bold' }}>{xg.home?.toFixed(2)}</div>
-          <div style={{ color: 'var(--fg-muted)' }}>xG</div>
+          <div style={{ color: 'var(--fg-primary)', fontWeight: 'bold', fontSize: 15 }}>{pred.home_team || p.home_team}</div>
+          <div style={{ color: 'var(--accent)', fontSize: 22, fontWeight: 'bold' }}>{xg.home?.toFixed(2)}</div>
+          <div style={{ color: 'var(--fg-muted)', fontSize: 11 }}>xG</div>
+          {playerH.elo_bonus != null && (
+            <div style={{ color: playerH.elo_bonus > 0 ? 'var(--green)' : 'var(--red)', fontSize: 11, marginTop: 2 }}>
+              Elo: {playerH.elo_bonus > 0 ? '+' : ''}{playerH.elo_bonus?.toFixed(1)}
+            </div>
+          )}
         </div>
-        <div style={{ color: 'var(--fg-muted)', fontSize: 12 }}>vs</div>
+        <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 4 }}>
+          <div style={{ color: 'var(--fg-muted)', fontSize: 11 }}>{p.stage || 'Group'}</div>
+          <div style={{ color: 'var(--fg-muted)', fontSize: 16, fontWeight: 'bold' }}>vs</div>
+          <div style={{ color: confColor, fontSize: 10 }}>Confidence: {(confidence * 100).toFixed(0)}%</div>
+        </div>
         <div style={{ textAlign: 'center' }}>
-          <div style={{ color: 'var(--fg-primary)', fontWeight: 'bold', fontSize: 14 }}>{pred.away_team || p.away_team}</div>
-          <div style={{ color: 'var(--accent)', fontSize: 18, fontWeight: 'bold' }}>{xg.away?.toFixed(2)}</div>
-          <div style={{ color: 'var(--fg-muted)' }}>xG</div>
+          <div style={{ color: 'var(--fg-primary)', fontWeight: 'bold', fontSize: 15 }}>{pred.away_team || p.away_team}</div>
+          <div style={{ color: 'var(--accent)', fontSize: 22, fontWeight: 'bold' }}>{xg.away?.toFixed(2)}</div>
+          <div style={{ color: 'var(--fg-muted)', fontSize: 11 }}>xG</div>
+          {playerA.elo_bonus != null && (
+            <div style={{ color: playerA.elo_bonus > 0 ? 'var(--green)' : 'var(--red)', fontSize: 11, marginTop: 2 }}>
+              Elo: {playerA.elo_bonus > 0 ? '+' : ''}{playerA.elo_bonus?.toFixed(1)}
+            </div>
+          )}
         </div>
       </div>
 
-      <div style={{ display: 'flex', height: 8, borderRadius: 4, overflow: 'hidden', background: 'var(--bg-input)' }}>
-        <div style={{ width: `${(wdl.home_win || 0) * 100}%`, background: 'var(--green)' }} />
-        <div style={{ width: `${(wdl.draw || 0) * 100}%`, background: 'var(--yellow)' }} />
-        <div style={{ width: `${(wdl.away_win || 0) * 100}%`, background: 'var(--red)' }} />
-      </div>
-      <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: 11, color: 'var(--fg-muted)' }}>
-        <span style={{ color: 'var(--green)' }}>Home {(wdl.home_win * 100)?.toFixed(1)}%</span>
-        <span style={{ color: 'var(--yellow)' }}>Draw {(wdl.draw * 100)?.toFixed(1)}%</span>
-        <span style={{ color: 'var(--red)' }}>Away {(wdl.away_win * 100)?.toFixed(1)}%</span>
+      {/* WDL Bar */}
+      <div>
+        <div style={{ display: 'flex', height: 10, borderRadius: 5, overflow: 'hidden', background: 'var(--bg-input)' }}>
+          <div style={{ width: `${(wdl.home_win || 0) * 100}%`, background: 'var(--green)' }} />
+          <div style={{ width: `${(wdl.draw || 0) * 100}%`, background: 'var(--yellow)' }} />
+          <div style={{ width: `${(wdl.away_win || 0) * 100}%`, background: 'var(--red)' }} />
+        </div>
+        <div style={{ display: 'flex', justifyContent: 'space-between', marginTop: 4, fontSize: 11 }}>
+          <span style={{ color: 'var(--green)', fontWeight: 'bold' }}>Home {(wdl.home_win * 100)?.toFixed(1)}%</span>
+          <span style={{ color: 'var(--yellow)', fontWeight: 'bold' }}>Draw {(wdl.draw * 100)?.toFixed(1)}%</span>
+          <span style={{ color: 'var(--red)', fontWeight: 'bold' }}>Away {(wdl.away_win * 100)?.toFixed(1)}%</span>
+        </div>
       </div>
 
-      <div style={{ display: 'flex', gap: 12, justifyContent: 'center', color: 'var(--fg-muted)', fontSize: 11 }}>
-        <span>Score: <b style={{ color: 'var(--fg-primary)' }}>{p.most_likely_score}</b></span>
-        <span>Over 2.5: <b style={{ color: 'var(--green)' }}>{(p.over_under?.over_25 * 100)?.toFixed(0)}%</b></span>
-        <span>Under 2.5: <b style={{ color: 'var(--red)' }}>{(p.over_under?.under_25 * 100)?.toFixed(0)}%</b></span>
+      {/* Score + Over/Under */}
+      <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr', gap: 8, textAlign: 'center' }}>
+        <div style={{ background: 'var(--bg-hover)', borderRadius: 6, padding: '8px 4px' }}>
+          <div style={{ color: 'var(--fg-muted)', fontSize: 10 }}>Predicted Score</div>
+          <div style={{ color: 'var(--fg-primary)', fontSize: 18, fontWeight: 'bold' }}>{p.most_likely_score}</div>
+        </div>
+        <div style={{ background: 'var(--bg-hover)', borderRadius: 6, padding: '8px 4px' }}>
+          <div style={{ color: 'var(--fg-muted)', fontSize: 10 }}>Over 2.5</div>
+          <div style={{ color: 'var(--green)', fontSize: 18, fontWeight: 'bold' }}>{(p.over_under?.over_25 * 100)?.toFixed(0)}%</div>
+        </div>
+        <div style={{ background: 'var(--bg-hover)', borderRadius: 6, padding: '8px 4px' }}>
+          <div style={{ color: 'var(--fg-muted)', fontSize: 10 }}>Under 2.5</div>
+          <div style={{ color: 'var(--red)', fontSize: 18, fontWeight: 'bold' }}>{(p.over_under?.under_25 * 100)?.toFixed(0)}%</div>
+        </div>
       </div>
+
+      {/* Top Players */}
+      {(playerH.top_players?.length > 0 || playerA.top_players?.length > 0) && (
+        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 8 }}>
+          <div>
+            <div style={{ color: 'var(--fg-muted)', fontSize: 10, marginBottom: 4 }}>Top Players</div>
+            {playerH.top_players?.slice(0, 5).map((tp, i) => {
+              const parts = tp.match(/(.+?)\s*\((\d+)\)/);
+              return parts ? (
+                <div key={i} style={{ display: 'flex', justifyContent: 'space-between', fontSize: 11, padding: '2px 0' }}>
+                  <span style={{ color: 'var(--fg-body)' }}>{parts[1]}</span>
+                  <span style={{ color: parts[2] > 70 ? 'var(--green)' : 'var(--accent)', fontWeight: 'bold' }}>{parts[2]}</span>
+                </div>
+              ) : (
+                <div key={i} style={{ fontSize: 11, color: 'var(--fg-body)' }}>{tp}</div>
+              );
+            })}
+          </div>
+          <div>
+            <div style={{ color: 'var(--fg-muted)', fontSize: 10, marginBottom: 4 }}>Top Players</div>
+            {playerA.top_players?.slice(0, 5).map((tp, i) => {
+              const parts = tp.match(/(.+?)\s*\((\d+)\)/);
+              return parts ? (
+                <div key={i} style={{ display: 'flex', justifyContent: 'space-between', fontSize: 11, padding: '2px 0' }}>
+                  <span style={{ color: 'var(--fg-body)' }}>{parts[1]}</span>
+                  <span style={{ color: parts[2] > 70 ? 'var(--green)' : 'var(--accent)', fontWeight: 'bold' }}>{parts[2]}</span>
+                </div>
+              ) : (
+                <div key={i} style={{ fontSize: 11, color: 'var(--fg-body)' }}>{tp}</div>
+              );
+            })}
+          </div>
+        </div>
+      )}
+
+      {/* Model Breakdown */}
+      {full && Object.keys(models).length > 0 && (
+        <div>
+          <div style={{ color: 'var(--fg-muted)', fontSize: 10, marginBottom: 6 }}>Model Breakdown ({p.method})</div>
+          <div style={{ display: 'grid', gap: 4 }}>
+            {Object.entries(models).map(([name, m]) => (
+              <div key={name} style={{ display: 'flex', alignItems: 'center', gap: 8, fontSize: 11 }}>
+                <span style={{ color: 'var(--fg-muted)', width: 90 }}>{name.replace('_', ' ')}</span>
+                <div style={{ flex: 1, display: 'flex', height: 6, borderRadius: 3, overflow: 'hidden', background: 'var(--bg-input)' }}>
+                  <div style={{ width: `${(m.wdl?.[0] || 0) * 100}%`, background: 'var(--green)' }} />
+                  <div style={{ width: `${(m.wdl?.[1] || 0) * 100}%`, background: 'var(--yellow)' }} />
+                  <div style={{ width: `${(m.wdl?.[2] || 0) * 100}%`, background: 'var(--red)' }} />
+                </div>
+                <span style={{ color: 'var(--fg-body)', width: 50, textAlign: 'right' }}>{(m.wdl?.[0] * 100)?.toFixed(0)}%</span>
+              </div>
+            ))}
+          </div>
+        </div>
+      )}
     </div>
   );
 }
