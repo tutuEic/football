@@ -197,10 +197,24 @@ class InternationalDixonColes:
         x0[-2] = -0.10
         x0[-1] = 0.20
 
+        # Pin first team attack and defence at 0 for identifiability.
+        # Without this, the parameter space has a translation degree of freedom:
+        # attack[i]+c, defence[i]-c gives the same likelihood for all c.
+        from scipy.optimize import Bounds
+        bounds = Bounds(
+            lb=[-3.0] * n_teams + [-3.0] * n_teams + [-0.5, -1.0],
+            ub=[3.0] * n_teams + [3.0] * n_teams + [0.5, 1.0],
+        )
+        x0[0] = 0.0
+        x0[n_teams] = 0.0
+        bounds.lb[0] = -0.001; bounds.ub[0] = 0.001
+        bounds.lb[n_teams] = -0.001; bounds.ub[n_teams] = 0.001
+
         result = minimize(
             self.ll_and_grad, x0,
             args=(indexed, n_teams),
             method='L-BFGS-B', jac=True,
+            bounds=bounds,
             options={'maxiter': max_iter, 'ftol': 1e-7}
         )
 

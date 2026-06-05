@@ -515,13 +515,15 @@ def full_prediction_v3(home_team, away_team, league="E0", simulations=2000):
     tact_h = _calc_tactical(home_team, league)
     tact_a = _calc_tactical(away_team, league)
 
-    # Final lambda/mu with multiplicative adjustments
-    # Home team expected goals:
-    #   base * attack_injury * opponent_defence_weakness * momentum * tactical
-    lam = base_lam * inj_att_h * (1.0 / max(inj_def_a, 0.5)) * (1 + mom_h * 0.20) * (1 + tact_h * 0.08)
+    # Final lambda/mu with adjustments.
+    # Injury: multiplicative on own attack, gentle additive on opponent defence weakness.
+    #   defence_weakness_factor = 1 + (1 - inj_def) * 0.3
+    #   e.g. inj_def=0.6 -> factor=1.12 (12% boost, not 67% as with 1/0.6)
+    def_def_weakness_h = 1 + (1 - inj_def_a) * 0.3  # home benefits from away defence injuries
+    def_def_weakness_a = 1 + (1 - inj_def_h) * 0.3  # away benefits from home defence injuries
 
-    # Away team expected goals:
-    mu = base_mu * inj_att_a * (1.0 / max(inj_def_h, 0.5)) * (1 + mom_a * 0.15) * (1 + tact_a * 0.06)
+    lam = base_lam * inj_att_h * def_def_weakness_h * (1 + mom_h * 0.20) * (1 + tact_h * 0.08)
+    mu = base_mu * inj_att_a * def_def_weakness_a * (1 + mom_a * 0.15) * (1 + tact_a * 0.06)
 
     # Clamp to reasonable range
     lam = max(lam, 0.15)

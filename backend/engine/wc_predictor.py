@@ -23,11 +23,11 @@ from engine.wc_dc_international import normalize_team
 
 
 # Dixon-Coles rho for internationals (more conservative)
-DC_RHO = 0.10          # Calibrated from 144 WC group matches (2014-2022)
+DC_RHO = -0.10         # Negative per Dixon-Coles convention (low-score correlation)
 
 # Knockout: negative rho (fewer draws, more decisive results)
 STAGE_RHO = {
-    "group":  0.10,
+    "group":  -0.10,
     "r16":   -0.15,
     "qf":    -0.15,
     "sf":    -0.12,
