@@ -241,11 +241,16 @@ def predict_wc_match(home_team, away_team, context=None):
     # Apply host advantage bonus (significant boost for host nation)
     is_host = context.get('is_host', False)
     if is_host:
-        # Host advantage: +8% win probability, -4% away win
+        # Host advantage: boost home_win, reduce away_win, keep draw stable.
+        # Shift is applied proportionally so probabilities always sum to 1.
         host_bonus = 0.08
-        wdl['home_win'] = round(min(wdl['home_win'] + host_bonus, 0.95), 4)
-        wdl['away_win'] = round(max(wdl['away_win'] - host_bonus * 0.5, 0.01), 4)
-        wdl['draw'] = round(max(1.0 - wdl['home_win'] - wdl['away_win'], 0.01), 4)
+        hw = wdl['home_win'] + host_bonus
+        aw = max(wdl['away_win'] - host_bonus * 0.5, 0.01)
+        dw = wdl['draw']
+        total = hw + aw + dw
+        wdl['home_win'] = round(hw / total, 4)
+        wdl['away_win'] = round(aw / total, 4)
+        wdl['draw'] = round(1.0 - wdl['home_win'] - wdl['away_win'], 4)
         # Also boost xG slightly for host
         xg['home'] = round(xg['home'] * 1.08, 2)
     
