@@ -182,18 +182,11 @@ class OddsUpdate(BaseModel):
 
 @router.post("/fixtures/update-odds")
 def update_fixture_odds(req: OddsUpdate):
-    """????????????"""
-    from data.mysql_client import _get_conn
-    conn = _get_conn("football_pred")
-    try:
-        cursor = conn.cursor()
-        cursor.execute(
-            "UPDATE fixtures SET odds_home=%s, odds_draw=%s, odds_away=%s WHERE id=%s",
-            [req.odds_home, req.odds_draw, req.odds_away, req.fixture_id]
-        )
-        affected = cursor.rowcount
-        conn.commit()
-        cursor.close()
-    finally:
-        conn.close()
-    return {"status": "ok", "updated": affected}
+    """Update odds for a fixture."""
+    from data.mysql_client import execute
+    affected = execute(
+        "UPDATE fixtures SET odds_home=%s, odds_draw=%s, odds_away=%s WHERE id=%s",
+        [req.odds_home, req.odds_draw, req.odds_away, req.fixture_id],
+        db="football_pred"
+    )
+    return {"status": "ok", "updated": affected or 0}

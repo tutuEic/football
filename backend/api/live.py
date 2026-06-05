@@ -2,6 +2,7 @@
 Live API - fixtures, live scores, WebSocket
 """
 import sys, os
+from security import API_KEY, DEV_MODE
 sys.path.insert(0, os.path.dirname(os.path.dirname(__file__)))
 
 import asyncio
@@ -46,8 +47,14 @@ def api_league_fixtures(league_code: str, days: int = 30):
 
 
 @router.websocket("/ws/live")
-async def websocket_live(ws: WebSocket):
-    """WebSocket: push live score changes to frontend"""
+async def websocket_live(ws: WebSocket, token: str = None):
+    """WebSocket: push live score changes to frontend (requires token)"""
+    # Authenticate: require valid token unless in dev mode
+    if not DEV_MODE:
+        if not token or token != API_KEY:
+            await ws.close(code=4001, reason="Unauthorized")
+            return
+    
     await ws.accept()
     _ws_clients.append(ws)
     loop = asyncio.get_running_loop()

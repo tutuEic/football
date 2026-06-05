@@ -97,12 +97,26 @@ def backtest(league_code, test_season, train_window=2):
 
         for label, (lo, hi) in cal_bins.items():
             pass  # placeholder
-        # Find the right bin
+        # Find the right bin (robust parsing)
         for label in cal_bins:
-            lo, hi = label.split("-")
-            lo_f = float(lo.strip("%")) / 100
-            hi_f = float(hi.strip("%")) / 100
-            if lo_f <= predicted_prob < hi_f or (hi_f == 1.0 and predicted_prob == 1.0):
+            try:
+                # Handle formats: "50%-60%", "50% - 60%", "0.5-0.6"
+                parts = label.replace(" ", "").split("-")
+                lo_str = parts[0].strip()
+                hi_str = parts[1].strip()
+                
+                # Parse as percentage or decimal
+                if "%" in lo_str:
+                    lo_f = float(lo_str.strip("%")) / 100
+                else:
+                    lo_f = float(lo_str)
+                
+                if "%" in hi_str:
+                    hi_f = float(hi_str.strip("%")) / 100
+                else:
+                    hi_f = float(hi_str)
+                
+                if lo_f <= predicted_prob < hi_f or (hi_f == 1.0 and predicted_prob == 1.0):
                 cal_bins[label]["predicted"].append(predicted_prob)
                 cal_bins[label]["actual"].append(is_correct)
                 break

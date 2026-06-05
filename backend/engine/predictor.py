@@ -5,6 +5,8 @@ Predicts using pre-trained model parameters directly, without Monte Carlo.
 """
 import json
 import os
+import threading
+import time
 
 from engine.dixon_coles import DixonColes
 from config import MODEL_DIR
@@ -81,12 +83,23 @@ def list_available_models():
 import numpy as _np
 
 _calibration_data = None
+_calibration_time = 0
+_calibration_lock = threading.Lock()
+_CALIBRATION_TTL = 3600  # 1 hour
 
 def _load_calibration_data():
     """Load or compute calibration mapping from historical predictions."""
-    global _calibration_data
-    if _calibration_data is not None:
+    global _calibration_data, _calibration_time
+    
+    # Return cached if fresh
+    if _calibration_data is not None and (time.time() - _calibration_time < _CALIBRATION_TTL):
         return _calibration_data
+    
+    # Thread-safe load
+    with _calibration_lock:
+        # Double-check after acquiring lock
+        if _calibration_data is not None and (time.time() - _calibration_time < _CALIBRATION_TTL):
+            return _calibration_data
 
     from data.mysql_client import query
     # Get completed matches with DC model predictions
@@ -141,6 +154,7 @@ def _load_calibration_data():
         })
 
     _calibration_data = calibration_map
+    _calibration_time = time.time()
     return calibration_map
 
 

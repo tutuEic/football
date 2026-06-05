@@ -21,6 +21,24 @@ from features.feature_store import compute_match_features, FEATURE_NAMES
 # ============================================================
 _ensemble_cache = {}
 _ENSEMBLE_TTL = 600  # 10 min
+_MAX_CACHE_SIZE = 500  # Max entries in cache
+
+def _clean_ensemble_cache():
+    """Remove expired entries and enforce max size."""
+    global _ensemble_cache
+    now = time.time()
+    
+    # Remove expired
+    expired = [k for k, (ts, _) in _ensemble_cache.items() if now - ts > _ENSEMBLE_TTL]
+    for k in expired:
+        del _ensemble_cache[k]
+    
+    # If still too large, remove oldest
+    if len(_ensemble_cache) > _MAX_CACHE_SIZE:
+        sorted_keys = sorted(_ensemble_cache.keys(), key=lambda k: _ensemble_cache[k][0])
+        for k in sorted_keys[:len(_ensemble_cache) - _MAX_CACHE_SIZE]:
+            del _ensemble_cache[k]
+
 
 def _load_ensemble_models(league="E0"):
     """Load all trained base models for ensemble prediction for a given league."""
@@ -208,6 +226,7 @@ def get_ensemble_wdl(home_team, away_team, league):
         result = {"home_win": 0.45, "draw": 0.25, "away_win": 0.30,
                   "xg_home": xg_h, "xg_away": xg_a,
                   "models_used": [], "weights": {}, "method": "fallback"}
+        _clean_ensemble_cache()
         _ensemble_cache[cache_key] = (time.time(), result)
         return result
 
