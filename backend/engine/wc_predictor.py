@@ -210,12 +210,12 @@ def predict_wc_match(home_team, away_team, context=None):
     # Get squad analysis for additional info
     try:
         analysis_h = analyze_squad_elo(home_team)
-    except:
+    except Exception:
         analysis_h = {'top_players': [], 'elo_bonus': 0}
     
     try:
         analysis_a = analyze_squad_elo(away_team)
-    except:
+    except Exception:
         analysis_a = {'top_players': [], 'elo_bonus': 0}
     
     # Build full response

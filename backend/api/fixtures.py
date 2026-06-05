@@ -94,16 +94,17 @@ def upcoming_with_predictions(
         where += " AND f.league_code=%s"
         params.append(league)
 
-    rows = query(f"""
-        SELECT f.id, f.league_code, f.match_date, f.match_time,
-               f.home_team, f.away_team,
-               f.odds_home, f.odds_draw, f.odds_away,
-               f.status
-        FROM fixtures f
-        {where}
-        ORDER BY f.match_date ASC, f.match_time ASC
-        LIMIT %s
-    """, params + [limit], db="football_pred")
+    sql = (
+        "SELECT f.id, f.league_code, f.match_date, f.match_time,"
+        "       f.home_team, f.away_team,"
+        "       f.odds_home, f.odds_draw, f.odds_away,"
+        "       f.status"
+        " FROM fixtures f "
+        + where
+        + " ORDER BY f.match_date ASC, f.match_time ASC"
+        " LIMIT %s"
+    )
+    rows = query(sql, params + [limit], db="football_pred")
 
     results = []
     for r in rows:
