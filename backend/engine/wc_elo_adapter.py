@@ -47,11 +47,15 @@ def analyze_squad_elo(fifa_country_name):
     # Get squad players with Elo ratings
     elo_players = calculate_elo_for_team(fifa_country_name, top_n=35)
     
-    if not elo_players:
-        return _empty_analysis(fifa_country_name)
-    
     # Get raw squad data for age, cohesion, set piece calculations
     raw_squad = get_national_squad(fifa_country_name, top_n=35)
+    
+    # If no Elo data but have players, use market value fallback
+    if not elo_players and raw_squad:
+        return _market_value_fallback(fifa_country_name, raw_squad)
+    
+    if not elo_players:
+        return _empty_analysis(fifa_country_name)
     
     # Build player lookup by id
     elo_by_id = {p['player_id']: p for p in elo_players}
@@ -196,6 +200,57 @@ def analyze_squad_elo(fifa_country_name):
     
     _squad_elo_cache[fifa_country_name] = result
     return result
+
+
+def _market_value_fallback(country, raw_squad):
+    """
+    Fallback analysis when Elo data is unavailable but players exist.
+    Uses market value to estimate team strength.
+    """
+    if not raw_squad:
+        return _empty_analysis(country)
+    
+    # Sort by market value
+    squad = sorted(raw_squad, key=lambda p: p.get('market_value', 0), reverse=True)
+    
+    # Top 11 market value
+    top_11 = squad[:11]
+    top_11_avg_mv = sum(p.get('market_value', 0) for p in top_11) / max(len(top_11), 1)
+    
+    # Convert market value to elo_bonus (log scale)
+    # Reference: EUR 10M avg -> elo_bonus ~0, EUR 1M -> -15, EUR 50M -> +20
+    import math
+    if top_11_avg_mv > 0:
+        mv_log = math.log10(top_11_avg_mv)
+        # Scale: log10(1M)=6 -> -15, log10(10M)=7 -> 0, log10(50M)=7.7 -> +15
+        elo_bonus = round((mv_log - 7) * 15, 1)
+        elo_bonus = max(-30, min(elo_bonus, 30))  # Clamp to [-30, +30]
+    else:
+        elo_bonus = -20.0
+    
+    # Top players list
+    top_players = []
+    for p in squad[:10]:
+        name = p.get('name', 'Unknown')
+        mv = p.get('market_value', 0)
+        # Estimate "rating" from market value for display
+        if mv > 0:
+            rating = min(99, max(50, int(50 + math.log10(mv) * 3)))
+        else:
+            rating = 50
+        top_players.append(f"{name} ({rating})")
+    
+    return {
+        "country": country, "tm_country": _country_name(country),
+        "squad_size": len(squad), "starting_xi": 50.0, "attack_quality": 50.0,
+        "defense_quality": 50.0, "squad_depth": 50.0, "avg_age": 25.0,
+        "age_score": 0.5, "league_quality": 45.0, "cohesion": 0.4,
+        "set_piece_strength": 0.5, "elo_bonus": elo_bonus,
+        "elo_breakdown": {"starting_xi": elo_bonus, "age": 0, "league": 0,
+                          "cohesion": 0, "set_piece": 0, "star": 0, "intl_exp": 0},
+        "top_players": top_players, "squad": squad,
+        "elo_system": "market_value_fallback", "elo_players": [],
+    }
 
 
 def _empty_analysis(country):
