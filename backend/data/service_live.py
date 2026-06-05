@@ -316,11 +316,22 @@ class LiveScorePoller:
 
     def _poll_loop(self):
         while self.running:
+            start_time = time.time()
             try:
-                fixtures = poll_live_scores()
+                # Run poll with timeout (use threading to enforce)
+                fixtures = None
+                def _do_poll():
+                    nonlocal fixtures
+                    fixtures = poll_live_scores()
 
-                if fixtures:
-                    #  Notify WebSocket clients with current state
+                poll_thread = threading.Thread(target=_do_poll, daemon=True)
+                poll_thread.start()
+                poll_thread.join(timeout=self.interval * 0.8)  # 80% of interval as timeout
+
+                if poll_thread.is_alive():
+                    logger.warning("[live] Poll timed out after %ds, skipping", int(self.interval * 0.8))
+                elif fixtures:
+                    # Notify WebSocket clients with current state
                     for cb in self.callbacks:
                         try:
                             cb(fixtures)
@@ -328,9 +339,12 @@ class LiveScorePoller:
                             pass
 
             except Exception as e:
-                print(f"[live] Poll error: {e}")
+                logger.error("[live] Poll error: %s", e)
 
-            time.sleep(self.interval)
+            # Sleep for remaining interval time
+            elapsed = time.time() - start_time
+            sleep_time = max(1, self.interval - elapsed)
+            time.sleep(sleep_time)
 
     def register_callback(self, callback):
         self.callbacks.append(callback)

@@ -107,7 +107,8 @@ def upsert_fixtures(league_code, season, rows):
     inserted = 0
     updated = 0
 
-    for row in rows:
+    try:
+        for row in rows:
         try:
             home = row.get("HomeTeam", "").strip()
             away = row.get("AwayTeam", "").strip()
@@ -207,9 +208,10 @@ def upsert_fixtures(league_code, season, rows):
             print(f"  Row error: {e} | {row.get('HomeTeam','?')} vs {row.get('AwayTeam','?')}")
             continue
 
-    conn.commit()
-    cur.close()
-    conn.close()
+        conn.commit()
+    finally:
+        cur.close()
+        conn.close()
     return inserted, updated
 
 
@@ -267,20 +269,22 @@ def refresh_all(leagues=None):
         database=DB,
         charset="utf8mb4",
     )
-    cur = conn.cursor()
-    log_status = "ok" if not errors else f"partial-{len(errors)}-errors"
-    cur.execute("""
-        INSERT INTO data_refresh_log (source, action, records_affected, status, finished_at)
-        VALUES (%s, %s, %s, %s, NOW())
-    """, (
-        "football-data.co.uk",
-        "refresh_all",
-        total_inserted + total_updated,
-        log_status[:200]
-    ))
-    conn.commit()
-    cur.close()
-    conn.close()
+    try:
+        cur = conn.cursor()
+        log_status = "ok" if not errors else f"partial-{len(errors)}-errors"
+        cur.execute("""
+            INSERT INTO data_refresh_log (source, action, records_affected, status, finished_at)
+            VALUES (%s, %s, %s, %s, NOW())
+        """, (
+            "football-data.co.uk",
+            "refresh_all",
+            total_inserted + total_updated,
+            log_status[:200]
+        ))
+        conn.commit()
+        cur.close()
+    finally:
+        conn.close()
 
     return total_inserted, total_updated
 
