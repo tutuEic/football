@@ -23,6 +23,7 @@ from data.mysql_client import query
 from engine.wc_data import analyze_squad, analyze_all_wc_teams
 from engine.wc_predictor import predict_wc_match
 from engine.wc_simulator import simulate_tournament, format_simulation_report, load_groups
+from engine.wc_elo_adapter import analyze_squad_elo, clear_elo_cache
 from engine.wc_knockout import simulate_bracket_n_times, get_golden_ball_candidates, analyze_group_upsets
 
 router = APIRouter(prefix="/worldcup")
@@ -378,7 +379,7 @@ def get_simulation_result():
 
 @router.get("/rankings")
 def get_rankings():
-    """Get all 48 WC teams ranked by combined strength (Elo + player data)."""
+    """Get all 48 WC teams ranked by official FIFA Elo rating."""
     global _rankings_cache, _rankings_time
 
     # Cache for 1 hour
@@ -386,25 +387,33 @@ def get_rankings():
         return _rankings_cache
 
     try:
-        all_data = analyze_all_wc_teams()
-
-        ranked = sorted(all_data.items(), key=lambda x: x[1]["elo_bonus"], reverse=True)
-
+        # Get all WC teams with official data
+        rows = query(
+            "SELECT team, fifa_ranking, elo_rating, is_host FROM wc_groups ORDER BY elo_rating DESC",
+            db="football_pred"
+        )
+        
         rankings = []
-        for i, (team, data) in enumerate(ranked, 1):
+        for i, r in enumerate(rows, 1):
+            team = r['team']
+            elo = r['elo_rating']
+            # Convert Elo to quality scores (calibrated)
+            starting_xi = 50 + (elo - 1350) / 11.2
+            attack_quality = starting_xi + 2  # Slightly higher for attack
+            defense_quality = starting_xi - 2  # Slightly lower for defense
+            elo_bonus = (elo - 1650) / 10.0
+            
             rankings.append({
                 "rank": i,
                 "team": team,
-                "starting_xi": data["starting_xi"],
-                "attack_quality": data["attack_quality"],
-                "defense_quality": data["defense_quality"],
-                "squad_depth": data["squad_depth"],
-                "avg_age": data["avg_age"],
-                "league_quality": data["league_quality"],
-                "cohesion": data["cohesion"],
-                "set_piece_strength": data["set_piece_strength"],
-                "elo_bonus": data["elo_bonus"],
-                "top_players": data["top_players"][:3],
+                "fifa_ranking": r['fifa_ranking'],
+                "elo_rating": elo,
+                "is_host": bool(r['is_host']),
+                "starting_xi": round(starting_xi, 1),
+                "attack_quality": round(attack_quality, 1),
+                "defense_quality": round(defense_quality, 1),
+                "elo_bonus": round(elo_bonus, 1),
+                "top_players": [],
             })
 
         result = {
