@@ -1,4 +1,4 @@
-﻿# -*- coding: utf-8 -*-
+# -*- coding: utf-8 -*-
 """
 World Cup Prediction Engine v3 — Ensemble Model
 ================================================
@@ -20,6 +20,144 @@ from data.mysql_client import query
 from engine.wc_ensemble import get_ensemble, predict_wc_match as ensemble_predict
 from engine.wc_elo_adapter import analyze_squad_elo, clear_elo_cache
 from engine.wc_dc_international import normalize_team
+
+
+# Dixon-Coles rho for internationals (more conservative)
+DC_RHO = 0.10          # Calibrated from 144 WC group matches (2014-2022)
+
+# Knockout: negative rho (fewer draws, more decisive results)
+STAGE_RHO = {
+    "group":  0.10,
+    "r16":   -0.15,
+    "qf":    -0.15,
+    "sf":    -0.12,
+    "final": -0.10,
+    "third":  0.00,
+}
+
+
+def _dc_prob_matrix(lam, mu, rho=None, stage="group", max_goals=8):
+    """Compute Dixon-Coles probability matrix with tau correction."""
+    if rho is None:
+        rho = STAGE_RHO.get(stage, DC_RHO)
+    from scipy.stats import poisson
+
+    n = max_goals + 1
+    prob = [[0.0] * n for _ in range(n)]
+    for i in range(n):
+        for j in range(n):
+            p = poisson.pmf(i, lam) * poisson.pmf(j, mu)
+            if i == 0 and j == 0:
+                tau = max(1 - lam * mu * rho, 1e-10)
+            elif i == 0 and j == 1:
+                tau = 1 + lam * rho
+            elif i == 1 and j == 0:
+                tau = 1 + mu * rho
+            elif i == 1 and j == 1:
+                tau = max(1 - rho, 1e-10)
+            else:
+                tau = 1.0
+            prob[i][j] = max(tau * p, 0)
+
+    total = sum(sum(row) for row in prob)
+    if total > 0:
+        for i in range(n):
+            for j in range(n):
+                prob[i][j] /= total
+
+    home_win = sum(prob[i][j] for i in range(n) for j in range(n) if i > j)
+    draw = sum(prob[i][i] for i in range(n))
+    away_win = sum(prob[i][j] for i in range(n) for j in range(n) if i < j)
+
+    best_score = (0, 0)
+    best_prob = 0
+    for i in range(n):
+        for j in range(n):
+            if prob[i][j] > best_prob:
+                best_prob = prob[i][j]
+                best_score = (i, j)
+
+    over_25 = sum(prob[i][j] for i in range(n) for j in range(n) if i + j > 2)
+    under_25 = 1 - over_25
+
+    return {
+        "home_win": round(home_win, 4),
+        "draw": round(draw, 4),
+        "away_win": round(away_win, 4),
+        "expected_goals": {"home": round(lam, 2), "away": round(mu, 2)},
+        "most_likely_score": f"{best_score[0]}-{best_score[1]}",
+        "prob_matrix": prob,
+    }
+
+
+def _dc_build_sampler(lam, mu, rho, max_goals=8):
+    """Pre-compute a flat probability array for fast repeated sampling."""
+    from scipy.stats import poisson
+    n = max_goals + 1
+    probs = []
+    for i in range(n):
+        for j in range(n):
+            p = poisson.pmf(i, lam) * poisson.pmf(j, mu)
+            if i == 0 and j == 0:
+                tau = max(1 - lam * mu * rho, 1e-10)
+            elif i == 0 and j == 1:
+                tau = 1 + lam * rho
+            elif i == 1 and j == 0:
+                tau = 1 + mu * rho
+            elif i == 1 and j == 1:
+                tau = max(1 - rho, 1e-10)
+            else:
+                tau = 1.0
+            probs.append(max(tau * p, 0))
+    total = sum(probs)
+    if total > 0:
+        probs = [p / total for p in probs]
+    return probs, n
+
+
+def _dc_sample_from_sampler(probs, n, n_samples=1):
+    """Fast sampling from pre-computed distribution."""
+    import random
+    home_goals = []
+    away_goals = []
+    for _ in range(n_samples):
+        r = random.random()
+        cumulative = 0
+        for idx, p in enumerate(probs):
+            cumulative += p
+            if r <= cumulative:
+                home_goals.append(idx // n)
+                away_goals.append(idx % n)
+                break
+    return home_goals, away_goals
+
+
+def _dc_sample_scores(lam, mu, rho, n_samples=5000, max_goals=8):
+    """Monte Carlo sampling from DC distribution."""
+    import random
+    result = _dc_prob_matrix(lam, mu, rho, max_goals=max_goals)
+    prob = result["prob_matrix"]
+    n = len(prob)
+    flat = []
+    for i in range(n):
+        for j in range(n):
+            flat.append(max(prob[i][j], 0))
+    total = sum(flat)
+    if total > 0:
+        flat = [p / total for p in flat]
+    home_goals = []
+    away_goals = []
+    for _ in range(n_samples):
+        r = random.random()
+        cumulative = 0
+        for idx, p in enumerate(flat):
+            cumulative += p
+            if r <= cumulative:
+                home_goals.append(idx // n)
+                away_goals.append(idx % n)
+                break
+    return home_goals, away_goals
+
 
 # Cache
 _prediction_cache = {}
@@ -261,4 +399,4 @@ if __name__ == '__main__':
         print(f"  xG:  {xg['home']:.2f} - {xg['away']:.2f}")
         print(f"  Score: {pred['most_likely_score']}")
         print(f"  Method: {pred['method']}")
-        print(f"  Confidence: {pred['confidence']}")
+        print(f"  Confidence: {pred['confidence']}")
