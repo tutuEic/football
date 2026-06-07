@@ -2,8 +2,6 @@
 import sys, os
 sys.path.insert(0, os.path.dirname(os.path.dirname(__file__)))
 from data.mysql_client import query
-from data.tm_repo import get_club_squad
-
 def get_team_injuries(team_name, league="E0"):
     """
     检测球队伤病/缺席情况
@@ -17,6 +15,7 @@ def get_team_injuries(team_name, league="E0"):
     """
     from data.tm_repo import search_club
     from engine.player_ratings import get_club_squad_rated
+
 
     clubs = search_club(team_name, 3)
     if not clubs:

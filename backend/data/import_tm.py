@@ -1,19 +1,23 @@
-# -*- coding: utf-8 -*-
+﻿# -*- coding: utf-8 -*-
 """
 Transfermarkt data import pipeline (v2 - improved NaN handling)
 """
 import mysql.connector
 import pandas as pd
-import numpy as np
-import sys, os, time
+import os, time
 
 DATA_DIR = os.getenv("TRANSFERMARKT_DATA_DIR", os.path.join(os.path.dirname(__file__), "..", "..", "data", "transfermarkt"))
+# Import from config to avoid hardcoded credentials
+import sys as _sys
+_sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+from config import MYSQL_HOST, MYSQL_PORT, MYSQL_USER, MYSQL_PASS, MYSQL_DB_PRED
+
 DB_CONFIG = {
-    "host": os.getenv("MYSQL_HOST", "127.0.0.1"),
-    "port": int(os.getenv("MYSQL_PORT", "3306")),
-    "user": os.getenv("MYSQL_USER", "root"),
-    "password": os.getenv("MYSQL_PASS", ""),
-    "database": os.getenv("MYSQL_DB_PRED", "football_pred"),
+    "host": MYSQL_HOST,
+    "port": MYSQL_PORT,
+    "user": MYSQL_USER,
+    "password": MYSQL_PASS,
+    "database": MYSQL_DB_PRED,
     "charset": "utf8mb4",
     "allow_local_infile": True,
 }
@@ -173,7 +177,8 @@ def import_appearances():
 def verify():
     conn = get_conn(); cur = conn.cursor()
     for t in sorted(_MANAGED_TABLES):
-        cur.execute("SELECT COUNT(*) FROM `{}`".format(t))
+        assert t in _MANAGED_TABLES, f"Unexpected table: {t}"
+        cur.execute(f"SELECT COUNT(*) FROM `{t}`")
         print(f"  {t}: {cur.fetchone()[0]:,}")
     cur.close(); conn.close()
 

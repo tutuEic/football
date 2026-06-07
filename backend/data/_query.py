@@ -3,11 +3,11 @@ import os
 import mysql.connector
 
 def main():
+    from config import MYSQL_HOST, MYSQL_PORT, MYSQL_USER, MYSQL_PASS, MYSQL_DB_PRED
     conn = mysql.connector.connect(
-        host=os.getenv("MYSQL_HOST", "127.0.0.1"),
-        user=os.getenv("MYSQL_USER", "root"),
-        password=os.getenv("MYSQL_PASS", ""),
-        database=os.getenv("MYSQL_DB_PRED", "football_pred"),
+        host=MYSQL_HOST, port=MYSQL_PORT,
+        user=MYSQL_USER, password=MYSQL_PASS,
+        database=MYSQL_DB_PRED,
     )
     c = conn.cursor()
 

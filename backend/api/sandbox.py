@@ -29,7 +29,7 @@ class SquadConfig(BaseModel):
 class SimulateRequest(BaseModel):
     team_a: SquadConfig
     team_b: SquadConfig
-    simulations: int = Field(default=1000, ge=100, le=50000)
+    simulations: int = Field(default=1000, ge=100, le=5000)
     home_advantage: bool = True
     match_context: str = "league"  # league, derby, title_decider, relegation, cup_ko, cup_final, cl_knockout, cl_final, friendly  # league, derby, title_decider, relegation, cup_ko, cup_final, cl_knockout, cl_final, friendly
 
@@ -66,4 +66,4 @@ def run_simulation(req: SimulateRequest):
 
 @router.get("/sandbox/formations")
 def get_formations():
-    return list_formations()
+    return {"formations": list_formations()}

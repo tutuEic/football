@@ -11,7 +11,6 @@ import time
 from datetime import date
 
 sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
-from data.mysql_client import query, execute
 from engine.wc_player_elo import (
     load_player_appearances, load_player_metadata,
     calculate_player_elo, MIN_APPEARANCES, START_DATE

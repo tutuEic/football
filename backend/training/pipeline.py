@@ -228,6 +228,7 @@ def train_stacking(league_code: str, seasons: list[str] = None):
     from models.xgboost_model import XGBoostPredictor
     from models.stacking import StackingEnsemble
     from features.feature_store import FEATURE_NAMES
+    from engine.predictor import predict_match as dc_predict
 
     X, y_home, y_away, matches = prepare_dataset(league_code, seasons)
     train, val, test = train_test_split(X, y_home, y_away, matches)
@@ -257,7 +258,6 @@ def train_stacking(league_code: str, seasons: list[str] = None):
     base_preds = {"dixon_coles": [], "poisson_regression": [], "xgboost": []}
     n_val = len(val[0])
 
-    from engine.predictor import predict_match as dc_predict
     for i in range(n_val):
         features = dict(zip(FEATURE_NAMES, val[0][i]))
         m = matches[len(train[0]) + i]
@@ -266,21 +266,21 @@ def train_stacking(league_code: str, seasons: list[str] = None):
         try:
             dc = dc_predict(m["home"], m["away"], league_code)
             base_preds["dixon_coles"].append([dc["home_win"], dc["draw"], dc["away_win"]])
-        except:
+        except Exception:
             base_preds["dixon_coles"].append([0.45, 0.25, 0.30])
 
         # Poisson Regression
         try:
             pr_pred = pr.predict(features)
             base_preds["poisson_regression"].append([pr_pred["home_win"], pr_pred["draw"], pr_pred["away_win"]])
-        except:
+        except Exception:
             base_preds["poisson_regression"].append([0.45, 0.25, 0.30])
 
         # XGBoost
         try:
             xgb_pred = xgb_model.predict(features)
             base_preds["xgboost"].append([xgb_pred["home_win"], xgb_pred["draw"], xgb_pred["away_win"]])
-        except:
+        except Exception:
             base_preds["xgboost"].append([0.45, 0.25, 0.30])
 
     # Convert to numpy arrays
@@ -301,19 +301,19 @@ def train_stacking(league_code: str, seasons: list[str] = None):
         try:
             dc = dc_predict(m["home"], m["away"], league_code)
             test_preds["dixon_coles"].append([dc["home_win"], dc["draw"], dc["away_win"]])
-        except:
+        except Exception:
             test_preds["dixon_coles"].append([0.45, 0.25, 0.30])
 
         try:
             pr_pred = pr.predict(features)
             test_preds["poisson_regression"].append([pr_pred["home_win"], pr_pred["draw"], pr_pred["away_win"]])
-        except:
+        except Exception:
             test_preds["poisson_regression"].append([0.45, 0.25, 0.30])
 
         try:
             xgb_pred = xgb_model.predict(features)
             test_preds["xgboost"].append([xgb_pred["home_win"], xgb_pred["draw"], xgb_pred["away_win"]])
-        except:
+        except Exception:
             test_preds["xgboost"].append([0.45, 0.25, 0.30])
 
     for k in test_preds:

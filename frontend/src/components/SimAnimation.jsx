@@ -1,19 +1,19 @@
 import { useState, useEffect, useRef } from 'react';
 
-const BALL_EMOJIS = ['?', '??', '???', '??', '??', '?', '??', '??'];
+const BALL_EMOJIS = ['⚽', '🏠', '🏆', '⚡', '🔥', '🌟', '💫', '🎯'];
 const COMMENTARY = [
-  '????????...',
-  '??????...',
-  '??????...',
-  '???1??...',
-  '??Dixon-Coles??...',
-  '????????...',
-  '??????...',
-  '??????...',
-  '??????...',
-  '??????...',
-  '??????...',
-  '?????',
+  '正在分析比赛数据...',
+  '正在计算球队实力...',
+  '正在模拟比赛过程...',
+  '第1场正在进行...',
+  '运行Dixon-Coles模型...',
+  '正在调整发球员状态...',
+  '正在计算最终结果...',
+  '比赛精彩瞬间...',
+  '数据已加载完成...',
+  '正在生成比赛报告...',
+  '正在汇总数据...',
+  '模拟完成!',
 ];
 
 export default function SimAnimation({ onComplete }) {
@@ -25,7 +25,7 @@ export default function SimAnimation({ onComplete }) {
   const startTime = useRef(Date.now());
 
   useEffect(() => {
-    const duration = 3000; // 3???
+    const duration = 3000;
     const startTimeMs = Date.now();
     
     const animate = () => {
@@ -33,14 +33,11 @@ export default function SimAnimation({ onComplete }) {
       const p = Math.min(elapsed / duration, 1);
       setProgress(p);
       
-      // ???? (????)
       setBallPos(50 + Math.sin(elapsed / 200) * 30);
       
-      // ???
       const ci = Math.min(Math.floor(p * COMMENTARY.length), COMMENTARY.length - 1);
       setCommentary(COMMENTARY[ci]);
       
-      // ????
       if (Math.random() < 0.3) {
         setParticles(prev => [...prev.slice(-20), {
           id: Date.now() + Math.random(),
@@ -52,10 +49,9 @@ export default function SimAnimation({ onComplete }) {
         }]);
       }
       
-      // ????
       setParticles(prev => prev
-        .map(p => ({ ...p, opacity: p.opacity - 0.02 }))
-        .filter(p => p.opacity > 0)
+        .map(pt => ({ ...pt, opacity: pt.opacity - 0.02 }))
+        .filter(pt => pt.opacity > 0)
       );
       
       if (p < 1) {
@@ -76,56 +72,50 @@ export default function SimAnimation({ onComplete }) {
       display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center',
       animation: 'fadeIn 0.3s ease',
     }}>
-      {/* ??? */}
       <div style={{ position: 'absolute', top: 0, left: 0, right: 0, bottom: 0, overflow: 'hidden', pointerEvents: 'none' }}>
         {particles.map(p => (
           <div key={p.id} style={{
             position: 'absolute',
-            left: `${p.x}%`, top: `${p.y}%`,
+            left: p.x + '%', top: p.y + '%',
             fontSize: p.size, opacity: p.opacity,
             transition: 'opacity 0.1s',
-            transform: `rotate(${Math.random() * 360}deg)`,
+            transform: 'rotate(' + (Math.random() * 360) + 'deg)',
           }}>
             {p.emoji}
           </div>
         ))}
       </div>
 
-      {/* ?? */}
       <div style={{
         width: 400, height: 200, background: 'linear-gradient(to right, #1a472a, #2d6a4f, #1a472a)',
         borderRadius: 12, position: 'relative', overflow: 'hidden',
         border: '2px solid rgba(255,255,255,0.2)',
         boxShadow: '0 0 40px rgba(0,200,100,0.3)',
       }}>
-        {/* ??? */}
         <div style={{ position: 'absolute', left: '50%', top: 0, bottom: 0, width: 2, background: 'rgba(255,255,255,0.3)' }} />
         <div style={{ position: 'absolute', left: '50%', top: '50%', width: 80, height: 80, border: '2px solid rgba(255,255,255,0.3)', borderRadius: '50%', transform: 'translate(-50%, -50%)' }} />
         
-        {/* ? */}
         <div style={{
           position: 'absolute',
-          left: `${ballPos}%`, top: '50%',
+          left: ballPos + '%', top: '50%',
           transform: 'translate(-50%, -50%)',
           fontSize: 36,
           filter: 'drop-shadow(0 0 10px rgba(255,255,255,0.8))',
           transition: 'left 0.05s linear',
         }}>
-          ?
+          ⚽
         </div>
         
-        {/* ?? */}
-        <div style={{ position: 'absolute', left: '20%', top: '30%', fontSize: 20, opacity: 0.7 }}>??</div>
-        <div style={{ position: 'absolute', left: '25%', top: '60%', fontSize: 20, opacity: 0.7 }}>??</div>
-        <div style={{ position: 'absolute', left: '75%', top: '35%', fontSize: 20, opacity: 0.7 }}>??</div>
-        <div style={{ position: 'absolute', left: '80%', top: '65%', fontSize: 20, opacity: 0.7 }}>??</div>
+        <div style={{ position: 'absolute', left: '20%', top: '30%', fontSize: 20, opacity: 0.7 }}>👤</div>
+        <div style={{ position: 'absolute', left: '25%', top: '60%', fontSize: 20, opacity: 0.7 }}>👤</div>
+        <div style={{ position: 'absolute', left: '75%', top: '35%', fontSize: 20, opacity: 0.7 }}>👤</div>
+        <div style={{ position: 'absolute', left: '80%', top: '65%', fontSize: 20, opacity: 0.7 }}>👤</div>
       </div>
 
-      {/* ??? */}
       <div style={{ width: 400, marginTop: 30 }}>
         <div style={{ background: 'rgba(255,255,255,0.1)', borderRadius: 10, height: 8, overflow: 'hidden' }}>
           <div style={{
-            width: `${progress * 100}%`, height: '100%',
+            width: (progress * 100) + '%', height: '100%',
             background: 'linear-gradient(90deg, var(--green), var(--accent))',
             borderRadius: 10,
             transition: 'width 0.1s linear',
@@ -133,7 +123,6 @@ export default function SimAnimation({ onComplete }) {
           }} />
         </div>
         
-        {/* ??? */}
         <div style={{
           textAlign: 'center', marginTop: 16,
           color: 'var(--fg-body)', fontSize: 16, fontWeight: 'bold',
@@ -143,7 +132,6 @@ export default function SimAnimation({ onComplete }) {
           {commentary}
         </div>
         
-        {/* ??? */}
         <div style={{ textAlign: 'center', marginTop: 8, color: 'var(--fg-muted)', fontSize: 14 }}>
           {Math.round(progress * 100)}%
         </div>

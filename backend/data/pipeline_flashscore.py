@@ -2,10 +2,10 @@
 FlashScore fixture scraper — 抓取缺失的末轮比赛
 flashscore.com 通过 XHR API 提供结构化数据
 """
-import requests, re, json, time
+import os, re, json, time
 from data.http_utils import safe_get
 import mysql.connector
-from datetime import date, datetime
+from datetime import datetime
 
 HEADERS = {"X-Requested-With": "XMLHttpRequest"}
 
@@ -82,17 +82,17 @@ def parse_flashscore_data(raw, league_code):
             try:
                 ts = int(val)
                 current["match_date"] = datetime.fromtimestamp(ts).strftime("%Y-%m-%d")
-            except:
+            except Exception:
                 pass
         elif key == "AG":
             try:
                 current["home_score"] = int(val)
-            except:
+            except Exception:
                 current["home_score"] = None
         elif key == "AH":
             try:
                 current["away_score"] = int(val)
-            except:
+            except Exception:
                 current["away_score"] = None
         elif key == "BC":
             current["match_time"] = val
@@ -108,14 +108,8 @@ def parse_flashscore_data(raw, league_code):
 
 def fill_missing_fixtures():
     """主函数：抓取缺失比赛并入库"""
-    conn = mysql.connector.connect(
-        host=os.getenv("MYSQL_HOST", "127.0.0.1"),
-        port=int(os.getenv("MYSQL_PORT", "3306")),
-        user=os.getenv("MYSQL_USER", "root"),
-        password=os.getenv("MYSQL_PASS", ""),
-        database=os.getenv("MYSQL_DB_PRED", "football_pred"),
-        charset="utf8mb4",
-    )
+    from data.mysql_client import get_connection
+    conn = get_connection(db="football_pred")
     cur = conn.cursor()
 
     for lc, info in FLASHSCORE_LEAGUES.items():

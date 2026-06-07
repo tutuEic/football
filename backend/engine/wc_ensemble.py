@@ -1,4 +1,4 @@
-# -*- coding: utf-8 -*-
+﻿# -*- coding: utf-8 -*-
 """
 WC Prediction Ensemble - combines multiple models.
 
@@ -16,14 +16,11 @@ import os
 import sys
 import time
 import hashlib
-import numpy as np
-from pathlib import Path
-
 sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 from engine.wc_bayes_dc import BayesianDixonColes, MODEL_DIR
 from engine.wc_poisson_reg import PoissonRegression
 from engine.wc_elo_poisson import predict_elo_poisson
-from engine.wc_features import compute_match_features, FEATURE_NAMES
+from engine.wc_features import compute_match_features
 from engine.wc_stacking import StackingEnsemble
 
 # Model weights (can be tuned via cross-validation)
@@ -33,9 +30,12 @@ DEFAULT_WEIGHTS = {
     'elo_poisson': 0.45,  # Elo-based, primary factor
 }
 
-# Cache
+# Cache (thread-safe)
+import threading as _threading
 _cache = {}
+_cache_lock = _threading.Lock()
 _CACHE_TTL = 300  # 5 min
+_MAX_CACHE = 100
 
 
 class WCPredictionEnsemble:
@@ -95,11 +95,13 @@ class WCPredictionEnsemble:
         - models: individual model predictions
         - method: 'weighted_avg' or 'stacking'
         """
-        cache_key = hashlib.md5(f"{home_team}_{away_team}".encode()).hexdigest()
-        if cache_key in _cache:
-            ts, data = _cache[cache_key]
-            if time.time() - ts < _CACHE_TTL:
-                return data
+        ctx_str = str(sorted((context or {}).items()))
+        cache_key = hashlib.md5(f"{home_team}_{away_team}_{ctx_str}".encode()).hexdigest()
+        with _cache_lock:
+            if cache_key in _cache:
+                ts, data = _cache[cache_key]
+                if time.time() - ts < _CACHE_TTL:
+                    return data
         
         predictions = {}
         
@@ -143,7 +145,14 @@ class WCPredictionEnsemble:
                 'models': {},
                 'method': 'fallback',
             }
-            _cache[cache_key] = (time.time(), result)
+            with _cache_lock:
+                if len(_cache) >= _MAX_CACHE:
+                    stale = [k for k, (ts, _) in _cache.items() if time.time() - ts > _CACHE_TTL]
+                    for k in stale:
+                        del _cache[k]
+                    if len(_cache) >= _MAX_CACHE:
+                        _cache.clear()
+                _cache[cache_key] = (time.time(), result)
             return result
         
         # Try stacking first
@@ -161,7 +170,7 @@ class WCPredictionEnsemble:
                     elo_diff = (analysis_h.get('elo_bonus', 0) - analysis_a.get('elo_bonus', 0)) / 100.0
                     cohesion_h = analysis_h.get('cohesion', 0.5)
                     cohesion_a = analysis_a.get('cohesion', 0.5)
-                except:
+                except Exception:
                     elo_diff = 0.0
                     cohesion_h = 0.5
                     cohesion_a = 0.5
@@ -189,6 +198,12 @@ class WCPredictionEnsemble:
                     'weights': {name: self.weights.get(name, 0) for name in predictions},
                     'method': 'stacking',
                 }
+                if len(_cache) >= _MAX_CACHE:
+                    stale = [k for k, (ts, _) in _cache.items() if time.time() - ts > _CACHE_TTL]
+                    for k in stale:
+                        del _cache[k]
+                    if len(_cache) >= _MAX_CACHE:
+                        _cache.clear()
                 _cache[cache_key] = (time.time(), result)
                 return result
             except Exception:
@@ -240,6 +255,12 @@ class WCPredictionEnsemble:
             'method': 'weighted_avg',
         }
         
+        if len(_cache) >= _MAX_CACHE:
+            stale = [k for k, (ts, _) in _cache.items() if time.time() - ts > _CACHE_TTL]
+            for k in stale:
+                del _cache[k]
+            if len(_cache) >= _MAX_CACHE:
+                _cache.clear()
         _cache[cache_key] = (time.time(), result)
         return result
 

@@ -11,10 +11,8 @@ Based on Schauberger & Groll (2018):
 import json
 import os
 import sys
-import math
 import numpy as np
 from datetime import datetime, date
-from pathlib import Path
 from scipy.optimize import minimize
 
 sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
@@ -22,7 +20,7 @@ from data.mysql_client import query
 from engine.wc_dc_international import InternationalDixonColes, normalize_team, MODEL_DIR
 from engine.wc_poisson_reg import PoissonRegression
 from engine.wc_elo_poisson import predict_elo_poisson
-from engine.wc_features import compute_match_features, FEATURE_NAMES
+from engine.wc_features import compute_match_features
 from engine.wc_elo_adapter import analyze_squad_elo
 
 
@@ -219,20 +217,20 @@ def prepare_stacking_dataset(split_date='2024-01-01'):
         try:
             dc_pred = dc_model.get_match_probs(home, away)
             dc_wdl = [dc_pred['home_win'], dc_pred['draw'], dc_pred['away_win']]
-        except:
+        except Exception:
             dc_wdl = [0.45, 0.25, 0.30]
         
         try:
             features = compute_match_features(home, away)
             pr_pred = pr_model.predict(features)
             pr_wdl = [pr_pred['home_win'], pr_pred['draw'], pr_pred['away_win']]
-        except:
+        except Exception:
             pr_wdl = [0.45, 0.25, 0.30]
         
         try:
             ep_pred = predict_elo_poisson(home, away)
             ep_wdl = [ep_pred['home_win'], ep_pred['draw'], ep_pred['away_win']]
-        except:
+        except Exception:
             ep_wdl = [0.45, 0.25, 0.30]
         
         # Features: [bias, dc_h, dc_d, dc_a, pr_h, pr_d, pr_a, ep_h, ep_d, ep_a, elo_diff, cohesion_h, cohesion_a]
@@ -240,12 +238,12 @@ def prepare_stacking_dataset(split_date='2024-01-01'):
         if home not in team_cache:
             try:
                 team_cache[home] = analyze_squad_elo(home)
-            except:
+            except Exception:
                 team_cache[home] = {'elo_bonus': 0, 'cohesion': 0.5}
         if away not in team_cache:
             try:
                 team_cache[away] = analyze_squad_elo(away)
-            except:
+            except Exception:
                 team_cache[away] = {'elo_bonus': 0, 'cohesion': 0.5}
         
         analysis_h = team_cache[home]

@@ -14,13 +14,9 @@ Features inspired by Groll et al. (2015):
 """
 import sys
 import os
-import math
-from datetime import date, datetime, timedelta
-from collections import defaultdict
-
+from datetime import date, datetime
 sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 from data.mysql_client import query
-from engine.wc_player_elo import calculate_elo_for_team, get_position_category
 from engine.wc_elo_adapter import analyze_squad_elo
 from engine.wc_dc_international import normalize_team
 
@@ -34,7 +30,14 @@ def _get_cached(key):
     return None
 
 
+_MAX_CACHE = 100
+
 def _set_cached(key, value):
+    if len(_cache) >= _MAX_CACHE:
+        # Remove oldest half (LRU approximation)
+        sorted_keys = sorted(_cache.keys())
+        for k in sorted_keys[:len(sorted_keys)//2]:
+            del _cache[k]
     _cache[key] = value
 
 

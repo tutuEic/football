@@ -7,8 +7,6 @@ import sys, os, json, math
 from pathlib import Path
 
 sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
-from data.mysql_client import query
-
 ELO_FILE = Path(__file__).resolve().parent.parent / 'models' / 'elo_ratings.json'
 
 # K-factor settings
@@ -123,17 +121,15 @@ class EloSystem:
         matches = get_matches_for_training(league_code, seasons)
 
         self.ratings = {}
-        current_season = None
+        prev_season = None
 
         for m in matches:
-            # Detect season change (approximate by checking home team list)
-            if m["home"] not in self.ratings and len(self.ratings) > 10:
-                # Likely new season
-                if current_season is None:
-                    current_season = 1
-                else:
-                    self.season_rollover()
-                    current_season += 1
+            # Detect season change from match data
+            m_season = m.get("season") or m.get("season_id")
+            if m_season is not None and prev_season is not None and m_season != prev_season:
+                self.season_rollover()
+            if m_season is not None:
+                prev_season = m_season
 
             self.update(m["home"], m["away"],
                        int(m["home_goals"]), int(m["away_goals"]))
@@ -146,12 +142,25 @@ class EloSystem:
         return sorted(self.ratings.items(), key=lambda x: -x[1])[:n]
 
 
+_elo_cache = None
+_elo_cache_mtime = 0.0
+
+def _get_cached_elo() -> EloSystem:
+    global _elo_cache, _elo_cache_mtime
+    try:
+        mt = ELO_FILE.stat().st_mtime if ELO_FILE.exists() else 0.0
+    except OSError:
+        mt = 0.0
+    if _elo_cache is None or mt != _elo_cache_mtime:
+        _elo_cache = EloSystem()
+        _elo_cache.load()
+        _elo_cache_mtime = mt
+    return _elo_cache
+
+
 def get_elo_rating(team: str, league: str = None) -> float:
-    """Get Elo rating for a team (loads from file)."""
-    elo = EloSystem()
-    if elo.load():
-        return elo.get_rating(team)
-    return LEAGUE_AVG_ELO
+    """Get Elo rating for a team (cached from file)."""
+    return _get_cached_elo().get_rating(team)
 
 
 def get_elo_diff(home: str, away: str) -> float:

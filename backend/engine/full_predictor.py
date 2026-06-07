@@ -3,17 +3,17 @@
 Football prediction engine v3 鈥?Full mathematical framework
 Fixed: Correct DC formula, proper injury/momentum scaling, tau-corrected sampling.
 """
-import os, math, time, json
+import math, time, json
 import numpy as np
 from collections import Counter
 
 
 from engine.predictor import load_model, predict_match as dc_predict
-from data.tm_repo import search_club, get_club_squad
-from engine.player_ratings import get_club_squad_rated, get_player_rating
+from data.tm_repo import search_club
+from engine.player_ratings import get_club_squad_rated
 from data.match_repo import query
 from engine.simulator import MonteCarloSimulator
-from features.feature_store import compute_match_features, FEATURE_NAMES
+from features.feature_store import compute_match_features
 
 
 # ============================================================
@@ -62,6 +62,7 @@ def _load_ensemble_models(league="E0"):
     # XGBoost
     try:
         from models.xgboost_model import XGBoostPredictor
+
         xgb = XGBoostPredictor()
         xgb_path = model_dir / f"xgboost_{league}.json"
         if xgb_path.exists():
@@ -189,6 +190,16 @@ def get_ensemble_wdl(home_team, away_team, league):
         except Exception:
             pass
 
+    # Compute weighted xG from all models that provide it
+    if xg_sources:
+        xg_weights = {"dc": 0.3, "bayes_dc": 0.4, "pr": 0.3}
+        total_w = sum(xg_weights.get(k, 0.2) for k in xg_sources)
+        xg_h = sum(v[0] * xg_weights.get(k, 0.2) for k, v in xg_sources.items()) / total_w
+        xg_a = sum(v[1] * xg_weights.get(k, 0.2) for k, v in xg_sources.items()) / total_w
+    else:
+        xg_h, xg_a = 1.3, 1.1
+
+
     # ZIP model (P1-1)
     try:
         from models.zip_model import ZeroInflatedPoisson
@@ -211,21 +222,12 @@ def get_ensemble_wdl(home_team, away_team, league):
         try:
             dc_model = dc_predict(home_team, away_team, league)
             rho_val = dc_model.get("rho", -0.13)
-        except:
+        except Exception:
             pass
         sk_pred = sk_m.predict_with_dc_correction(xg_h, xg_a, rho_val)
         predictions["skellam"] = [sk_pred["home_win"], sk_pred["draw"], sk_pred["away_win"]]
     except Exception:
         pass
-
-    # Compute weighted xG from all models that provide it
-    if xg_sources:
-        xg_weights = {"dc": 0.3, "bayes_dc": 0.4, "pr": 0.3}
-        total_w = sum(xg_weights.get(k, 0.2) for k in xg_sources)
-        xg_h = sum(v[0] * xg_weights.get(k, 0.2) for k, v in xg_sources.items()) / total_w
-        xg_a = sum(v[1] * xg_weights.get(k, 0.2) for k, v in xg_sources.items()) / total_w
-    else:
-        xg_h, xg_a = 1.3, 1.1
 
     if not predictions:
         result = {"home_win": 0.45, "draw": 0.25, "away_win": 0.30,
@@ -257,6 +259,7 @@ def get_ensemble_wdl(home_team, away_team, league):
                     "weights": {k: "stacking" for k in predictions},
                     "method": "stacking",
                 }
+                _clean_ensemble_cache()
                 _ensemble_cache[cache_key] = (time.time(), result)
                 return result
             except Exception:
@@ -290,6 +293,7 @@ def get_ensemble_wdl(home_team, away_team, league):
         "method": "weighted_avg",
     }
 
+    _clean_ensemble_cache()
     _ensemble_cache[cache_key] = (time.time(), result)
     return result
 
@@ -314,7 +318,7 @@ def get_team_params(team, league):
         gamma = model.params.get("gamma", 0.2)
         rho = model.params.get("rho", -0.13)
         return att, deff, gamma, rho
-    except:
+    except Exception:
         return 0.0, 0.0, 0.2, -0.13
 
 
@@ -354,7 +358,7 @@ def calc_momentum_v3(team, league):
             total_w += w
 
         return round(max(min(score / max(total_w, 1), 0.8), -0.8), 3)
-    except:
+    except Exception:
         return 0.0
 
 
@@ -396,7 +400,7 @@ def calc_personnel_impact(team_name, league):
                 def_scale -= 0.06 * impact
 
         return max(att_scale, 0.4), max(def_scale, 0.4)
-    except:
+    except Exception:
         return 1.0, 1.0
 
 
@@ -417,7 +421,7 @@ def _calc_tactical(team, league):
         r = rows[0]
         sot_ratio = float(r["avg_hst"] or 0) / max(float(r["avg_hs"] or 1), 1)
         return round((sot_ratio - 0.35) * 2, 2)
-    except:
+    except Exception:
         return 0.0
 
 
@@ -613,7 +617,7 @@ def full_prediction_v3(home_team, away_team, league="E0", simulations=2000):
         from engine.injury_detector import get_team_injuries
         home_injury = get_team_injuries(home_team, league)
         away_injury = get_team_injuries(away_team, league)
-    except:
+    except Exception:
         home_injury = away_injury = None
 
     # === Factor analysis ===

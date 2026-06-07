@@ -7,8 +7,6 @@ league + international Elo system instead of market-value-based strength.
 """
 import sys
 import os
-from collections import defaultdict
-
 sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 from data.mysql_client import query
 from engine.wc_player_elo import (
@@ -29,7 +27,8 @@ from engine.wc_data import (
 )
 
 # Cache for squad Elo analysis
-
+import threading as _threading
+_elo_cache_lock = _threading.Lock()
 
 # Official FIFA Elo ratings from wc_groups (cached at module level)
 _official_elo_cache = None
@@ -38,8 +37,9 @@ _official_elo_cache = None
 def _load_official_elo():
     """Load official Elo ratings from wc_groups table."""
     global _official_elo_cache
-    if _official_elo_cache is not None:
-        return _official_elo_cache
+    with _elo_cache_lock:
+        if _official_elo_cache is not None:
+            return _official_elo_cache
     
     try:
         rows = query("SELECT team, elo_rating FROM wc_groups", db='football_pred')

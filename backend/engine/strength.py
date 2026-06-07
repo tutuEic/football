@@ -14,7 +14,7 @@ Physical contributes to both (strength in duels, hold-up play).
 """
 import sys, os
 sys.path.insert(0, os.path.dirname(__file__))
-from formations import get_formation, get_positions
+from formations import get_formation
 
 def calc_team_strength(squad: dict) -> tuple:
     """

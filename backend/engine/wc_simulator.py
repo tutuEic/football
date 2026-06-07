@@ -263,8 +263,7 @@ def simulate_knockout_match(home, away, stage, predictions_cache, squad_cache=No
     if pred is None:
         pred = predict_wc_match(home, away, {
             "stage": stage, "is_host": False, "in_host_country": True,
-        }, analysis_home=squad_cache.get(home) if squad_cache else None,
-           analysis_away=squad_cache.get(away) if squad_cache else None)
+        })
         predictions_cache[cache_key] = pred
 
     lam = pred["expected_goals"]["home"]
@@ -371,12 +370,15 @@ def simulate_tournament(n_sims=DEFAULT_N_SIMS, progress_callback=None):
         _squad_cache[team_name] = analyze_squad(team_name)
     print(f"[SIM] Squad analyses cached.")
 
-    # Pre-compute form and base_elo for all teams
-    from engine.wc_predictor import get_international_form, get_team_base_elo
+    # Pre-compute form and base_elo for all teams (skip if functions not available)
     print(f"[SIM] Pre-computing form and base Elo...")
-    for team_name in all_team_names:
-        get_international_form(team_name)
-        get_team_base_elo(team_name)
+    try:
+        from engine.wc_predictor import get_international_form, get_team_base_elo
+        for team_name in all_team_names:
+            get_international_form(team_name)
+            get_team_base_elo(team_name)
+    except ImportError:
+        print(f"[SIM] Form/Elo pre-compute skipped (functions not available)")
     print(f"[SIM] Form and base Elo cached.")
 
     # Pre-compute all group match predictions (cache)
@@ -392,7 +394,7 @@ def simulate_tournament(n_sims=DEFAULT_N_SIMS, progress_callback=None):
                 pred_cache[(h, a)] = predict_wc_match(h, a, {
                     "stage": "group", "matchday": 1,
                     "is_host": h in host_teams, "in_host_country": True,
-                }, analysis_home=_squad_cache.get(h), analysis_away=_squad_cache.get(a))
+                })
     print(f"[SIM] {len(pred_cache)} group predictions cached.")
 
     # Accumulators
@@ -482,7 +484,7 @@ def format_simulation_report(result):
 
     lines.append("\n--- CHAMPION PROBABILITY ---")
     for team, prob in list(result["champion_probs"].items())[:15]:
-        bar = "█" * int(prob * 100)
+        bar = "#" * int(prob * 100)
         lines.append(f"  {team:20s} {prob:6.1%}  {bar}")
 
     lines.append("\n--- REACH FINAL ---")

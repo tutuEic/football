@@ -1,4 +1,4 @@
-# -*- coding: utf-8 -*-
+﻿# -*- coding: utf-8 -*-
 """
 Fixtures API - ???? + ?? + ??
 =====================================
@@ -183,8 +183,14 @@ class OddsUpdate(BaseModel):
 
 @router.post("/fixtures/update-odds")
 def update_fixture_odds(req: OddsUpdate):
-    """Update odds for a fixture."""
+    """Update odds for a fixture. Validates odds are reasonable."""
     from data.mysql_client import execute
+    for label, val in [("odds_home", req.odds_home), ("odds_draw", req.odds_draw), ("odds_away", req.odds_away)]:
+        if val < 1.01 or val > 100:
+            return {"status": "error", "message": f"{label} must be between 1.01 and 100, got {val}"}
+    existing = query("SELECT id FROM fixtures WHERE id=%s", [req.fixture_id], db="football_pred")
+    if not existing:
+        return {"status": "error", "message": f"Fixture {req.fixture_id} not found"}
     affected = execute(
         "UPDATE fixtures SET odds_home=%s, odds_draw=%s, odds_away=%s WHERE id=%s",
         [req.odds_home, req.odds_draw, req.odds_away, req.fixture_id],

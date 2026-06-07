@@ -144,6 +144,37 @@ def update_tables(conn):
     except mysql.connector.errors.OperationalError:
         pass
 
+    # Create tables if not exist (idempotent)
+    cur.execute("""CREATE TABLE IF NOT EXISTS wc_groups (
+        id INT AUTO_INCREMENT PRIMARY KEY,
+        group_name VARCHAR(5) NOT NULL,
+        team VARCHAR(100) NOT NULL,
+        confederation VARCHAR(20) DEFAULT '',
+        fifa_ranking INT DEFAULT 0,
+        elo_rating FLOAT DEFAULT 1500,
+        pot INT DEFAULT 0,
+        fifa_team_id VARCHAR(20) DEFAULT '',
+        appearances INT DEFAULT 0,
+        is_host TINYINT DEFAULT 0,
+        UNIQUE KEY uk_group_team (group_name, team)
+    ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4""")
+    cur.execute("""CREATE TABLE IF NOT EXISTS wc_standings (
+        id INT AUTO_INCREMENT PRIMARY KEY,
+        group_name VARCHAR(5) NOT NULL,
+        team VARCHAR(100) NOT NULL,
+        played INT DEFAULT 0,
+        wins INT DEFAULT 0,
+        draws INT DEFAULT 0,
+        losses INT DEFAULT 0,
+        goals_for INT DEFAULT 0,
+        goals_against INT DEFAULT 0,
+        goal_diff INT DEFAULT 0,
+        points INT DEFAULT 0,
+        position INT DEFAULT 0,
+        UNIQUE KEY uk_standing_team (group_name, team)
+    ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4""")
+    conn.commit()
+
     # Clear and repopulate
     cur.execute("DELETE FROM wc_groups")
     cur.execute("DELETE FROM wc_standings")

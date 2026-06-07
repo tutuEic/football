@@ -6,7 +6,6 @@ import csv, os, sys, random
 from collections import defaultdict
 
 sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
-from data.mysql_client import query
 from config import FIFA_PATH
 
 # Load FIFA20 data
@@ -37,7 +36,7 @@ def _fifa_to_player(row, club_name, idx):
     """Convert FIFA20 row to player dict"""
     try:
         rating = int(row.get("RATING", 65) or 65)
-    except:
+    except Exception:
         rating = 65
     
     pos = row.get("POSITION", "CM").strip()
@@ -51,7 +50,7 @@ def _fifa_to_player(row, club_name, idx):
         dribbling = int(row.get("DRIBBLING", 60) or 60)
         defending = int(row.get("DEFENDING", 45) or 45)
         physical = int(row.get("PHYSICAL", 60) or 60)
-    except:
+    except Exception:
         pace = shooting = passing = dribbling = defending = physical = 65
     
     attack_rating = round(shooting * 0.6 + dribbling * 0.3 + pace * 0.1)

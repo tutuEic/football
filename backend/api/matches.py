@@ -4,8 +4,6 @@ from fastapi import APIRouter, Query
 import sys, os
 sys.path.insert(0, os.path.dirname(os.path.dirname(__file__)))
 from data.mysql_client import query
-from data.tm_repo import search_club
-
 router = APIRouter()
 
 
@@ -13,7 +11,7 @@ router = APIRouter()
 def list_leagues():
     """League list."""
     from data.match_repo import get_all_leagues
-    return {"leagues": get_all_leagues()}
+    return {"status": "ok", "leagues": get_all_leagues()}
 
 
 @router.get("/matches/recent")
@@ -57,7 +55,7 @@ def recent_form(team: str = Query(...), league: str = "E0", limit: int = 10):
     wins = sum(1 for r in results if r["outcome"] == "W")
     draws = sum(1 for r in results if r["outcome"] == "D")
     losses = sum(1 for r in results if r["outcome"] == "L")
-    return {
+    return {"status": "ok", 
         "team": team, "league": league,
         "recent": results,
         "summary": f"{wins}W {draws}D {losses}L"
@@ -85,7 +83,7 @@ def head_to_head(team1: str, team2: str, league: str = "E0", limit: int = 10):
             "score": f"{r['fthg']}-{r['ftag']}",
         })
     
-    return {"team1": team1, "team2": team2, "h2h": results}
+    return {"status": "ok", "team1": team1, "team2": team2, "h2h": results}
 
 
 @router.get("/matches/standings")
@@ -123,7 +121,7 @@ def standings(league: str = "E0", season: str = None):
         t["pos"] = i + 1
         t["GD"] = t["GF"] - t["GA"]
     
-    return {"league": league, "season": season, "standings": standings_list}
+    return {"status": "ok", "league": league, "season": season, "standings": standings_list}
 
 
 @router.get("/matches/upcoming")
@@ -154,4 +152,4 @@ def upcoming_fixtures(league: str = Query(None), limit: int = Query(20, ge=1, le
             "status": r["status"] or "scheduled",
         })
     
-    return {"fixtures": results}
+    return {"status": "ok", "fixtures": results}

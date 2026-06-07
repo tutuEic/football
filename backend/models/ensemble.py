@@ -66,6 +66,21 @@ class EnsemblePredictor:
             except Exception as e:
                 print(f"Poisson regression failed: {e}")
 
+        # XGBoost prediction
+        if "xgboost" in self.models and features:
+            try:
+                xgb_pred = self.models["xgboost"].predict(features)
+                predictions["xgboost"] = {
+                    "home_win": xgb_pred["home_win"],
+                    "draw": xgb_pred["draw"],
+                    "away_win": xgb_pred["away_win"],
+                    "xg_home": 0,  # XGBoost doesn't predict xG
+                    "xg_away": 0,
+                }
+                weights_used["xgboost"] = self.weights["xgboost"]
+            except Exception as e:
+                print(f"XGBoost model failed: {e}")
+
         if not predictions:
             raise ValueError("No models available for prediction")
 

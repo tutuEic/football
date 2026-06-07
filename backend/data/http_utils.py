@@ -1,7 +1,6 @@
 # -*- coding: utf-8 -*-
 """Shared HTTP utilities with retry and backoff for data collection."""
 import os
-import time
 import logging
 import requests
 from requests.adapters import HTTPAdapter
@@ -27,7 +26,7 @@ def build_session() -> requests.Session:
     retry = Retry(
         total=COLLECT_MAX_RETRIES,
         backoff_factor=COLLECT_BACKOFF,
-        # 429 deliberately excluded ¡ª retrying on rate-limit backfires
+        # 429 deliberately excluded ï¿½ï¿½ retrying on rate-limit backfires
         # by amplifying the load on the upstream service.
         status_forcelist=[500, 502, 503, 504],
         allowed_methods=["GET"],

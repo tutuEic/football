@@ -19,10 +19,6 @@ import numpy as np
 from pathlib import Path
 from scipy.optimize import minimize
 from scipy.stats import poisson, norm
-from scipy.linalg import inv
-from collections import defaultdict
-
-
 class BayesianDixonColes:
     """
     Bayesian Dixon-Coles with Laplace approximation.

@@ -57,3 +57,7 @@ def execute(sql, params=None, db="football_pred"):
         raise
     finally:
         conn.close()
+
+def get_connection(db="football_pred"):
+    """Get a pooled connection for manual transaction management."""
+    return _get_pool(db).get_connection()

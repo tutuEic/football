@@ -5,8 +5,6 @@ Predicts P(H), P(D), P(A) directly as classification.
 """
 import sys, os, json
 import numpy as np
-from pathlib import Path
-
 sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
 try:
@@ -76,11 +74,15 @@ class XGBoostPredictor:
             dval = xgb.DMatrix(X_val, label=y_val, feature_names=self.feature_names)
             evals.append((dval, "val"))
 
+        callbacks = [xgb.callback.EvaluationMonitor()]
+        if X_val is not None:
+            callbacks.append(xgb.callback.EarlyStopping(rounds=50, save_best=True))
+
         self.model = xgb.train(
             params, dtrain,
             num_boost_round=500,
             evals=evals,
-            early_stopping_rounds=50 if X_val is not None else None,
+            callbacks=callbacks,
             verbose_eval=False,
         )
         self.fitted = True

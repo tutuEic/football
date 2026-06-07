@@ -12,15 +12,17 @@ export default function EVScanner() {
   const [minEV, setMinEV] = useState(0);
   const [results, setResults] = useState(null);
   const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(null);
 
   async function scan() {
     setLoading(true);
     setResults(null);
+    setError(null);
     try {
       const d = await get('/odds/scan', { league, min_ev: minEV });
       setResults(d);
     } catch (e) {
-      alert('扫描失败: ' + e.message);
+      setError('扫描失败: ' + e.message);
     }
     setLoading(false);
   }

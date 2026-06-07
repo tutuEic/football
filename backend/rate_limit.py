@@ -1,6 +1,7 @@
-# -*- coding: utf-8 -*-
+﻿# -*- coding: utf-8 -*-
 """Simple in-memory rate limiting middleware."""
 import time
+import os
 import logging
 from collections import defaultdict
 from starlette.middleware.base import BaseHTTPMiddleware
@@ -29,12 +30,15 @@ class RateLimitMiddleware(BaseHTTPMiddleware):
             # Remove empty entries to prevent memory leak
             self._hits.pop(key, None)
 
+    # Set TRUST_PROXY=true env var ONLY when behind a trusted reverse proxy.
+    _TRUST_PROXY = os.getenv("TRUST_PROXY", "").lower() in ("1", "true", "yes")
+
     def _get_client_ip(self, request: Request) -> str:
-        """Get real client IP, respecting X-Forwarded-For behind reverse proxy."""
-        forwarded = request.headers.get("x-forwarded-for")
-        if forwarded:
-            # Take first IP (original client)
-            return forwarded.split(",")[0].strip()
+        """Get real client IP. Only trusts X-Forwarded-For behind a known proxy."""
+        if self._TRUST_PROXY:
+            forwarded = request.headers.get("x-forwarded-for")
+            if forwarded:
+                return forwarded.split(",")[0].strip()
         return request.client.host if request.client else "unknown"
 
     async def dispatch(self, request: Request, call_next):
@@ -43,7 +47,7 @@ class RateLimitMiddleware(BaseHTTPMiddleware):
         now = time.time()
 
         # Use stricter key for search-like endpoints
-        if path.startswith("/search"):
+        if path.startswith("/api/") and "/search" in path:
             key = f"{ip}:search"
             limit = self.search_limit
         else:

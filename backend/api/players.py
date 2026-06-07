@@ -21,7 +21,7 @@ class CustomPlayerRequest(BaseModel):
 def search_player(q: str = Query(...), limit: int = 20):
     """搜索球员（含评分）"""
     results = search_players_rated(q, limit)
-    return {"query": q, "count": len(results), "players": results}
+    return {"status": "ok", "query": q, "count": len(results), "players": results}
 
 
 @router.get("/players/{player_id}")
@@ -31,7 +31,7 @@ def player_detail(player_id: int):
     if not rating:
         return {"status": "error", "message": f"Player {player_id} not found"}
     from data.tm_repo import get_player_stats, get_player_recent_games
-    return {
+    return {"status": "ok", 
         "rating": rating,
         "stats": get_player_stats(player_id),
         "recent_games": get_player_recent_games(player_id, 10),

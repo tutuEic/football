@@ -49,11 +49,18 @@ def api_league_fixtures(league_code: str, days: int = 30):
 
 
 @router.websocket("/ws/live")
-async def websocket_live(ws: WebSocket, token: str = None):
-    """WebSocket: push live score changes to frontend (requires token)"""
-    # Authenticate: require valid token unless in dev mode
+async def websocket_live(ws: WebSocket):
+    """WebSocket: push live score changes to frontend (requires token via subprotocol)"""
     if not DEV_MODE:
-        if not token or token != API_KEY:
+        token = None
+        proto = ws.headers.get("sec-websocket-protocol", "")
+        if proto:
+            parts = [p.strip() for p in proto.split(",")]
+            for p in parts:
+                if p != "json":
+                    token = p
+                    break
+        if not token or not secrets.compare_digest(token, API_KEY):
             await ws.close(code=4001, reason="Unauthorized")
             return
     

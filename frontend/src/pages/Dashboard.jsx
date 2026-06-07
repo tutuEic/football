@@ -8,10 +8,12 @@ export default function Dashboard() {
   const [standings, setStandings] = useState(null);
   const [league, setLeague] = useState('E0');
   const [modelCount, setModelCount] = useState(0);
+  const [stats, setStats] = useState({ matches: 0, players: 0 });
 
   useEffect(() => {
     get('/matches/leagues').then(d => setLeagues(d.leagues || [])).catch(() => {});
     get('/models').then(d => setModelCount(d.length || 0)).catch(() => {});
+    get('/health').then(d => setStats(s => ({ ...s, matches: d.today_matches || 0 }))).catch(() => {});
   }, []);
 
   async function loadStandings(lg) {
@@ -27,10 +29,10 @@ export default function Dashboard() {
       <h2 style={{ color: 'var(--fg-primary)', fontSize: 18, marginBottom: 20 }}>{'📊'} 仪表盘</h2>
 
       <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(160px, 1fr))', gap: 12, marginBottom: 20 }}>
-        <StatCard label="数据库比赛" value="578K" sub="场" color="var(--accent)" />
-        <StatCard label="覆盖联赛" value={leagues.length || 33} sub="个" color="var(--green)" />
-        <StatCard label="球员数据" value="4.7万" sub="Transfermarkt" color="var(--purple)" />
-        <StatCard label="已训练模型" value={modelCount || 35} sub="DC Dixon-Coles" color="var(--green)" />
+        <StatCard label="覆盖联赛" value={leagues.length || '-'} sub="个" color="var(--green)" />
+        <StatCard label="今日比赛" value={stats.matches || '-'} sub="场" color="var(--accent)" />
+        <StatCard label="已训练模型" value={modelCount || '-'} sub="个" color="var(--green)" />
+        <StatCard label="系统状态" value={leagues.length > 0 ? '✅' : '⚠️'} sub="运行中" color="var(--purple)" />
       </div>
 
       {/* 联赛选择 — 动态 */}

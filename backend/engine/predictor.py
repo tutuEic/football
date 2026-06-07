@@ -7,6 +7,7 @@ import json
 import os
 import threading
 import time
+import numpy as _np
 
 from engine.dixon_coles import DixonColes
 from config import MODEL_DIR
@@ -80,7 +81,6 @@ def list_available_models():
 # ============================================================
 # Probability Calibration (Platt-style binning)
 # ============================================================
-import numpy as _np
 
 _calibration_data = None
 _calibration_time = 0
@@ -101,61 +101,61 @@ def _load_calibration_data():
         if _calibration_data is not None and (time.time() - _calibration_time < _CALIBRATION_TTL):
             return _calibration_data
 
-    from data.mysql_client import query
-    # Get completed matches with DC model predictions
-    rows = query("""
-        SELECT home_team, away_team, league_code, fthg, ftag, ftr
-        FROM matches
-        WHERE fthg IS NOT NULL AND ftr IS NOT NULL
-        ORDER BY match_date DESC LIMIT 2000
-    """)
+        from data.mysql_client import query
+        # Get completed matches with DC model predictions
+        rows = query("""
+            SELECT home_team, away_team, league_code, fthg, ftag, ftr
+            FROM matches
+            WHERE fthg IS NOT NULL AND ftr IS NOT NULL
+            ORDER BY match_date DESC LIMIT 2000
+        """)
 
-    if not rows or len(rows) < 100:
-        _calibration_data = None
-        return None
+        if not rows or len(rows) < 100:
+            _calibration_data = None
+            return None
 
-    # Compute predictions for each match
-    predictions = []
-    for r in rows:
-        try:
-            model = load_model(r['league_code'])
-            probs = model.get_match_probs(r['home_team'], r['away_team'])
-            actual = r['ftr']
-            if actual not in ('H', 'D', 'A'):
+        # Compute predictions for each match
+        predictions = []
+        for r in rows:
+            try:
+                model = load_model(r['league_code'])
+                probs = model.get_match_probs(r['home_team'], r['away_team'])
+                actual = r['ftr']
+                if actual not in ('H', 'D', 'A'):
+                    continue
+                for outcome, key in [('H', 'home_win'), ('D', 'draw'), ('A', 'away_win')]:
+                    predictions.append({
+                        'predicted': probs[key],
+                        'actual': 1.0 if actual == outcome else 0.0,
+                    })
+            except Exception:
                 continue
-            for outcome, key in [('H', 'home_win'), ('D', 'draw'), ('A', 'away_win')]:
-                predictions.append({
-                    'predicted': probs[key],
-                    'actual': 1.0 if actual == outcome else 0.0,
-                })
-        except Exception:
-            continue
 
-    if len(predictions) < 50:
-        _calibration_data = None
-        return None
+        if len(predictions) < 50:
+            _calibration_data = None
+            return None
 
-    # Build calibration curve using equal-frequency binning
-    preds = sorted(predictions, key=lambda x: x['predicted'])
-    n_bins = 10
-    bin_size = len(preds) // n_bins
-    calibration_map = []
+        # Build calibration curve using equal-frequency binning
+        preds = sorted(predictions, key=lambda x: x['predicted'])
+        n_bins = 10
+        bin_size = len(preds) // n_bins
+        calibration_map = []
 
-    for i in range(n_bins):
-        start = i * bin_size
-        end = start + bin_size if i < n_bins - 1 else len(preds)
-        chunk = preds[start:end]
-        avg_pred = _np.mean([p['predicted'] for p in chunk])
-        avg_actual = _np.mean([p['actual'] for p in chunk])
-        calibration_map.append({
-            'predicted_center': round(float(avg_pred), 4),
-            'actual_freq': round(float(avg_actual), 4),
-            'count': len(chunk),
-        })
+        for i in range(n_bins):
+            start = i * bin_size
+            end = start + bin_size if i < n_bins - 1 else len(preds)
+            chunk = preds[start:end]
+            avg_pred = _np.mean([p['predicted'] for p in chunk])
+            avg_actual = _np.mean([p['actual'] for p in chunk])
+            calibration_map.append({
+                'predicted_center': round(float(avg_pred), 4),
+                'actual_freq': round(float(avg_actual), 4),
+                'count': len(chunk),
+            })
 
-    _calibration_data = calibration_map
-    _calibration_time = time.time()
-    return calibration_map
+        _calibration_data = calibration_map
+        _calibration_time = time.time()
+        return calibration_map
 
 
 def calibrate_prob(prob, cal_map=None):

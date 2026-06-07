@@ -1,4 +1,4 @@
-node_modules/
+﻿node_modules/
 __pycache__/
 *.pyc
 .venv/
@@ -15,3 +15,11 @@ backend/data/sofifa_cache/
 .env.local
 .env.*
 !.env.example
+
+# Debug / one-off scripts (not part of the application)
+_check_active.py
+debug_*.py
+wc_backtest.py
+
+# BAT launcher scripts (contain local paths)
+*.bat

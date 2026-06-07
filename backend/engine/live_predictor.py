@@ -10,8 +10,6 @@ Updates match predictions based on live match state:
 
 Uses Bayesian updating: prior = pre-match prediction, likelihood = current score + time.
 """
-import math
-import numpy as np
 from scipy.stats import poisson
 
 
@@ -126,6 +124,17 @@ class LivePredictor:
             hw /= total
             dw /= total
             aw /= total
+
+        # Bayesian blend: weight pre-match prior more early, Poisson model more late
+        if pre_match_wdl:
+            blend = max(0.05, minutes_remaining / 90.0)  # prior fades as match progresses
+            hw = pre_match_wdl.get("home_win", hw) * blend + hw * (1 - blend)
+            dw = pre_match_wdl.get("draw", dw) * blend + dw * (1 - blend)
+            aw = pre_match_wdl.get("away_win", aw) * blend + aw * (1 - blend)
+            # Re-normalize
+            s = hw + dw + aw
+            if s > 0:
+                hw /= s; dw /= s; aw /= s
         
         return self._make_result(
             home_goals, away_goals, hw, dw, aw,

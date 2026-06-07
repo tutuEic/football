@@ -11,8 +11,7 @@ PROJECT_ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 sys.path.insert(0, PROJECT_ROOT)
 
 from data.http_utils import safe_get
-import mysql.connector
-from config import MYSQL_HOST, MYSQL_PORT, MYSQL_USER, MYSQL_PASS, CURRENT_SEASON
+from config import CURRENT_SEASON
 
 DB = "football_pred"
 LEAGUE_CODE = "CL"
@@ -22,7 +21,7 @@ SEASON_STR = f"{CURRENT_SEASON % 100:02d}{(CURRENT_SEASON + 1) % 100:02d}"
 
 # FlashScore field separators
 FIELD_SEP = "\u00AC"  # ?
-KV_SEP = "\u00F7"     # ¡Â
+KV_SEP = "\u00F7"     # ï¿½ï¿½
 
 FLASHSCORE_URLS = {
     "results": "https://www.flashscore.com/football/europe/champions-league/results/",
@@ -31,11 +30,8 @@ FLASHSCORE_URLS = {
 
 
 def get_conn():
-    return mysql.connector.connect(
-        host=MYSQL_HOST, port=MYSQL_PORT,
-        user=MYSQL_USER, password=MYSQL_PASS,
-        database=DB, charset="utf8mb4",
-    )
+    from data.mysql_client import get_connection
+    return get_connection(db=DB)
 
 
 def _parse_flashscore_data(raw):
@@ -90,7 +86,7 @@ def fetch_cl_results():
             print(f"[CL] Results fetch failed: {r.status_code if r else 'None'}")
             return []
         
-        match = re.search(r'initialFeeds\["summary-results"\]\s*=\s*\{[^}]*data:\s*([^]+)', r.text)
+        match = re.search(r'initialFeeds\["summary-results"\]\s*=\s*\{[^}]*data:\s*([\s\S]+)', r.text)
         if not match:
             print("[CL] No results data found")
             return []
@@ -115,10 +111,10 @@ def fetch_cl_fixtures():
             return []
         
         # Try summary-fixtures first
-        match = re.search(r'initialFeeds\["summary-fixtures"\]\s*=\s*\{[^}]*data:\s*([^]+)', r.text)
+        match = re.search(r'initialFeeds\["summary-fixtures"\]\s*=\s*\{[^}]*data:\s*([\s\S]+)', r.text)
         if not match:
             # Fall back to future feed or results feed
-            match = re.search(r'initialFeeds\["summary-results"\]\s*=\s*\{[^}]*data:\s*([^]+)', r.text)
+            match = re.search(r'initialFeeds\["summary-results"\]\s*=\s*\{[^}]*data:\s*([\s\S]+)', r.text)
         
         if not match:
             print("[CL] No fixtures data found")

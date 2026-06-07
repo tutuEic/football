@@ -9,9 +9,6 @@ from pathlib import Path
 from scipy.optimize import minimize
 
 sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
-from models.registry import ModelRegistry
-
-
 class StackingEnsemble:
     """
     Stacking ensemble that combines base model predictions.

@@ -39,7 +39,8 @@ def _get_team_strength(team_name):
 def generate_squad_from_fixtures(club_name):
     """Generate a realistic squad using team performance data"""
     atk_str, def_str, games = _get_team_strength(club_name)
-    random.seed(int(__import__("hashlib").md5(club_name.encode()).hexdigest(), 16) % 10000)  # Deterministic per club
+    _seed = int(__import__("hashlib").md5(club_name.encode()).hexdigest(), 16) % 10000
+    rng = random.Random(_seed)  # Local RNG to avoid polluting global state
     
     players = []
     name_pools = {"GK": GK_NAMES, "DF": DF_NAMES, "MF": MF_NAMES, "FW": FW_NAMES}
@@ -54,35 +55,35 @@ def generate_squad_from_fixtures(club_name):
     idx = 0
     for cat, count, base_ovr, base_def in templates:
         for _ in range(count):
-            fname = random.choice(FIRST_NAMES)
-            lname = random.choice(name_pools[cat])
+            fname = rng.choice(FIRST_NAMES)
+            lname = rng.choice(name_pools[cat])
             name = f"{fname} {lname}"
             
             # Adjust ratings based on team strength
             if cat == "GK":
                 adj = def_str
-                ovr = int(base_ovr * adj + random.randint(-3, 3))
-                atk = int(15 * atk_str + random.randint(-2, 2))
-                df = int(base_def * def_str + random.randint(-3, 3))
+                ovr = int(base_ovr * adj + rng.randint(-3, 3))
+                atk = int(15 * atk_str + rng.randint(-2, 2))
+                df = int(base_def * def_str + rng.randint(-3, 3))
                 pos = "Goalkeeper"
             elif cat == "DF":
                 adj = def_str
-                ovr = int(base_ovr * adj + random.randint(-5, 5))
-                atk = int(30 * atk_str + random.randint(-5, 5))
-                df = int(base_def * def_str + random.randint(-5, 5))
-                pos = random.choice(["Centre-Back", "Left-Back", "Right-Back"])
+                ovr = int(base_ovr * adj + rng.randint(-5, 5))
+                atk = int(30 * atk_str + rng.randint(-5, 5))
+                df = int(base_def * def_str + rng.randint(-5, 5))
+                pos = rng.choice(["Centre-Back", "Left-Back", "Right-Back"])
             elif cat == "MF":
                 adj = (atk_str + def_str) / 2
-                ovr = int(base_ovr * adj + random.randint(-5, 5))
-                atk = int(55 * atk_str + random.randint(-5, 5))
-                df = int(base_def * def_str + random.randint(-5, 5))
-                pos = random.choice(["Central Midfield", "Defensive Midfield", "Attacking Midfield"])
+                ovr = int(base_ovr * adj + rng.randint(-5, 5))
+                atk = int(55 * atk_str + rng.randint(-5, 5))
+                df = int(base_def * def_str + rng.randint(-5, 5))
+                pos = rng.choice(["Central Midfield", "Defensive Midfield", "Attacking Midfield"])
             else:  # FW
                 adj = atk_str
-                ovr = int(base_ovr * adj + random.randint(-5, 5))
-                atk = int(78 * atk_str + random.randint(-5, 5))
-                df = int(base_def * def_str + random.randint(-5, 5))
-                pos = random.choice(["Centre-Forward", "Left Winger", "Right Winger"])
+                ovr = int(base_ovr * adj + rng.randint(-5, 5))
+                atk = int(78 * atk_str + rng.randint(-5, 5))
+                df = int(base_def * def_str + rng.randint(-5, 5))
+                pos = rng.choice(["Centre-Forward", "Left Winger", "Right Winger"])
             
             ovr = max(40, min(85, ovr))
             atk = max(10, min(90, atk))
@@ -99,8 +100,8 @@ def generate_squad_from_fixtures(club_name):
                 "defense_rating": df,
                 "att": None,
                 "market_value": "N/A",
-                "goals_per_90": round(atk_str * 0.3 + random.random() * 0.3, 2),
-                "assists_per_90": round(atk_str * 0.15 + random.random() * 0.2, 2),
+                "goals_per_90": round(atk_str * 0.3 + rng.random() * 0.3, 2),
+                "assists_per_90": round(atk_str * 0.15 + rng.random() * 0.2, 2),
                 "appearances": games,
                 "source": "estimated",
             })

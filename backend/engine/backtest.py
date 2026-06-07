@@ -1,5 +1,4 @@
 """Docstring."""
-import os
 from engine.dixon_coles import DixonColes
 from data.match_repo import get_matches_for_training, get_seasons
 import numpy as np

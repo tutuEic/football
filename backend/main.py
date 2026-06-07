@@ -1,33 +1,65 @@
-# -*- coding: utf-8 -*-
+﻿# -*- coding: utf-8 -*-
 """Football Sandbox API - FastAPI main entry."""
 import sys, os, asyncio, logging
 # Ensure the backend package is importable when running main.py directly.
 if os.path.dirname(__file__) not in sys.path:
     sys.path.insert(0, os.path.dirname(__file__))
 
+from contextlib import asynccontextmanager
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
 from api import players, predict, sandbox, odds, models, matches, teams, clubs, live, fixtures, worldcup
-from security import APIKeyMiddleware
+from security import APIKeyMiddleware, DEV_MODE
 from rate_limit import RateLimitMiddleware
 from config import MYSQL_USER, MYSQL_PASS
 
 logger = logging.getLogger(__name__)
 
+
+@asynccontextmanager
+async def lifespan(app: FastAPI):
+    """Startup / shutdown lifecycle."""
+    from data.service_live import poller
+    poller.start()
+    print("[api] Live score poller started")
+
+    # Warn about insecure MySQL credentials
+    if MYSQL_USER == "root":
+        logger.warning("[security] MYSQL_USER is set to 'root'. Use a dedicated application user instead.")
+    if not MYSQL_PASS:
+        logger.warning("[security] MYSQL_PASS is empty. Set a strong password in .env.")
+
+    yield
+
+    # Shutdown: stop poller gracefully
+    try:
+        poller.stop()
+    except Exception:
+        pass
+
+
 app = FastAPI(
     title="Football Prediction Sandbox API",
     version="0.3.1",
-    description="Football prediction sandbox system with Monte Carlo simulation."
+    description="Football prediction sandbox system with Monte Carlo simulation.",
+    lifespan=lifespan,
 )
 
-app.add_middleware(
-    CORSMiddleware,
-    allow_origins=[
+# CORS: allow localhost + LAN IPs for development, restrict in production
+if DEV_MODE:
+    _allow_origins = ["*"]
+else:
+    _allow_origins = [
         "http://localhost:5173",
         "http://127.0.0.1:5173",
         "http://localhost:3000",
-    ],
+        "http://localhost:8000",
+    ]
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=_allow_origins,
     allow_methods=["GET", "POST", "PUT", "DELETE", "OPTIONS"],
     allow_headers=["Content-Type", "Authorization", "X-API-Key", "Accept"],
 )
@@ -48,19 +80,6 @@ app.include_router(fixtures.router, prefix="/api")
 app.include_router(worldcup.router, prefix="/api")
 
 
-@app.on_event("startup")
-async def startup():
-    from data.service_live import poller
-    poller.start()
-    print("[api] Live score poller started")
-
-    # Warn about insecure MySQL credentials
-    if MYSQL_USER == "root":
-        logger.warning("[security] MYSQL_USER is set to 'root'. Use a dedicated application user instead.")
-    if not MYSQL_PASS:
-        logger.warning("[security] MYSQL_PASS is empty. Set a strong password in .env.")
-
-
 @app.post("/api/refresh/cl")
 async def refresh_cl():
     """Run CL pipeline in background thread."""
@@ -77,9 +96,9 @@ async def refresh_cl():
 @app.post("/api/refresh/fixtures")
 async def refresh_fixtures():
     """Run fixtures pipeline in background thread."""
-    from data.pipeline_fixtures import run_pipeline
+    from data.pipeline_fixtures import refresh_all
     loop = asyncio.get_event_loop()
-    await loop.run_in_executor(None, run_pipeline)
+    await loop.run_in_executor(None, refresh_all)
     return {"status": "ok"}
 
 @app.get("/api/health")

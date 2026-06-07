@@ -41,7 +41,7 @@ FIFA_PATH = os.getenv("FIFA_PATH", "")
 
 # Current season derived from the calendar.
 # Football seasons span two calendar years (e.g. 2025/2026).
-# If we're in the second half of the year (July¨CDecember) the season started this year,
+# If we're in the second half of the year (Julyï¿½CDecember) the season started this year,
 # otherwise it started last year.
 now = datetime.now()
 CURRENT_SEASON = now.year if now.month >= 7 else now.year - 1

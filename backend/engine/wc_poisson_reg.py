@@ -11,14 +11,11 @@ Uses 23 features to predict expected goals (lambda_home, lambda_away).
 import json
 import os
 import sys
-import math
 import numpy as np
 from scipy.optimize import minimize
-from pathlib import Path
-
 sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 from data.mysql_client import query
-from engine.wc_features import compute_match_features, FEATURE_NAMES, clear_feature_cache
+from engine.wc_features import compute_match_features, FEATURE_NAMES
 from engine.wc_dc_international import normalize_team, MODEL_DIR
 
 

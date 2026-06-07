@@ -12,7 +12,7 @@ from pathlib import Path
 
 sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 import os
-from features.feature_store import FEATURE_NAMES, compute_match_features
+from features.feature_store import FEATURE_NAMES
 
 
 class PoissonRegression:

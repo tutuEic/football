@@ -1,0 +1,224 @@
+============================================================================
+        2026 FIFA WORLD CUP — TOURNAMENT RULES & FORMAT
+============================================================================
+Source: FIFA Official Rules + Project Design Documents
+Compiled: 2026-06-07
+============================================================================
+
+1. OVERVIEW
+-----------
+- Host countries: United States, Canada, Mexico (tri-host)
+- Total teams: 48 (expanded from 32)
+- Total matches: 104
+- Tournament dates: June 11 – July 19, 2026
+
+============================================================================
+
+2. GROUP STAGE FORMAT
+---------------------
+- Number of groups: 12 (Groups A through L)
+- Teams per group: 4
+- Total group stage teams: 48
+- Matches per group: 6 (each team plays 3 matches — round-robin)
+- Total group stage matches: 72
+
+Group Composition (from project data):
+  Group A, B, C, D, E, F, G, H, I, J, K, L
+  Each group contains 4 teams seeded by FIFA ranking.
+
+============================================================================
+
+3. GROUP STAGE ADVANCEMENT RULES
+---------------------------------
+From each group of 4 teams:
+
+  ADVANCE DIRECTLY:
+  - 1st place (12 group winners)    → Round of 32
+  - 2nd place (12 runners-up)       → Round of 32
+
+  BEST THIRD-PLACE ADVANCEMENT:
+  - 8 best 3rd-place teams (out of 12) → Round of 32
+
+  TOTAL ADVANCING: 12 + 12 + 8 = 32 teams
+
+  ELIMINATED:
+  - 4th place from all groups (12 teams)
+  - 4 worst 3rd-place teams (4 teams)
+  - Total eliminated in group stage: 16 teams
+
+Best 3rd-Place Selection Criteria:
+  The 12 third-place teams are ranked by:
+    1. Points (most)
+    2. Goal difference (best)
+    3. Goals scored (most)
+    4. Fair play points (if still tied)
+    5. Drawing of lots (last resort)
+  Top 8 of the 12 qualify for R32.
+
+============================================================================
+
+4. GROUP STAGE TIEBREAKERS
+---------------------------
+Teams in the same group are ranked by (in order):
+
+  1. Points (3 for win, 1 for draw, 0 for loss)
+  2. Overall goal difference
+  3. Overall goals scored (total goals for)
+  4. Head-to-head points (among tied teams only)
+  5. Head-to-head goal difference (among tied teams only)
+  6. Head-to-head goals scored (among tied teams only)
+  7. Fair play points:
+       - Yellow card: -1 point
+       - Indirect red (2 yellows): -3 points
+       - Direct red: -4 points
+       - Yellow + direct red: -5 points
+  8. Drawing of lots by FIFA Organising Committee
+
+Note: The project's simplified simulation uses criteria 1-3 only
+(Points → GD → GF). Full tiebreakers 4-8 are implemented in the
+official FIFA regulations.
+
+============================================================================
+
+5. KNOCKOUT STAGE STRUCTURE
+----------------------------
+Total knockout matches: 32
+
+  Stage          Matches    Teams Remaining
+  ─────────────  ───────    ───────────────
+  Round of 32    16         32 → 16
+  Round of 16     8         16 → 8
+  Quarter-finals  4          8 → 4
+  Semi-finals     2          4 → 2
+  Third-place     1          2 (losers of SF)
+  Final           1          2 → Champion
+
+  Total knockout: 16 + 8 + 4 + 2 + 1 + 1 = 32 matches
+  Total tournament: 72 (group) + 32 (knockout) = 104 matches
+
+============================================================================
+
+6. KNOCKOUT BRACKET — R32 PAIRING RULES
+-----------------------------------------
+The 32 qualifiers are paired as follows:
+
+  STRUCTURE:
+  The 12 groups are organized into 6 pairs:
+    Pair 1: Groups A & B
+    Pair 2: Groups C & D
+    Pair 3: Groups E & F
+    Pair 4: Groups G & H
+    Pair 5: Groups I & J
+    Pair 6: Groups K & L
+
+  CROSS-PAIRING (within each group pair):
+  For each pair of groups (e.g., A & B):
+    - Winner of Group A vs Runner-up of Group B
+    - Winner of Group B vs Runner-up of Group A
+  This accounts for 12 R32 matches (6 pairs × 2 matches each).
+
+  THIRD-PLACE ASSIGNMENT:
+  The 8 best third-place teams are assigned to face:
+    - Remaining group winners who don't already have a runner-up opponent
+    - Some runners-up who don't already have a winner opponent
+  The exact assignment depends on WHICH 8 third-place teams qualify
+  (FIFA publishes a pre-defined assignment table based on the
+  combination of groups from which 3rd-place teams qualify).
+
+  BRACKET PROPAGATION:
+  R32 winners advance to R16 → R16 winners to QF → QF to SF → SF to Final
+  Adjacent R32 matches feed into the same R16 match:
+    - R32 Match 1 winner vs R32 Match 2 winner = R16 Match 1
+    - R32 Match 3 winner vs R32 Match 4 winner = R16 Match 2
+    ... and so on.
+
+============================================================================
+
+7. KNOCKOUT MATCH RULES
+------------------------
+All knockout matches must produce a winner:
+
+  90 Minutes:
+  - Standard 90 minutes + stoppage time
+  - If a winner is determined → match ends
+
+  Extra Time (if drawn after 90 min):
+  - Two periods of 15 minutes each (30 minutes total)
+  - Golden goal rule is NOT used (full 30 minutes played)
+  - If winner determined in extra time → match ends
+
+  Penalty Shootout (if still drawn after extra time):
+  - Best of 5 penalties each
+  - If still tied after 5 → sudden death
+  - Coin toss decides which team takes first penalty
+
+============================================================================
+
+8. SPECIAL RULES & NOTES
+-------------------------
+  a) HOST NATIONS:
+     - USA, Canada, Mexico all automatically qualify
+     - USA is the primary host (hosts majority of matches)
+     - Mexico hosts opening match at Estadio Azteca
+     - Final at MetLife Stadium, New Jersey
+
+  b) VENUE DISTRIBUTION:
+     - 16 host cities across 3 countries
+     - USA: 11 cities
+     - Canada: 2 cities (Toronto, Vancouver)
+     - Mexico: 3 cities (Mexico City, Guadalajara, Monterrey)
+
+  c) SQUAD SIZE:
+     - 26 players per squad (expanded from traditional 23)
+     - Up to 26 players can be named for each match
+     - 5 substitutions allowed per match (from a bench of up to 15)
+
+  d) MATCH SCHEDULING:
+     - Group stage: 3 matchdays per group
+     - All groups play simultaneously on final matchday (MD3)
+     - No team plays twice within 3 days
+
+  e) VAR (Video Assistant Referee):
+     - Used in all 104 matches
+     - Semi-automated offside technology (SAOT) deployed
+
+  f) COOLING BREAKS:
+     - Mandatory cooling breaks in matches with high heat/humidity
+     - Two breaks per half (each 3 minutes) if temperature > 32°C
+
+============================================================================
+
+9. MATCH CONTEXT STAGES (for prediction model)
+------------------------------------------------
+Stage name    | Goal Multiplier | Draw Shift | Notes
+──────────────┼─────────────────┼────────────┼──────────────────
+Group MD1     | 1.02            | -0.01      | Opening matches
+Group MD2     | 1.00            |  0.00      | Normal
+Group MD3     | 0.95            | +0.02      | Tactical/cautious
+R32           | 0.92            | +0.03      | Knockout begins
+R16           | 0.90            | +0.04      |
+Quarter-Final | 0.88            | +0.05      | High stakes
+Semi-Final    | 0.85            | +0.06      |
+Final         | 0.82            | +0.07      | Most defensive
+
+Note: Goal multiplier < 1.0 in knockouts reflects that knockout
+matches tend to be lower-scoring and more defensive. Draw shift > 0
+reflects the increased likelihood of draws in regulation time.
+
+============================================================================
+
+10. HOME ADVANTAGE
+-------------------
+Context                     | Elo Advantage
+────────────────────────────┼──────────────
+True host team (USA/MEX/CAN)| +65 Elo
+Team playing in host country| +20 Elo
+Neutral venue               |   0 Elo
+
+In knockout stages, host advantage is halved (+32 for true hosts,
+0 for all others since knockouts are effectively neutral).
+
+============================================================================
+
+END OF FILE
+============================================================================

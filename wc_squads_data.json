@@ -1,0 +1,8717 @@
+[
+  {
+    "team_name": "Czechia",
+    "player_name": "Matěj Kovář",
+    "position": "Goalkeeper",
+    "club": "PSV Eindhoven",
+    "jersey_number": 1
+  },
+  {
+    "team_name": "Czechia",
+    "player_name": "David Zima",
+    "position": "Defender",
+    "club": "Slavia Prague",
+    "jersey_number": 2
+  },
+  {
+    "team_name": "Czechia",
+    "player_name": "Tomáš Holeš",
+    "position": "Defender",
+    "club": "Slavia Prague",
+    "jersey_number": 3
+  },
+  {
+    "team_name": "Czechia",
+    "player_name": "Robin Hranáč",
+    "position": "Defender",
+    "club": "TSG Hoffenheim",
+    "jersey_number": 4
+  },
+  {
+    "team_name": "Czechia",
+    "player_name": "Vladimír Coufal",
+    "position": "Defender",
+    "club": "TSG Hoffenheim",
+    "jersey_number": 5
+  },
+  {
+    "team_name": "Czechia",
+    "player_name": "Štěpán Chaloupek",
+    "position": "Defender",
+    "club": "Slavia Prague",
+    "jersey_number": 6
+  },
+  {
+    "team_name": "Czechia",
+    "player_name": "Ladislav Krejčí",
+    "position": "Defender",
+    "club": "Wolverhampton Wanderers",
+    "jersey_number": 7
+  },
+  {
+    "team_name": "Czechia",
+    "player_name": "Vladimír Darida",
+    "position": "Midfielder",
+    "club": "Hradec Králové",
+    "jersey_number": 8
+  },
+  {
+    "team_name": "Czechia",
+    "player_name": "Adam Hložek",
+    "position": "Forward",
+    "club": "TSG Hoffenheim",
+    "jersey_number": 9
+  },
+  {
+    "team_name": "Czechia",
+    "player_name": "Patrik Schick",
+    "position": "Forward",
+    "club": "Bayer Leverkusen",
+    "jersey_number": 10
+  },
+  {
+    "team_name": "Czechia",
+    "player_name": "Jan Kuchta",
+    "position": "Forward",
+    "club": "Sparta Prague",
+    "jersey_number": 11
+  },
+  {
+    "team_name": "Czechia",
+    "player_name": "Lukáš Červ",
+    "position": "Midfielder",
+    "club": "Viktoria Plzeň",
+    "jersey_number": 12
+  },
+  {
+    "team_name": "Czechia",
+    "player_name": "Mojmír Chytil",
+    "position": "Forward",
+    "club": "Slavia Prague",
+    "jersey_number": 13
+  },
+  {
+    "team_name": "Czechia",
+    "player_name": "David Jurásek",
+    "position": "Defender",
+    "club": "Slavia Prague",
+    "jersey_number": 14
+  },
+  {
+    "team_name": "Czechia",
+    "player_name": "Pavel Šulc",
+    "position": "Forward",
+    "club": "Lyon",
+    "jersey_number": 15
+  },
+  {
+    "team_name": "Czechia",
+    "player_name": "Jindřich Staněk",
+    "position": "Goalkeeper",
+    "club": "Slavia Prague",
+    "jersey_number": 16
+  },
+  {
+    "team_name": "Czechia",
+    "player_name": "Lukáš Provod",
+    "position": "Midfielder",
+    "club": "Slavia Prague",
+    "jersey_number": 17
+  },
+  {
+    "team_name": "Czechia",
+    "player_name": "Michal Sadílek",
+    "position": "Midfielder",
+    "club": "Slavia Prague",
+    "jersey_number": 18
+  },
+  {
+    "team_name": "Czechia",
+    "player_name": "Tomáš Chorý",
+    "position": "Forward",
+    "club": "Slavia Prague",
+    "jersey_number": 19
+  },
+  {
+    "team_name": "Czechia",
+    "player_name": "Jaroslav Zelený",
+    "position": "Defender",
+    "club": "Sparta Prague",
+    "jersey_number": 20
+  },
+  {
+    "team_name": "Czechia",
+    "player_name": "David Douděra",
+    "position": "Defender",
+    "club": "Slavia Prague",
+    "jersey_number": 21
+  },
+  {
+    "team_name": "Czechia",
+    "player_name": "Tomáš Souček",
+    "position": "Midfielder",
+    "club": "West Ham United",
+    "jersey_number": 22
+  },
+  {
+    "team_name": "Czechia",
+    "player_name": "Lukáš Horníček",
+    "position": "Goalkeeper",
+    "club": "Braga",
+    "jersey_number": 23
+  },
+  {
+    "team_name": "Czechia",
+    "player_name": "Alexandr Sojka",
+    "position": "Midfielder",
+    "club": "Viktoria Plzeň",
+    "jersey_number": 24
+  },
+  {
+    "team_name": "Czechia",
+    "player_name": "Hugo Sochůrek",
+    "position": "Midfielder",
+    "club": "Sparta Prague",
+    "jersey_number": 25
+  },
+  {
+    "team_name": "Czechia",
+    "player_name": "Denis Višinský",
+    "position": "Forward",
+    "club": "Viktoria Plzeň",
+    "jersey_number": 26
+  },
+  {
+    "team_name": "Mexico",
+    "player_name": "Raúl Rangel",
+    "position": "Goalkeeper",
+    "club": "Guadalajara",
+    "jersey_number": 1
+  },
+  {
+    "team_name": "Mexico",
+    "player_name": "Jorge Sánchez",
+    "position": "Defender",
+    "club": "PAOK",
+    "jersey_number": 2
+  },
+  {
+    "team_name": "Mexico",
+    "player_name": "César Montes",
+    "position": "Defender",
+    "club": "Lokomotiv Moscow",
+    "jersey_number": 3
+  },
+  {
+    "team_name": "Mexico",
+    "player_name": "Edson Álvarez",
+    "position": "Defender",
+    "club": "Fenerbahçe",
+    "jersey_number": 4
+  },
+  {
+    "team_name": "Mexico",
+    "player_name": "Johan Vásquez",
+    "position": "Defender",
+    "club": "Genoa",
+    "jersey_number": 5
+  },
+  {
+    "team_name": "Mexico",
+    "player_name": "Érik Lira",
+    "position": "Midfielder",
+    "club": "Cruz Azul",
+    "jersey_number": 6
+  },
+  {
+    "team_name": "Mexico",
+    "player_name": "Luis Romo",
+    "position": "Midfielder",
+    "club": "Guadalajara",
+    "jersey_number": 7
+  },
+  {
+    "team_name": "Mexico",
+    "player_name": "Álvaro Fidalgo",
+    "position": "Midfielder",
+    "club": "Real Betis",
+    "jersey_number": 8
+  },
+  {
+    "team_name": "Mexico",
+    "player_name": "Raúl Jiménez",
+    "position": "Forward",
+    "club": "Fulham",
+    "jersey_number": 9
+  },
+  {
+    "team_name": "Mexico",
+    "player_name": "Alexis Vega",
+    "position": "Forward",
+    "club": "Toluca",
+    "jersey_number": 10
+  },
+  {
+    "team_name": "Mexico",
+    "player_name": "Santiago Giménez",
+    "position": "Forward",
+    "club": "Milan",
+    "jersey_number": 11
+  },
+  {
+    "team_name": "Mexico",
+    "player_name": "Carlos Acevedo",
+    "position": "Goalkeeper",
+    "club": "Santos Laguna",
+    "jersey_number": 12
+  },
+  {
+    "team_name": "Mexico",
+    "player_name": "Guillermo Ochoa",
+    "position": "Goalkeeper",
+    "club": "AEL Limassol",
+    "jersey_number": 13
+  },
+  {
+    "team_name": "Mexico",
+    "player_name": "Armando González",
+    "position": "Forward",
+    "club": "Guadalajara",
+    "jersey_number": 14
+  },
+  {
+    "team_name": "Mexico",
+    "player_name": "Israel Reyes",
+    "position": "Defender",
+    "club": "América",
+    "jersey_number": 15
+  },
+  {
+    "team_name": "Mexico",
+    "player_name": "Julián Quiñones",
+    "position": "Forward",
+    "club": "Al-Qadsiah",
+    "jersey_number": 16
+  },
+  {
+    "team_name": "Mexico",
+    "player_name": "Orbelín Pineda",
+    "position": "Midfielder",
+    "club": "AEK Athens",
+    "jersey_number": 17
+  },
+  {
+    "team_name": "Mexico",
+    "player_name": "Obed Vargas",
+    "position": "Midfielder",
+    "club": "Atlético Madrid",
+    "jersey_number": 18
+  },
+  {
+    "team_name": "Mexico",
+    "player_name": "Gilberto Mora",
+    "position": "Midfielder",
+    "club": "Tijuana",
+    "jersey_number": 19
+  },
+  {
+    "team_name": "Mexico",
+    "player_name": "Mateo Chávez",
+    "position": "Defender",
+    "club": "AZ",
+    "jersey_number": 20
+  },
+  {
+    "team_name": "Mexico",
+    "player_name": "César Huerta",
+    "position": "Forward",
+    "club": "Anderlecht",
+    "jersey_number": 21
+  },
+  {
+    "team_name": "Mexico",
+    "player_name": "Guillermo Martínez",
+    "position": "Forward",
+    "club": "Pumas",
+    "jersey_number": 22
+  },
+  {
+    "team_name": "Mexico",
+    "player_name": "Jesús Gallardo",
+    "position": "Defender",
+    "club": "Toluca",
+    "jersey_number": 23
+  },
+  {
+    "team_name": "Mexico",
+    "player_name": "Luis Chávez",
+    "position": "Midfielder",
+    "club": "Dynamo Moscow",
+    "jersey_number": 24
+  },
+  {
+    "team_name": "Mexico",
+    "player_name": "Roberto Alvarado",
+    "position": "Forward",
+    "club": "Guadalajara",
+    "jersey_number": 25
+  },
+  {
+    "team_name": "Mexico",
+    "player_name": "Brian Gutiérrez",
+    "position": "Midfielder",
+    "club": "Guadalajara",
+    "jersey_number": 26
+  },
+  {
+    "team_name": "South Africa",
+    "player_name": "Ronwen Williams",
+    "position": "Goalkeeper",
+    "club": "Mamelodi Sundowns",
+    "jersey_number": 1
+  },
+  {
+    "team_name": "South Africa",
+    "player_name": "Thabang Matuludi",
+    "position": "Defender",
+    "club": "Polokwane City",
+    "jersey_number": 2
+  },
+  {
+    "team_name": "South Africa",
+    "player_name": "Khulumani Ndamane",
+    "position": "Defender",
+    "club": "Mamelodi Sundowns",
+    "jersey_number": 3
+  },
+  {
+    "team_name": "South Africa",
+    "player_name": "Teboho Mokoena",
+    "position": "Midfielder",
+    "club": "Mamelodi Sundowns",
+    "jersey_number": 4
+  },
+  {
+    "team_name": "South Africa",
+    "player_name": "Thalente Mbatha",
+    "position": "Midfielder",
+    "club": "Orlando Pirates",
+    "jersey_number": 5
+  },
+  {
+    "team_name": "South Africa",
+    "player_name": "Aubrey Modiba",
+    "position": "Defender",
+    "club": "Mamelodi Sundowns",
+    "jersey_number": 6
+  },
+  {
+    "team_name": "South Africa",
+    "player_name": "Oswin Appollis",
+    "position": "Forward",
+    "club": "Orlando Pirates",
+    "jersey_number": 7
+  },
+  {
+    "team_name": "South Africa",
+    "player_name": "Tshepang Moremi",
+    "position": "Forward",
+    "club": "Orlando Pirates",
+    "jersey_number": 8
+  },
+  {
+    "team_name": "South Africa",
+    "player_name": "Lyle Foster",
+    "position": "Forward",
+    "club": "Burnley",
+    "jersey_number": 9
+  },
+  {
+    "team_name": "South Africa",
+    "player_name": "Relebohile Mofokeng",
+    "position": "Forward",
+    "club": "Orlando Pirates",
+    "jersey_number": 10
+  },
+  {
+    "team_name": "South Africa",
+    "player_name": "Themba Zwane",
+    "position": "Midfielder",
+    "club": "Mamelodi Sundowns",
+    "jersey_number": 11
+  },
+  {
+    "team_name": "South Africa",
+    "player_name": "Thapelo Maseko",
+    "position": "Forward",
+    "club": "AEL Limassol",
+    "jersey_number": 12
+  },
+  {
+    "team_name": "South Africa",
+    "player_name": "Sphephelo Sithole",
+    "position": "Midfielder",
+    "club": "Tondela",
+    "jersey_number": 13
+  },
+  {
+    "team_name": "South Africa",
+    "player_name": "Mbekezeli Mbokazi",
+    "position": "Defender",
+    "club": "Chicago Fire FC",
+    "jersey_number": 14
+  },
+  {
+    "team_name": "South Africa",
+    "player_name": "Iqraam Rayners",
+    "position": "Forward",
+    "club": "Mamelodi Sundowns",
+    "jersey_number": 15
+  },
+  {
+    "team_name": "South Africa",
+    "player_name": "Sipho Chaine",
+    "position": "Goalkeeper",
+    "club": "Orlando Pirates",
+    "jersey_number": 16
+  },
+  {
+    "team_name": "South Africa",
+    "player_name": "Evidence Makgopa",
+    "position": "Forward",
+    "club": "Orlando Pirates",
+    "jersey_number": 17
+  },
+  {
+    "team_name": "South Africa",
+    "player_name": "Samukele Kabini",
+    "position": "Defender",
+    "club": "Molde",
+    "jersey_number": 18
+  },
+  {
+    "team_name": "South Africa",
+    "player_name": "Nkosinathi Sibisi",
+    "position": "Defender",
+    "club": "Orlando Pirates",
+    "jersey_number": 19
+  },
+  {
+    "team_name": "South Africa",
+    "player_name": "Khuliso Mudau",
+    "position": "Defender",
+    "club": "Mamelodi Sundowns",
+    "jersey_number": 20
+  },
+  {
+    "team_name": "South Africa",
+    "player_name": "Ime Okon",
+    "position": "Defender",
+    "club": "Hannover 96",
+    "jersey_number": 21
+  },
+  {
+    "team_name": "South Africa",
+    "player_name": "Ricardo Goss",
+    "position": "Goalkeeper",
+    "club": "Siwelele",
+    "jersey_number": 22
+  },
+  {
+    "team_name": "South Africa",
+    "player_name": "Jayden Adams",
+    "position": "Midfielder",
+    "club": "Mamelodi Sundowns",
+    "jersey_number": 23
+  },
+  {
+    "team_name": "South Africa",
+    "player_name": "Olwethu Makhanya",
+    "position": "Defender",
+    "club": "Philadelphia Union",
+    "jersey_number": 24
+  },
+  {
+    "team_name": "South Africa",
+    "player_name": "Kamogelo Sebelebele",
+    "position": "Forward",
+    "club": "Orlando Pirates",
+    "jersey_number": 25
+  },
+  {
+    "team_name": "South Africa",
+    "player_name": "Bradley Cross",
+    "position": "Defender",
+    "club": "Kaizer Chiefs",
+    "jersey_number": 26
+  },
+  {
+    "team_name": "Korea Republic",
+    "player_name": "Kim Seung-gyu",
+    "position": "Goalkeeper",
+    "club": "FC Tokyo",
+    "jersey_number": 1
+  },
+  {
+    "team_name": "Korea Republic",
+    "player_name": "Lee Han-beom",
+    "position": "Defender",
+    "club": "Midtjylland",
+    "jersey_number": 2
+  },
+  {
+    "team_name": "Korea Republic",
+    "player_name": "Lee Gi-hyuk",
+    "position": "Midfielder",
+    "club": "Gangwon FC",
+    "jersey_number": 3
+  },
+  {
+    "team_name": "Korea Republic",
+    "player_name": "Kim Min-jae",
+    "position": "Defender",
+    "club": "Bayern Munich",
+    "jersey_number": 4
+  },
+  {
+    "team_name": "Korea Republic",
+    "player_name": "Kim Tae-hyeon",
+    "position": "Defender",
+    "club": "Kashima Antlers",
+    "jersey_number": 5
+  },
+  {
+    "team_name": "Korea Republic",
+    "player_name": "Hwang In-beom",
+    "position": "Midfielder",
+    "club": "Feyenoord",
+    "jersey_number": 6
+  },
+  {
+    "team_name": "Korea Republic",
+    "player_name": "Son Heung-min",
+    "position": "Forward",
+    "club": "Los Angeles FC",
+    "jersey_number": 7
+  },
+  {
+    "team_name": "Korea Republic",
+    "player_name": "Paik Seung-ho",
+    "position": "Midfielder",
+    "club": "Birmingham City",
+    "jersey_number": 8
+  },
+  {
+    "team_name": "Korea Republic",
+    "player_name": "Cho Gue-sung",
+    "position": "Forward",
+    "club": "Midtjylland",
+    "jersey_number": 9
+  },
+  {
+    "team_name": "Korea Republic",
+    "player_name": "Lee Jae-sung",
+    "position": "Midfielder",
+    "club": "Mainz 05",
+    "jersey_number": 10
+  },
+  {
+    "team_name": "Korea Republic",
+    "player_name": "Hwang Hee-chan",
+    "position": "Midfielder",
+    "club": "Wolverhampton Wanderers",
+    "jersey_number": 11
+  },
+  {
+    "team_name": "Korea Republic",
+    "player_name": "Song Bum-keun",
+    "position": "Goalkeeper",
+    "club": "Jeonbuk Hyundai Motors",
+    "jersey_number": 12
+  },
+  {
+    "team_name": "Korea Republic",
+    "player_name": "Lee Tae-seok",
+    "position": "Defender",
+    "club": "Austria Wien",
+    "jersey_number": 13
+  },
+  {
+    "team_name": "Korea Republic",
+    "player_name": "Cho Wi-je",
+    "position": "Defender",
+    "club": "Jeonbuk Hyundai Motors",
+    "jersey_number": 14
+  },
+  {
+    "team_name": "Korea Republic",
+    "player_name": "Kim Moon-hwan",
+    "position": "Defender",
+    "club": "Daejeon Hana Citizen",
+    "jersey_number": 15
+  },
+  {
+    "team_name": "Korea Republic",
+    "player_name": "Park Jin-seob",
+    "position": "Defender",
+    "club": "Zhejiang",
+    "jersey_number": 16
+  },
+  {
+    "team_name": "Korea Republic",
+    "player_name": "Bae Jun-ho",
+    "position": "Midfielder",
+    "club": "Stoke City",
+    "jersey_number": 17
+  },
+  {
+    "team_name": "Korea Republic",
+    "player_name": "Oh Hyeon-gyu",
+    "position": "Forward",
+    "club": "Beşiktaş",
+    "jersey_number": 18
+  },
+  {
+    "team_name": "Korea Republic",
+    "player_name": "Lee Kang-in",
+    "position": "Midfielder",
+    "club": "Paris Saint-Germain",
+    "jersey_number": 19
+  },
+  {
+    "team_name": "Korea Republic",
+    "player_name": "Yang Hyun-jun",
+    "position": "Midfielder",
+    "club": "Celtic",
+    "jersey_number": 20
+  },
+  {
+    "team_name": "Korea Republic",
+    "player_name": "Jo Hyeon-woo",
+    "position": "Goalkeeper",
+    "club": "Ulsan HD",
+    "jersey_number": 21
+  },
+  {
+    "team_name": "Korea Republic",
+    "player_name": "Seol Young-woo",
+    "position": "Defender",
+    "club": "Red Star Belgrade",
+    "jersey_number": 22
+  },
+  {
+    "team_name": "Korea Republic",
+    "player_name": "Jens Castrop",
+    "position": "Defender",
+    "club": "Borussia Mönchengladbach",
+    "jersey_number": 23
+  },
+  {
+    "team_name": "Korea Republic",
+    "player_name": "Kim Jin-gyu",
+    "position": "Midfielder",
+    "club": "Jeonbuk Hyundai Motors",
+    "jersey_number": 24
+  },
+  {
+    "team_name": "Korea Republic",
+    "player_name": "Eom Ji-sung",
+    "position": "Midfielder",
+    "club": "Swansea City",
+    "jersey_number": 25
+  },
+  {
+    "team_name": "Korea Republic",
+    "player_name": "Lee Dong-gyeong",
+    "position": "Midfielder",
+    "club": "Ulsan HD",
+    "jersey_number": 26
+  },
+  {
+    "team_name": "Bosnia and Herzegovina",
+    "player_name": "Nikola Vasilj",
+    "position": "Goalkeeper",
+    "club": "FC St. Pauli",
+    "jersey_number": 1
+  },
+  {
+    "team_name": "Bosnia and Herzegovina",
+    "player_name": "Nihad Mujakić",
+    "position": "Defender",
+    "club": "Gaziantep",
+    "jersey_number": 2
+  },
+  {
+    "team_name": "Bosnia and Herzegovina",
+    "player_name": "Dennis Hadžikadunić",
+    "position": "Defender",
+    "club": "Sampdoria",
+    "jersey_number": 3
+  },
+  {
+    "team_name": "Bosnia and Herzegovina",
+    "player_name": "Tarik Muharemović",
+    "position": "Defender",
+    "club": "Sassuolo",
+    "jersey_number": 4
+  },
+  {
+    "team_name": "Bosnia and Herzegovina",
+    "player_name": "Sead Kolašinac",
+    "position": "Defender",
+    "club": "Atalanta",
+    "jersey_number": 5
+  },
+  {
+    "team_name": "Bosnia and Herzegovina",
+    "player_name": "Benjamin Tahirović",
+    "position": "Midfielder",
+    "club": "Brøndby",
+    "jersey_number": 6
+  },
+  {
+    "team_name": "Bosnia and Herzegovina",
+    "player_name": "Amar Dedić",
+    "position": "Defender",
+    "club": "Benfica",
+    "jersey_number": 7
+  },
+  {
+    "team_name": "Bosnia and Herzegovina",
+    "player_name": "Armin Gigović",
+    "position": "Midfielder",
+    "club": "Young Boys",
+    "jersey_number": 8
+  },
+  {
+    "team_name": "Bosnia and Herzegovina",
+    "player_name": "Samed Baždar",
+    "position": "Forward",
+    "club": "Jagiellonia Białystok",
+    "jersey_number": 9
+  },
+  {
+    "team_name": "Bosnia and Herzegovina",
+    "player_name": "Ermedin Demirović",
+    "position": "Forward",
+    "club": "VfB Stuttgart",
+    "jersey_number": 10
+  },
+  {
+    "team_name": "Bosnia and Herzegovina",
+    "player_name": "Edin Džeko",
+    "position": "Forward",
+    "club": "Schalke 04",
+    "jersey_number": 11
+  },
+  {
+    "team_name": "Bosnia and Herzegovina",
+    "player_name": "Mladen Jurkas",
+    "position": "Goalkeeper",
+    "club": "Borac Banja Luka",
+    "jersey_number": 12
+  },
+  {
+    "team_name": "Bosnia and Herzegovina",
+    "player_name": "Ivan Bašić",
+    "position": "Midfielder",
+    "club": "Astana",
+    "jersey_number": 13
+  },
+  {
+    "team_name": "Bosnia and Herzegovina",
+    "player_name": "Ivan Šunjić",
+    "position": "Midfielder",
+    "club": "Pafos",
+    "jersey_number": 14
+  },
+  {
+    "team_name": "Bosnia and Herzegovina",
+    "player_name": "Amar Memić",
+    "position": "Midfielder",
+    "club": "Viktoria Plzeň",
+    "jersey_number": 15
+  },
+  {
+    "team_name": "Bosnia and Herzegovina",
+    "player_name": "Amir Hadžiahmetović",
+    "position": "Midfielder",
+    "club": "Hull City",
+    "jersey_number": 16
+  },
+  {
+    "team_name": "Bosnia and Herzegovina",
+    "player_name": "Dženis Burnić",
+    "position": "Midfielder",
+    "club": "Karlsruher SC",
+    "jersey_number": 17
+  },
+  {
+    "team_name": "Bosnia and Herzegovina",
+    "player_name": "Nikola Katić",
+    "position": "Defender",
+    "club": "Schalke 04",
+    "jersey_number": 18
+  },
+  {
+    "team_name": "Bosnia and Herzegovina",
+    "player_name": "Kerim Alajbegović",
+    "position": "Forward",
+    "club": "Red Bull Salzburg",
+    "jersey_number": 19
+  },
+  {
+    "team_name": "Bosnia and Herzegovina",
+    "player_name": "Esmir Bajraktarević",
+    "position": "Forward",
+    "club": "PSV Eindhoven",
+    "jersey_number": 20
+  },
+  {
+    "team_name": "Bosnia and Herzegovina",
+    "player_name": "Stjepan Radeljić",
+    "position": "Defender",
+    "club": "Rijeka",
+    "jersey_number": 21
+  },
+  {
+    "team_name": "Bosnia and Herzegovina",
+    "player_name": "Martin Zlomislić",
+    "position": "Goalkeeper",
+    "club": "Rijeka",
+    "jersey_number": 22
+  },
+  {
+    "team_name": "Bosnia and Herzegovina",
+    "player_name": "Haris Tabaković",
+    "position": "Forward",
+    "club": "Borussia Mönchengladbach",
+    "jersey_number": 23
+  },
+  {
+    "team_name": "Bosnia and Herzegovina",
+    "player_name": "Nidal Čelik",
+    "position": "Defender",
+    "club": "Lens",
+    "jersey_number": 24
+  },
+  {
+    "team_name": "Bosnia and Herzegovina",
+    "player_name": "Jovo Lukić",
+    "position": "Forward",
+    "club": "Universitatea Cluj",
+    "jersey_number": 25
+  },
+  {
+    "team_name": "Bosnia and Herzegovina",
+    "player_name": "Ermin Mahmić",
+    "position": "Midfielder",
+    "club": "Slovan Liberec",
+    "jersey_number": 26
+  },
+  {
+    "team_name": "Canada",
+    "player_name": "Dayne St. Clair",
+    "position": "Goalkeeper",
+    "club": "Inter Miami CF",
+    "jersey_number": 1
+  },
+  {
+    "team_name": "Canada",
+    "player_name": "Alistair Johnston",
+    "position": "Defender",
+    "club": "Celtic",
+    "jersey_number": 2
+  },
+  {
+    "team_name": "Canada",
+    "player_name": "Alfie Jones",
+    "position": "Defender",
+    "club": "Middlesbrough",
+    "jersey_number": 3
+  },
+  {
+    "team_name": "Canada",
+    "player_name": "Luc de Fougerolles",
+    "position": "Defender",
+    "club": "Dender",
+    "jersey_number": 4
+  },
+  {
+    "team_name": "Canada",
+    "player_name": "Joel Waterman",
+    "position": "Defender",
+    "club": "Chicago Fire FC",
+    "jersey_number": 5
+  },
+  {
+    "team_name": "Canada",
+    "player_name": "Mathieu Choinière",
+    "position": "Midfielder",
+    "club": "Los Angeles FC",
+    "jersey_number": 6
+  },
+  {
+    "team_name": "Canada",
+    "player_name": "Stephen Eustáquio",
+    "position": "Midfielder",
+    "club": "Los Angeles FC",
+    "jersey_number": 7
+  },
+  {
+    "team_name": "Canada",
+    "player_name": "Ismaël Koné",
+    "position": "Midfielder",
+    "club": "Sassuolo",
+    "jersey_number": 8
+  },
+  {
+    "team_name": "Canada",
+    "player_name": "Cyle Larin",
+    "position": "Forward",
+    "club": "Southampton",
+    "jersey_number": 9
+  },
+  {
+    "team_name": "Canada",
+    "player_name": "Jonathan David",
+    "position": "Forward",
+    "club": "Juventus",
+    "jersey_number": 10
+  },
+  {
+    "team_name": "Canada",
+    "player_name": "Liam Millar",
+    "position": "Midfielder",
+    "club": "Hull City",
+    "jersey_number": 11
+  },
+  {
+    "team_name": "Canada",
+    "player_name": "Tani Oluwaseyi",
+    "position": "Forward",
+    "club": "Villarreal",
+    "jersey_number": 12
+  },
+  {
+    "team_name": "Canada",
+    "player_name": "Derek Cornelius",
+    "position": "Defender",
+    "club": "Rangers",
+    "jersey_number": 13
+  },
+  {
+    "team_name": "Canada",
+    "player_name": "Jacob Shaffelburg",
+    "position": "Midfielder",
+    "club": "Los Angeles FC",
+    "jersey_number": 14
+  },
+  {
+    "team_name": "Canada",
+    "player_name": "Moïse Bombito",
+    "position": "Defender",
+    "club": "Nice",
+    "jersey_number": 15
+  },
+  {
+    "team_name": "Canada",
+    "player_name": "Maxime Crépeau",
+    "position": "Goalkeeper",
+    "club": "Orlando City SC",
+    "jersey_number": 16
+  },
+  {
+    "team_name": "Canada",
+    "player_name": "Tajon Buchanan",
+    "position": "Forward",
+    "club": "Villarreal",
+    "jersey_number": 17
+  },
+  {
+    "team_name": "Canada",
+    "player_name": "Owen Goodman",
+    "position": "Goalkeeper",
+    "club": "Barnsley",
+    "jersey_number": 18
+  },
+  {
+    "team_name": "Canada",
+    "player_name": "Alphonso Davies",
+    "position": "Defender",
+    "club": "Bayern Munich",
+    "jersey_number": 19
+  },
+  {
+    "team_name": "Canada",
+    "player_name": "Ali Ahmed",
+    "position": "Forward",
+    "club": "Norwich City",
+    "jersey_number": 20
+  },
+  {
+    "team_name": "Canada",
+    "player_name": "Jonathan Osorio",
+    "position": "Midfielder",
+    "club": "Toronto FC",
+    "jersey_number": 21
+  },
+  {
+    "team_name": "Canada",
+    "player_name": "Richie Laryea",
+    "position": "Defender",
+    "club": "Toronto FC",
+    "jersey_number": 22
+  },
+  {
+    "team_name": "Canada",
+    "player_name": "Niko Sigur",
+    "position": "Defender",
+    "club": "Hajduk Split",
+    "jersey_number": 23
+  },
+  {
+    "team_name": "Canada",
+    "player_name": "Promise David",
+    "position": "Forward",
+    "club": "Union Saint-Gilloise",
+    "jersey_number": 24
+  },
+  {
+    "team_name": "Canada",
+    "player_name": "Nathan Saliba",
+    "position": "Midfielder",
+    "club": "Anderlecht",
+    "jersey_number": 25
+  },
+  {
+    "team_name": "Qatar",
+    "player_name": "Mahmud Abunada",
+    "position": "Goalkeeper",
+    "club": "Al-Rayyan",
+    "jersey_number": 1
+  },
+  {
+    "team_name": "Qatar",
+    "player_name": "Pedro Miguel",
+    "position": "Defender",
+    "club": "Al-Sadd",
+    "jersey_number": 2
+  },
+  {
+    "team_name": "Qatar",
+    "player_name": "Lucas Mendes",
+    "position": "Defender",
+    "club": "Al-Wakrah",
+    "jersey_number": 3
+  },
+  {
+    "team_name": "Qatar",
+    "player_name": "Issa Laye",
+    "position": "Defender",
+    "club": "Al-Arabi",
+    "jersey_number": 4
+  },
+  {
+    "team_name": "Qatar",
+    "player_name": "Jassem Gaber",
+    "position": "Defender",
+    "club": "Al-Rayyan",
+    "jersey_number": 5
+  },
+  {
+    "team_name": "Qatar",
+    "player_name": "Abdulaziz Hatem",
+    "position": "Midfielder",
+    "club": "Al-Rayyan",
+    "jersey_number": 6
+  },
+  {
+    "team_name": "Qatar",
+    "player_name": "Ahmed Alaaeldin",
+    "position": "Forward",
+    "club": "Al-Rayyan",
+    "jersey_number": 7
+  },
+  {
+    "team_name": "Qatar",
+    "player_name": "Edmilson Junior",
+    "position": "Forward",
+    "club": "Al-Duhail",
+    "jersey_number": 8
+  },
+  {
+    "team_name": "Qatar",
+    "player_name": "Mohammed Muntari",
+    "position": "Forward",
+    "club": "Al-Gharafa",
+    "jersey_number": 9
+  },
+  {
+    "team_name": "Qatar",
+    "player_name": "Hassan Al-Haydos",
+    "position": "Forward",
+    "club": "Al-Sadd",
+    "jersey_number": 10
+  },
+  {
+    "team_name": "Qatar",
+    "player_name": "Akram Afif",
+    "position": "Forward",
+    "club": "Al-Sadd",
+    "jersey_number": 11
+  },
+  {
+    "team_name": "Qatar",
+    "player_name": "Karim Boudiaf",
+    "position": "Midfielder",
+    "club": "Al-Duhail",
+    "jersey_number": 12
+  },
+  {
+    "team_name": "Qatar",
+    "player_name": "Ayoub Al-Oui",
+    "position": "Defender",
+    "club": "Al-Gharafa",
+    "jersey_number": 13
+  },
+  {
+    "team_name": "Qatar",
+    "player_name": "Homam Ahmed",
+    "position": "Defender",
+    "club": "Cultural Leonesa",
+    "jersey_number": 14
+  },
+  {
+    "team_name": "Qatar",
+    "player_name": "Yusuf Abdurisag",
+    "position": "Forward",
+    "club": "Al-Wakrah",
+    "jersey_number": 15
+  },
+  {
+    "team_name": "Qatar",
+    "player_name": "Boualem Khoukhi",
+    "position": "Defender",
+    "club": "Al-Sadd",
+    "jersey_number": 16
+  },
+  {
+    "team_name": "Qatar",
+    "player_name": "Ahmed Al-Ganehi",
+    "position": "Midfielder",
+    "club": "Al-Gharafa",
+    "jersey_number": 17
+  },
+  {
+    "team_name": "Qatar",
+    "player_name": "Sultan Al-Brake",
+    "position": "Defender",
+    "club": "Al-Duhail",
+    "jersey_number": 18
+  },
+  {
+    "team_name": "Qatar",
+    "player_name": "Almoez Ali",
+    "position": "Forward",
+    "club": "Al-Duhail",
+    "jersey_number": 19
+  },
+  {
+    "team_name": "Qatar",
+    "player_name": "Ahmed Fathy",
+    "position": "Midfielder",
+    "club": "Al-Arabi",
+    "jersey_number": 20
+  },
+  {
+    "team_name": "Qatar",
+    "player_name": "Salah Zakaria",
+    "position": "Goalkeeper",
+    "club": "Al-Duhail",
+    "jersey_number": 21
+  },
+  {
+    "team_name": "Qatar",
+    "player_name": "Meshaal Barsham",
+    "position": "Goalkeeper",
+    "club": "Al-Sadd",
+    "jersey_number": 22
+  },
+  {
+    "team_name": "Qatar",
+    "player_name": "Assim Madibo",
+    "position": "Midfielder",
+    "club": "Al-Wakrah",
+    "jersey_number": 23
+  },
+  {
+    "team_name": "Qatar",
+    "player_name": "Tahsin Jamshid",
+    "position": "Forward",
+    "club": "Al-Duhail",
+    "jersey_number": 24
+  },
+  {
+    "team_name": "Qatar",
+    "player_name": "Al-Hashmi Al-Hussain",
+    "position": "Defender",
+    "club": "Al-Arabi",
+    "jersey_number": 25
+  },
+  {
+    "team_name": "Qatar",
+    "player_name": "Mohamed Manai",
+    "position": "Forward",
+    "club": "Al-Shamal",
+    "jersey_number": 26
+  },
+  {
+    "team_name": "Switzerland",
+    "player_name": "Gregor Kobel",
+    "position": "Goalkeeper",
+    "club": "Borussia Dortmund",
+    "jersey_number": 1
+  },
+  {
+    "team_name": "Switzerland",
+    "player_name": "Miro Muheim",
+    "position": "Defender",
+    "club": "Hamburger SV",
+    "jersey_number": 2
+  },
+  {
+    "team_name": "Switzerland",
+    "player_name": "Silvan Widmer",
+    "position": "Defender",
+    "club": "Mainz 05",
+    "jersey_number": 3
+  },
+  {
+    "team_name": "Switzerland",
+    "player_name": "Nico Elvedi",
+    "position": "Defender",
+    "club": "Borussia Mönchengladbach",
+    "jersey_number": 4
+  },
+  {
+    "team_name": "Switzerland",
+    "player_name": "Manuel Akanji",
+    "position": "Defender",
+    "club": "Inter Milan",
+    "jersey_number": 5
+  },
+  {
+    "team_name": "Switzerland",
+    "player_name": "Denis Zakaria",
+    "position": "Midfielder",
+    "club": "Monaco",
+    "jersey_number": 6
+  },
+  {
+    "team_name": "Switzerland",
+    "player_name": "Breel Embolo",
+    "position": "Forward",
+    "club": "Rennes",
+    "jersey_number": 7
+  },
+  {
+    "team_name": "Switzerland",
+    "player_name": "Remo Freuler",
+    "position": "Midfielder",
+    "club": "Bologna",
+    "jersey_number": 8
+  },
+  {
+    "team_name": "Switzerland",
+    "player_name": "Johan Manzambi",
+    "position": "Midfielder",
+    "club": "SC Freiburg",
+    "jersey_number": 9
+  },
+  {
+    "team_name": "Switzerland",
+    "player_name": "Granit Xhaka",
+    "position": "Midfielder",
+    "club": "Sunderland",
+    "jersey_number": 10
+  },
+  {
+    "team_name": "Switzerland",
+    "player_name": "Dan Ndoye",
+    "position": "Forward",
+    "club": "Nottingham Forest",
+    "jersey_number": 11
+  },
+  {
+    "team_name": "Switzerland",
+    "player_name": "Yvon Mvogo",
+    "position": "Goalkeeper",
+    "club": "Lorient",
+    "jersey_number": 12
+  },
+  {
+    "team_name": "Switzerland",
+    "player_name": "Ricardo Rodriguez",
+    "position": "Defender",
+    "club": "Real Betis",
+    "jersey_number": 13
+  },
+  {
+    "team_name": "Switzerland",
+    "player_name": "Ardon Jashari",
+    "position": "Midfielder",
+    "club": "Milan",
+    "jersey_number": 14
+  },
+  {
+    "team_name": "Switzerland",
+    "player_name": "Djibril Sow",
+    "position": "Midfielder",
+    "club": "Sevilla",
+    "jersey_number": 15
+  },
+  {
+    "team_name": "Switzerland",
+    "player_name": "Christian Fassnacht",
+    "position": "Forward",
+    "club": "Young Boys",
+    "jersey_number": 16
+  },
+  {
+    "team_name": "Switzerland",
+    "player_name": "Rubén Vargas",
+    "position": "Forward",
+    "club": "Sevilla",
+    "jersey_number": 17
+  },
+  {
+    "team_name": "Switzerland",
+    "player_name": "Eray Cömert",
+    "position": "Defender",
+    "club": "Valencia",
+    "jersey_number": 18
+  },
+  {
+    "team_name": "Switzerland",
+    "player_name": "Noah Okafor",
+    "position": "Forward",
+    "club": "Leeds United",
+    "jersey_number": 19
+  },
+  {
+    "team_name": "Switzerland",
+    "player_name": "Michel Aebischer",
+    "position": "Midfielder",
+    "club": "Pisa",
+    "jersey_number": 20
+  },
+  {
+    "team_name": "Switzerland",
+    "player_name": "Marvin Keller",
+    "position": "Goalkeeper",
+    "club": "Young Boys",
+    "jersey_number": 21
+  },
+  {
+    "team_name": "Switzerland",
+    "player_name": "Fabian Rieder",
+    "position": "Midfielder",
+    "club": "FC Augsburg",
+    "jersey_number": 22
+  },
+  {
+    "team_name": "Switzerland",
+    "player_name": "Zeki Amdouni",
+    "position": "Forward",
+    "club": "Burnley",
+    "jersey_number": 23
+  },
+  {
+    "team_name": "Switzerland",
+    "player_name": "Aurèle Amenda",
+    "position": "Defender",
+    "club": "Eintracht Frankfurt",
+    "jersey_number": 24
+  },
+  {
+    "team_name": "Switzerland",
+    "player_name": "Luca Jaquez",
+    "position": "Defender",
+    "club": "VfB Stuttgart",
+    "jersey_number": 25
+  },
+  {
+    "team_name": "Switzerland",
+    "player_name": "Cedric Itten",
+    "position": "Forward",
+    "club": "Fortuna Düsseldorf",
+    "jersey_number": 26
+  },
+  {
+    "team_name": "Brazil",
+    "player_name": "Alisson",
+    "position": "Goalkeeper",
+    "club": "Liverpool",
+    "jersey_number": 1
+  },
+  {
+    "team_name": "Brazil",
+    "player_name": "Wesley",
+    "position": "Defender",
+    "club": "Roma",
+    "jersey_number": 2
+  },
+  {
+    "team_name": "Brazil",
+    "player_name": "Gabriel Magalhães",
+    "position": "Defender",
+    "club": "Arsenal",
+    "jersey_number": 3
+  },
+  {
+    "team_name": "Brazil",
+    "player_name": "Marquinhos",
+    "position": "Defender",
+    "club": "Paris Saint-Germain",
+    "jersey_number": 4
+  },
+  {
+    "team_name": "Brazil",
+    "player_name": "Casemiro",
+    "position": "Midfielder",
+    "club": "Manchester United",
+    "jersey_number": 5
+  },
+  {
+    "team_name": "Brazil",
+    "player_name": "Alex Sandro",
+    "position": "Defender",
+    "club": "Flamengo",
+    "jersey_number": 6
+  },
+  {
+    "team_name": "Brazil",
+    "player_name": "Vinícius Júnior",
+    "position": "Forward",
+    "club": "Real Madrid",
+    "jersey_number": 7
+  },
+  {
+    "team_name": "Brazil",
+    "player_name": "Bruno Guimarães",
+    "position": "Midfielder",
+    "club": "Newcastle United",
+    "jersey_number": 8
+  },
+  {
+    "team_name": "Brazil",
+    "player_name": "Matheus Cunha",
+    "position": "Forward",
+    "club": "Manchester United",
+    "jersey_number": 9
+  },
+  {
+    "team_name": "Brazil",
+    "player_name": "Neymar",
+    "position": "Forward",
+    "club": "Santos",
+    "jersey_number": 10
+  },
+  {
+    "team_name": "Brazil",
+    "player_name": "Raphinha",
+    "position": "Forward",
+    "club": "Barcelona",
+    "jersey_number": 11
+  },
+  {
+    "team_name": "Brazil",
+    "player_name": "Weverton",
+    "position": "Goalkeeper",
+    "club": "Grêmio",
+    "jersey_number": 12
+  },
+  {
+    "team_name": "Brazil",
+    "player_name": "Danilo Luiz",
+    "position": "Defender",
+    "club": "Flamengo",
+    "jersey_number": 13
+  },
+  {
+    "team_name": "Brazil",
+    "player_name": "Bremer",
+    "position": "Defender",
+    "club": "Juventus",
+    "jersey_number": 14
+  },
+  {
+    "team_name": "Brazil",
+    "player_name": "Léo Pereira",
+    "position": "Defender",
+    "club": "Flamengo",
+    "jersey_number": 15
+  },
+  {
+    "team_name": "Brazil",
+    "player_name": "Douglas Santos",
+    "position": "Defender",
+    "club": "Zenit Saint Petersburg",
+    "jersey_number": 16
+  },
+  {
+    "team_name": "Brazil",
+    "player_name": "Fabinho",
+    "position": "Midfielder",
+    "club": "Al-Ittihad",
+    "jersey_number": 17
+  },
+  {
+    "team_name": "Brazil",
+    "player_name": "Danilo Santos",
+    "position": "Midfielder",
+    "club": "Botafogo",
+    "jersey_number": 18
+  },
+  {
+    "team_name": "Brazil",
+    "player_name": "Endrick",
+    "position": "Forward",
+    "club": "Lyon",
+    "jersey_number": 19
+  },
+  {
+    "team_name": "Brazil",
+    "player_name": "Lucas Paquetá",
+    "position": "Midfielder",
+    "club": "Flamengo",
+    "jersey_number": 20
+  },
+  {
+    "team_name": "Brazil",
+    "player_name": "Luiz Henrique",
+    "position": "Forward",
+    "club": "Zenit Saint Petersburg",
+    "jersey_number": 21
+  },
+  {
+    "team_name": "Brazil",
+    "player_name": "Gabriel Martinelli",
+    "position": "Forward",
+    "club": "Arsenal",
+    "jersey_number": 22
+  },
+  {
+    "team_name": "Brazil",
+    "player_name": "Ederson",
+    "position": "Goalkeeper",
+    "club": "Fenerbahçe",
+    "jersey_number": 23
+  },
+  {
+    "team_name": "Brazil",
+    "player_name": "Roger Ibañez",
+    "position": "Defender",
+    "club": "Al-Ahli",
+    "jersey_number": 24
+  },
+  {
+    "team_name": "Brazil",
+    "player_name": "Igor Thiago",
+    "position": "Forward",
+    "club": "Brentford",
+    "jersey_number": 25
+  },
+  {
+    "team_name": "Brazil",
+    "player_name": "Rayan",
+    "position": "Forward",
+    "club": "Bournemouth",
+    "jersey_number": 26
+  },
+  {
+    "team_name": "Haiti",
+    "player_name": "Johny Placide",
+    "position": "Goalkeeper",
+    "club": "Bastia",
+    "jersey_number": 1
+  },
+  {
+    "team_name": "Haiti",
+    "player_name": "Carlens Arcus",
+    "position": "Defender",
+    "club": "Angers",
+    "jersey_number": 2
+  },
+  {
+    "team_name": "Haiti",
+    "player_name": "Keeto Thermoncy",
+    "position": "Defender",
+    "club": "Young Boys",
+    "jersey_number": 3
+  },
+  {
+    "team_name": "Haiti",
+    "player_name": "Ricardo Adé",
+    "position": "Defender",
+    "club": "LDU Quito",
+    "jersey_number": 4
+  },
+  {
+    "team_name": "Haiti",
+    "player_name": "Hannes Delcroix",
+    "position": "Defender",
+    "club": "Lugano",
+    "jersey_number": 5
+  },
+  {
+    "team_name": "Haiti",
+    "player_name": "Carl Sainté",
+    "position": "Midfielder",
+    "club": "El Paso Locomotive FC",
+    "jersey_number": 6
+  },
+  {
+    "team_name": "Haiti",
+    "player_name": "Derrick Etienne Jr.",
+    "position": "Forward",
+    "club": "Toronto FC",
+    "jersey_number": 7
+  },
+  {
+    "team_name": "Haiti",
+    "player_name": "Martin Expérience",
+    "position": "Defender",
+    "club": "Nancy",
+    "jersey_number": 8
+  },
+  {
+    "team_name": "Haiti",
+    "player_name": "Duckens Nazon",
+    "position": "Forward",
+    "club": "Esteghlal",
+    "jersey_number": 9
+  },
+  {
+    "team_name": "Haiti",
+    "player_name": "Jean-Ricner Bellegarde",
+    "position": "Midfielder",
+    "club": "Wolverhampton Wanderers",
+    "jersey_number": 10
+  },
+  {
+    "team_name": "Haiti",
+    "player_name": "Louicius Deedson",
+    "position": "Forward",
+    "club": "FC Dallas",
+    "jersey_number": 11
+  },
+  {
+    "team_name": "Haiti",
+    "player_name": "Alexandre Pierre",
+    "position": "Goalkeeper",
+    "club": "Sochaux",
+    "jersey_number": 12
+  },
+  {
+    "team_name": "Haiti",
+    "player_name": "Duke Lacroix",
+    "position": "Defender",
+    "club": "Colorado Springs Switchbacks FC",
+    "jersey_number": 13
+  },
+  {
+    "team_name": "Haiti",
+    "player_name": "Leverton Pierre",
+    "position": "Midfielder",
+    "club": "Vizela",
+    "jersey_number": 14
+  },
+  {
+    "team_name": "Haiti",
+    "player_name": "Ruben Providence",
+    "position": "Forward",
+    "club": "Almere City",
+    "jersey_number": 15
+  },
+  {
+    "team_name": "Haiti",
+    "player_name": "Lenny Joseph",
+    "position": "Forward",
+    "club": "Ferencváros",
+    "jersey_number": 16
+  },
+  {
+    "team_name": "Haiti",
+    "player_name": "Danley Jean Jacques",
+    "position": "Midfielder",
+    "club": "Philadelphia Union",
+    "jersey_number": 17
+  },
+  {
+    "team_name": "Haiti",
+    "player_name": "Wilson Isidor",
+    "position": "Forward",
+    "club": "Sunderland",
+    "jersey_number": 18
+  },
+  {
+    "team_name": "Haiti",
+    "player_name": "Yassin Fortuné",
+    "position": "Forward",
+    "club": "Vizela",
+    "jersey_number": 19
+  },
+  {
+    "team_name": "Haiti",
+    "player_name": "Frantzdy Pierrot",
+    "position": "Forward",
+    "club": "Çaykur Rizespor",
+    "jersey_number": 20
+  },
+  {
+    "team_name": "Haiti",
+    "player_name": "Josué Casimir",
+    "position": "Forward",
+    "club": "Auxerre",
+    "jersey_number": 21
+  },
+  {
+    "team_name": "Haiti",
+    "player_name": "Jean-Kévin Duverne",
+    "position": "Defender",
+    "club": "Gent",
+    "jersey_number": 22
+  },
+  {
+    "team_name": "Haiti",
+    "player_name": "Josué Duverger",
+    "position": "Goalkeeper",
+    "club": "Cosmos Koblenz",
+    "jersey_number": 23
+  },
+  {
+    "team_name": "Haiti",
+    "player_name": "Wilguens Paugain",
+    "position": "Defender",
+    "club": "Zulte Waregem",
+    "jersey_number": 24
+  },
+  {
+    "team_name": "Haiti",
+    "player_name": "Dominique Simon",
+    "position": "Midfielder",
+    "club": "Tatran Prešov",
+    "jersey_number": 25
+  },
+  {
+    "team_name": "Haiti",
+    "player_name": "Woodensky Pierre",
+    "position": "Midfielder",
+    "club": "Violette",
+    "jersey_number": 26
+  },
+  {
+    "team_name": "Morocco",
+    "player_name": "Yassine Bounou",
+    "position": "Goalkeeper",
+    "club": "Al-Hilal",
+    "jersey_number": 1
+  },
+  {
+    "team_name": "Morocco",
+    "player_name": "Achraf Hakimi",
+    "position": "Defender",
+    "club": "Paris Saint-Germain",
+    "jersey_number": 2
+  },
+  {
+    "team_name": "Morocco",
+    "player_name": "Noussair Mazraoui",
+    "position": "Defender",
+    "club": "Manchester United",
+    "jersey_number": 3
+  },
+  {
+    "team_name": "Morocco",
+    "player_name": "Sofyan Amrabat",
+    "position": "Midfielder",
+    "club": "Real Betis",
+    "jersey_number": 4
+  },
+  {
+    "team_name": "Morocco",
+    "player_name": "Nayef Aguerd",
+    "position": "Defender",
+    "club": "Marseille",
+    "jersey_number": 5
+  },
+  {
+    "team_name": "Morocco",
+    "player_name": "Ayyoub Bouaddi",
+    "position": "Midfielder",
+    "club": "Lille",
+    "jersey_number": 6
+  },
+  {
+    "team_name": "Morocco",
+    "player_name": "Chemsdine Talbi",
+    "position": "Midfielder",
+    "club": "Sunderland",
+    "jersey_number": 7
+  },
+  {
+    "team_name": "Morocco",
+    "player_name": "Azzedine Ounahi",
+    "position": "Midfielder",
+    "club": "Girona",
+    "jersey_number": 8
+  },
+  {
+    "team_name": "Morocco",
+    "player_name": "Soufiane Rahimi",
+    "position": "Forward",
+    "club": "Al Ain",
+    "jersey_number": 9
+  },
+  {
+    "team_name": "Morocco",
+    "player_name": "Brahim Díaz",
+    "position": "Forward",
+    "club": "Real Madrid",
+    "jersey_number": 10
+  },
+  {
+    "team_name": "Morocco",
+    "player_name": "Ismael Saibari",
+    "position": "Midfielder",
+    "club": "PSV Eindhoven",
+    "jersey_number": 11
+  },
+  {
+    "team_name": "Morocco",
+    "player_name": "Munir Mohamedi",
+    "position": "Goalkeeper",
+    "club": "RS Berkane",
+    "jersey_number": 12
+  },
+  {
+    "team_name": "Morocco",
+    "player_name": "Zakaria El Ouahdi",
+    "position": "Defender",
+    "club": "Genk",
+    "jersey_number": 13
+  },
+  {
+    "team_name": "Morocco",
+    "player_name": "Issa Diop",
+    "position": "Defender",
+    "club": "Fulham",
+    "jersey_number": 14
+  },
+  {
+    "team_name": "Morocco",
+    "player_name": "Samir El Mourabet",
+    "position": "Midfielder",
+    "club": "Strasbourg",
+    "jersey_number": 15
+  },
+  {
+    "team_name": "Morocco",
+    "player_name": "Gessime Yassine",
+    "position": "Midfielder",
+    "club": "Strasbourg",
+    "jersey_number": 16
+  },
+  {
+    "team_name": "Morocco",
+    "player_name": "Abde Ezzalzouli",
+    "position": "Forward",
+    "club": "Real Betis",
+    "jersey_number": 17
+  },
+  {
+    "team_name": "Morocco",
+    "player_name": "Chadi Riad",
+    "position": "Defender",
+    "club": "Crystal Palace",
+    "jersey_number": 18
+  },
+  {
+    "team_name": "Morocco",
+    "player_name": "Youssef Belammari",
+    "position": "Defender",
+    "club": "Al Ahly",
+    "jersey_number": 19
+  },
+  {
+    "team_name": "Morocco",
+    "player_name": "Ayoub El Kaabi",
+    "position": "Forward",
+    "club": "Olympiacos",
+    "jersey_number": 20
+  },
+  {
+    "team_name": "Morocco",
+    "player_name": "Ayoube Amaimouni",
+    "position": "Forward",
+    "club": "Eintracht Frankfurt",
+    "jersey_number": 21
+  },
+  {
+    "team_name": "Morocco",
+    "player_name": "Ahmed Reda Tagnaouti",
+    "position": "Goalkeeper",
+    "club": "AS FAR",
+    "jersey_number": 22
+  },
+  {
+    "team_name": "Morocco",
+    "player_name": "Bilal El Khannouss",
+    "position": "Midfielder",
+    "club": "VfB Stuttgart",
+    "jersey_number": 23
+  },
+  {
+    "team_name": "Morocco",
+    "player_name": "Neil El Aynaoui",
+    "position": "Midfielder",
+    "club": "Roma",
+    "jersey_number": 24
+  },
+  {
+    "team_name": "Morocco",
+    "player_name": "Redouane Halhal",
+    "position": "Defender",
+    "club": "Mechelen",
+    "jersey_number": 25
+  },
+  {
+    "team_name": "Morocco",
+    "player_name": "Anass Salah-Eddine",
+    "position": "Defender",
+    "club": "PSV Eindhoven",
+    "jersey_number": 26
+  },
+  {
+    "team_name": "Scotland",
+    "player_name": "Angus Gunn",
+    "position": "Goalkeeper",
+    "club": "Nottingham Forest",
+    "jersey_number": 1
+  },
+  {
+    "team_name": "Scotland",
+    "player_name": "Aaron Hickey",
+    "position": "Defender",
+    "club": "Brentford",
+    "jersey_number": 2
+  },
+  {
+    "team_name": "Scotland",
+    "player_name": "Andy Robertson",
+    "position": "Defender",
+    "club": "Liverpool",
+    "jersey_number": 3
+  },
+  {
+    "team_name": "Scotland",
+    "player_name": "Scott McTominay",
+    "position": "Midfielder",
+    "club": "Napoli",
+    "jersey_number": 4
+  },
+  {
+    "team_name": "Scotland",
+    "player_name": "Grant Hanley",
+    "position": "Defender",
+    "club": "Hibernian",
+    "jersey_number": 5
+  },
+  {
+    "team_name": "Scotland",
+    "player_name": "Kieran Tierney",
+    "position": "Defender",
+    "club": "Celtic",
+    "jersey_number": 6
+  },
+  {
+    "team_name": "Scotland",
+    "player_name": "John McGinn",
+    "position": "Midfielder",
+    "club": "Aston Villa",
+    "jersey_number": 7
+  },
+  {
+    "team_name": "Scotland",
+    "player_name": "Tyler Fletcher",
+    "position": "Midfielder",
+    "club": "Manchester United",
+    "jersey_number": 8
+  },
+  {
+    "team_name": "Scotland",
+    "player_name": "Lyndon Dykes",
+    "position": "Forward",
+    "club": "Charlton Athletic",
+    "jersey_number": 9
+  },
+  {
+    "team_name": "Scotland",
+    "player_name": "Ché Adams",
+    "position": "Forward",
+    "club": "Torino",
+    "jersey_number": 10
+  },
+  {
+    "team_name": "Scotland",
+    "player_name": "Ryan Christie",
+    "position": "Midfielder",
+    "club": "Bournemouth",
+    "jersey_number": 11
+  },
+  {
+    "team_name": "Scotland",
+    "player_name": "Liam Kelly",
+    "position": "Goalkeeper",
+    "club": "Rangers",
+    "jersey_number": 12
+  },
+  {
+    "team_name": "Scotland",
+    "player_name": "Jack Hendry",
+    "position": "Defender",
+    "club": "Al-Ettifaq",
+    "jersey_number": 13
+  },
+  {
+    "team_name": "Scotland",
+    "player_name": "Ross Stewart",
+    "position": "Forward",
+    "club": "Southampton",
+    "jersey_number": 14
+  },
+  {
+    "team_name": "Scotland",
+    "player_name": "John Souttar",
+    "position": "Defender",
+    "club": "Rangers",
+    "jersey_number": 15
+  },
+  {
+    "team_name": "Scotland",
+    "player_name": "Dominic Hyam",
+    "position": "Defender",
+    "club": "Wrexham",
+    "jersey_number": 16
+  },
+  {
+    "team_name": "Scotland",
+    "player_name": "Ben Gannon-Doak",
+    "position": "Forward",
+    "club": "Bournemouth",
+    "jersey_number": 17
+  },
+  {
+    "team_name": "Scotland",
+    "player_name": "George Hirst",
+    "position": "Forward",
+    "club": "Ipswich Town",
+    "jersey_number": 18
+  },
+  {
+    "team_name": "Scotland",
+    "player_name": "Lewis Ferguson",
+    "position": "Midfielder",
+    "club": "Bologna",
+    "jersey_number": 19
+  },
+  {
+    "team_name": "Scotland",
+    "player_name": "Lawrence Shankland",
+    "position": "Forward",
+    "club": "Heart of Midlothian",
+    "jersey_number": 20
+  },
+  {
+    "team_name": "Scotland",
+    "player_name": "Craig Gordon",
+    "position": "Goalkeeper",
+    "club": "Heart of Midlothian",
+    "jersey_number": 21
+  },
+  {
+    "team_name": "Scotland",
+    "player_name": "Nathan Patterson",
+    "position": "Defender",
+    "club": "Everton",
+    "jersey_number": 22
+  },
+  {
+    "team_name": "Scotland",
+    "player_name": "Kenny McLean",
+    "position": "Midfielder",
+    "club": "Norwich City",
+    "jersey_number": 23
+  },
+  {
+    "team_name": "Scotland",
+    "player_name": "Anthony Ralston",
+    "position": "Defender",
+    "club": "Celtic",
+    "jersey_number": 24
+  },
+  {
+    "team_name": "Scotland",
+    "player_name": "Findlay Curtis",
+    "position": "Forward",
+    "club": "Kilmarnock",
+    "jersey_number": 25
+  },
+  {
+    "team_name": "Scotland",
+    "player_name": "Scott McKenna",
+    "position": "Defender",
+    "club": "Dinamo Zagreb",
+    "jersey_number": 26
+  },
+  {
+    "team_name": "Australia",
+    "player_name": "Mathew Ryan",
+    "position": "Goalkeeper",
+    "club": "Levante",
+    "jersey_number": 1
+  },
+  {
+    "team_name": "Australia",
+    "player_name": "Miloš Degenek",
+    "position": "Defender",
+    "club": "APOEL",
+    "jersey_number": 2
+  },
+  {
+    "team_name": "Australia",
+    "player_name": "Alessandro Circati",
+    "position": "Defender",
+    "club": "Parma",
+    "jersey_number": 3
+  },
+  {
+    "team_name": "Australia",
+    "player_name": "Jacob Italiano",
+    "position": "Defender",
+    "club": "Grazer AK",
+    "jersey_number": 4
+  },
+  {
+    "team_name": "Australia",
+    "player_name": "Jordan Bos",
+    "position": "Defender",
+    "club": "Feyenoord",
+    "jersey_number": 5
+  },
+  {
+    "team_name": "Australia",
+    "player_name": "Jason Geria",
+    "position": "Defender",
+    "club": "Albirex Niigata",
+    "jersey_number": 6
+  },
+  {
+    "team_name": "Australia",
+    "player_name": "Mathew Leckie",
+    "position": "Forward",
+    "club": "Melbourne City",
+    "jersey_number": 7
+  },
+  {
+    "team_name": "Australia",
+    "player_name": "Connor Metcalfe",
+    "position": "Midfielder",
+    "club": "FC St. Pauli",
+    "jersey_number": 8
+  },
+  {
+    "team_name": "Australia",
+    "player_name": "Mohamed Touré",
+    "position": "Forward",
+    "club": "Norwich City",
+    "jersey_number": 9
+  },
+  {
+    "team_name": "Australia",
+    "player_name": "Ajdin Hrustic",
+    "position": "Forward",
+    "club": "Heracles Almelo",
+    "jersey_number": 10
+  },
+  {
+    "team_name": "Australia",
+    "player_name": "Awer Mabil",
+    "position": "Forward",
+    "club": "Castellón",
+    "jersey_number": 11
+  },
+  {
+    "team_name": "Australia",
+    "player_name": "Paul Izzo",
+    "position": "Goalkeeper",
+    "club": "Randers",
+    "jersey_number": 12
+  },
+  {
+    "team_name": "Australia",
+    "player_name": "Aiden O'Neill",
+    "position": "Midfielder",
+    "club": "New York City FC",
+    "jersey_number": 13
+  },
+  {
+    "team_name": "Australia",
+    "player_name": "Cammy Devlin",
+    "position": "Midfielder",
+    "club": "Heart of Midlothian",
+    "jersey_number": 14
+  },
+  {
+    "team_name": "Australia",
+    "player_name": "Kai Trewin",
+    "position": "Defender",
+    "club": "New York City FC",
+    "jersey_number": 15
+  },
+  {
+    "team_name": "Australia",
+    "player_name": "Aziz Behich",
+    "position": "Defender",
+    "club": "Melbourne City",
+    "jersey_number": 16
+  },
+  {
+    "team_name": "Australia",
+    "player_name": "Nestory Irankunda",
+    "position": "Forward",
+    "club": "Watford",
+    "jersey_number": 17
+  },
+  {
+    "team_name": "Australia",
+    "player_name": "Patrick Beach",
+    "position": "Goalkeeper",
+    "club": "Melbourne City",
+    "jersey_number": 18
+  },
+  {
+    "team_name": "Australia",
+    "player_name": "Harry Souttar",
+    "position": "Defender",
+    "club": "Leicester City",
+    "jersey_number": 19
+  },
+  {
+    "team_name": "Australia",
+    "player_name": "Cristian Volpato",
+    "position": "Forward",
+    "club": "Sassuolo",
+    "jersey_number": 20
+  },
+  {
+    "team_name": "Australia",
+    "player_name": "Cameron Burgess",
+    "position": "Defender",
+    "club": "Swansea City",
+    "jersey_number": 21
+  },
+  {
+    "team_name": "Australia",
+    "player_name": "Jackson Irvine",
+    "position": "Midfielder",
+    "club": "FC St. Pauli",
+    "jersey_number": 22
+  },
+  {
+    "team_name": "Australia",
+    "player_name": "Nishan Velupillay",
+    "position": "Forward",
+    "club": "Melbourne Victory",
+    "jersey_number": 23
+  },
+  {
+    "team_name": "Australia",
+    "player_name": "Paul Okon-Engstler",
+    "position": "Midfielder",
+    "club": "Sydney FC",
+    "jersey_number": 24
+  },
+  {
+    "team_name": "Australia",
+    "player_name": "Lucas Herrington",
+    "position": "Defender",
+    "club": "Colorado Rapids",
+    "jersey_number": 25
+  },
+  {
+    "team_name": "Australia",
+    "player_name": "Tete Yengi",
+    "position": "Forward",
+    "club": "Machida Zelvia",
+    "jersey_number": 26
+  },
+  {
+    "team_name": "Paraguay",
+    "player_name": "Gatito Fernández",
+    "position": "Goalkeeper",
+    "club": "Cerro Porteño",
+    "jersey_number": 1
+  },
+  {
+    "team_name": "Paraguay",
+    "player_name": "Gustavo Velázquez",
+    "position": "Defender",
+    "club": "Cerro Porteño",
+    "jersey_number": 2
+  },
+  {
+    "team_name": "Paraguay",
+    "player_name": "Omar Alderete",
+    "position": "Defender",
+    "club": "Sunderland",
+    "jersey_number": 3
+  },
+  {
+    "team_name": "Paraguay",
+    "player_name": "Juan José Cáceres",
+    "position": "Defender",
+    "club": "Dynamo Moscow",
+    "jersey_number": 4
+  },
+  {
+    "team_name": "Paraguay",
+    "player_name": "Fabián Balbuena",
+    "position": "Defender",
+    "club": "Grêmio",
+    "jersey_number": 5
+  },
+  {
+    "team_name": "Paraguay",
+    "player_name": "Júnior Alonso",
+    "position": "Defender",
+    "club": "Atlético Mineiro",
+    "jersey_number": 6
+  },
+  {
+    "team_name": "Paraguay",
+    "player_name": "Ramón Sosa",
+    "position": "Midfielder",
+    "club": "Palmeiras",
+    "jersey_number": 7
+  },
+  {
+    "team_name": "Paraguay",
+    "player_name": "Diego Gómez",
+    "position": "Midfielder",
+    "club": "Brighton & Hove Albion",
+    "jersey_number": 8
+  },
+  {
+    "team_name": "Paraguay",
+    "player_name": "Antonio Sanabria",
+    "position": "Forward",
+    "club": "Cremonese",
+    "jersey_number": 9
+  },
+  {
+    "team_name": "Paraguay",
+    "player_name": "Miguel Almirón",
+    "position": "Midfielder",
+    "club": "Atlanta United FC",
+    "jersey_number": 10
+  },
+  {
+    "team_name": "Paraguay",
+    "player_name": "Maurício",
+    "position": "Midfielder",
+    "club": "Palmeiras",
+    "jersey_number": 11
+  },
+  {
+    "team_name": "Paraguay",
+    "player_name": "Orlando Gill",
+    "position": "Goalkeeper",
+    "club": "San Lorenzo",
+    "jersey_number": 12
+  },
+  {
+    "team_name": "Paraguay",
+    "player_name": "José Canale",
+    "position": "Defender",
+    "club": "Lanús",
+    "jersey_number": 13
+  },
+  {
+    "team_name": "Paraguay",
+    "player_name": "Andrés Cubas",
+    "position": "Midfielder",
+    "club": "Vancouver Whitecaps FC",
+    "jersey_number": 14
+  },
+  {
+    "team_name": "Paraguay",
+    "player_name": "Gustavo Gómez",
+    "position": "Defender",
+    "club": "Palmeiras",
+    "jersey_number": 15
+  },
+  {
+    "team_name": "Paraguay",
+    "player_name": "Damián Bobadilla",
+    "position": "Midfielder",
+    "club": "São Paulo",
+    "jersey_number": 16
+  },
+  {
+    "team_name": "Paraguay",
+    "player_name": "Kaku",
+    "position": "Forward",
+    "club": "Al Ain",
+    "jersey_number": 17
+  },
+  {
+    "team_name": "Paraguay",
+    "player_name": "Álex Arce",
+    "position": "Forward",
+    "club": "Independiente Rivadavia",
+    "jersey_number": 18
+  },
+  {
+    "team_name": "Paraguay",
+    "player_name": "Julio Enciso",
+    "position": "Forward",
+    "club": "Strasbourg",
+    "jersey_number": 19
+  },
+  {
+    "team_name": "Paraguay",
+    "player_name": "Braian Ojeda",
+    "position": "Midfielder",
+    "club": "Orlando City SC",
+    "jersey_number": 20
+  },
+  {
+    "team_name": "Paraguay",
+    "player_name": "Gabriel Ávalos",
+    "position": "Forward",
+    "club": "Independiente",
+    "jersey_number": 21
+  },
+  {
+    "team_name": "Paraguay",
+    "player_name": "Gastón Olveira",
+    "position": "Goalkeeper",
+    "club": "Olimpia",
+    "jersey_number": 22
+  },
+  {
+    "team_name": "Paraguay",
+    "player_name": "Matías Galarza",
+    "position": "Midfielder",
+    "club": "Atlanta United FC",
+    "jersey_number": 23
+  },
+  {
+    "team_name": "Paraguay",
+    "player_name": "Gustavo Caballero",
+    "position": "Midfielder",
+    "club": "Portsmouth",
+    "jersey_number": 24
+  },
+  {
+    "team_name": "Paraguay",
+    "player_name": "Isidro Pitta",
+    "position": "Forward",
+    "club": "Red Bull Bragantino",
+    "jersey_number": 25
+  },
+  {
+    "team_name": "Paraguay",
+    "player_name": "Alexandro Maidana",
+    "position": "Defender",
+    "club": "Talleres",
+    "jersey_number": 26
+  },
+  {
+    "team_name": "Turkiye",
+    "player_name": "Mert Günok",
+    "position": "Goalkeeper",
+    "club": "Fenerbahçe",
+    "jersey_number": 1
+  },
+  {
+    "team_name": "Turkiye",
+    "player_name": "Zeki Çelik",
+    "position": "Defender",
+    "club": "Roma",
+    "jersey_number": 2
+  },
+  {
+    "team_name": "Turkiye",
+    "player_name": "Merih Demiral",
+    "position": "Defender",
+    "club": "Al-Ahli",
+    "jersey_number": 3
+  },
+  {
+    "team_name": "Turkiye",
+    "player_name": "Çağlar Söyüncü",
+    "position": "Defender",
+    "club": "Fenerbahçe",
+    "jersey_number": 4
+  },
+  {
+    "team_name": "Turkiye",
+    "player_name": "Salih Özcan",
+    "position": "Midfielder",
+    "club": "Borussia Dortmund",
+    "jersey_number": 5
+  },
+  {
+    "team_name": "Turkiye",
+    "player_name": "Orkun Kökçü",
+    "position": "Midfielder",
+    "club": "Beşiktaş",
+    "jersey_number": 6
+  },
+  {
+    "team_name": "Turkiye",
+    "player_name": "Kerem Aktürkoğlu",
+    "position": "Forward",
+    "club": "Fenerbahçe",
+    "jersey_number": 7
+  },
+  {
+    "team_name": "Turkiye",
+    "player_name": "Arda Güler",
+    "position": "Forward",
+    "club": "Real Madrid",
+    "jersey_number": 8
+  },
+  {
+    "team_name": "Turkiye",
+    "player_name": "Deniz Gül",
+    "position": "Forward",
+    "club": "Porto",
+    "jersey_number": 9
+  },
+  {
+    "team_name": "Turkiye",
+    "player_name": "Hakan Çalhanoğlu",
+    "position": "Midfielder",
+    "club": "Inter Milan",
+    "jersey_number": 10
+  },
+  {
+    "team_name": "Turkiye",
+    "player_name": "Kenan Yıldız",
+    "position": "Forward",
+    "club": "Juventus",
+    "jersey_number": 11
+  },
+  {
+    "team_name": "Turkiye",
+    "player_name": "Altay Bayındır",
+    "position": "Goalkeeper",
+    "club": "Manchester United",
+    "jersey_number": 12
+  },
+  {
+    "team_name": "Turkiye",
+    "player_name": "Eren Elmalı",
+    "position": "Defender",
+    "club": "Galatasaray",
+    "jersey_number": 13
+  },
+  {
+    "team_name": "Turkiye",
+    "player_name": "Abdülkerim Bardakcı",
+    "position": "Defender",
+    "club": "Galatasaray",
+    "jersey_number": 14
+  },
+  {
+    "team_name": "Turkiye",
+    "player_name": "Ozan Kabak",
+    "position": "Defender",
+    "club": "TSG Hoffenheim",
+    "jersey_number": 15
+  },
+  {
+    "team_name": "Turkiye",
+    "player_name": "İsmail Yüksek",
+    "position": "Midfielder",
+    "club": "Fenerbahçe",
+    "jersey_number": 16
+  },
+  {
+    "team_name": "Turkiye",
+    "player_name": "İrfan Can Kahveci",
+    "position": "Forward",
+    "club": "Kasımpaşa",
+    "jersey_number": 17
+  },
+  {
+    "team_name": "Turkiye",
+    "player_name": "Mert Müldür",
+    "position": "Defender",
+    "club": "Fenerbahçe",
+    "jersey_number": 18
+  },
+  {
+    "team_name": "Turkiye",
+    "player_name": "Yunus Akgün",
+    "position": "Forward",
+    "club": "Galatasaray",
+    "jersey_number": 19
+  },
+  {
+    "team_name": "Turkiye",
+    "player_name": "Ferdi Kadıoğlu",
+    "position": "Defender",
+    "club": "Brighton & Hove Albion",
+    "jersey_number": 20
+  },
+  {
+    "team_name": "Turkiye",
+    "player_name": "Barış Alper Yılmaz",
+    "position": "Forward",
+    "club": "Galatasaray",
+    "jersey_number": 21
+  },
+  {
+    "team_name": "Turkiye",
+    "player_name": "Kaan Ayhan",
+    "position": "Midfielder",
+    "club": "Galatasaray",
+    "jersey_number": 22
+  },
+  {
+    "team_name": "Turkiye",
+    "player_name": "Uğurcan Çakır",
+    "position": "Goalkeeper",
+    "club": "Galatasaray",
+    "jersey_number": 23
+  },
+  {
+    "team_name": "Turkiye",
+    "player_name": "Oğuz Aydın",
+    "position": "Forward",
+    "club": "Fenerbahçe",
+    "jersey_number": 24
+  },
+  {
+    "team_name": "Turkiye",
+    "player_name": "Samet Akaydin",
+    "position": "Defender",
+    "club": "Çaykur Rizespor",
+    "jersey_number": 25
+  },
+  {
+    "team_name": "Turkiye",
+    "player_name": "Can Uzun",
+    "position": "Forward",
+    "club": "Eintracht Frankfurt",
+    "jersey_number": 26
+  },
+  {
+    "team_name": "USA",
+    "player_name": "Matt Turner",
+    "position": "Goalkeeper",
+    "club": "New England Revolution",
+    "jersey_number": 1
+  },
+  {
+    "team_name": "USA",
+    "player_name": "Sergiño Dest",
+    "position": "Defender",
+    "club": "PSV Eindhoven",
+    "jersey_number": 2
+  },
+  {
+    "team_name": "USA",
+    "player_name": "Chris Richards",
+    "position": "Defender",
+    "club": "Crystal Palace",
+    "jersey_number": 3
+  },
+  {
+    "team_name": "USA",
+    "player_name": "Tyler Adams",
+    "position": "Midfielder",
+    "club": "Bournemouth",
+    "jersey_number": 4
+  },
+  {
+    "team_name": "USA",
+    "player_name": "Antonee Robinson",
+    "position": "Defender",
+    "club": "Fulham",
+    "jersey_number": 5
+  },
+  {
+    "team_name": "USA",
+    "player_name": "Auston Trusty",
+    "position": "Defender",
+    "club": "Celtic",
+    "jersey_number": 6
+  },
+  {
+    "team_name": "USA",
+    "player_name": "Giovanni Reyna",
+    "position": "Midfielder",
+    "club": "Borussia Mönchengladbach",
+    "jersey_number": 7
+  },
+  {
+    "team_name": "USA",
+    "player_name": "Weston McKennie",
+    "position": "Midfielder",
+    "club": "Juventus",
+    "jersey_number": 8
+  },
+  {
+    "team_name": "USA",
+    "player_name": "Ricardo Pepi",
+    "position": "Forward",
+    "club": "PSV Eindhoven",
+    "jersey_number": 9
+  },
+  {
+    "team_name": "USA",
+    "player_name": "Christian Pulisic",
+    "position": "Forward",
+    "club": "Milan",
+    "jersey_number": 10
+  },
+  {
+    "team_name": "USA",
+    "player_name": "Brenden Aaronson",
+    "position": "Forward",
+    "club": "Leeds United",
+    "jersey_number": 11
+  },
+  {
+    "team_name": "USA",
+    "player_name": "Miles Robinson",
+    "position": "Defender",
+    "club": "FC Cincinnati",
+    "jersey_number": 12
+  },
+  {
+    "team_name": "USA",
+    "player_name": "Tim Ream",
+    "position": "Defender",
+    "club": "Charlotte FC",
+    "jersey_number": 13
+  },
+  {
+    "team_name": "USA",
+    "player_name": "Sebastian Berhalter",
+    "position": "Midfielder",
+    "club": "Vancouver Whitecaps FC",
+    "jersey_number": 14
+  },
+  {
+    "team_name": "USA",
+    "player_name": "Cristian Roldan",
+    "position": "Midfielder",
+    "club": "Seattle Sounders FC",
+    "jersey_number": 15
+  },
+  {
+    "team_name": "USA",
+    "player_name": "Alex Freeman",
+    "position": "Defender",
+    "club": "Villarreal",
+    "jersey_number": 16
+  },
+  {
+    "team_name": "USA",
+    "player_name": "Malik Tillman",
+    "position": "Midfielder",
+    "club": "Bayer Leverkusen",
+    "jersey_number": 17
+  },
+  {
+    "team_name": "USA",
+    "player_name": "Maximilian Arfsten",
+    "position": "Defender",
+    "club": "Columbus Crew",
+    "jersey_number": 18
+  },
+  {
+    "team_name": "USA",
+    "player_name": "Haji Wright",
+    "position": "Forward",
+    "club": "Coventry City",
+    "jersey_number": 19
+  },
+  {
+    "team_name": "USA",
+    "player_name": "Folarin Balogun",
+    "position": "Forward",
+    "club": "Monaco",
+    "jersey_number": 20
+  },
+  {
+    "team_name": "USA",
+    "player_name": "Timothy Weah",
+    "position": "Forward",
+    "club": "Marseille",
+    "jersey_number": 21
+  },
+  {
+    "team_name": "USA",
+    "player_name": "Mark McKenzie",
+    "position": "Defender",
+    "club": "Toulouse",
+    "jersey_number": 22
+  },
+  {
+    "team_name": "USA",
+    "player_name": "Joe Scally",
+    "position": "Defender",
+    "club": "Borussia Mönchengladbach",
+    "jersey_number": 23
+  },
+  {
+    "team_name": "USA",
+    "player_name": "Matt Freese",
+    "position": "Goalkeeper",
+    "club": "New York City FC",
+    "jersey_number": 24
+  },
+  {
+    "team_name": "USA",
+    "player_name": "Chris Brady",
+    "position": "Goalkeeper",
+    "club": "Chicago Fire FC",
+    "jersey_number": 25
+  },
+  {
+    "team_name": "USA",
+    "player_name": "Alejandro Zendejas",
+    "position": "Forward",
+    "club": "América",
+    "jersey_number": 26
+  },
+  {
+    "team_name": "Curacao",
+    "player_name": "Eloy Room",
+    "position": "Goalkeeper",
+    "club": "Miami FC",
+    "jersey_number": 1
+  },
+  {
+    "team_name": "Curacao",
+    "player_name": "Shurandy Sambo",
+    "position": "Defender",
+    "club": "Sparta Rotterdam",
+    "jersey_number": 2
+  },
+  {
+    "team_name": "Curacao",
+    "player_name": "Juriën Gaari",
+    "position": "Defender",
+    "club": "Abha",
+    "jersey_number": 3
+  },
+  {
+    "team_name": "Curacao",
+    "player_name": "Roshon van Eijma",
+    "position": "Defender",
+    "club": "RKC Waalwijk",
+    "jersey_number": 4
+  },
+  {
+    "team_name": "Curacao",
+    "player_name": "Sherel Floranus",
+    "position": "Defender",
+    "club": "PEC Zwolle",
+    "jersey_number": 5
+  },
+  {
+    "team_name": "Curacao",
+    "player_name": "Godfried Roemeratoe",
+    "position": "Midfielder",
+    "club": "RKC Waalwijk",
+    "jersey_number": 6
+  },
+  {
+    "team_name": "Curacao",
+    "player_name": "Juninho Bacuna",
+    "position": "Midfielder",
+    "club": "Volendam",
+    "jersey_number": 7
+  },
+  {
+    "team_name": "Curacao",
+    "player_name": "Livano Comenencia",
+    "position": "Midfielder",
+    "club": "Zürich",
+    "jersey_number": 8
+  },
+  {
+    "team_name": "Curacao",
+    "player_name": "Jürgen Locadia",
+    "position": "Forward",
+    "club": "Miami FC",
+    "jersey_number": 9
+  },
+  {
+    "team_name": "Curacao",
+    "player_name": "Leandro Bacuna",
+    "position": "Midfielder",
+    "club": "Iğdır",
+    "jersey_number": 10
+  },
+  {
+    "team_name": "Curacao",
+    "player_name": "Jeremy Antonisse",
+    "position": "Forward",
+    "club": "Kifisia",
+    "jersey_number": 11
+  },
+  {
+    "team_name": "Curacao",
+    "player_name": "Sontje Hansen",
+    "position": "Forward",
+    "club": "Middlesbrough",
+    "jersey_number": 12
+  },
+  {
+    "team_name": "Curacao",
+    "player_name": "Tyrese Noslin",
+    "position": "Forward",
+    "club": "Telstar",
+    "jersey_number": 13
+  },
+  {
+    "team_name": "Curacao",
+    "player_name": "Kenji Gorré",
+    "position": "Forward",
+    "club": "Maccabi Haifa",
+    "jersey_number": 14
+  },
+  {
+    "team_name": "Curacao",
+    "player_name": "Ar'jany Martha",
+    "position": "Midfielder",
+    "club": "Rotherham United",
+    "jersey_number": 15
+  },
+  {
+    "team_name": "Curacao",
+    "player_name": "Jearl Margaritha",
+    "position": "Forward",
+    "club": "Beveren",
+    "jersey_number": 16
+  },
+  {
+    "team_name": "Curacao",
+    "player_name": "Brandley Kuwas",
+    "position": "Forward",
+    "club": "Volendam",
+    "jersey_number": 17
+  },
+  {
+    "team_name": "Curacao",
+    "player_name": "Armando Obispo",
+    "position": "Defender",
+    "club": "PSV Eindhoven",
+    "jersey_number": 18
+  },
+  {
+    "team_name": "Curacao",
+    "player_name": "Gervane Kastaneer",
+    "position": "Forward",
+    "club": "Terengganu",
+    "jersey_number": 19
+  },
+  {
+    "team_name": "Curacao",
+    "player_name": "Joshua Brenet",
+    "position": "Defender",
+    "club": "Kayserispor",
+    "jersey_number": 20
+  },
+  {
+    "team_name": "Curacao",
+    "player_name": "Tahith Chong",
+    "position": "Midfielder",
+    "club": "Sheffield United",
+    "jersey_number": 21
+  },
+  {
+    "team_name": "Curacao",
+    "player_name": "Kevin Felida",
+    "position": "Midfielder",
+    "club": "Den Bosch",
+    "jersey_number": 22
+  },
+  {
+    "team_name": "Curacao",
+    "player_name": "Riechedly Bazoer",
+    "position": "Defender",
+    "club": "Konyaspor",
+    "jersey_number": 23
+  },
+  {
+    "team_name": "Curacao",
+    "player_name": "Deveron Fonville",
+    "position": "Defender",
+    "club": "NEC",
+    "jersey_number": 24
+  },
+  {
+    "team_name": "Curacao",
+    "player_name": "Tyrick Bodak",
+    "position": "Goalkeeper",
+    "club": "Telstar",
+    "jersey_number": 25
+  },
+  {
+    "team_name": "Curacao",
+    "player_name": "Trevor Doornbusch",
+    "position": "Goalkeeper",
+    "club": "VVV-Venlo",
+    "jersey_number": 26
+  },
+  {
+    "team_name": "Ecuador",
+    "player_name": "Hernán Galíndez",
+    "position": "Goalkeeper",
+    "club": "Huracán",
+    "jersey_number": 1
+  },
+  {
+    "team_name": "Ecuador",
+    "player_name": "Félix Torres",
+    "position": "Defender",
+    "club": "Internacional",
+    "jersey_number": 2
+  },
+  {
+    "team_name": "Ecuador",
+    "player_name": "Piero Hincapié",
+    "position": "Defender",
+    "club": "Arsenal",
+    "jersey_number": 3
+  },
+  {
+    "team_name": "Ecuador",
+    "player_name": "Joel Ordóñez",
+    "position": "Defender",
+    "club": "Club Brugge",
+    "jersey_number": 4
+  },
+  {
+    "team_name": "Ecuador",
+    "player_name": "Jordy Alcívar",
+    "position": "Midfielder",
+    "club": "Independiente del Valle",
+    "jersey_number": 5
+  },
+  {
+    "team_name": "Ecuador",
+    "player_name": "Willian Pacho",
+    "position": "Defender",
+    "club": "Paris Saint-Germain",
+    "jersey_number": 6
+  },
+  {
+    "team_name": "Ecuador",
+    "player_name": "Pervis Estupiñán",
+    "position": "Defender",
+    "club": "Milan",
+    "jersey_number": 7
+  },
+  {
+    "team_name": "Ecuador",
+    "player_name": "Anthony Valencia",
+    "position": "Midfielder",
+    "club": "Antwerp",
+    "jersey_number": 8
+  },
+  {
+    "team_name": "Ecuador",
+    "player_name": "John Yeboah",
+    "position": "Forward",
+    "club": "Venezia",
+    "jersey_number": 9
+  },
+  {
+    "team_name": "Ecuador",
+    "player_name": "Kendry Páez",
+    "position": "Midfielder",
+    "club": "River Plate",
+    "jersey_number": 10
+  },
+  {
+    "team_name": "Ecuador",
+    "player_name": "Kevin Rodríguez",
+    "position": "Forward",
+    "club": "Union Saint-Gilloise",
+    "jersey_number": 11
+  },
+  {
+    "team_name": "Ecuador",
+    "player_name": "Moisés Ramírez",
+    "position": "Goalkeeper",
+    "club": "Kifisia",
+    "jersey_number": 12
+  },
+  {
+    "team_name": "Ecuador",
+    "player_name": "Enner Valencia",
+    "position": "Forward",
+    "club": "Pachuca",
+    "jersey_number": 13
+  },
+  {
+    "team_name": "Ecuador",
+    "player_name": "Alan Minda",
+    "position": "Midfielder",
+    "club": "Atlético Mineiro",
+    "jersey_number": 14
+  },
+  {
+    "team_name": "Ecuador",
+    "player_name": "Pedro Vite",
+    "position": "Midfielder",
+    "club": "UNAM",
+    "jersey_number": 15
+  },
+  {
+    "team_name": "Ecuador",
+    "player_name": "Jordy Caicedo",
+    "position": "Forward",
+    "club": "Huracán",
+    "jersey_number": 16
+  },
+  {
+    "team_name": "Ecuador",
+    "player_name": "Ángelo Preciado",
+    "position": "Defender",
+    "club": "Atlético Mineiro",
+    "jersey_number": 17
+  },
+  {
+    "team_name": "Ecuador",
+    "player_name": "Denil Castillo",
+    "position": "Midfielder",
+    "club": "Midtjylland",
+    "jersey_number": 18
+  },
+  {
+    "team_name": "Ecuador",
+    "player_name": "Gonzalo Plata",
+    "position": "Forward",
+    "club": "Flamengo",
+    "jersey_number": 19
+  },
+  {
+    "team_name": "Ecuador",
+    "player_name": "Nilson Angulo",
+    "position": "Forward",
+    "club": "Sunderland",
+    "jersey_number": 20
+  },
+  {
+    "team_name": "Ecuador",
+    "player_name": "Alan Franco",
+    "position": "Midfielder",
+    "club": "Atlético Mineiro",
+    "jersey_number": 21
+  },
+  {
+    "team_name": "Ecuador",
+    "player_name": "Gonzalo Valle",
+    "position": "Goalkeeper",
+    "club": "LDU Quito",
+    "jersey_number": 22
+  },
+  {
+    "team_name": "Ecuador",
+    "player_name": "Moisés Caicedo",
+    "position": "Midfielder",
+    "club": "Chelsea",
+    "jersey_number": 23
+  },
+  {
+    "team_name": "Ecuador",
+    "player_name": "Jeremy Arévalo",
+    "position": "Forward",
+    "club": "VfB Stuttgart",
+    "jersey_number": 24
+  },
+  {
+    "team_name": "Ecuador",
+    "player_name": "Jackson Porozo",
+    "position": "Defender",
+    "club": "Tijuana",
+    "jersey_number": 25
+  },
+  {
+    "team_name": "Ecuador",
+    "player_name": "Yaimar Medina",
+    "position": "Defender",
+    "club": "Genk",
+    "jersey_number": 26
+  },
+  {
+    "team_name": "Germany",
+    "player_name": "Manuel Neuer",
+    "position": "Goalkeeper",
+    "club": "Bayern Munich",
+    "jersey_number": 1
+  },
+  {
+    "team_name": "Germany",
+    "player_name": "Antonio Rüdiger",
+    "position": "Defender",
+    "club": "Real Madrid",
+    "jersey_number": 2
+  },
+  {
+    "team_name": "Germany",
+    "player_name": "Waldemar Anton",
+    "position": "Defender",
+    "club": "Borussia Dortmund",
+    "jersey_number": 3
+  },
+  {
+    "team_name": "Germany",
+    "player_name": "Jonathan Tah",
+    "position": "Defender",
+    "club": "Bayern Munich",
+    "jersey_number": 4
+  },
+  {
+    "team_name": "Germany",
+    "player_name": "Aleksandar Pavlović",
+    "position": "Midfielder",
+    "club": "Bayern Munich",
+    "jersey_number": 5
+  },
+  {
+    "team_name": "Germany",
+    "player_name": "Joshua Kimmich",
+    "position": "Defender",
+    "club": "Bayern Munich",
+    "jersey_number": 6
+  },
+  {
+    "team_name": "Germany",
+    "player_name": "Kai Havertz",
+    "position": "Forward",
+    "club": "Arsenal",
+    "jersey_number": 7
+  },
+  {
+    "team_name": "Germany",
+    "player_name": "Leon Goretzka",
+    "position": "Midfielder",
+    "club": "Bayern Munich",
+    "jersey_number": 8
+  },
+  {
+    "team_name": "Germany",
+    "player_name": "Jamie Leweling",
+    "position": "Midfielder",
+    "club": "VfB Stuttgart",
+    "jersey_number": 9
+  },
+  {
+    "team_name": "Germany",
+    "player_name": "Jamal Musiala",
+    "position": "Midfielder",
+    "club": "Bayern Munich",
+    "jersey_number": 10
+  },
+  {
+    "team_name": "Germany",
+    "player_name": "Nick Woltemade",
+    "position": "Forward",
+    "club": "Newcastle United",
+    "jersey_number": 11
+  },
+  {
+    "team_name": "Germany",
+    "player_name": "Oliver Baumann",
+    "position": "Goalkeeper",
+    "club": "TSG Hoffenheim",
+    "jersey_number": 12
+  },
+  {
+    "team_name": "Germany",
+    "player_name": "Pascal Groß",
+    "position": "Midfielder",
+    "club": "Brighton & Hove Albion",
+    "jersey_number": 13
+  },
+  {
+    "team_name": "Germany",
+    "player_name": "Maximilian Beier",
+    "position": "Forward",
+    "club": "Borussia Dortmund",
+    "jersey_number": 14
+  },
+  {
+    "team_name": "Germany",
+    "player_name": "Nico Schlotterbeck",
+    "position": "Defender",
+    "club": "Borussia Dortmund",
+    "jersey_number": 15
+  },
+  {
+    "team_name": "Germany",
+    "player_name": "Angelo Stiller",
+    "position": "Midfielder",
+    "club": "VfB Stuttgart",
+    "jersey_number": 16
+  },
+  {
+    "team_name": "Germany",
+    "player_name": "Florian Wirtz",
+    "position": "Midfielder",
+    "club": "Liverpool",
+    "jersey_number": 17
+  },
+  {
+    "team_name": "Germany",
+    "player_name": "Nathaniel Brown",
+    "position": "Defender",
+    "club": "Eintracht Frankfurt",
+    "jersey_number": 18
+  },
+  {
+    "team_name": "Germany",
+    "player_name": "Leroy Sané",
+    "position": "Midfielder",
+    "club": "Galatasaray",
+    "jersey_number": 19
+  },
+  {
+    "team_name": "Germany",
+    "player_name": "Nadiem Amiri",
+    "position": "Midfielder",
+    "club": "Mainz 05",
+    "jersey_number": 20
+  },
+  {
+    "team_name": "Germany",
+    "player_name": "Alexander Nübel",
+    "position": "Goalkeeper",
+    "club": "VfB Stuttgart",
+    "jersey_number": 21
+  },
+  {
+    "team_name": "Germany",
+    "player_name": "David Raum",
+    "position": "Defender",
+    "club": "RB Leipzig",
+    "jersey_number": 22
+  },
+  {
+    "team_name": "Germany",
+    "player_name": "Felix Nmecha",
+    "position": "Midfielder",
+    "club": "Borussia Dortmund",
+    "jersey_number": 23
+  },
+  {
+    "team_name": "Germany",
+    "player_name": "Malick Thiaw",
+    "position": "Defender",
+    "club": "Newcastle United",
+    "jersey_number": 24
+  },
+  {
+    "team_name": "Germany",
+    "player_name": "Assan Ouédraogo",
+    "position": "Midfielder",
+    "club": "RB Leipzig",
+    "jersey_number": 25
+  },
+  {
+    "team_name": "Germany",
+    "player_name": "Deniz Undav",
+    "position": "Forward",
+    "club": "VfB Stuttgart",
+    "jersey_number": 26
+  },
+  {
+    "team_name": "Cote d'Ivoire",
+    "player_name": "Yahia Fofana",
+    "position": "Goalkeeper",
+    "club": "Çaykur Rizespor",
+    "jersey_number": 1
+  },
+  {
+    "team_name": "Cote d'Ivoire",
+    "player_name": "Ousmane Diomande",
+    "position": "Defender",
+    "club": "Sporting CP",
+    "jersey_number": 2
+  },
+  {
+    "team_name": "Cote d'Ivoire",
+    "player_name": "Ghislain Konan",
+    "position": "Defender",
+    "club": "Gil Vicente",
+    "jersey_number": 3
+  },
+  {
+    "team_name": "Cote d'Ivoire",
+    "player_name": "Jean Michaël Seri",
+    "position": "Midfielder",
+    "club": "Maribor",
+    "jersey_number": 4
+  },
+  {
+    "team_name": "Cote d'Ivoire",
+    "player_name": "Wilfried Singo",
+    "position": "Defender",
+    "club": "Galatasaray",
+    "jersey_number": 5
+  },
+  {
+    "team_name": "Cote d'Ivoire",
+    "player_name": "Seko Fofana",
+    "position": "Midfielder",
+    "club": "Porto",
+    "jersey_number": 6
+  },
+  {
+    "team_name": "Cote d'Ivoire",
+    "player_name": "Odilon Kossounou",
+    "position": "Defender",
+    "club": "Atalanta",
+    "jersey_number": 7
+  },
+  {
+    "team_name": "Cote d'Ivoire",
+    "player_name": "Franck Kessié",
+    "position": "Midfielder",
+    "club": "Al-Ahli",
+    "jersey_number": 8
+  },
+  {
+    "team_name": "Cote d'Ivoire",
+    "player_name": "Ange-Yoan Bonny",
+    "position": "Forward",
+    "club": "Inter Milan",
+    "jersey_number": 9
+  },
+  {
+    "team_name": "Cote d'Ivoire",
+    "player_name": "Simon Adingra",
+    "position": "Forward",
+    "club": "Monaco",
+    "jersey_number": 10
+  },
+  {
+    "team_name": "Cote d'Ivoire",
+    "player_name": "Yan Diomande",
+    "position": "Forward",
+    "club": "RB Leipzig",
+    "jersey_number": 11
+  },
+  {
+    "team_name": "Cote d'Ivoire",
+    "player_name": "Elye Wahi",
+    "position": "Forward",
+    "club": "Nice",
+    "jersey_number": 12
+  },
+  {
+    "team_name": "Cote d'Ivoire",
+    "player_name": "Christopher Opéri",
+    "position": "Defender",
+    "club": "İstanbul Başakşehir",
+    "jersey_number": 13
+  },
+  {
+    "team_name": "Cote d'Ivoire",
+    "player_name": "Oumar Diakité",
+    "position": "Forward",
+    "club": "Cercle Brugge",
+    "jersey_number": 14
+  },
+  {
+    "team_name": "Cote d'Ivoire",
+    "player_name": "Amad Diallo",
+    "position": "Forward",
+    "club": "Manchester United",
+    "jersey_number": 15
+  },
+  {
+    "team_name": "Cote d'Ivoire",
+    "player_name": "Mohamed Koné",
+    "position": "Goalkeeper",
+    "club": "Charleroi",
+    "jersey_number": 16
+  },
+  {
+    "team_name": "Cote d'Ivoire",
+    "player_name": "Guéla Doué",
+    "position": "Defender",
+    "club": "Strasbourg",
+    "jersey_number": 17
+  },
+  {
+    "team_name": "Cote d'Ivoire",
+    "player_name": "Ibrahim Sangaré",
+    "position": "Midfielder",
+    "club": "Nottingham Forest",
+    "jersey_number": 18
+  },
+  {
+    "team_name": "Cote d'Ivoire",
+    "player_name": "Nicolas Pépé",
+    "position": "Forward",
+    "club": "Villarreal",
+    "jersey_number": 19
+  },
+  {
+    "team_name": "Cote d'Ivoire",
+    "player_name": "Emmanuel Agbadou",
+    "position": "Defender",
+    "club": "Beşiktaş",
+    "jersey_number": 20
+  },
+  {
+    "team_name": "Cote d'Ivoire",
+    "player_name": "Evan Ndicka",
+    "position": "Defender",
+    "club": "Roma",
+    "jersey_number": 21
+  },
+  {
+    "team_name": "Cote d'Ivoire",
+    "player_name": "Evann Guessand",
+    "position": "Forward",
+    "club": "Crystal Palace",
+    "jersey_number": 22
+  },
+  {
+    "team_name": "Cote d'Ivoire",
+    "player_name": "Alban Lafont",
+    "position": "Goalkeeper",
+    "club": "Panathinaikos",
+    "jersey_number": 23
+  },
+  {
+    "team_name": "Cote d'Ivoire",
+    "player_name": "Bazoumana Touré",
+    "position": "Forward",
+    "club": "TSG Hoffenheim",
+    "jersey_number": 24
+  },
+  {
+    "team_name": "Cote d'Ivoire",
+    "player_name": "Parfait Guiagon",
+    "position": "Midfielder",
+    "club": "Charleroi",
+    "jersey_number": 25
+  },
+  {
+    "team_name": "Cote d'Ivoire",
+    "player_name": "Christ Inao Oulaï",
+    "position": "Midfielder",
+    "club": "Trabzonspor",
+    "jersey_number": 26
+  },
+  {
+    "team_name": "Japan",
+    "player_name": "Zion Suzuki",
+    "position": "Goalkeeper",
+    "club": "Parma",
+    "jersey_number": 1
+  },
+  {
+    "team_name": "Japan",
+    "player_name": "Yukinari Sugawara",
+    "position": "Defender",
+    "club": "Werder Bremen",
+    "jersey_number": 2
+  },
+  {
+    "team_name": "Japan",
+    "player_name": "Shōgo Taniguchi",
+    "position": "Defender",
+    "club": "Sint-Truiden",
+    "jersey_number": 3
+  },
+  {
+    "team_name": "Japan",
+    "player_name": "Kō Itakura",
+    "position": "Defender",
+    "club": "Ajax",
+    "jersey_number": 4
+  },
+  {
+    "team_name": "Japan",
+    "player_name": "Yūto Nagatomo",
+    "position": "Defender",
+    "club": "FC Tokyo",
+    "jersey_number": 5
+  },
+  {
+    "team_name": "Japan",
+    "player_name": "Wataru Endo",
+    "position": "Midfielder",
+    "club": "Liverpool",
+    "jersey_number": 6
+  },
+  {
+    "team_name": "Japan",
+    "player_name": "Ao Tanaka",
+    "position": "Midfielder",
+    "club": "Leeds United",
+    "jersey_number": 7
+  },
+  {
+    "team_name": "Japan",
+    "player_name": "Takefusa Kubo",
+    "position": "Midfielder",
+    "club": "Real Sociedad",
+    "jersey_number": 8
+  },
+  {
+    "team_name": "Japan",
+    "player_name": "Keisuke Gotō",
+    "position": "Forward",
+    "club": "Sint-Truiden",
+    "jersey_number": 9
+  },
+  {
+    "team_name": "Japan",
+    "player_name": "Ritsu Dōan",
+    "position": "Midfielder",
+    "club": "Eintracht Frankfurt",
+    "jersey_number": 10
+  },
+  {
+    "team_name": "Japan",
+    "player_name": "Daizen Maeda",
+    "position": "Midfielder",
+    "club": "Celtic",
+    "jersey_number": 11
+  },
+  {
+    "team_name": "Japan",
+    "player_name": "Keisuke Ōsako",
+    "position": "Goalkeeper",
+    "club": "Sanfrecce Hiroshima",
+    "jersey_number": 12
+  },
+  {
+    "team_name": "Japan",
+    "player_name": "Keito Nakamura",
+    "position": "Midfielder",
+    "club": "Reims",
+    "jersey_number": 13
+  },
+  {
+    "team_name": "Japan",
+    "player_name": "Junya Itō",
+    "position": "Midfielder",
+    "club": "Genk",
+    "jersey_number": 14
+  },
+  {
+    "team_name": "Japan",
+    "player_name": "Daichi Kamada",
+    "position": "Midfielder",
+    "club": "Crystal Palace",
+    "jersey_number": 15
+  },
+  {
+    "team_name": "Japan",
+    "player_name": "Tsuyoshi Watanabe",
+    "position": "Defender",
+    "club": "Feyenoord",
+    "jersey_number": 16
+  },
+  {
+    "team_name": "Japan",
+    "player_name": "Yuito Suzuki",
+    "position": "Midfielder",
+    "club": "SC Freiburg",
+    "jersey_number": 17
+  },
+  {
+    "team_name": "Japan",
+    "player_name": "Ayase Ueda",
+    "position": "Forward",
+    "club": "Feyenoord",
+    "jersey_number": 18
+  },
+  {
+    "team_name": "Japan",
+    "player_name": "Kōki Ogawa",
+    "position": "Forward",
+    "club": "NEC",
+    "jersey_number": 19
+  },
+  {
+    "team_name": "Japan",
+    "player_name": "Ayumu Seko",
+    "position": "Defender",
+    "club": "Le Havre",
+    "jersey_number": 20
+  },
+  {
+    "team_name": "Japan",
+    "player_name": "Hiroki Itō",
+    "position": "Defender",
+    "club": "Bayern Munich",
+    "jersey_number": 21
+  },
+  {
+    "team_name": "Japan",
+    "player_name": "Takehiro Tomiyasu",
+    "position": "Defender",
+    "club": "Ajax",
+    "jersey_number": 22
+  },
+  {
+    "team_name": "Japan",
+    "player_name": "Tomoki Hayakawa",
+    "position": "Goalkeeper",
+    "club": "Kashima Antlers",
+    "jersey_number": 23
+  },
+  {
+    "team_name": "Japan",
+    "player_name": "Kaishū Sano",
+    "position": "Midfielder",
+    "club": "Mainz 05",
+    "jersey_number": 24
+  },
+  {
+    "team_name": "Japan",
+    "player_name": "Junnosuke Suzuki",
+    "position": "Defender",
+    "club": "Copenhagen",
+    "jersey_number": 25
+  },
+  {
+    "team_name": "Japan",
+    "player_name": "Kento Shiogai",
+    "position": "Forward",
+    "club": "VfL Wolfsburg",
+    "jersey_number": 26
+  },
+  {
+    "team_name": "Netherlands",
+    "player_name": "Bart Verbruggen",
+    "position": "Goalkeeper",
+    "club": "Brighton & Hove Albion",
+    "jersey_number": 1
+  },
+  {
+    "team_name": "Netherlands",
+    "player_name": "Jurriën Timber",
+    "position": "Defender",
+    "club": "Arsenal",
+    "jersey_number": 2
+  },
+  {
+    "team_name": "Netherlands",
+    "player_name": "Marten de Roon",
+    "position": "Midfielder",
+    "club": "Atalanta",
+    "jersey_number": 3
+  },
+  {
+    "team_name": "Netherlands",
+    "player_name": "Virgil van Dijk",
+    "position": "Defender",
+    "club": "Liverpool",
+    "jersey_number": 4
+  },
+  {
+    "team_name": "Netherlands",
+    "player_name": "Nathan Aké",
+    "position": "Defender",
+    "club": "Manchester City",
+    "jersey_number": 5
+  },
+  {
+    "team_name": "Netherlands",
+    "player_name": "Jan Paul van Hecke",
+    "position": "Defender",
+    "club": "Brighton & Hove Albion",
+    "jersey_number": 6
+  },
+  {
+    "team_name": "Netherlands",
+    "player_name": "Justin Kluivert",
+    "position": "Midfielder",
+    "club": "Bournemouth",
+    "jersey_number": 7
+  },
+  {
+    "team_name": "Netherlands",
+    "player_name": "Ryan Gravenberch",
+    "position": "Midfielder",
+    "club": "Liverpool",
+    "jersey_number": 8
+  },
+  {
+    "team_name": "Netherlands",
+    "player_name": "Wout Weghorst",
+    "position": "Forward",
+    "club": "Ajax",
+    "jersey_number": 9
+  },
+  {
+    "team_name": "Netherlands",
+    "player_name": "Memphis Depay",
+    "position": "Forward",
+    "club": "Corinthians",
+    "jersey_number": 10
+  },
+  {
+    "team_name": "Netherlands",
+    "player_name": "Cody Gakpo",
+    "position": "Forward",
+    "club": "Liverpool",
+    "jersey_number": 11
+  },
+  {
+    "team_name": "Netherlands",
+    "player_name": "Mats Wieffer",
+    "position": "Defender",
+    "club": "Brighton & Hove Albion",
+    "jersey_number": 12
+  },
+  {
+    "team_name": "Netherlands",
+    "player_name": "Robin Roefs",
+    "position": "Goalkeeper",
+    "club": "Sunderland",
+    "jersey_number": 13
+  },
+  {
+    "team_name": "Netherlands",
+    "player_name": "Tijjani Reijnders",
+    "position": "Midfielder",
+    "club": "Manchester City",
+    "jersey_number": 14
+  },
+  {
+    "team_name": "Netherlands",
+    "player_name": "Micky van de Ven",
+    "position": "Defender",
+    "club": "Tottenham Hotspur",
+    "jersey_number": 15
+  },
+  {
+    "team_name": "Netherlands",
+    "player_name": "Guus Til",
+    "position": "Midfielder",
+    "club": "PSV Eindhoven",
+    "jersey_number": 16
+  },
+  {
+    "team_name": "Netherlands",
+    "player_name": "Noa Lang",
+    "position": "Forward",
+    "club": "Galatasaray",
+    "jersey_number": 17
+  },
+  {
+    "team_name": "Netherlands",
+    "player_name": "Donyell Malen",
+    "position": "Forward",
+    "club": "Roma",
+    "jersey_number": 18
+  },
+  {
+    "team_name": "Netherlands",
+    "player_name": "Brian Brobbey",
+    "position": "Forward",
+    "club": "Sunderland",
+    "jersey_number": 19
+  },
+  {
+    "team_name": "Netherlands",
+    "player_name": "Teun Koopmeiners",
+    "position": "Midfielder",
+    "club": "Juventus",
+    "jersey_number": 20
+  },
+  {
+    "team_name": "Netherlands",
+    "player_name": "Frenkie de Jong",
+    "position": "Midfielder",
+    "club": "Barcelona",
+    "jersey_number": 21
+  },
+  {
+    "team_name": "Netherlands",
+    "player_name": "Denzel Dumfries",
+    "position": "Defender",
+    "club": "Inter Milan",
+    "jersey_number": 22
+  },
+  {
+    "team_name": "Netherlands",
+    "player_name": "Mark Flekken",
+    "position": "Goalkeeper",
+    "club": "Bayer Leverkusen",
+    "jersey_number": 23
+  },
+  {
+    "team_name": "Netherlands",
+    "player_name": "Crysencio Summerville",
+    "position": "Forward",
+    "club": "West Ham United",
+    "jersey_number": 24
+  },
+  {
+    "team_name": "Netherlands",
+    "player_name": "Jorrel Hato",
+    "position": "Defender",
+    "club": "Chelsea",
+    "jersey_number": 25
+  },
+  {
+    "team_name": "Netherlands",
+    "player_name": "Quinten Timber",
+    "position": "Midfielder",
+    "club": "Marseille",
+    "jersey_number": 26
+  },
+  {
+    "team_name": "Sweden",
+    "player_name": "Jacob Widell Zetterström",
+    "position": "Goalkeeper",
+    "club": "Derby County",
+    "jersey_number": 1
+  },
+  {
+    "team_name": "Sweden",
+    "player_name": "Gustaf Lagerbielke",
+    "position": "Defender",
+    "club": "Braga",
+    "jersey_number": 2
+  },
+  {
+    "team_name": "Sweden",
+    "player_name": "Victor Lindelöf",
+    "position": "Defender",
+    "club": "Aston Villa",
+    "jersey_number": 3
+  },
+  {
+    "team_name": "Sweden",
+    "player_name": "Isak Hien",
+    "position": "Defender",
+    "club": "Atalanta",
+    "jersey_number": 4
+  },
+  {
+    "team_name": "Sweden",
+    "player_name": "Gabriel Gudmundsson",
+    "position": "Defender",
+    "club": "Leeds United",
+    "jersey_number": 5
+  },
+  {
+    "team_name": "Sweden",
+    "player_name": "Herman Johansson",
+    "position": "Defender",
+    "club": "FC Dallas",
+    "jersey_number": 6
+  },
+  {
+    "team_name": "Sweden",
+    "player_name": "Lucas Bergvall",
+    "position": "Midfielder",
+    "club": "Tottenham Hotspur",
+    "jersey_number": 7
+  },
+  {
+    "team_name": "Sweden",
+    "player_name": "Daniel Svensson",
+    "position": "Defender",
+    "club": "Borussia Dortmund",
+    "jersey_number": 8
+  },
+  {
+    "team_name": "Sweden",
+    "player_name": "Alexander Isak",
+    "position": "Forward",
+    "club": "Liverpool",
+    "jersey_number": 9
+  },
+  {
+    "team_name": "Sweden",
+    "player_name": "Benjamin Nygren",
+    "position": "Midfielder",
+    "club": "Celtic",
+    "jersey_number": 10
+  },
+  {
+    "team_name": "Sweden",
+    "player_name": "Anthony Elanga",
+    "position": "Forward",
+    "club": "Newcastle United",
+    "jersey_number": 11
+  },
+  {
+    "team_name": "Sweden",
+    "player_name": "Viktor Johansson",
+    "position": "Goalkeeper",
+    "club": "Stoke City",
+    "jersey_number": 12
+  },
+  {
+    "team_name": "Sweden",
+    "player_name": "Ken Sema",
+    "position": "Midfielder",
+    "club": "Pafos",
+    "jersey_number": 13
+  },
+  {
+    "team_name": "Sweden",
+    "player_name": "Hjalmar Ekdal",
+    "position": "Defender",
+    "club": "Burnley",
+    "jersey_number": 14
+  },
+  {
+    "team_name": "Sweden",
+    "player_name": "Carl Starfelt",
+    "position": "Defender",
+    "club": "Celta Vigo",
+    "jersey_number": 15
+  },
+  {
+    "team_name": "Sweden",
+    "player_name": "Jesper Karlström",
+    "position": "Midfielder",
+    "club": "Udinese",
+    "jersey_number": 16
+  },
+  {
+    "team_name": "Sweden",
+    "player_name": "Viktor Gyökeres",
+    "position": "Forward",
+    "club": "Arsenal",
+    "jersey_number": 17
+  },
+  {
+    "team_name": "Sweden",
+    "player_name": "Yasin Ayari",
+    "position": "Midfielder",
+    "club": "Brighton & Hove Albion",
+    "jersey_number": 18
+  },
+  {
+    "team_name": "Sweden",
+    "player_name": "Mattias Svanberg",
+    "position": "Midfielder",
+    "club": "VfL Wolfsburg",
+    "jersey_number": 19
+  },
+  {
+    "team_name": "Sweden",
+    "player_name": "Eric Smith",
+    "position": "Defender",
+    "club": "FC St. Pauli",
+    "jersey_number": 20
+  },
+  {
+    "team_name": "Sweden",
+    "player_name": "Alexander Bernhardsson",
+    "position": "Defender",
+    "club": "Holstein Kiel",
+    "jersey_number": 21
+  },
+  {
+    "team_name": "Sweden",
+    "player_name": "Besfort Zeneli",
+    "position": "Midfielder",
+    "club": "Union Saint-Gilloise",
+    "jersey_number": 22
+  },
+  {
+    "team_name": "Sweden",
+    "player_name": "Kristoffer Nordfeldt",
+    "position": "Goalkeeper",
+    "club": "AIK",
+    "jersey_number": 23
+  },
+  {
+    "team_name": "Sweden",
+    "player_name": "Elliot Stroud",
+    "position": "Defender",
+    "club": "Mjällby AIF",
+    "jersey_number": 24
+  },
+  {
+    "team_name": "Sweden",
+    "player_name": "Gustaf Nilsson",
+    "position": "Forward",
+    "club": "Club Brugge",
+    "jersey_number": 25
+  },
+  {
+    "team_name": "Sweden",
+    "player_name": "Taha Ali",
+    "position": "Forward",
+    "club": "Malmö FF",
+    "jersey_number": 26
+  },
+  {
+    "team_name": "Tunisia",
+    "player_name": "Mouhib Chamakh",
+    "position": "Goalkeeper",
+    "club": "Club Africain",
+    "jersey_number": 1
+  },
+  {
+    "team_name": "Tunisia",
+    "player_name": "Ali Abdi",
+    "position": "Defender",
+    "club": "Nice",
+    "jersey_number": 2
+  },
+  {
+    "team_name": "Tunisia",
+    "player_name": "Montassar Talbi",
+    "position": "Defender",
+    "club": "Lorient",
+    "jersey_number": 3
+  },
+  {
+    "team_name": "Tunisia",
+    "player_name": "Omar Rekik",
+    "position": "Defender",
+    "club": "Maribor",
+    "jersey_number": 4
+  },
+  {
+    "team_name": "Tunisia",
+    "player_name": "Adem Arous",
+    "position": "Defender",
+    "club": "Kasımpaşa",
+    "jersey_number": 5
+  },
+  {
+    "team_name": "Tunisia",
+    "player_name": "Dylan Bronn",
+    "position": "Defender",
+    "club": "Servette",
+    "jersey_number": 6
+  },
+  {
+    "team_name": "Tunisia",
+    "player_name": "Elias Achouri",
+    "position": "Forward",
+    "club": "Copenhagen",
+    "jersey_number": 7
+  },
+  {
+    "team_name": "Tunisia",
+    "player_name": "Elias Saad",
+    "position": "Forward",
+    "club": "Hannover 96",
+    "jersey_number": 8
+  },
+  {
+    "team_name": "Tunisia",
+    "player_name": "Hazem Mastouri",
+    "position": "Forward",
+    "club": "Dynamo Makhachkala",
+    "jersey_number": 9
+  },
+  {
+    "team_name": "Tunisia",
+    "player_name": "Hannibal Mejbri",
+    "position": "Midfielder",
+    "club": "Burnley",
+    "jersey_number": 10
+  },
+  {
+    "team_name": "Tunisia",
+    "player_name": "Ismaël Gharbi",
+    "position": "Midfielder",
+    "club": "FC Augsburg",
+    "jersey_number": 11
+  },
+  {
+    "team_name": "Tunisia",
+    "player_name": "Mortadha Ben Ouanes",
+    "position": "Defender",
+    "club": "Kasımpaşa",
+    "jersey_number": 12
+  },
+  {
+    "team_name": "Tunisia",
+    "player_name": "Rani Khedira",
+    "position": "Midfielder",
+    "club": "Union Berlin",
+    "jersey_number": 13
+  },
+  {
+    "team_name": "Tunisia",
+    "player_name": "Khalil Ayari",
+    "position": "Midfielder",
+    "club": "Paris Saint-Germain",
+    "jersey_number": 14
+  },
+  {
+    "team_name": "Tunisia",
+    "player_name": "Hadj Mahmoud",
+    "position": "Midfielder",
+    "club": "Lugano",
+    "jersey_number": 15
+  },
+  {
+    "team_name": "Tunisia",
+    "player_name": "Aymen Dahmen",
+    "position": "Goalkeeper",
+    "club": "CS Sfaxien",
+    "jersey_number": 16
+  },
+  {
+    "team_name": "Tunisia",
+    "player_name": "Ellyes Skhiri",
+    "position": "Midfielder",
+    "club": "Eintracht Frankfurt",
+    "jersey_number": 17
+  },
+  {
+    "team_name": "Tunisia",
+    "player_name": "Rayan Elloumi",
+    "position": "Forward",
+    "club": "Vancouver Whitecaps FC",
+    "jersey_number": 18
+  },
+  {
+    "team_name": "Tunisia",
+    "player_name": "Firas Chaouat",
+    "position": "Forward",
+    "club": "Club Africain",
+    "jersey_number": 19
+  },
+  {
+    "team_name": "Tunisia",
+    "player_name": "Yan Valery",
+    "position": "Defender",
+    "club": "Young Boys",
+    "jersey_number": 20
+  },
+  {
+    "team_name": "Tunisia",
+    "player_name": "Mohamed Amine Ben Hamida",
+    "position": "Defender",
+    "club": "Espérance de Tunis",
+    "jersey_number": 21
+  },
+  {
+    "team_name": "Tunisia",
+    "player_name": "Sabri Ben Hessen",
+    "position": "Goalkeeper",
+    "club": "Étoile du Sahel",
+    "jersey_number": 22
+  },
+  {
+    "team_name": "Tunisia",
+    "player_name": "Moutaz Neffati",
+    "position": "Defender",
+    "club": "IFK Norrköping",
+    "jersey_number": 23
+  },
+  {
+    "team_name": "Tunisia",
+    "player_name": "Raed Chikhaoui",
+    "position": "Defender",
+    "club": "US Monastir",
+    "jersey_number": 24
+  },
+  {
+    "team_name": "Tunisia",
+    "player_name": "Anis Ben Slimane",
+    "position": "Midfielder",
+    "club": "Norwich City",
+    "jersey_number": 25
+  },
+  {
+    "team_name": "Tunisia",
+    "player_name": "Sebastian Tounekti",
+    "position": "Midfielder",
+    "club": "Celtic",
+    "jersey_number": 26
+  },
+  {
+    "team_name": "Belgium",
+    "player_name": "Thibaut Courtois",
+    "position": "Goalkeeper",
+    "club": "Real Madrid",
+    "jersey_number": 1
+  },
+  {
+    "team_name": "Belgium",
+    "player_name": "Zeno Debast",
+    "position": "Defender",
+    "club": "Sporting CP",
+    "jersey_number": 2
+  },
+  {
+    "team_name": "Belgium",
+    "player_name": "Arthur Theate",
+    "position": "Defender",
+    "club": "Eintracht Frankfurt",
+    "jersey_number": 3
+  },
+  {
+    "team_name": "Belgium",
+    "player_name": "Brandon Mechele",
+    "position": "Defender",
+    "club": "Club Brugge",
+    "jersey_number": 4
+  },
+  {
+    "team_name": "Belgium",
+    "player_name": "Maxim De Cuyper",
+    "position": "Defender",
+    "club": "Brighton & Hove Albion",
+    "jersey_number": 5
+  },
+  {
+    "team_name": "Belgium",
+    "player_name": "Axel Witsel",
+    "position": "Midfielder",
+    "club": "Girona",
+    "jersey_number": 6
+  },
+  {
+    "team_name": "Belgium",
+    "player_name": "Kevin De Bruyne",
+    "position": "Midfielder",
+    "club": "Napoli",
+    "jersey_number": 7
+  },
+  {
+    "team_name": "Belgium",
+    "player_name": "Youri Tielemans",
+    "position": "Midfielder",
+    "club": "Aston Villa",
+    "jersey_number": 8
+  },
+  {
+    "team_name": "Belgium",
+    "player_name": "Romelu Lukaku",
+    "position": "Forward",
+    "club": "Napoli",
+    "jersey_number": 9
+  },
+  {
+    "team_name": "Belgium",
+    "player_name": "Leandro Trossard",
+    "position": "Forward",
+    "club": "Arsenal",
+    "jersey_number": 10
+  },
+  {
+    "team_name": "Belgium",
+    "player_name": "Jérémy Doku",
+    "position": "Forward",
+    "club": "Manchester City",
+    "jersey_number": 11
+  },
+  {
+    "team_name": "Belgium",
+    "player_name": "Senne Lammens",
+    "position": "Goalkeeper",
+    "club": "Manchester United",
+    "jersey_number": 12
+  },
+  {
+    "team_name": "Belgium",
+    "player_name": "Mike Penders",
+    "position": "Goalkeeper",
+    "club": "Strasbourg",
+    "jersey_number": 13
+  },
+  {
+    "team_name": "Belgium",
+    "player_name": "Dodi Lukébakio",
+    "position": "Forward",
+    "club": "Benfica",
+    "jersey_number": 14
+  },
+  {
+    "team_name": "Belgium",
+    "player_name": "Thomas Meunier",
+    "position": "Defender",
+    "club": "Lille",
+    "jersey_number": 15
+  },
+  {
+    "team_name": "Belgium",
+    "player_name": "Koni De Winter",
+    "position": "Defender",
+    "club": "Milan",
+    "jersey_number": 16
+  },
+  {
+    "team_name": "Belgium",
+    "player_name": "Charles De Ketelaere",
+    "position": "Forward",
+    "club": "Atalanta",
+    "jersey_number": 17
+  },
+  {
+    "team_name": "Belgium",
+    "player_name": "Joaquin Seys",
+    "position": "Defender",
+    "club": "Club Brugge",
+    "jersey_number": 18
+  },
+  {
+    "team_name": "Belgium",
+    "player_name": "Diego Moreira",
+    "position": "Midfielder",
+    "club": "Strasbourg",
+    "jersey_number": 19
+  },
+  {
+    "team_name": "Belgium",
+    "player_name": "Hans Vanaken",
+    "position": "Midfielder",
+    "club": "Club Brugge",
+    "jersey_number": 20
+  },
+  {
+    "team_name": "Belgium",
+    "player_name": "Timothy Castagne",
+    "position": "Defender",
+    "club": "Fulham",
+    "jersey_number": 21
+  },
+  {
+    "team_name": "Belgium",
+    "player_name": "Alexis Saelemaekers",
+    "position": "Midfielder",
+    "club": "Milan",
+    "jersey_number": 22
+  },
+  {
+    "team_name": "Belgium",
+    "player_name": "Nicolas Raskin",
+    "position": "Midfielder",
+    "club": "Rangers",
+    "jersey_number": 23
+  },
+  {
+    "team_name": "Belgium",
+    "player_name": "Amadou Onana",
+    "position": "Midfielder",
+    "club": "Aston Villa",
+    "jersey_number": 24
+  },
+  {
+    "team_name": "Belgium",
+    "player_name": "Nathan Ngoy",
+    "position": "Defender",
+    "club": "Lille",
+    "jersey_number": 25
+  },
+  {
+    "team_name": "Belgium",
+    "player_name": "Matias Fernandez-Pardo",
+    "position": "Forward",
+    "club": "Lille",
+    "jersey_number": 26
+  },
+  {
+    "team_name": "Egypt",
+    "player_name": "Mohamed El Shenawy",
+    "position": "Goalkeeper",
+    "club": "Al Ahly",
+    "jersey_number": 1
+  },
+  {
+    "team_name": "Egypt",
+    "player_name": "Yasser Ibrahim",
+    "position": "Defender",
+    "club": "Al Ahly",
+    "jersey_number": 2
+  },
+  {
+    "team_name": "Egypt",
+    "player_name": "Mohamed Hany",
+    "position": "Defender",
+    "club": "Al Ahly",
+    "jersey_number": 3
+  },
+  {
+    "team_name": "Egypt",
+    "player_name": "Hossam Abdelmaguid",
+    "position": "Defender",
+    "club": "Zamalek",
+    "jersey_number": 4
+  },
+  {
+    "team_name": "Egypt",
+    "player_name": "Ramy Rabia",
+    "position": "Defender",
+    "club": "Al Ain",
+    "jersey_number": 5
+  },
+  {
+    "team_name": "Egypt",
+    "player_name": "Mohamed Abdelmonem",
+    "position": "Defender",
+    "club": "Nice",
+    "jersey_number": 6
+  },
+  {
+    "team_name": "Egypt",
+    "player_name": "Trézéguet",
+    "position": "Forward",
+    "club": "Al Ahly",
+    "jersey_number": 7
+  },
+  {
+    "team_name": "Egypt",
+    "player_name": "Emam Ashour",
+    "position": "Midfielder",
+    "club": "Al Ahly",
+    "jersey_number": 8
+  },
+  {
+    "team_name": "Egypt",
+    "player_name": "Hamza Abdelkarim",
+    "position": "Forward",
+    "club": "Barcelona",
+    "jersey_number": 9
+  },
+  {
+    "team_name": "Egypt",
+    "player_name": "Mohamed Salah",
+    "position": "Forward",
+    "club": "Liverpool",
+    "jersey_number": 10
+  },
+  {
+    "team_name": "Egypt",
+    "player_name": "Mostafa Ziko",
+    "position": "Midfielder",
+    "club": "Pyramids",
+    "jersey_number": 11
+  },
+  {
+    "team_name": "Egypt",
+    "player_name": "Haissem Hassan",
+    "position": "Forward",
+    "club": "Oviedo",
+    "jersey_number": 12
+  },
+  {
+    "team_name": "Egypt",
+    "player_name": "Ahmed Fatouh",
+    "position": "Defender",
+    "club": "Zamalek",
+    "jersey_number": 13
+  },
+  {
+    "team_name": "Egypt",
+    "player_name": "Hamdy Fathy",
+    "position": "Midfielder",
+    "club": "Al-Wakrah",
+    "jersey_number": 14
+  },
+  {
+    "team_name": "Egypt",
+    "player_name": "Karim Hafez",
+    "position": "Defender",
+    "club": "Pyramids",
+    "jersey_number": 15
+  },
+  {
+    "team_name": "Egypt",
+    "player_name": "El Mahdy Soliman",
+    "position": "Goalkeeper",
+    "club": "Zamalek",
+    "jersey_number": 16
+  },
+  {
+    "team_name": "Egypt",
+    "player_name": "Mohanad Lasheen",
+    "position": "Midfielder",
+    "club": "Pyramids",
+    "jersey_number": 17
+  },
+  {
+    "team_name": "Egypt",
+    "player_name": "Nabil Emad",
+    "position": "Midfielder",
+    "club": "Al-Najma",
+    "jersey_number": 18
+  },
+  {
+    "team_name": "Egypt",
+    "player_name": "Marwan Attia",
+    "position": "Midfielder",
+    "club": "Al Ahly",
+    "jersey_number": 19
+  },
+  {
+    "team_name": "Egypt",
+    "player_name": "Ibrahim Adel",
+    "position": "Forward",
+    "club": "Nordsjælland",
+    "jersey_number": 20
+  },
+  {
+    "team_name": "Egypt",
+    "player_name": "Mahmoud Saber",
+    "position": "Midfielder",
+    "club": "ZED",
+    "jersey_number": 21
+  },
+  {
+    "team_name": "Egypt",
+    "player_name": "Omar Marmoush",
+    "position": "Forward",
+    "club": "Manchester City",
+    "jersey_number": 22
+  },
+  {
+    "team_name": "Egypt",
+    "player_name": "Mostafa Shobeir",
+    "position": "Goalkeeper",
+    "club": "Al Ahly",
+    "jersey_number": 23
+  },
+  {
+    "team_name": "Egypt",
+    "player_name": "Tarek Alaa",
+    "position": "Defender",
+    "club": "ZED",
+    "jersey_number": 24
+  },
+  {
+    "team_name": "Egypt",
+    "player_name": "Zizo",
+    "position": "Forward",
+    "club": "Al Ahly",
+    "jersey_number": 25
+  },
+  {
+    "team_name": "Egypt",
+    "player_name": "Mohamed Alaa",
+    "position": "Goalkeeper",
+    "club": "El Gouna",
+    "jersey_number": 26
+  },
+  {
+    "team_name": "IR Iran",
+    "player_name": "Alireza Beiranvand",
+    "position": "Goalkeeper",
+    "club": "Tractor",
+    "jersey_number": 1
+  },
+  {
+    "team_name": "IR Iran",
+    "player_name": "Saleh Hardani",
+    "position": "Defender",
+    "club": "Esteghlal",
+    "jersey_number": 2
+  },
+  {
+    "team_name": "IR Iran",
+    "player_name": "Ehsan Hajsafi",
+    "position": "Defender",
+    "club": "Sepahan",
+    "jersey_number": 3
+  },
+  {
+    "team_name": "IR Iran",
+    "player_name": "Shojae Khalilzadeh",
+    "position": "Defender",
+    "club": "Tractor",
+    "jersey_number": 4
+  },
+  {
+    "team_name": "IR Iran",
+    "player_name": "Milad Mohammadi",
+    "position": "Defender",
+    "club": "Persepolis",
+    "jersey_number": 5
+  },
+  {
+    "team_name": "IR Iran",
+    "player_name": "Saeid Ezatolahi",
+    "position": "Midfielder",
+    "club": "Shabab Al Ahli",
+    "jersey_number": 6
+  },
+  {
+    "team_name": "IR Iran",
+    "player_name": "Alireza Jahanbakhsh",
+    "position": "Midfielder",
+    "club": "Dender",
+    "jersey_number": 7
+  },
+  {
+    "team_name": "IR Iran",
+    "player_name": "Mohammad Mohebi",
+    "position": "Midfielder",
+    "club": "Rostov",
+    "jersey_number": 8
+  },
+  {
+    "team_name": "IR Iran",
+    "player_name": "Mehdi Taremi",
+    "position": "Forward",
+    "club": "Olympiacos",
+    "jersey_number": 9
+  },
+  {
+    "team_name": "IR Iran",
+    "player_name": "Mehdi Ghayedi",
+    "position": "Forward",
+    "club": "Al Nasr",
+    "jersey_number": 10
+  },
+  {
+    "team_name": "IR Iran",
+    "player_name": "Ali Alipour",
+    "position": "Forward",
+    "club": "Persepolis",
+    "jersey_number": 11
+  },
+  {
+    "team_name": "IR Iran",
+    "player_name": "Payam Niazmand",
+    "position": "Goalkeeper",
+    "club": "Persepolis",
+    "jersey_number": 12
+  },
+  {
+    "team_name": "IR Iran",
+    "player_name": "Hossein Kanaanizadegan",
+    "position": "Defender",
+    "club": "Persepolis",
+    "jersey_number": 13
+  },
+  {
+    "team_name": "IR Iran",
+    "player_name": "Saman Ghoddos",
+    "position": "Midfielder",
+    "club": "Kalba",
+    "jersey_number": 14
+  },
+  {
+    "team_name": "IR Iran",
+    "player_name": "Rouzbeh Cheshmi",
+    "position": "Midfielder",
+    "club": "Esteghlal",
+    "jersey_number": 15
+  },
+  {
+    "team_name": "IR Iran",
+    "player_name": "Mehdi Torabi",
+    "position": "Midfielder",
+    "club": "Tractor",
+    "jersey_number": 16
+  },
+  {
+    "team_name": "IR Iran",
+    "player_name": "Aria Yousefi",
+    "position": "Defender",
+    "club": "Sepahan",
+    "jersey_number": 17
+  },
+  {
+    "team_name": "IR Iran",
+    "player_name": "Amirhossein Hosseinzadeh",
+    "position": "Forward",
+    "club": "Tractor",
+    "jersey_number": 18
+  },
+  {
+    "team_name": "IR Iran",
+    "player_name": "Ali Nemati",
+    "position": "Defender",
+    "club": "Foolad",
+    "jersey_number": 19
+  },
+  {
+    "team_name": "IR Iran",
+    "player_name": "Shahriyar Moghanlou",
+    "position": "Forward",
+    "club": "Kalba",
+    "jersey_number": 20
+  },
+  {
+    "team_name": "IR Iran",
+    "player_name": "Mohammad Ghorbani",
+    "position": "Midfielder",
+    "club": "Al Wahda",
+    "jersey_number": 21
+  },
+  {
+    "team_name": "IR Iran",
+    "player_name": "Hossein Hosseini",
+    "position": "Goalkeeper",
+    "club": "Sepahan",
+    "jersey_number": 22
+  },
+  {
+    "team_name": "IR Iran",
+    "player_name": "Ramin Rezaeian",
+    "position": "Defender",
+    "club": "Foolad",
+    "jersey_number": 23
+  },
+  {
+    "team_name": "IR Iran",
+    "player_name": "Dennis Eckert",
+    "position": "Forward",
+    "club": "Standard Liège",
+    "jersey_number": 24
+  },
+  {
+    "team_name": "IR Iran",
+    "player_name": "Danial Eiri",
+    "position": "Defender",
+    "club": "Malavan",
+    "jersey_number": 25
+  },
+  {
+    "team_name": "IR Iran",
+    "player_name": "Amirmohammad Razzaghinia",
+    "position": "Midfielder",
+    "club": "Esteghlal",
+    "jersey_number": 26
+  },
+  {
+    "team_name": "New Zealand",
+    "player_name": "Max Crocombe",
+    "position": "Goalkeeper",
+    "club": "Millwall",
+    "jersey_number": 1
+  },
+  {
+    "team_name": "New Zealand",
+    "player_name": "Tim Payne",
+    "position": "Defender",
+    "club": "Wellington Phoenix",
+    "jersey_number": 2
+  },
+  {
+    "team_name": "New Zealand",
+    "player_name": "Francis de Vries",
+    "position": "Defender",
+    "club": "Auckland FC",
+    "jersey_number": 3
+  },
+  {
+    "team_name": "New Zealand",
+    "player_name": "Tyler Bindon",
+    "position": "Defender",
+    "club": "Sheffield United",
+    "jersey_number": 4
+  },
+  {
+    "team_name": "New Zealand",
+    "player_name": "Michael Boxall",
+    "position": "Defender",
+    "club": "Minnesota United FC",
+    "jersey_number": 5
+  },
+  {
+    "team_name": "New Zealand",
+    "player_name": "Joe Bell",
+    "position": "Midfielder",
+    "club": "Viking",
+    "jersey_number": 6
+  },
+  {
+    "team_name": "New Zealand",
+    "player_name": "Matthew Garbett",
+    "position": "Midfielder",
+    "club": "Peterborough United",
+    "jersey_number": 7
+  },
+  {
+    "team_name": "New Zealand",
+    "player_name": "Marko Stamenić",
+    "position": "Midfielder",
+    "club": "Swansea City",
+    "jersey_number": 8
+  },
+  {
+    "team_name": "New Zealand",
+    "player_name": "Chris Wood",
+    "position": "Forward",
+    "club": "Nottingham Forest",
+    "jersey_number": 9
+  },
+  {
+    "team_name": "New Zealand",
+    "player_name": "Sarpreet Singh",
+    "position": "Midfielder",
+    "club": "Wellington Phoenix",
+    "jersey_number": 10
+  },
+  {
+    "team_name": "New Zealand",
+    "player_name": "Elijah Just",
+    "position": "Midfielder",
+    "club": "Motherwell",
+    "jersey_number": 11
+  },
+  {
+    "team_name": "New Zealand",
+    "player_name": "Alex Paulsen",
+    "position": "Goalkeeper",
+    "club": "Lechia Gdańsk",
+    "jersey_number": 12
+  },
+  {
+    "team_name": "New Zealand",
+    "player_name": "Liberato Cacace",
+    "position": "Defender",
+    "club": "Wrexham",
+    "jersey_number": 13
+  },
+  {
+    "team_name": "New Zealand",
+    "player_name": "Alex Rufer",
+    "position": "Midfielder",
+    "club": "Wellington Phoenix",
+    "jersey_number": 14
+  },
+  {
+    "team_name": "New Zealand",
+    "player_name": "Nando Pijnaker",
+    "position": "Defender",
+    "club": "Auckland FC",
+    "jersey_number": 15
+  },
+  {
+    "team_name": "New Zealand",
+    "player_name": "Finn Surman",
+    "position": "Defender",
+    "club": "Portland Timbers",
+    "jersey_number": 16
+  },
+  {
+    "team_name": "New Zealand",
+    "player_name": "Kosta Barbarouses",
+    "position": "Forward",
+    "club": "Western Sydney Wanderers",
+    "jersey_number": 17
+  },
+  {
+    "team_name": "New Zealand",
+    "player_name": "Ben Waine",
+    "position": "Forward",
+    "club": "Port Vale",
+    "jersey_number": 18
+  },
+  {
+    "team_name": "New Zealand",
+    "player_name": "Ben Old",
+    "position": "Midfielder",
+    "club": "Saint-Étienne",
+    "jersey_number": 19
+  },
+  {
+    "team_name": "New Zealand",
+    "player_name": "Callum McCowatt",
+    "position": "Midfielder",
+    "club": "Silkeborg",
+    "jersey_number": 20
+  },
+  {
+    "team_name": "New Zealand",
+    "player_name": "Jesse Randall",
+    "position": "Forward",
+    "club": "Auckland FC",
+    "jersey_number": 21
+  },
+  {
+    "team_name": "New Zealand",
+    "player_name": "Michael Woud",
+    "position": "Goalkeeper",
+    "club": "Auckland FC",
+    "jersey_number": 22
+  },
+  {
+    "team_name": "New Zealand",
+    "player_name": "Ryan Thomas",
+    "position": "Midfielder",
+    "club": "PEC Zwolle",
+    "jersey_number": 23
+  },
+  {
+    "team_name": "New Zealand",
+    "player_name": "Callan Elliot",
+    "position": "Defender",
+    "club": "Auckland FC",
+    "jersey_number": 24
+  },
+  {
+    "team_name": "New Zealand",
+    "player_name": "Lachlan Bayliss",
+    "position": "Midfielder",
+    "club": "Newcastle Jets",
+    "jersey_number": 25
+  },
+  {
+    "team_name": "New Zealand",
+    "player_name": "Tommy Smith",
+    "position": "Defender",
+    "club": "Braintree Town",
+    "jersey_number": 26
+  },
+  {
+    "team_name": "Cabo Verde",
+    "player_name": "Vozinha",
+    "position": "Goalkeeper",
+    "club": "Chaves",
+    "jersey_number": 1
+  },
+  {
+    "team_name": "Cabo Verde",
+    "player_name": "Stopira",
+    "position": "Defender",
+    "club": "Torreense",
+    "jersey_number": 2
+  },
+  {
+    "team_name": "Cabo Verde",
+    "player_name": "Diney",
+    "position": "Defender",
+    "club": "Al Bataeh",
+    "jersey_number": 3
+  },
+  {
+    "team_name": "Cabo Verde",
+    "player_name": "Roberto Lopes",
+    "position": "Defender",
+    "club": "Shamrock Rovers",
+    "jersey_number": 4
+  },
+  {
+    "team_name": "Cabo Verde",
+    "player_name": "Logan Costa",
+    "position": "Defender",
+    "club": "Villarreal",
+    "jersey_number": 5
+  },
+  {
+    "team_name": "Cabo Verde",
+    "player_name": "Kevin Pina",
+    "position": "Midfielder",
+    "club": "Krasnodar",
+    "jersey_number": 6
+  },
+  {
+    "team_name": "Cabo Verde",
+    "player_name": "Jovane Cabral",
+    "position": "Midfielder",
+    "club": "Estrela Amadora",
+    "jersey_number": 7
+  },
+  {
+    "team_name": "Cabo Verde",
+    "player_name": "João Paulo",
+    "position": "Midfielder",
+    "club": "FCSB",
+    "jersey_number": 8
+  },
+  {
+    "team_name": "Cabo Verde",
+    "player_name": "Gilson Benchimol",
+    "position": "Forward",
+    "club": "Akron Tolyatti",
+    "jersey_number": 9
+  },
+  {
+    "team_name": "Cabo Verde",
+    "player_name": "Jamiro Monteiro",
+    "position": "Midfielder",
+    "club": "PEC Zwolle",
+    "jersey_number": 10
+  },
+  {
+    "team_name": "Cabo Verde",
+    "player_name": "Garry Rodrigues",
+    "position": "Midfielder",
+    "club": "Apollon Limassol",
+    "jersey_number": 11
+  },
+  {
+    "team_name": "Cabo Verde",
+    "player_name": "Márcio Rosa",
+    "position": "Goalkeeper",
+    "club": "Montana",
+    "jersey_number": 12
+  },
+  {
+    "team_name": "Cabo Verde",
+    "player_name": "Sidny Lopes Cabral",
+    "position": "Defender",
+    "club": "Benfica",
+    "jersey_number": 13
+  },
+  {
+    "team_name": "Cabo Verde",
+    "player_name": "Deroy Duarte",
+    "position": "Midfielder",
+    "club": "Ludogorets Razgrad",
+    "jersey_number": 14
+  },
+  {
+    "team_name": "Cabo Verde",
+    "player_name": "Laros Duarte",
+    "position": "Midfielder",
+    "club": "Puskás Akadémia",
+    "jersey_number": 15
+  },
+  {
+    "team_name": "Cabo Verde",
+    "player_name": "Yannick Semedo",
+    "position": "Midfielder",
+    "club": "Farense",
+    "jersey_number": 16
+  },
+  {
+    "team_name": "Cabo Verde",
+    "player_name": "Willy Semedo",
+    "position": "Midfielder",
+    "club": "Omonia",
+    "jersey_number": 17
+  },
+  {
+    "team_name": "Cabo Verde",
+    "player_name": "Telmo Arcanjo",
+    "position": "Midfielder",
+    "club": "Vitória de Guimarães",
+    "jersey_number": 18
+  },
+  {
+    "team_name": "Cabo Verde",
+    "player_name": "Dailon Livramento",
+    "position": "Forward",
+    "club": "Casa Pia",
+    "jersey_number": 19
+  },
+  {
+    "team_name": "Cabo Verde",
+    "player_name": "Ryan Mendes",
+    "position": "Forward",
+    "club": "Iğdır",
+    "jersey_number": 20
+  },
+  {
+    "team_name": "Cabo Verde",
+    "player_name": "Nuno da Costa",
+    "position": "Midfielder",
+    "club": "İstanbul Başakşehir",
+    "jersey_number": 21
+  },
+  {
+    "team_name": "Cabo Verde",
+    "player_name": "Steven Moreira",
+    "position": "Defender",
+    "club": "Columbus Crew",
+    "jersey_number": 22
+  },
+  {
+    "team_name": "Cabo Verde",
+    "player_name": "CJ dos Santos",
+    "position": "Goalkeeper",
+    "club": "San Diego FC",
+    "jersey_number": 23
+  },
+  {
+    "team_name": "Cabo Verde",
+    "player_name": "Wagner Pina",
+    "position": "Defender",
+    "club": "Trabzonspor",
+    "jersey_number": 24
+  },
+  {
+    "team_name": "Cabo Verde",
+    "player_name": "Kelvin Pires",
+    "position": "Defender",
+    "club": "SJK",
+    "jersey_number": 25
+  },
+  {
+    "team_name": "Cabo Verde",
+    "player_name": "Hélio Varela",
+    "position": "Midfielder",
+    "club": "Maccabi Tel Aviv",
+    "jersey_number": 26
+  },
+  {
+    "team_name": "Saudi Arabia",
+    "player_name": "Nawaf Al-Aqidi",
+    "position": "Goalkeeper",
+    "club": "Al-Nassr",
+    "jersey_number": 1
+  },
+  {
+    "team_name": "Saudi Arabia",
+    "player_name": "Ali Majrashi",
+    "position": "Defender",
+    "club": "Al-Ahli",
+    "jersey_number": 2
+  },
+  {
+    "team_name": "Saudi Arabia",
+    "player_name": "Ali Lajami",
+    "position": "Defender",
+    "club": "Al-Hilal",
+    "jersey_number": 3
+  },
+  {
+    "team_name": "Saudi Arabia",
+    "player_name": "Abdulelah Al-Amri",
+    "position": "Defender",
+    "club": "Al-Nassr",
+    "jersey_number": 4
+  },
+  {
+    "team_name": "Saudi Arabia",
+    "player_name": "Hassan Al-Tambakti",
+    "position": "Defender",
+    "club": "Al-Hilal",
+    "jersey_number": 5
+  },
+  {
+    "team_name": "Saudi Arabia",
+    "player_name": "Nasser Al-Dawsari",
+    "position": "Midfielder",
+    "club": "Al-Hilal",
+    "jersey_number": 6
+  },
+  {
+    "team_name": "Saudi Arabia",
+    "player_name": "Musab Al-Juwayr",
+    "position": "Midfielder",
+    "club": "Al-Qadsiah",
+    "jersey_number": 7
+  },
+  {
+    "team_name": "Saudi Arabia",
+    "player_name": "Ayman Yahya",
+    "position": "Forward",
+    "club": "Al-Nassr",
+    "jersey_number": 8
+  },
+  {
+    "team_name": "Saudi Arabia",
+    "player_name": "Firas Al-Buraikan",
+    "position": "Forward",
+    "club": "Al-Ahli",
+    "jersey_number": 9
+  },
+  {
+    "team_name": "Saudi Arabia",
+    "player_name": "Salem Al-Dawsari",
+    "position": "Forward",
+    "club": "Al-Hilal",
+    "jersey_number": 10
+  },
+  {
+    "team_name": "Saudi Arabia",
+    "player_name": "Saleh Al-Shehri",
+    "position": "Forward",
+    "club": "Al-Ittihad",
+    "jersey_number": 11
+  },
+  {
+    "team_name": "Saudi Arabia",
+    "player_name": "Saud Abdulhamid",
+    "position": "Defender",
+    "club": "Lens",
+    "jersey_number": 12
+  },
+  {
+    "team_name": "Saudi Arabia",
+    "player_name": "Nawaf Boushal",
+    "position": "Defender",
+    "club": "Al-Nassr",
+    "jersey_number": 13
+  },
+  {
+    "team_name": "Saudi Arabia",
+    "player_name": "Hassan Kadesh",
+    "position": "Defender",
+    "club": "Al-Ittihad",
+    "jersey_number": 14
+  },
+  {
+    "team_name": "Saudi Arabia",
+    "player_name": "Abdullah Al-Khaibari",
+    "position": "Midfielder",
+    "club": "Al-Nassr",
+    "jersey_number": 15
+  },
+  {
+    "team_name": "Saudi Arabia",
+    "player_name": "Ziyad Al-Johani",
+    "position": "Midfielder",
+    "club": "Al-Ahli",
+    "jersey_number": 16
+  },
+  {
+    "team_name": "Saudi Arabia",
+    "player_name": "Khalid Al-Ghannam",
+    "position": "Forward",
+    "club": "Al-Ettifaq",
+    "jersey_number": 17
+  },
+  {
+    "team_name": "Saudi Arabia",
+    "player_name": "Alaa Al-Hejji",
+    "position": "Midfielder",
+    "club": "Neom",
+    "jersey_number": 18
+  },
+  {
+    "team_name": "Saudi Arabia",
+    "player_name": "Abdullah Al-Hamdan",
+    "position": "Forward",
+    "club": "Al-Nassr",
+    "jersey_number": 19
+  },
+  {
+    "team_name": "Saudi Arabia",
+    "player_name": "Sultan Mandash",
+    "position": "Forward",
+    "club": "Al-Hilal",
+    "jersey_number": 20
+  },
+  {
+    "team_name": "Saudi Arabia",
+    "player_name": "Mohammed Al-Owais",
+    "position": "Goalkeeper",
+    "club": "Al-Ula",
+    "jersey_number": 21
+  },
+  {
+    "team_name": "Saudi Arabia",
+    "player_name": "Ahmed Al-Kassar",
+    "position": "Goalkeeper",
+    "club": "Al-Qadsiah",
+    "jersey_number": 22
+  },
+  {
+    "team_name": "Saudi Arabia",
+    "player_name": "Mohamed Kanno",
+    "position": "Midfielder",
+    "club": "Al-Hilal",
+    "jersey_number": 23
+  },
+  {
+    "team_name": "Saudi Arabia",
+    "player_name": "Moteb Al-Harbi",
+    "position": "Defender",
+    "club": "Al-Hilal",
+    "jersey_number": 24
+  },
+  {
+    "team_name": "Saudi Arabia",
+    "player_name": "Jehad Thakri",
+    "position": "Defender",
+    "club": "Al-Qadsiah",
+    "jersey_number": 25
+  },
+  {
+    "team_name": "Saudi Arabia",
+    "player_name": "Mohammed Abu Al-Shamat",
+    "position": "Defender",
+    "club": "Al-Qadsiah",
+    "jersey_number": 26
+  },
+  {
+    "team_name": "Spain",
+    "player_name": "David Raya",
+    "position": "Goalkeeper",
+    "club": "Arsenal",
+    "jersey_number": 1
+  },
+  {
+    "team_name": "Spain",
+    "player_name": "Marc Pubill",
+    "position": "Defender",
+    "club": "Atlético Madrid",
+    "jersey_number": 2
+  },
+  {
+    "team_name": "Spain",
+    "player_name": "Álex Grimaldo",
+    "position": "Defender",
+    "club": "Bayer Leverkusen",
+    "jersey_number": 3
+  },
+  {
+    "team_name": "Spain",
+    "player_name": "Eric García",
+    "position": "Defender",
+    "club": "Barcelona",
+    "jersey_number": 4
+  },
+  {
+    "team_name": "Spain",
+    "player_name": "Marcos Llorente",
+    "position": "Defender",
+    "club": "Atlético Madrid",
+    "jersey_number": 5
+  },
+  {
+    "team_name": "Spain",
+    "player_name": "Mikel Merino",
+    "position": "Midfielder",
+    "club": "Arsenal",
+    "jersey_number": 6
+  },
+  {
+    "team_name": "Spain",
+    "player_name": "Ferran Torres",
+    "position": "Forward",
+    "club": "Barcelona",
+    "jersey_number": 7
+  },
+  {
+    "team_name": "Spain",
+    "player_name": "Fabián Ruiz",
+    "position": "Midfielder",
+    "club": "Paris Saint-Germain",
+    "jersey_number": 8
+  },
+  {
+    "team_name": "Spain",
+    "player_name": "Gavi",
+    "position": "Midfielder",
+    "club": "Barcelona",
+    "jersey_number": 9
+  },
+  {
+    "team_name": "Spain",
+    "player_name": "Dani Olmo",
+    "position": "Forward",
+    "club": "Barcelona",
+    "jersey_number": 10
+  },
+  {
+    "team_name": "Spain",
+    "player_name": "Yéremy Pino",
+    "position": "Forward",
+    "club": "Crystal Palace",
+    "jersey_number": 11
+  },
+  {
+    "team_name": "Spain",
+    "player_name": "Pedro Porro",
+    "position": "Defender",
+    "club": "Tottenham Hotspur",
+    "jersey_number": 12
+  },
+  {
+    "team_name": "Spain",
+    "player_name": "Joan Garcia",
+    "position": "Goalkeeper",
+    "club": "Barcelona",
+    "jersey_number": 13
+  },
+  {
+    "team_name": "Spain",
+    "player_name": "Aymeric Laporte",
+    "position": "Defender",
+    "club": "Athletic Bilbao",
+    "jersey_number": 14
+  },
+  {
+    "team_name": "Spain",
+    "player_name": "Álex Baena",
+    "position": "Midfielder",
+    "club": "Atlético Madrid",
+    "jersey_number": 15
+  },
+  {
+    "team_name": "Spain",
+    "player_name": "Rodri",
+    "position": "Midfielder",
+    "club": "Manchester City",
+    "jersey_number": 16
+  },
+  {
+    "team_name": "Spain",
+    "player_name": "Nico Williams",
+    "position": "Forward",
+    "club": "Athletic Bilbao",
+    "jersey_number": 17
+  },
+  {
+    "team_name": "Spain",
+    "player_name": "Martín Zubimendi",
+    "position": "Midfielder",
+    "club": "Arsenal",
+    "jersey_number": 18
+  },
+  {
+    "team_name": "Spain",
+    "player_name": "Lamine Yamal",
+    "position": "Forward",
+    "club": "Barcelona",
+    "jersey_number": 19
+  },
+  {
+    "team_name": "Spain",
+    "player_name": "Pedri",
+    "position": "Midfielder",
+    "club": "Barcelona",
+    "jersey_number": 20
+  },
+  {
+    "team_name": "Spain",
+    "player_name": "Mikel Oyarzabal",
+    "position": "Forward",
+    "club": "Real Sociedad",
+    "jersey_number": 21
+  },
+  {
+    "team_name": "Spain",
+    "player_name": "Pau Cubarsí",
+    "position": "Defender",
+    "club": "Barcelona",
+    "jersey_number": 22
+  },
+  {
+    "team_name": "Spain",
+    "player_name": "Unai Simón",
+    "position": "Goalkeeper",
+    "club": "Athletic Bilbao",
+    "jersey_number": 23
+  },
+  {
+    "team_name": "Spain",
+    "player_name": "Marc Cucurella",
+    "position": "Defender",
+    "club": "Chelsea",
+    "jersey_number": 24
+  },
+  {
+    "team_name": "Spain",
+    "player_name": "Víctor Muñoz",
+    "position": "Forward",
+    "club": "Osasuna",
+    "jersey_number": 25
+  },
+  {
+    "team_name": "Spain",
+    "player_name": "Borja Iglesias",
+    "position": "Forward",
+    "club": "Celta Vigo",
+    "jersey_number": 26
+  },
+  {
+    "team_name": "Uruguay",
+    "player_name": "Sergio Rochet",
+    "position": "Goalkeeper",
+    "club": "Internacional",
+    "jersey_number": 1
+  },
+  {
+    "team_name": "Uruguay",
+    "player_name": "José Giménez",
+    "position": "Defender",
+    "club": "Atlético Madrid",
+    "jersey_number": 2
+  },
+  {
+    "team_name": "Uruguay",
+    "player_name": "Sebastián Cáceres",
+    "position": "Defender",
+    "club": "América",
+    "jersey_number": 3
+  },
+  {
+    "team_name": "Uruguay",
+    "player_name": "Ronald Araújo",
+    "position": "Defender",
+    "club": "Barcelona",
+    "jersey_number": 4
+  },
+  {
+    "team_name": "Uruguay",
+    "player_name": "Manuel Ugarte",
+    "position": "Midfielder",
+    "club": "Manchester United",
+    "jersey_number": 5
+  },
+  {
+    "team_name": "Uruguay",
+    "player_name": "Rodrigo Bentancur",
+    "position": "Midfielder",
+    "club": "Tottenham Hotspur",
+    "jersey_number": 6
+  },
+  {
+    "team_name": "Uruguay",
+    "player_name": "Nicolás de la Cruz",
+    "position": "Midfielder",
+    "club": "Flamengo",
+    "jersey_number": 7
+  },
+  {
+    "team_name": "Uruguay",
+    "player_name": "Federico Valverde",
+    "position": "Midfielder",
+    "club": "Real Madrid",
+    "jersey_number": 8
+  },
+  {
+    "team_name": "Uruguay",
+    "player_name": "Darwin Núñez",
+    "position": "Forward",
+    "club": "Al-Hilal",
+    "jersey_number": 9
+  },
+  {
+    "team_name": "Uruguay",
+    "player_name": "Giorgian de Arrascaeta",
+    "position": "Midfielder",
+    "club": "Flamengo",
+    "jersey_number": 10
+  },
+  {
+    "team_name": "Uruguay",
+    "player_name": "Facundo Pellistri",
+    "position": "Forward",
+    "club": "Panathinaikos",
+    "jersey_number": 11
+  },
+  {
+    "team_name": "Uruguay",
+    "player_name": "Santiago Mele",
+    "position": "Goalkeeper",
+    "club": "Monterrey",
+    "jersey_number": 12
+  },
+  {
+    "team_name": "Uruguay",
+    "player_name": "Guillermo Varela",
+    "position": "Defender",
+    "club": "Flamengo",
+    "jersey_number": 13
+  },
+  {
+    "team_name": "Uruguay",
+    "player_name": "Agustín Canobbio",
+    "position": "Midfielder",
+    "club": "Fluminense",
+    "jersey_number": 14
+  },
+  {
+    "team_name": "Uruguay",
+    "player_name": "Emiliano Martínez",
+    "position": "Midfielder",
+    "club": "Palmeiras",
+    "jersey_number": 15
+  },
+  {
+    "team_name": "Uruguay",
+    "player_name": "Mathías Olivera",
+    "position": "Defender",
+    "club": "Napoli",
+    "jersey_number": 16
+  },
+  {
+    "team_name": "Uruguay",
+    "player_name": "Matías Viña",
+    "position": "Defender",
+    "club": "River Plate",
+    "jersey_number": 17
+  },
+  {
+    "team_name": "Uruguay",
+    "player_name": "Brian Rodríguez",
+    "position": "Forward",
+    "club": "América",
+    "jersey_number": 18
+  },
+  {
+    "team_name": "Uruguay",
+    "player_name": "Rodrigo Aguirre",
+    "position": "Forward",
+    "club": "UANL",
+    "jersey_number": 19
+  },
+  {
+    "team_name": "Uruguay",
+    "player_name": "Maximiliano Araújo",
+    "position": "Midfielder",
+    "club": "Sporting CP",
+    "jersey_number": 20
+  },
+  {
+    "team_name": "Uruguay",
+    "player_name": "Federico Viñas",
+    "position": "Forward",
+    "club": "Oviedo",
+    "jersey_number": 21
+  },
+  {
+    "team_name": "Uruguay",
+    "player_name": "Joaquín Piquerez",
+    "position": "Midfielder",
+    "club": "Palmeiras",
+    "jersey_number": 22
+  },
+  {
+    "team_name": "Uruguay",
+    "player_name": "Fernando Muslera",
+    "position": "Goalkeeper",
+    "club": "Estudiantes",
+    "jersey_number": 23
+  },
+  {
+    "team_name": "Uruguay",
+    "player_name": "Santiago Bueno",
+    "position": "Defender",
+    "club": "Wolverhampton Wanderers",
+    "jersey_number": 24
+  },
+  {
+    "team_name": "Uruguay",
+    "player_name": "Juan Manuel Sanabria",
+    "position": "Midfielder",
+    "club": "Real Salt Lake",
+    "jersey_number": 25
+  },
+  {
+    "team_name": "Uruguay",
+    "player_name": "Rodrigo Zalazar",
+    "position": "Midfielder",
+    "club": "Braga",
+    "jersey_number": 26
+  },
+  {
+    "team_name": "France",
+    "player_name": "Brice Samba",
+    "position": "Goalkeeper",
+    "club": "Rennes",
+    "jersey_number": 1
+  },
+  {
+    "team_name": "France",
+    "player_name": "Malo Gusto",
+    "position": "Defender",
+    "club": "Chelsea",
+    "jersey_number": 2
+  },
+  {
+    "team_name": "France",
+    "player_name": "Lucas Digne",
+    "position": "Defender",
+    "club": "Aston Villa",
+    "jersey_number": 3
+  },
+  {
+    "team_name": "France",
+    "player_name": "Dayot Upamecano",
+    "position": "Defender",
+    "club": "Bayern Munich",
+    "jersey_number": 4
+  },
+  {
+    "team_name": "France",
+    "player_name": "Jules Koundé",
+    "position": "Defender",
+    "club": "Barcelona",
+    "jersey_number": 5
+  },
+  {
+    "team_name": "France",
+    "player_name": "Manu Koné",
+    "position": "Midfielder",
+    "club": "Roma",
+    "jersey_number": 6
+  },
+  {
+    "team_name": "France",
+    "player_name": "Ousmane Dembélé",
+    "position": "Forward",
+    "club": "Paris Saint-Germain",
+    "jersey_number": 7
+  },
+  {
+    "team_name": "France",
+    "player_name": "Aurélien Tchouaméni",
+    "position": "Midfielder",
+    "club": "Real Madrid",
+    "jersey_number": 8
+  },
+  {
+    "team_name": "France",
+    "player_name": "Marcus Thuram",
+    "position": "Forward",
+    "club": "Inter Milan",
+    "jersey_number": 9
+  },
+  {
+    "team_name": "France",
+    "player_name": "Kylian Mbappé",
+    "position": "Forward",
+    "club": "Real Madrid",
+    "jersey_number": 10
+  },
+  {
+    "team_name": "France",
+    "player_name": "Michael Olise",
+    "position": "Forward",
+    "club": "Bayern Munich",
+    "jersey_number": 11
+  },
+  {
+    "team_name": "France",
+    "player_name": "Bradley Barcola",
+    "position": "Forward",
+    "club": "Paris Saint-Germain",
+    "jersey_number": 12
+  },
+  {
+    "team_name": "France",
+    "player_name": "N'Golo Kanté",
+    "position": "Midfielder",
+    "club": "Fenerbahçe",
+    "jersey_number": 13
+  },
+  {
+    "team_name": "France",
+    "player_name": "Adrien Rabiot",
+    "position": "Midfielder",
+    "club": "Milan",
+    "jersey_number": 14
+  },
+  {
+    "team_name": "France",
+    "player_name": "Ibrahima Konaté",
+    "position": "Defender",
+    "club": "Liverpool",
+    "jersey_number": 15
+  },
+  {
+    "team_name": "France",
+    "player_name": "Mike Maignan",
+    "position": "Goalkeeper",
+    "club": "Milan",
+    "jersey_number": 16
+  },
+  {
+    "team_name": "France",
+    "player_name": "William Saliba",
+    "position": "Defender",
+    "club": "Arsenal",
+    "jersey_number": 17
+  },
+  {
+    "team_name": "France",
+    "player_name": "Warren Zaïre-Emery",
+    "position": "Midfielder",
+    "club": "Paris Saint-Germain",
+    "jersey_number": 18
+  },
+  {
+    "team_name": "France",
+    "player_name": "Théo Hernandez",
+    "position": "Defender",
+    "club": "Al-Hilal",
+    "jersey_number": 19
+  },
+  {
+    "team_name": "France",
+    "player_name": "Désiré Doué",
+    "position": "Forward",
+    "club": "Paris Saint-Germain",
+    "jersey_number": 20
+  },
+  {
+    "team_name": "France",
+    "player_name": "Lucas Hernandez",
+    "position": "Defender",
+    "club": "Paris Saint-Germain",
+    "jersey_number": 21
+  },
+  {
+    "team_name": "France",
+    "player_name": "Jean-Philippe Mateta",
+    "position": "Forward",
+    "club": "Crystal Palace",
+    "jersey_number": 22
+  },
+  {
+    "team_name": "France",
+    "player_name": "Robin Risser",
+    "position": "Goalkeeper",
+    "club": "Lens",
+    "jersey_number": 23
+  },
+  {
+    "team_name": "France",
+    "player_name": "Rayan Cherki",
+    "position": "Midfielder",
+    "club": "Manchester City",
+    "jersey_number": 24
+  },
+  {
+    "team_name": "France",
+    "player_name": "Maghnes Akliouche",
+    "position": "Midfielder",
+    "club": "Monaco",
+    "jersey_number": 25
+  },
+  {
+    "team_name": "France",
+    "player_name": "Maxence Lacroix",
+    "position": "Defender",
+    "club": "Crystal Palace",
+    "jersey_number": 26
+  },
+  {
+    "team_name": "Iraq",
+    "player_name": "Fahad Talib",
+    "position": "Goalkeeper",
+    "club": "Al-Talaba",
+    "jersey_number": 1
+  },
+  {
+    "team_name": "Iraq",
+    "player_name": "Rebin Sulaka",
+    "position": "Defender",
+    "club": "Port",
+    "jersey_number": 2
+  },
+  {
+    "team_name": "Iraq",
+    "player_name": "Hussein Ali",
+    "position": "Defender",
+    "club": "Pogoń Szczecin",
+    "jersey_number": 3
+  },
+  {
+    "team_name": "Iraq",
+    "player_name": "Zaid Tahseen",
+    "position": "Defender",
+    "club": "Pakhtakor",
+    "jersey_number": 4
+  },
+  {
+    "team_name": "Iraq",
+    "player_name": "Akam Hashim",
+    "position": "Defender",
+    "club": "Al-Zawraa",
+    "jersey_number": 5
+  },
+  {
+    "team_name": "Iraq",
+    "player_name": "Manaf Younis",
+    "position": "Defender",
+    "club": "Al-Shorta",
+    "jersey_number": 6
+  },
+  {
+    "team_name": "Iraq",
+    "player_name": "Youssef Amyn",
+    "position": "Midfielder",
+    "club": "AEK Larnaca",
+    "jersey_number": 7
+  },
+  {
+    "team_name": "Iraq",
+    "player_name": "Ibrahim Bayesh",
+    "position": "Midfielder",
+    "club": "Al Dhafra",
+    "jersey_number": 8
+  },
+  {
+    "team_name": "Iraq",
+    "player_name": "Ali Al-Hamadi",
+    "position": "Forward",
+    "club": "Luton Town",
+    "jersey_number": 9
+  },
+  {
+    "team_name": "Iraq",
+    "player_name": "Mohanad Ali",
+    "position": "Forward",
+    "club": "Dibba",
+    "jersey_number": 10
+  },
+  {
+    "team_name": "Iraq",
+    "player_name": "Ahmed Qasem",
+    "position": "Forward",
+    "club": "Nashville SC",
+    "jersey_number": 11
+  },
+  {
+    "team_name": "Iraq",
+    "player_name": "Jalal Hassan",
+    "position": "Goalkeeper",
+    "club": "Al-Zawraa",
+    "jersey_number": 12
+  },
+  {
+    "team_name": "Iraq",
+    "player_name": "Ali Yousif",
+    "position": "Forward",
+    "club": "Al-Talaba",
+    "jersey_number": 13
+  },
+  {
+    "team_name": "Iraq",
+    "player_name": "Zidane Iqbal",
+    "position": "Midfielder",
+    "club": "Utrecht",
+    "jersey_number": 14
+  },
+  {
+    "team_name": "Iraq",
+    "player_name": "Ahmed Yahya",
+    "position": "Defender",
+    "club": "Al-Shorta",
+    "jersey_number": 15
+  },
+  {
+    "team_name": "Iraq",
+    "player_name": "Amir Al-Ammari",
+    "position": "Midfielder",
+    "club": "Cracovia",
+    "jersey_number": 16
+  },
+  {
+    "team_name": "Iraq",
+    "player_name": "Ali Jasim",
+    "position": "Forward",
+    "club": "Al-Najma",
+    "jersey_number": 17
+  },
+  {
+    "team_name": "Iraq",
+    "player_name": "Aymen Hussein",
+    "position": "Forward",
+    "club": "Al-Karma",
+    "jersey_number": 18
+  },
+  {
+    "team_name": "Iraq",
+    "player_name": "Kevin Yakob",
+    "position": "Midfielder",
+    "club": "AGF",
+    "jersey_number": 19
+  },
+  {
+    "team_name": "Iraq",
+    "player_name": "Aimar Sher",
+    "position": "Midfielder",
+    "club": "Sarpsborg 08",
+    "jersey_number": 20
+  },
+  {
+    "team_name": "Iraq",
+    "player_name": "Marko Farji",
+    "position": "Forward",
+    "club": "Venezia",
+    "jersey_number": 21
+  },
+  {
+    "team_name": "Iraq",
+    "player_name": "Ahmed Basil",
+    "position": "Goalkeeper",
+    "club": "Al-Shorta",
+    "jersey_number": 22
+  },
+  {
+    "team_name": "Iraq",
+    "player_name": "Merchas Doski",
+    "position": "Defender",
+    "club": "Viktoria Plzeň",
+    "jersey_number": 23
+  },
+  {
+    "team_name": "Iraq",
+    "player_name": "Zaid Ismail",
+    "position": "Midfielder",
+    "club": "Al-Talaba",
+    "jersey_number": 24
+  },
+  {
+    "team_name": "Iraq",
+    "player_name": "Mustafa Saadoon",
+    "position": "Defender",
+    "club": "Al-Shorta",
+    "jersey_number": 25
+  },
+  {
+    "team_name": "Iraq",
+    "player_name": "Frans Putros",
+    "position": "Defender",
+    "club": "Persib",
+    "jersey_number": 26
+  },
+  {
+    "team_name": "Norway",
+    "player_name": "Ørjan Nyland",
+    "position": "Goalkeeper",
+    "club": "Sevilla",
+    "jersey_number": 1
+  },
+  {
+    "team_name": "Norway",
+    "player_name": "Morten Thorsby",
+    "position": "Midfielder",
+    "club": "Cremonese",
+    "jersey_number": 2
+  },
+  {
+    "team_name": "Norway",
+    "player_name": "Kristoffer Ajer",
+    "position": "Defender",
+    "club": "Brentford",
+    "jersey_number": 3
+  },
+  {
+    "team_name": "Norway",
+    "player_name": "Leo Østigård",
+    "position": "Defender",
+    "club": "Genoa",
+    "jersey_number": 4
+  },
+  {
+    "team_name": "Norway",
+    "player_name": "David Møller Wolfe",
+    "position": "Defender",
+    "club": "Wolverhampton Wanderers",
+    "jersey_number": 5
+  },
+  {
+    "team_name": "Norway",
+    "player_name": "Patrick Berg",
+    "position": "Midfielder",
+    "club": "Bodø/Glimt",
+    "jersey_number": 6
+  },
+  {
+    "team_name": "Norway",
+    "player_name": "Alexander Sørloth",
+    "position": "Forward",
+    "club": "Atlético Madrid",
+    "jersey_number": 7
+  },
+  {
+    "team_name": "Norway",
+    "player_name": "Sander Berge",
+    "position": "Midfielder",
+    "club": "Fulham",
+    "jersey_number": 8
+  },
+  {
+    "team_name": "Norway",
+    "player_name": "Erling Haaland",
+    "position": "Forward",
+    "club": "Manchester City",
+    "jersey_number": 9
+  },
+  {
+    "team_name": "Norway",
+    "player_name": "Martin Ødegaard",
+    "position": "Midfielder",
+    "club": "Arsenal",
+    "jersey_number": 10
+  },
+  {
+    "team_name": "Norway",
+    "player_name": "Jørgen Strand Larsen",
+    "position": "Forward",
+    "club": "Crystal Palace",
+    "jersey_number": 11
+  },
+  {
+    "team_name": "Norway",
+    "player_name": "Sander Tangvik",
+    "position": "Goalkeeper",
+    "club": "Hamburger SV",
+    "jersey_number": 12
+  },
+  {
+    "team_name": "Norway",
+    "player_name": "Egil Selvik",
+    "position": "Goalkeeper",
+    "club": "Watford",
+    "jersey_number": 13
+  },
+  {
+    "team_name": "Norway",
+    "player_name": "Fredrik Aursnes",
+    "position": "Midfielder",
+    "club": "Benfica",
+    "jersey_number": 14
+  },
+  {
+    "team_name": "Norway",
+    "player_name": "Fredrik André Bjørkan",
+    "position": "Defender",
+    "club": "Bodø/Glimt",
+    "jersey_number": 15
+  },
+  {
+    "team_name": "Norway",
+    "player_name": "Marcus Holmgren Pedersen",
+    "position": "Defender",
+    "club": "Torino",
+    "jersey_number": 16
+  },
+  {
+    "team_name": "Norway",
+    "player_name": "Torbjørn Heggem",
+    "position": "Defender",
+    "club": "Bologna",
+    "jersey_number": 17
+  },
+  {
+    "team_name": "Norway",
+    "player_name": "Kristian Thorstvedt",
+    "position": "Midfielder",
+    "club": "Sassuolo",
+    "jersey_number": 18
+  },
+  {
+    "team_name": "Norway",
+    "player_name": "Thelo Aasgaard",
+    "position": "Midfielder",
+    "club": "Rangers",
+    "jersey_number": 19
+  },
+  {
+    "team_name": "Norway",
+    "player_name": "Antonio Nusa",
+    "position": "Forward",
+    "club": "RB Leipzig",
+    "jersey_number": 20
+  },
+  {
+    "team_name": "Norway",
+    "player_name": "Andreas Schjelderup",
+    "position": "Midfielder",
+    "club": "Benfica",
+    "jersey_number": 21
+  },
+  {
+    "team_name": "Norway",
+    "player_name": "Oscar Bobb",
+    "position": "Midfielder",
+    "club": "Fulham",
+    "jersey_number": 22
+  },
+  {
+    "team_name": "Norway",
+    "player_name": "Jens Petter Hauge",
+    "position": "Midfielder",
+    "club": "Bodø/Glimt",
+    "jersey_number": 23
+  },
+  {
+    "team_name": "Norway",
+    "player_name": "Sondre Langås",
+    "position": "Defender",
+    "club": "Derby County",
+    "jersey_number": 24
+  },
+  {
+    "team_name": "Norway",
+    "player_name": "Henrik Falchener",
+    "position": "Defender",
+    "club": "Viking",
+    "jersey_number": 25
+  },
+  {
+    "team_name": "Norway",
+    "player_name": "Julian Ryerson",
+    "position": "Forward",
+    "club": "Borussia Dortmund",
+    "jersey_number": 26
+  },
+  {
+    "team_name": "Senegal",
+    "player_name": "Yehvann Diouf",
+    "position": "Goalkeeper",
+    "club": "Nice",
+    "jersey_number": 1
+  },
+  {
+    "team_name": "Senegal",
+    "player_name": "Mamadou Sarr",
+    "position": "Defender",
+    "club": "Chelsea",
+    "jersey_number": 2
+  },
+  {
+    "team_name": "Senegal",
+    "player_name": "Kalidou Koulibaly",
+    "position": "Defender",
+    "club": "Al-Hilal",
+    "jersey_number": 3
+  },
+  {
+    "team_name": "Senegal",
+    "player_name": "Abdoulaye Seck",
+    "position": "Defender",
+    "club": "Maccabi Haifa",
+    "jersey_number": 4
+  },
+  {
+    "team_name": "Senegal",
+    "player_name": "Idrissa Gueye",
+    "position": "Midfielder",
+    "club": "Everton",
+    "jersey_number": 5
+  },
+  {
+    "team_name": "Senegal",
+    "player_name": "Pathé Ciss",
+    "position": "Midfielder",
+    "club": "Rayo Vallecano",
+    "jersey_number": 6
+  },
+  {
+    "team_name": "Senegal",
+    "player_name": "Assane Diao",
+    "position": "Forward",
+    "club": "Como",
+    "jersey_number": 7
+  },
+  {
+    "team_name": "Senegal",
+    "player_name": "Lamine Camara",
+    "position": "Midfielder",
+    "club": "Monaco",
+    "jersey_number": 8
+  },
+  {
+    "team_name": "Senegal",
+    "player_name": "Bamba Dieng",
+    "position": "Forward",
+    "club": "Lorient",
+    "jersey_number": 9
+  },
+  {
+    "team_name": "Senegal",
+    "player_name": "Sadio Mané",
+    "position": "Forward",
+    "club": "Al-Nassr",
+    "jersey_number": 10
+  },
+  {
+    "team_name": "Senegal",
+    "player_name": "Nicolas Jackson",
+    "position": "Forward",
+    "club": "Bayern Munich",
+    "jersey_number": 11
+  },
+  {
+    "team_name": "Senegal",
+    "player_name": "Cherif Ndiaye",
+    "position": "Forward",
+    "club": "Samsunspor",
+    "jersey_number": 12
+  },
+  {
+    "team_name": "Senegal",
+    "player_name": "Iliman Ndiaye",
+    "position": "Forward",
+    "club": "Everton",
+    "jersey_number": 13
+  },
+  {
+    "team_name": "Senegal",
+    "player_name": "Ismail Jakobs",
+    "position": "Defender",
+    "club": "Galatasaray",
+    "jersey_number": 14
+  },
+  {
+    "team_name": "Senegal",
+    "player_name": "Krépin Diatta",
+    "position": "Defender",
+    "club": "Monaco",
+    "jersey_number": 15
+  },
+  {
+    "team_name": "Senegal",
+    "player_name": "Édouard Mendy",
+    "position": "Goalkeeper",
+    "club": "Al-Ahli",
+    "jersey_number": 16
+  },
+  {
+    "team_name": "Senegal",
+    "player_name": "Pape Matar Sarr",
+    "position": "Midfielder",
+    "club": "Tottenham Hotspur",
+    "jersey_number": 17
+  },
+  {
+    "team_name": "Senegal",
+    "player_name": "Ismaïla Sarr",
+    "position": "Forward",
+    "club": "Crystal Palace",
+    "jersey_number": 18
+  },
+  {
+    "team_name": "Senegal",
+    "player_name": "Moussa Niakhaté",
+    "position": "Defender",
+    "club": "Lyon",
+    "jersey_number": 19
+  },
+  {
+    "team_name": "Senegal",
+    "player_name": "Ibrahim Mbaye",
+    "position": "Forward",
+    "club": "Paris Saint-Germain",
+    "jersey_number": 20
+  },
+  {
+    "team_name": "Senegal",
+    "player_name": "Habib Diarra",
+    "position": "Midfielder",
+    "club": "Sunderland",
+    "jersey_number": 21
+  },
+  {
+    "team_name": "Senegal",
+    "player_name": "Bara Sapoko Ndiaye",
+    "position": "Midfielder",
+    "club": "Bayern Munich",
+    "jersey_number": 22
+  },
+  {
+    "team_name": "Senegal",
+    "player_name": "Mory Diaw",
+    "position": "Goalkeeper",
+    "club": "Le Havre",
+    "jersey_number": 23
+  },
+  {
+    "team_name": "Senegal",
+    "player_name": "Antoine Mendy",
+    "position": "Defender",
+    "club": "Nice",
+    "jersey_number": 24
+  },
+  {
+    "team_name": "Senegal",
+    "player_name": "El Hadji Malick Diouf",
+    "position": "Defender",
+    "club": "West Ham United",
+    "jersey_number": 25
+  },
+  {
+    "team_name": "Senegal",
+    "player_name": "Pape Gueye",
+    "position": "Midfielder",
+    "club": "Villarreal",
+    "jersey_number": 26
+  },
+  {
+    "team_name": "Algeria",
+    "player_name": "Melvin Mastil",
+    "position": "Goalkeeper",
+    "club": "Stade Nyonnais",
+    "jersey_number": 1
+  },
+  {
+    "team_name": "Algeria",
+    "player_name": "Aïssa Mandi",
+    "position": "Defender",
+    "club": "Lille",
+    "jersey_number": 2
+  },
+  {
+    "team_name": "Algeria",
+    "player_name": "Achref Abada",
+    "position": "Defender",
+    "club": "USM Alger",
+    "jersey_number": 3
+  },
+  {
+    "team_name": "Algeria",
+    "player_name": "Mohamed Amine Tougai",
+    "position": "Defender",
+    "club": "Espérance de Tunis",
+    "jersey_number": 4
+  },
+  {
+    "team_name": "Algeria",
+    "player_name": "Zineddine Belaïd",
+    "position": "Defender",
+    "club": "JS Kabylie",
+    "jersey_number": 5
+  },
+  {
+    "team_name": "Algeria",
+    "player_name": "Ramiz Zerrouki",
+    "position": "Midfielder",
+    "club": "Twente",
+    "jersey_number": 6
+  },
+  {
+    "team_name": "Algeria",
+    "player_name": "Riyad Mahrez",
+    "position": "Forward",
+    "club": "Al-Ahli",
+    "jersey_number": 7
+  },
+  {
+    "team_name": "Algeria",
+    "player_name": "Houssem Aouar",
+    "position": "Midfielder",
+    "club": "Al-Ittihad",
+    "jersey_number": 8
+  },
+  {
+    "team_name": "Algeria",
+    "player_name": "Amine Gouiri",
+    "position": "Forward",
+    "club": "Marseille",
+    "jersey_number": 9
+  },
+  {
+    "team_name": "Algeria",
+    "player_name": "Farès Chaïbi",
+    "position": "Midfielder",
+    "club": "Eintracht Frankfurt",
+    "jersey_number": 10
+  },
+  {
+    "team_name": "Algeria",
+    "player_name": "Anis Hadj Moussa",
+    "position": "Forward",
+    "club": "Feyenoord",
+    "jersey_number": 11
+  },
+  {
+    "team_name": "Algeria",
+    "player_name": "Nadhir Benbouali",
+    "position": "Forward",
+    "club": "Győri ETO",
+    "jersey_number": 12
+  },
+  {
+    "team_name": "Algeria",
+    "player_name": "Jaouen Hadjam",
+    "position": "Defender",
+    "club": "Young Boys",
+    "jersey_number": 13
+  },
+  {
+    "team_name": "Algeria",
+    "player_name": "Hicham Boudaoui",
+    "position": "Midfielder",
+    "club": "Nice",
+    "jersey_number": 14
+  },
+  {
+    "team_name": "Algeria",
+    "player_name": "Rayan Aït-Nouri",
+    "position": "Defender",
+    "club": "Manchester City",
+    "jersey_number": 15
+  },
+  {
+    "team_name": "Algeria",
+    "player_name": "Oussama Benbot",
+    "position": "Goalkeeper",
+    "club": "USM Alger",
+    "jersey_number": 16
+  },
+  {
+    "team_name": "Algeria",
+    "player_name": "Rafik Belghali",
+    "position": "Defender",
+    "club": "Hellas Verona",
+    "jersey_number": 17
+  },
+  {
+    "team_name": "Algeria",
+    "player_name": "Mohamed Amoura",
+    "position": "Forward",
+    "club": "VfL Wolfsburg",
+    "jersey_number": 18
+  },
+  {
+    "team_name": "Algeria",
+    "player_name": "Nabil Bentaleb",
+    "position": "Midfielder",
+    "club": "Lille",
+    "jersey_number": 19
+  },
+  {
+    "team_name": "Algeria",
+    "player_name": "Adil Boulbina",
+    "position": "Forward",
+    "club": "Al-Duhail",
+    "jersey_number": 20
+  },
+  {
+    "team_name": "Algeria",
+    "player_name": "Ramy Bensebaini",
+    "position": "Defender",
+    "club": "Borussia Dortmund",
+    "jersey_number": 21
+  },
+  {
+    "team_name": "Algeria",
+    "player_name": "Ibrahim Maza",
+    "position": "Midfielder",
+    "club": "Bayer Leverkusen",
+    "jersey_number": 22
+  },
+  {
+    "team_name": "Algeria",
+    "player_name": "Luca Zidane",
+    "position": "Goalkeeper",
+    "club": "Granada",
+    "jersey_number": 23
+  },
+  {
+    "team_name": "Algeria",
+    "player_name": "Yacine Titraoui",
+    "position": "Midfielder",
+    "club": "Charleroi",
+    "jersey_number": 24
+  },
+  {
+    "team_name": "Algeria",
+    "player_name": "Farès Ghedjemis",
+    "position": "Forward",
+    "club": "Frosinone",
+    "jersey_number": 25
+  },
+  {
+    "team_name": "Algeria",
+    "player_name": "Samir Chergui",
+    "position": "Defender",
+    "club": "Paris FC",
+    "jersey_number": 26
+  },
+  {
+    "team_name": "Argentina",
+    "player_name": "Juan Musso",
+    "position": "Goalkeeper",
+    "club": "Atlético Madrid",
+    "jersey_number": 1
+  },
+  {
+    "team_name": "Argentina",
+    "player_name": "Leonardo Balerdi",
+    "position": "Defender",
+    "club": "Marseille",
+    "jersey_number": 2
+  },
+  {
+    "team_name": "Argentina",
+    "player_name": "Nicolás Tagliafico",
+    "position": "Defender",
+    "club": "Lyon",
+    "jersey_number": 3
+  },
+  {
+    "team_name": "Argentina",
+    "player_name": "Gonzalo Montiel",
+    "position": "Defender",
+    "club": "River Plate",
+    "jersey_number": 4
+  },
+  {
+    "team_name": "Argentina",
+    "player_name": "Leandro Paredes",
+    "position": "Midfielder",
+    "club": "Boca Juniors",
+    "jersey_number": 5
+  },
+  {
+    "team_name": "Argentina",
+    "player_name": "Lisandro Martínez",
+    "position": "Defender",
+    "club": "Manchester United",
+    "jersey_number": 6
+  },
+  {
+    "team_name": "Argentina",
+    "player_name": "Rodrigo De Paul",
+    "position": "Midfielder",
+    "club": "Inter Miami CF",
+    "jersey_number": 7
+  },
+  {
+    "team_name": "Argentina",
+    "player_name": "Valentín Barco",
+    "position": "Midfielder",
+    "club": "Strasbourg",
+    "jersey_number": 8
+  },
+  {
+    "team_name": "Argentina",
+    "player_name": "Julián Alvarez",
+    "position": "Forward",
+    "club": "Atlético Madrid",
+    "jersey_number": 9
+  },
+  {
+    "team_name": "Argentina",
+    "player_name": "Lionel Messi",
+    "position": "Forward",
+    "club": "Inter Miami CF",
+    "jersey_number": 10
+  },
+  {
+    "team_name": "Argentina",
+    "player_name": "Giovani Lo Celso",
+    "position": "Midfielder",
+    "club": "Real Betis",
+    "jersey_number": 11
+  },
+  {
+    "team_name": "Argentina",
+    "player_name": "Gerónimo Rulli",
+    "position": "Goalkeeper",
+    "club": "Marseille",
+    "jersey_number": 12
+  },
+  {
+    "team_name": "Argentina",
+    "player_name": "Cristian Romero",
+    "position": "Defender",
+    "club": "Tottenham Hotspur",
+    "jersey_number": 13
+  },
+  {
+    "team_name": "Argentina",
+    "player_name": "Exequiel Palacios",
+    "position": "Midfielder",
+    "club": "Bayer Leverkusen",
+    "jersey_number": 14
+  },
+  {
+    "team_name": "Argentina",
+    "player_name": "Nicolás González",
+    "position": "Midfielder",
+    "club": "Atlético Madrid",
+    "jersey_number": 15
+  },
+  {
+    "team_name": "Argentina",
+    "player_name": "Thiago Almada",
+    "position": "Forward",
+    "club": "Atlético Madrid",
+    "jersey_number": 16
+  },
+  {
+    "team_name": "Argentina",
+    "player_name": "Giuliano Simeone",
+    "position": "Forward",
+    "club": "Atlético Madrid",
+    "jersey_number": 17
+  },
+  {
+    "team_name": "Argentina",
+    "player_name": "Nico Paz",
+    "position": "Forward",
+    "club": "Como",
+    "jersey_number": 18
+  },
+  {
+    "team_name": "Argentina",
+    "player_name": "Nicolás Otamendi",
+    "position": "Defender",
+    "club": "Benfica",
+    "jersey_number": 19
+  },
+  {
+    "team_name": "Argentina",
+    "player_name": "Alexis Mac Allister",
+    "position": "Midfielder",
+    "club": "Liverpool",
+    "jersey_number": 20
+  },
+  {
+    "team_name": "Argentina",
+    "player_name": "José Manuel López",
+    "position": "Forward",
+    "club": "Palmeiras",
+    "jersey_number": 21
+  },
+  {
+    "team_name": "Argentina",
+    "player_name": "Lautaro Martínez",
+    "position": "Forward",
+    "club": "Inter Milan",
+    "jersey_number": 22
+  },
+  {
+    "team_name": "Argentina",
+    "player_name": "Emiliano Martínez",
+    "position": "Goalkeeper",
+    "club": "Aston Villa",
+    "jersey_number": 23
+  },
+  {
+    "team_name": "Argentina",
+    "player_name": "Enzo Fernández",
+    "position": "Midfielder",
+    "club": "Chelsea",
+    "jersey_number": 24
+  },
+  {
+    "team_name": "Argentina",
+    "player_name": "Facundo Medina",
+    "position": "Defender",
+    "club": "Marseille",
+    "jersey_number": 25
+  },
+  {
+    "team_name": "Argentina",
+    "player_name": "Nahuel Molina",
+    "position": "Defender",
+    "club": "Atlético Madrid",
+    "jersey_number": 26
+  },
+  {
+    "team_name": "Austria",
+    "player_name": "Alexander Schlager",
+    "position": "Goalkeeper",
+    "club": "Red Bull Salzburg",
+    "jersey_number": 1
+  },
+  {
+    "team_name": "Austria",
+    "player_name": "David Affengruber",
+    "position": "Defender",
+    "club": "Elche",
+    "jersey_number": 2
+  },
+  {
+    "team_name": "Austria",
+    "player_name": "Kevin Danso",
+    "position": "Defender",
+    "club": "Tottenham Hotspur",
+    "jersey_number": 3
+  },
+  {
+    "team_name": "Austria",
+    "player_name": "Xaver Schlager",
+    "position": "Midfielder",
+    "club": "RB Leipzig",
+    "jersey_number": 4
+  },
+  {
+    "team_name": "Austria",
+    "player_name": "Stefan Posch",
+    "position": "Defender",
+    "club": "Mainz 05",
+    "jersey_number": 5
+  },
+  {
+    "team_name": "Austria",
+    "player_name": "Nicolas Seiwald",
+    "position": "Midfielder",
+    "club": "RB Leipzig",
+    "jersey_number": 6
+  },
+  {
+    "team_name": "Austria",
+    "player_name": "Marko Arnautović",
+    "position": "Forward",
+    "club": "Red Star Belgrade",
+    "jersey_number": 7
+  },
+  {
+    "team_name": "Austria",
+    "player_name": "David Alaba",
+    "position": "Defender",
+    "club": "Real Madrid",
+    "jersey_number": 8
+  },
+  {
+    "team_name": "Austria",
+    "player_name": "Marcel Sabitzer",
+    "position": "Midfielder",
+    "club": "Borussia Dortmund",
+    "jersey_number": 9
+  },
+  {
+    "team_name": "Austria",
+    "player_name": "Florian Grillitsch",
+    "position": "Midfielder",
+    "club": "Braga",
+    "jersey_number": 10
+  },
+  {
+    "team_name": "Austria",
+    "player_name": "Michael Gregoritsch",
+    "position": "Forward",
+    "club": "FC Augsburg",
+    "jersey_number": 11
+  },
+  {
+    "team_name": "Austria",
+    "player_name": "Florian Wiegele",
+    "position": "Goalkeeper",
+    "club": "Viktoria Plzeň",
+    "jersey_number": 12
+  },
+  {
+    "team_name": "Austria",
+    "player_name": "Patrick Pentz",
+    "position": "Goalkeeper",
+    "club": "Brøndby",
+    "jersey_number": 13
+  },
+  {
+    "team_name": "Austria",
+    "player_name": "Saša Kalajdžić",
+    "position": "Forward",
+    "club": "LASK",
+    "jersey_number": 14
+  },
+  {
+    "team_name": "Austria",
+    "player_name": "Philipp Lienhart",
+    "position": "Defender",
+    "club": "SC Freiburg",
+    "jersey_number": 15
+  },
+  {
+    "team_name": "Austria",
+    "player_name": "Phillipp Mwene",
+    "position": "Defender",
+    "club": "Mainz 05",
+    "jersey_number": 16
+  },
+  {
+    "team_name": "Austria",
+    "player_name": "Carney Chukwuemeka",
+    "position": "Midfielder",
+    "club": "Borussia Dortmund",
+    "jersey_number": 17
+  },
+  {
+    "team_name": "Austria",
+    "player_name": "Romano Schmid",
+    "position": "Midfielder",
+    "club": "Werder Bremen",
+    "jersey_number": 18
+  },
+  {
+    "team_name": "Austria",
+    "player_name": "Konrad Laimer",
+    "position": "Midfielder",
+    "club": "Bayern Munich",
+    "jersey_number": 20
+  },
+  {
+    "team_name": "Austria",
+    "player_name": "Patrick Wimmer",
+    "position": "Forward",
+    "club": "VfL Wolfsburg",
+    "jersey_number": 21
+  },
+  {
+    "team_name": "Austria",
+    "player_name": "Alexander Prass",
+    "position": "Midfielder",
+    "club": "TSG Hoffenheim",
+    "jersey_number": 22
+  },
+  {
+    "team_name": "Austria",
+    "player_name": "Marco Friedl",
+    "position": "Defender",
+    "club": "Werder Bremen",
+    "jersey_number": 23
+  },
+  {
+    "team_name": "Austria",
+    "player_name": "Paul Wanner",
+    "position": "Midfielder",
+    "club": "PSV Eindhoven",
+    "jersey_number": 24
+  },
+  {
+    "team_name": "Austria",
+    "player_name": "Michael Svoboda",
+    "position": "Defender",
+    "club": "Venezia",
+    "jersey_number": 25
+  },
+  {
+    "team_name": "Austria",
+    "player_name": "Alessandro Schöpf",
+    "position": "Midfielder",
+    "club": "Wolfsberger AC",
+    "jersey_number": 26
+  },
+  {
+    "team_name": "Jordan",
+    "player_name": "Yazeed Abulaila",
+    "position": "Goalkeeper",
+    "club": "Al-Hussein",
+    "jersey_number": 1
+  },
+  {
+    "team_name": "Jordan",
+    "player_name": "Mohammad Abu Hashish",
+    "position": "Defender",
+    "club": "Al-Karma",
+    "jersey_number": 2
+  },
+  {
+    "team_name": "Jordan",
+    "player_name": "Abdallah Nasib",
+    "position": "Defender",
+    "club": "Al-Zawraa",
+    "jersey_number": 3
+  },
+  {
+    "team_name": "Jordan",
+    "player_name": "Husam Abu Dahab",
+    "position": "Defender",
+    "club": "Al-Faisaly",
+    "jersey_number": 4
+  },
+  {
+    "team_name": "Jordan",
+    "player_name": "Yazan Al-Arab",
+    "position": "Defender",
+    "club": "FC Seoul",
+    "jersey_number": 5
+  },
+  {
+    "team_name": "Jordan",
+    "player_name": "Amer Jamous",
+    "position": "Midfielder",
+    "club": "Al-Zawraa",
+    "jersey_number": 6
+  },
+  {
+    "team_name": "Jordan",
+    "player_name": "Mohammad Abu Zrayq",
+    "position": "Forward",
+    "club": "Raja Casablanca",
+    "jersey_number": 7
+  },
+  {
+    "team_name": "Jordan",
+    "player_name": "Noor Al-Rawabdeh",
+    "position": "Midfielder",
+    "club": "Selangor",
+    "jersey_number": 8
+  },
+  {
+    "team_name": "Jordan",
+    "player_name": "Ali Olwan",
+    "position": "Forward",
+    "club": "Al-Sailiya",
+    "jersey_number": 9
+  },
+  {
+    "team_name": "Jordan",
+    "player_name": "Musa Al-Taamari",
+    "position": "Forward",
+    "club": "Rennes",
+    "jersey_number": 10
+  },
+  {
+    "team_name": "Jordan",
+    "player_name": "Odeh Al-Fakhouri",
+    "position": "Forward",
+    "club": "Pyramids",
+    "jersey_number": 11
+  },
+  {
+    "team_name": "Jordan",
+    "player_name": "Nour Bani Attiah",
+    "position": "Goalkeeper",
+    "club": "Al-Faisaly",
+    "jersey_number": 12
+  },
+  {
+    "team_name": "Jordan",
+    "player_name": "Mahmoud Al-Mardi",
+    "position": "Forward",
+    "club": "Al-Hussein",
+    "jersey_number": 13
+  },
+  {
+    "team_name": "Jordan",
+    "player_name": "Rajaei Ayed",
+    "position": "Midfielder",
+    "club": "Al-Hussein",
+    "jersey_number": 14
+  },
+  {
+    "team_name": "Jordan",
+    "player_name": "Ibrahim Sadeh",
+    "position": "Midfielder",
+    "club": "Al-Karma",
+    "jersey_number": 15
+  },
+  {
+    "team_name": "Jordan",
+    "player_name": "Mo Abualnadi",
+    "position": "Defender",
+    "club": "Selangor",
+    "jersey_number": 16
+  },
+  {
+    "team_name": "Jordan",
+    "player_name": "Salim Obaid",
+    "position": "Defender",
+    "club": "Al-Hussein",
+    "jersey_number": 17
+  },
+  {
+    "team_name": "Jordan",
+    "player_name": "Saed Al-Rosan",
+    "position": "Defender",
+    "club": "Al-Hussein",
+    "jersey_number": 19
+  },
+  {
+    "team_name": "Jordan",
+    "player_name": "Mohannad Abu Taha",
+    "position": "Midfielder",
+    "club": "Al-Quwa Al-Jawiya",
+    "jersey_number": 20
+  },
+  {
+    "team_name": "Jordan",
+    "player_name": "Nizar Al-Rashdan",
+    "position": "Midfielder",
+    "club": "Qatar SC",
+    "jersey_number": 21
+  },
+  {
+    "team_name": "Jordan",
+    "player_name": "Abdallah Al-Fakhouri",
+    "position": "Goalkeeper",
+    "club": "Al-Wehdat",
+    "jersey_number": 22
+  },
+  {
+    "team_name": "Jordan",
+    "player_name": "Ihsan Haddad",
+    "position": "Defender",
+    "club": "Al-Hussein",
+    "jersey_number": 23
+  },
+  {
+    "team_name": "Jordan",
+    "player_name": "Ali Azaizeh",
+    "position": "Forward",
+    "club": "Al-Shabab",
+    "jersey_number": 24
+  },
+  {
+    "team_name": "Jordan",
+    "player_name": "Mohammad Al-Dawoud",
+    "position": "Midfielder",
+    "club": "Al-Wehdat",
+    "jersey_number": 25
+  },
+  {
+    "team_name": "Jordan",
+    "player_name": "Anas Badawi",
+    "position": "Defender",
+    "club": "Al-Faisaly",
+    "jersey_number": 26
+  },
+  {
+    "team_name": "Colombia",
+    "player_name": "David Ospina",
+    "position": "Goalkeeper",
+    "club": "Atlético Nacional",
+    "jersey_number": 1
+  },
+  {
+    "team_name": "Colombia",
+    "player_name": "Daniel Muñoz",
+    "position": "Defender",
+    "club": "Crystal Palace",
+    "jersey_number": 2
+  },
+  {
+    "team_name": "Colombia",
+    "player_name": "Jhon Lucumí",
+    "position": "Defender",
+    "club": "Bologna",
+    "jersey_number": 3
+  },
+  {
+    "team_name": "Colombia",
+    "player_name": "Santiago Arias",
+    "position": "Defender",
+    "club": "Independiente",
+    "jersey_number": 4
+  },
+  {
+    "team_name": "Colombia",
+    "player_name": "Kevin Castaño",
+    "position": "Midfielder",
+    "club": "River Plate",
+    "jersey_number": 5
+  },
+  {
+    "team_name": "Colombia",
+    "player_name": "Richard Ríos",
+    "position": "Midfielder",
+    "club": "Benfica",
+    "jersey_number": 6
+  },
+  {
+    "team_name": "Colombia",
+    "player_name": "Luis Díaz",
+    "position": "Forward",
+    "club": "Bayern Munich",
+    "jersey_number": 7
+  },
+  {
+    "team_name": "Colombia",
+    "player_name": "Jorge Carrascal",
+    "position": "Midfielder",
+    "club": "Flamengo",
+    "jersey_number": 8
+  },
+  {
+    "team_name": "Colombia",
+    "player_name": "Jhon Córdoba",
+    "position": "Forward",
+    "club": "Krasnodar",
+    "jersey_number": 9
+  },
+  {
+    "team_name": "Colombia",
+    "player_name": "James Rodríguez",
+    "position": "Midfielder",
+    "club": "Minnesota United FC",
+    "jersey_number": 10
+  },
+  {
+    "team_name": "Colombia",
+    "player_name": "Jhon Arias",
+    "position": "Midfielder",
+    "club": "Palmeiras",
+    "jersey_number": 11
+  },
+  {
+    "team_name": "Colombia",
+    "player_name": "Camilo Vargas",
+    "position": "Goalkeeper",
+    "club": "Atlas",
+    "jersey_number": 12
+  },
+  {
+    "team_name": "Colombia",
+    "player_name": "Yerry Mina",
+    "position": "Defender",
+    "club": "Cagliari",
+    "jersey_number": 13
+  },
+  {
+    "team_name": "Colombia",
+    "player_name": "Gustavo Puerta",
+    "position": "Defender",
+    "club": "Racing Santander",
+    "jersey_number": 14
+  },
+  {
+    "team_name": "Colombia",
+    "player_name": "Juan Portilla",
+    "position": "Midfielder",
+    "club": "Athletico Paranaense",
+    "jersey_number": 15
+  },
+  {
+    "team_name": "Colombia",
+    "player_name": "Jefferson Lerma",
+    "position": "Midfielder",
+    "club": "Crystal Palace",
+    "jersey_number": 16
+  },
+  {
+    "team_name": "Colombia",
+    "player_name": "Johan Mojica",
+    "position": "Defender",
+    "club": "Mallorca",
+    "jersey_number": 17
+  },
+  {
+    "team_name": "Colombia",
+    "player_name": "Willer Ditta",
+    "position": "Defender",
+    "club": "Cruz Azul",
+    "jersey_number": 18
+  },
+  {
+    "team_name": "Colombia",
+    "player_name": "Cucho Hernández",
+    "position": "Forward",
+    "club": "Real Betis",
+    "jersey_number": 19
+  },
+  {
+    "team_name": "Colombia",
+    "player_name": "Juan Fernando Quintero",
+    "position": "Midfielder",
+    "club": "River Plate",
+    "jersey_number": 20
+  },
+  {
+    "team_name": "Colombia",
+    "player_name": "Jaminton Campaz",
+    "position": "Forward",
+    "club": "Rosario Central",
+    "jersey_number": 21
+  },
+  {
+    "team_name": "Colombia",
+    "player_name": "Deiver Machado",
+    "position": "Defender",
+    "club": "Nantes",
+    "jersey_number": 22
+  },
+  {
+    "team_name": "Colombia",
+    "player_name": "Davinson Sánchez",
+    "position": "Defender",
+    "club": "Galatasaray",
+    "jersey_number": 23
+  },
+  {
+    "team_name": "Colombia",
+    "player_name": "Álvaro Montero",
+    "position": "Goalkeeper",
+    "club": "Vélez Sarsfield",
+    "jersey_number": 24
+  },
+  {
+    "team_name": "Colombia",
+    "player_name": "Luis Suárez",
+    "position": "Forward",
+    "club": "Sporting CP",
+    "jersey_number": 25
+  },
+  {
+    "team_name": "Colombia",
+    "player_name": "Andrés Gómez",
+    "position": "Forward",
+    "club": "Vasco da Gama",
+    "jersey_number": 26
+  },
+  {
+    "team_name": "Congo DR",
+    "player_name": "Lionel Mpasi",
+    "position": "Goalkeeper",
+    "club": "Le Havre",
+    "jersey_number": 1
+  },
+  {
+    "team_name": "Congo DR",
+    "player_name": "Aaron Wan-Bissaka",
+    "position": "Defender",
+    "club": "West Ham United",
+    "jersey_number": 2
+  },
+  {
+    "team_name": "Congo DR",
+    "player_name": "Steve Kapuadi",
+    "position": "Defender",
+    "club": "Widzew Łódź",
+    "jersey_number": 3
+  },
+  {
+    "team_name": "Congo DR",
+    "player_name": "Axel Tuanzebe",
+    "position": "Defender",
+    "club": "Burnley",
+    "jersey_number": 4
+  },
+  {
+    "team_name": "Congo DR",
+    "player_name": "Dylan Batubinsika",
+    "position": "Defender",
+    "club": "AEL",
+    "jersey_number": 5
+  },
+  {
+    "team_name": "Congo DR",
+    "player_name": "Ngal'ayel Mukau",
+    "position": "Midfielder",
+    "club": "Lille",
+    "jersey_number": 6
+  },
+  {
+    "team_name": "Congo DR",
+    "player_name": "Nathanaël Mbuku",
+    "position": "Midfielder",
+    "club": "Montpellier",
+    "jersey_number": 7
+  },
+  {
+    "team_name": "Congo DR",
+    "player_name": "Samuel Moutoussamy",
+    "position": "Midfielder",
+    "club": "Atromitos",
+    "jersey_number": 8
+  },
+  {
+    "team_name": "Congo DR",
+    "player_name": "Brian Cipenga",
+    "position": "Forward",
+    "club": "Castellón",
+    "jersey_number": 9
+  },
+  {
+    "team_name": "Congo DR",
+    "player_name": "Théo Bongonda",
+    "position": "Midfielder",
+    "club": "Spartak Moscow",
+    "jersey_number": 10
+  },
+  {
+    "team_name": "Congo DR",
+    "player_name": "Gaël Kakuta",
+    "position": "Forward",
+    "club": "AEL",
+    "jersey_number": 11
+  },
+  {
+    "team_name": "Congo DR",
+    "player_name": "Joris Kayembe",
+    "position": "Defender",
+    "club": "Genk",
+    "jersey_number": 12
+  },
+  {
+    "team_name": "Congo DR",
+    "player_name": "Meschak Elia",
+    "position": "Forward",
+    "club": "Alanyaspor",
+    "jersey_number": 13
+  },
+  {
+    "team_name": "Congo DR",
+    "player_name": "Noah Sadiki",
+    "position": "Midfielder",
+    "club": "Sunderland",
+    "jersey_number": 14
+  },
+  {
+    "team_name": "Congo DR",
+    "player_name": "Aaron Tshibola",
+    "position": "Midfielder",
+    "club": "Kilmarnock",
+    "jersey_number": 15
+  },
+  {
+    "team_name": "Congo DR",
+    "player_name": "Timothy Fayulu",
+    "position": "Goalkeeper",
+    "club": "Noah",
+    "jersey_number": 16
+  },
+  {
+    "team_name": "Congo DR",
+    "player_name": "Cédric Bakambu",
+    "position": "Forward",
+    "club": "Real Betis",
+    "jersey_number": 17
+  },
+  {
+    "team_name": "Congo DR",
+    "player_name": "Charles Pickel",
+    "position": "Midfielder",
+    "club": "Espanyol",
+    "jersey_number": 18
+  },
+  {
+    "team_name": "Congo DR",
+    "player_name": "Fiston Mayele",
+    "position": "Forward",
+    "club": "Pyramids",
+    "jersey_number": 19
+  },
+  {
+    "team_name": "Congo DR",
+    "player_name": "Yoane Wissa",
+    "position": "Forward",
+    "club": "Newcastle United",
+    "jersey_number": 20
+  },
+  {
+    "team_name": "Congo DR",
+    "player_name": "Matthieu Epolo",
+    "position": "Goalkeeper",
+    "club": "Standard Liège",
+    "jersey_number": 21
+  },
+  {
+    "team_name": "Congo DR",
+    "player_name": "Chancel Mbemba",
+    "position": "Defender",
+    "club": "Lille",
+    "jersey_number": 22
+  },
+  {
+    "team_name": "Congo DR",
+    "player_name": "Simon Banza",
+    "position": "Forward",
+    "club": "Al Jazira",
+    "jersey_number": 23
+  },
+  {
+    "team_name": "Congo DR",
+    "player_name": "Gédéon Kalulu",
+    "position": "Defender",
+    "club": "Aris Limassol",
+    "jersey_number": 24
+  },
+  {
+    "team_name": "Congo DR",
+    "player_name": "Edo Kayembe",
+    "position": "Midfielder",
+    "club": "Watford",
+    "jersey_number": 25
+  },
+  {
+    "team_name": "Congo DR",
+    "player_name": "Arthur Masuaku",
+    "position": "Defender",
+    "club": "Lens",
+    "jersey_number": 26
+  },
+  {
+    "team_name": "Portugal",
+    "player_name": "Diogo Costa",
+    "position": "Goalkeeper",
+    "club": "Porto",
+    "jersey_number": 1
+  },
+  {
+    "team_name": "Portugal",
+    "player_name": "Nélson Semedo",
+    "position": "Defender",
+    "club": "Fenerbahçe",
+    "jersey_number": 2
+  },
+  {
+    "team_name": "Portugal",
+    "player_name": "Rúben Dias",
+    "position": "Defender",
+    "club": "Manchester City",
+    "jersey_number": 3
+  },
+  {
+    "team_name": "Portugal",
+    "player_name": "Tomás Araújo",
+    "position": "Defender",
+    "club": "Benfica",
+    "jersey_number": 4
+  },
+  {
+    "team_name": "Portugal",
+    "player_name": "Diogo Dalot",
+    "position": "Defender",
+    "club": "Manchester United",
+    "jersey_number": 5
+  },
+  {
+    "team_name": "Portugal",
+    "player_name": "Matheus Nunes",
+    "position": "Midfielder",
+    "club": "Manchester City",
+    "jersey_number": 6
+  },
+  {
+    "team_name": "Portugal",
+    "player_name": "Cristiano Ronaldo",
+    "position": "Forward",
+    "club": "Al-Nassr",
+    "jersey_number": 7
+  },
+  {
+    "team_name": "Portugal",
+    "player_name": "Bruno Fernandes",
+    "position": "Midfielder",
+    "club": "Manchester United",
+    "jersey_number": 8
+  },
+  {
+    "team_name": "Portugal",
+    "player_name": "Gonçalo Ramos",
+    "position": "Forward",
+    "club": "Paris Saint-Germain",
+    "jersey_number": 9
+  },
+  {
+    "team_name": "Portugal",
+    "player_name": "Bernardo Silva",
+    "position": "Midfielder",
+    "club": "Manchester City",
+    "jersey_number": 10
+  },
+  {
+    "team_name": "Portugal",
+    "player_name": "João Félix",
+    "position": "Forward",
+    "club": "Al-Nassr",
+    "jersey_number": 11
+  },
+  {
+    "team_name": "Portugal",
+    "player_name": "José Sá",
+    "position": "Goalkeeper",
+    "club": "Wolverhampton Wanderers",
+    "jersey_number": 12
+  },
+  {
+    "team_name": "Portugal",
+    "player_name": "Renato Veiga",
+    "position": "Defender",
+    "club": "Villarreal",
+    "jersey_number": 13
+  },
+  {
+    "team_name": "Portugal",
+    "player_name": "Gonçalo Inácio",
+    "position": "Defender",
+    "club": "Sporting CP",
+    "jersey_number": 14
+  },
+  {
+    "team_name": "Portugal",
+    "player_name": "João Neves",
+    "position": "Midfielder",
+    "club": "Paris Saint-Germain",
+    "jersey_number": 15
+  },
+  {
+    "team_name": "Portugal",
+    "player_name": "Francisco Trincão",
+    "position": "Forward",
+    "club": "Sporting CP",
+    "jersey_number": 16
+  },
+  {
+    "team_name": "Portugal",
+    "player_name": "Rafael Leão",
+    "position": "Forward",
+    "club": "Milan",
+    "jersey_number": 17
+  },
+  {
+    "team_name": "Portugal",
+    "player_name": "Pedro Neto",
+    "position": "Forward",
+    "club": "Chelsea",
+    "jersey_number": 18
+  },
+  {
+    "team_name": "Portugal",
+    "player_name": "Gonçalo Guedes",
+    "position": "Forward",
+    "club": "Real Sociedad",
+    "jersey_number": 19
+  },
+  {
+    "team_name": "Portugal",
+    "player_name": "João Cancelo",
+    "position": "Defender",
+    "club": "Barcelona",
+    "jersey_number": 20
+  },
+  {
+    "team_name": "Portugal",
+    "player_name": "Rúben Neves",
+    "position": "Midfielder",
+    "club": "Al-Hilal",
+    "jersey_number": 21
+  },
+  {
+    "team_name": "Portugal",
+    "player_name": "Rui Silva",
+    "position": "Goalkeeper",
+    "club": "Sporting CP",
+    "jersey_number": 22
+  },
+  {
+    "team_name": "Portugal",
+    "player_name": "Vitinha",
+    "position": "Midfielder",
+    "club": "Paris Saint-Germain",
+    "jersey_number": 23
+  },
+  {
+    "team_name": "Portugal",
+    "player_name": "Samú Costa",
+    "position": "Defender",
+    "club": "Mallorca",
+    "jersey_number": 24
+  },
+  {
+    "team_name": "Portugal",
+    "player_name": "Nuno Mendes",
+    "position": "Defender",
+    "club": "Paris Saint-Germain",
+    "jersey_number": 25
+  },
+  {
+    "team_name": "Portugal",
+    "player_name": "Francisco Conceição",
+    "position": "Forward",
+    "club": "Juventus",
+    "jersey_number": 26
+  },
+  {
+    "team_name": "Uzbekistan",
+    "player_name": "Utkir Yusupov",
+    "position": "Goalkeeper",
+    "club": "Navbahor Namangan",
+    "jersey_number": 1
+  },
+  {
+    "team_name": "Uzbekistan",
+    "player_name": "Abdukodir Khusanov",
+    "position": "Defender",
+    "club": "Manchester City",
+    "jersey_number": 2
+  },
+  {
+    "team_name": "Uzbekistan",
+    "player_name": "Khojiakbar Alijonov",
+    "position": "Defender",
+    "club": "Pakhtakor",
+    "jersey_number": 3
+  },
+  {
+    "team_name": "Uzbekistan",
+    "player_name": "Farrukh Sayfiev",
+    "position": "Defender",
+    "club": "Neftchi Fergana",
+    "jersey_number": 4
+  },
+  {
+    "team_name": "Uzbekistan",
+    "player_name": "Rustam Ashurmatov",
+    "position": "Defender",
+    "club": "Esteghlal",
+    "jersey_number": 5
+  },
+  {
+    "team_name": "Uzbekistan",
+    "player_name": "Akmal Mozgovoy",
+    "position": "Midfielder",
+    "club": "Pakhtakor",
+    "jersey_number": 6
+  },
+  {
+    "team_name": "Uzbekistan",
+    "player_name": "Otabek Shukurov",
+    "position": "Midfielder",
+    "club": "Baniyas",
+    "jersey_number": 7
+  },
+  {
+    "team_name": "Uzbekistan",
+    "player_name": "Jamshid Iskanderov",
+    "position": "Midfielder",
+    "club": "Neftchi Fergana",
+    "jersey_number": 8
+  },
+  {
+    "team_name": "Uzbekistan",
+    "player_name": "Odiljon Hamrobekov",
+    "position": "Midfielder",
+    "club": "Tractor",
+    "jersey_number": 9
+  },
+  {
+    "team_name": "Uzbekistan",
+    "player_name": "Jaloliddin Masharipov",
+    "position": "Midfielder",
+    "club": "Esteghlal",
+    "jersey_number": 10
+  },
+  {
+    "team_name": "Uzbekistan",
+    "player_name": "Oston Urunov",
+    "position": "Midfielder",
+    "club": "Persepolis",
+    "jersey_number": 11
+  },
+  {
+    "team_name": "Uzbekistan",
+    "player_name": "Abduvohid Nematov",
+    "position": "Goalkeeper",
+    "club": "Nasaf",
+    "jersey_number": 12
+  },
+  {
+    "team_name": "Uzbekistan",
+    "player_name": "Sherzod Nasrullaev",
+    "position": "Defender",
+    "club": "Nasaf",
+    "jersey_number": 13
+  },
+  {
+    "team_name": "Uzbekistan",
+    "player_name": "Eldor Shomurodov",
+    "position": "Forward",
+    "club": "İstanbul Başakşehir",
+    "jersey_number": 14
+  },
+  {
+    "team_name": "Uzbekistan",
+    "player_name": "Umar Eshmurodov",
+    "position": "Defender",
+    "club": "Nasaf",
+    "jersey_number": 15
+  },
+  {
+    "team_name": "Uzbekistan",
+    "player_name": "Botirali Ergashev",
+    "position": "Goalkeeper",
+    "club": "Neftchi Fergana",
+    "jersey_number": 16
+  },
+  {
+    "team_name": "Uzbekistan",
+    "player_name": "Dostonbek Khamdamov",
+    "position": "Midfielder",
+    "club": "Pakhtakor",
+    "jersey_number": 17
+  },
+  {
+    "team_name": "Uzbekistan",
+    "player_name": "Abdulla Abdullaev",
+    "position": "Defender",
+    "club": "Dibba",
+    "jersey_number": 18
+  },
+  {
+    "team_name": "Uzbekistan",
+    "player_name": "Azizjon Ganiev",
+    "position": "Midfielder",
+    "club": "Al Bataeh",
+    "jersey_number": 19
+  },
+  {
+    "team_name": "Uzbekistan",
+    "player_name": "Azizbek Amonov",
+    "position": "Forward",
+    "club": "Dinamo Samarqand",
+    "jersey_number": 20
+  },
+  {
+    "team_name": "Uzbekistan",
+    "player_name": "Igor Sergeev",
+    "position": "Forward",
+    "club": "Persepolis",
+    "jersey_number": 21
+  },
+  {
+    "team_name": "Uzbekistan",
+    "player_name": "Abbosbek Fayzullaev",
+    "position": "Midfielder",
+    "club": "İstanbul Başakşehir",
+    "jersey_number": 22
+  },
+  {
+    "team_name": "Uzbekistan",
+    "player_name": "Sherzod Esanov",
+    "position": "Midfielder",
+    "club": "Bukhara",
+    "jersey_number": 23
+  },
+  {
+    "team_name": "Uzbekistan",
+    "player_name": "Bekhruz Karimov",
+    "position": "Defender",
+    "club": "Surkhon Termiz",
+    "jersey_number": 24
+  },
+  {
+    "team_name": "Uzbekistan",
+    "player_name": "Avazbek Ulmasaliev",
+    "position": "Defender",
+    "club": "AGMK",
+    "jersey_number": 25
+  },
+  {
+    "team_name": "Uzbekistan",
+    "player_name": "Jakhongir Urozov",
+    "position": "Defender",
+    "club": "Dinamo Samarqand",
+    "jersey_number": 26
+  },
+  {
+    "team_name": "Croatia",
+    "player_name": "Dominik Livaković",
+    "position": "Goalkeeper",
+    "club": "Dinamo Zagreb",
+    "jersey_number": 1
+  },
+  {
+    "team_name": "Croatia",
+    "player_name": "Josip Stanišić",
+    "position": "Defender",
+    "club": "Bayern Munich",
+    "jersey_number": 2
+  },
+  {
+    "team_name": "Croatia",
+    "player_name": "Marin Pongračić",
+    "position": "Defender",
+    "club": "Fiorentina",
+    "jersey_number": 3
+  },
+  {
+    "team_name": "Croatia",
+    "player_name": "Joško Gvardiol",
+    "position": "Defender",
+    "club": "Manchester City",
+    "jersey_number": 4
+  },
+  {
+    "team_name": "Croatia",
+    "player_name": "Duje Ćaleta-Car",
+    "position": "Defender",
+    "club": "Real Sociedad",
+    "jersey_number": 5
+  },
+  {
+    "team_name": "Croatia",
+    "player_name": "Josip Šutalo",
+    "position": "Defender",
+    "club": "Ajax",
+    "jersey_number": 6
+  },
+  {
+    "team_name": "Croatia",
+    "player_name": "Nikola Moro",
+    "position": "Midfielder",
+    "club": "Bologna",
+    "jersey_number": 7
+  },
+  {
+    "team_name": "Croatia",
+    "player_name": "Mateo Kovačić",
+    "position": "Midfielder",
+    "club": "Manchester City",
+    "jersey_number": 8
+  },
+  {
+    "team_name": "Croatia",
+    "player_name": "Andrej Kramarić",
+    "position": "Forward",
+    "club": "TSG Hoffenheim",
+    "jersey_number": 9
+  },
+  {
+    "team_name": "Croatia",
+    "player_name": "Luka Modrić",
+    "position": "Midfielder",
+    "club": "Milan",
+    "jersey_number": 10
+  },
+  {
+    "team_name": "Croatia",
+    "player_name": "Ante Budimir",
+    "position": "Forward",
+    "club": "Osasuna",
+    "jersey_number": 11
+  },
+  {
+    "team_name": "Croatia",
+    "player_name": "Ivor Pandur",
+    "position": "Goalkeeper",
+    "club": "Hull City",
+    "jersey_number": 12
+  },
+  {
+    "team_name": "Croatia",
+    "player_name": "Nikola Vlašić",
+    "position": "Midfielder",
+    "club": "Torino",
+    "jersey_number": 13
+  },
+  {
+    "team_name": "Croatia",
+    "player_name": "Ivan Perišić",
+    "position": "Forward",
+    "club": "PSV Eindhoven",
+    "jersey_number": 14
+  },
+  {
+    "team_name": "Croatia",
+    "player_name": "Mario Pašalić",
+    "position": "Midfielder",
+    "club": "Atalanta",
+    "jersey_number": 15
+  },
+  {
+    "team_name": "Croatia",
+    "player_name": "Martin Baturina",
+    "position": "Midfielder",
+    "club": "Como",
+    "jersey_number": 16
+  },
+  {
+    "team_name": "Croatia",
+    "player_name": "Petar Sučić",
+    "position": "Midfielder",
+    "club": "Inter Milan",
+    "jersey_number": 17
+  },
+  {
+    "team_name": "Croatia",
+    "player_name": "Kristijan Jakić",
+    "position": "Defender",
+    "club": "FC Augsburg",
+    "jersey_number": 18
+  },
+  {
+    "team_name": "Croatia",
+    "player_name": "Toni Fruk",
+    "position": "Midfielder",
+    "club": "Rijeka",
+    "jersey_number": 19
+  },
+  {
+    "team_name": "Croatia",
+    "player_name": "Igor Matanović",
+    "position": "Forward",
+    "club": "SC Freiburg",
+    "jersey_number": 20
+  },
+  {
+    "team_name": "Croatia",
+    "player_name": "Luka Sučić",
+    "position": "Midfielder",
+    "club": "Real Sociedad",
+    "jersey_number": 21
+  },
+  {
+    "team_name": "Croatia",
+    "player_name": "Luka Vušković",
+    "position": "Defender",
+    "club": "Hamburger SV",
+    "jersey_number": 22
+  },
+  {
+    "team_name": "Croatia",
+    "player_name": "Dominik Kotarski",
+    "position": "Goalkeeper",
+    "club": "Copenhagen",
+    "jersey_number": 23
+  },
+  {
+    "team_name": "Croatia",
+    "player_name": "Marco Pašalić",
+    "position": "Forward",
+    "club": "Orlando City SC",
+    "jersey_number": 24
+  },
+  {
+    "team_name": "Croatia",
+    "player_name": "Martin Erlić",
+    "position": "Defender",
+    "club": "Midtjylland",
+    "jersey_number": 25
+  },
+  {
+    "team_name": "Croatia",
+    "player_name": "Petar Musa",
+    "position": "Forward",
+    "club": "FC Dallas",
+    "jersey_number": 26
+  },
+  {
+    "team_name": "England",
+    "player_name": "Jordan Pickford",
+    "position": "Goalkeeper",
+    "club": "Everton",
+    "jersey_number": 1
+  },
+  {
+    "team_name": "England",
+    "player_name": "Ezri Konsa",
+    "position": "Defender",
+    "club": "Aston Villa",
+    "jersey_number": 2
+  },
+  {
+    "team_name": "England",
+    "player_name": "Nico O'Reilly",
+    "position": "Defender",
+    "club": "Manchester City",
+    "jersey_number": 3
+  },
+  {
+    "team_name": "England",
+    "player_name": "Declan Rice",
+    "position": "Midfielder",
+    "club": "Arsenal",
+    "jersey_number": 4
+  },
+  {
+    "team_name": "England",
+    "player_name": "John Stones",
+    "position": "Defender",
+    "club": "Manchester City",
+    "jersey_number": 5
+  },
+  {
+    "team_name": "England",
+    "player_name": "Marc Guéhi",
+    "position": "Defender",
+    "club": "Manchester City",
+    "jersey_number": 6
+  },
+  {
+    "team_name": "England",
+    "player_name": "Bukayo Saka",
+    "position": "Forward",
+    "club": "Arsenal",
+    "jersey_number": 7
+  },
+  {
+    "team_name": "England",
+    "player_name": "Elliot Anderson",
+    "position": "Midfielder",
+    "club": "Nottingham Forest",
+    "jersey_number": 8
+  },
+  {
+    "team_name": "England",
+    "player_name": "Harry Kane",
+    "position": "Forward",
+    "club": "Bayern Munich",
+    "jersey_number": 9
+  },
+  {
+    "team_name": "England",
+    "player_name": "Jude Bellingham",
+    "position": "Midfielder",
+    "club": "Real Madrid",
+    "jersey_number": 10
+  },
+  {
+    "team_name": "England",
+    "player_name": "Marcus Rashford",
+    "position": "Forward",
+    "club": "Barcelona",
+    "jersey_number": 11
+  },
+  {
+    "team_name": "England",
+    "player_name": "Tino Livramento",
+    "position": "Defender",
+    "club": "Newcastle United",
+    "jersey_number": 12
+  },
+  {
+    "team_name": "England",
+    "player_name": "Dean Henderson",
+    "position": "Goalkeeper",
+    "club": "Crystal Palace",
+    "jersey_number": 13
+  },
+  {
+    "team_name": "England",
+    "player_name": "Jordan Henderson",
+    "position": "Midfielder",
+    "club": "Brentford",
+    "jersey_number": 14
+  },
+  {
+    "team_name": "England",
+    "player_name": "Dan Burn",
+    "position": "Defender",
+    "club": "Newcastle United",
+    "jersey_number": 15
+  },
+  {
+    "team_name": "England",
+    "player_name": "Kobbie Mainoo",
+    "position": "Midfielder",
+    "club": "Manchester United",
+    "jersey_number": 16
+  },
+  {
+    "team_name": "England",
+    "player_name": "Morgan Rogers",
+    "position": "Midfielder",
+    "club": "Aston Villa",
+    "jersey_number": 17
+  },
+  {
+    "team_name": "England",
+    "player_name": "Anthony Gordon",
+    "position": "Forward",
+    "club": "Newcastle United",
+    "jersey_number": 18
+  },
+  {
+    "team_name": "England",
+    "player_name": "Ollie Watkins",
+    "position": "Forward",
+    "club": "Aston Villa",
+    "jersey_number": 19
+  },
+  {
+    "team_name": "England",
+    "player_name": "Noni Madueke",
+    "position": "Forward",
+    "club": "Arsenal",
+    "jersey_number": 20
+  },
+  {
+    "team_name": "England",
+    "player_name": "Eberechi Eze",
+    "position": "Midfielder",
+    "club": "Arsenal",
+    "jersey_number": 21
+  },
+  {
+    "team_name": "England",
+    "player_name": "Ivan Toney",
+    "position": "Forward",
+    "club": "Al-Ahli",
+    "jersey_number": 22
+  },
+  {
+    "team_name": "England",
+    "player_name": "James Trafford",
+    "position": "Goalkeeper",
+    "club": "Manchester City",
+    "jersey_number": 23
+  },
+  {
+    "team_name": "England",
+    "player_name": "Reece James",
+    "position": "Defender",
+    "club": "Chelsea",
+    "jersey_number": 24
+  },
+  {
+    "team_name": "England",
+    "player_name": "Djed Spence",
+    "position": "Defender",
+    "club": "Tottenham Hotspur",
+    "jersey_number": 25
+  },
+  {
+    "team_name": "England",
+    "player_name": "Jarell Quansah",
+    "position": "Defender",
+    "club": "Bayer Leverkusen",
+    "jersey_number": 26
+  },
+  {
+    "team_name": "Ghana",
+    "player_name": "Lawrence Ati-Zigi",
+    "position": "Goalkeeper",
+    "club": "St. Gallen",
+    "jersey_number": 1
+  },
+  {
+    "team_name": "Ghana",
+    "player_name": "Alidu Seidu",
+    "position": "Defender",
+    "club": "Rennes",
+    "jersey_number": 2
+  },
+  {
+    "team_name": "Ghana",
+    "player_name": "Caleb Yirenkyi",
+    "position": "Midfielder",
+    "club": "Nordsjælland",
+    "jersey_number": 3
+  },
+  {
+    "team_name": "Ghana",
+    "player_name": "Jonas Adjetey",
+    "position": "Defender",
+    "club": "VfL Wolfsburg",
+    "jersey_number": 4
+  },
+  {
+    "team_name": "Ghana",
+    "player_name": "Thomas Partey",
+    "position": "Midfielder",
+    "club": "Villarreal",
+    "jersey_number": 5
+  },
+  {
+    "team_name": "Ghana",
+    "player_name": "Abdul Mumin",
+    "position": "Defender",
+    "club": "Rayo Vallecano",
+    "jersey_number": 6
+  },
+  {
+    "team_name": "Ghana",
+    "player_name": "Abdul Fatawu",
+    "position": "Forward",
+    "club": "Leicester City",
+    "jersey_number": 7
+  },
+  {
+    "team_name": "Ghana",
+    "player_name": "Kwasi Sibo",
+    "position": "Midfielder",
+    "club": "Oviedo",
+    "jersey_number": 8
+  },
+  {
+    "team_name": "Ghana",
+    "player_name": "Jordan Ayew",
+    "position": "Forward",
+    "club": "Leicester City",
+    "jersey_number": 9
+  },
+  {
+    "team_name": "Ghana",
+    "player_name": "Brandon Thomas-Asante",
+    "position": "Forward",
+    "club": "Coventry City",
+    "jersey_number": 10
+  },
+  {
+    "team_name": "Ghana",
+    "player_name": "Antoine Semenyo",
+    "position": "Midfielder",
+    "club": "Manchester City",
+    "jersey_number": 11
+  },
+  {
+    "team_name": "Ghana",
+    "player_name": "Joseph Anang",
+    "position": "Goalkeeper",
+    "club": "St Patrick's Athletic",
+    "jersey_number": 12
+  },
+  {
+    "team_name": "Ghana",
+    "player_name": "Christopher Bonsu Baah",
+    "position": "Forward",
+    "club": "Al-Qadsiah",
+    "jersey_number": 13
+  },
+  {
+    "team_name": "Ghana",
+    "player_name": "Gideon Mensah",
+    "position": "Defender",
+    "club": "Auxerre",
+    "jersey_number": 14
+  },
+  {
+    "team_name": "Ghana",
+    "player_name": "Elisha Owusu",
+    "position": "Midfielder",
+    "club": "Auxerre",
+    "jersey_number": 15
+  },
+  {
+    "team_name": "Ghana",
+    "player_name": "Benjamin Asare",
+    "position": "Goalkeeper",
+    "club": "Hearts of Oak",
+    "jersey_number": 16
+  },
+  {
+    "team_name": "Ghana",
+    "player_name": "Abdul Rahman Baba",
+    "position": "Defender",
+    "club": "PAOK",
+    "jersey_number": 17
+  },
+  {
+    "team_name": "Ghana",
+    "player_name": "Jerome Opoku",
+    "position": "Defender",
+    "club": "İstanbul Başakşehir",
+    "jersey_number": 18
+  },
+  {
+    "team_name": "Ghana",
+    "player_name": "Iñaki Williams",
+    "position": "Forward",
+    "club": "Athletic Bilbao",
+    "jersey_number": 19
+  },
+  {
+    "team_name": "Ghana",
+    "player_name": "Augustine Boakye",
+    "position": "Midfielder",
+    "club": "Saint-Étienne",
+    "jersey_number": 20
+  },
+  {
+    "team_name": "Ghana",
+    "player_name": "Kojo Peprah Oppong",
+    "position": "Defender",
+    "club": "Nice",
+    "jersey_number": 21
+  },
+  {
+    "team_name": "Ghana",
+    "player_name": "Kamaldeen Sulemana",
+    "position": "Forward",
+    "club": "Atalanta",
+    "jersey_number": 22
+  },
+  {
+    "team_name": "Ghana",
+    "player_name": "Derrick Luckassen",
+    "position": "Defender",
+    "club": "Pafos",
+    "jersey_number": 23
+  },
+  {
+    "team_name": "Ghana",
+    "player_name": "Ernest Nuamah",
+    "position": "Forward",
+    "club": "Lyon",
+    "jersey_number": 24
+  },
+  {
+    "team_name": "Ghana",
+    "player_name": "Prince Kwabena Adu",
+    "position": "Forward",
+    "club": "Viktoria Plzeň",
+    "jersey_number": 25
+  },
+  {
+    "team_name": "Ghana",
+    "player_name": "Marvin Senaya",
+    "position": "Defender",
+    "club": "Auxerre",
+    "jersey_number": 26
+  },
+  {
+    "team_name": "Panama",
+    "player_name": "Luis Mejía",
+    "position": "Goalkeeper",
+    "club": "Nacional",
+    "jersey_number": 1
+  },
+  {
+    "team_name": "Panama",
+    "player_name": "César Blackman",
+    "position": "Defender",
+    "club": "Slovan Bratislava",
+    "jersey_number": 2
+  },
+  {
+    "team_name": "Panama",
+    "player_name": "José Córdoba",
+    "position": "Defender",
+    "club": "Norwich City",
+    "jersey_number": 3
+  },
+  {
+    "team_name": "Panama",
+    "player_name": "Fidel Escobar",
+    "position": "Defender",
+    "club": "Saprissa",
+    "jersey_number": 4
+  },
+  {
+    "team_name": "Panama",
+    "player_name": "Edgardo Fariña",
+    "position": "Defender",
+    "club": "Pari Nizhny Novgorod",
+    "jersey_number": 5
+  },
+  {
+    "team_name": "Panama",
+    "player_name": "Cristian Martínez",
+    "position": "Midfielder",
+    "club": "Ironi Kiryat Shmona",
+    "jersey_number": 6
+  },
+  {
+    "team_name": "Panama",
+    "player_name": "José Luis Rodríguez",
+    "position": "Midfielder",
+    "club": "Juárez",
+    "jersey_number": 7
+  },
+  {
+    "team_name": "Panama",
+    "player_name": "Adalberto Carrasquilla",
+    "position": "Midfielder",
+    "club": "UNAM",
+    "jersey_number": 8
+  },
+  {
+    "team_name": "Panama",
+    "player_name": "Tomás Rodríguez",
+    "position": "Forward",
+    "club": "Saprissa",
+    "jersey_number": 9
+  },
+  {
+    "team_name": "Panama",
+    "player_name": "Ismael Díaz",
+    "position": "Midfielder",
+    "club": "León",
+    "jersey_number": 10
+  },
+  {
+    "team_name": "Panama",
+    "player_name": "Yoel Bárcenas",
+    "position": "Midfielder",
+    "club": "Mazatlán",
+    "jersey_number": 11
+  },
+  {
+    "team_name": "Panama",
+    "player_name": "César Samudio",
+    "position": "Goalkeeper",
+    "club": "Marathón",
+    "jersey_number": 12
+  },
+  {
+    "team_name": "Panama",
+    "player_name": "Jiovany Ramos",
+    "position": "Defender",
+    "club": "Puerto Cabello",
+    "jersey_number": 13
+  },
+  {
+    "team_name": "Panama",
+    "player_name": "Carlos Harvey",
+    "position": "Defender",
+    "club": "Minnesota United FC",
+    "jersey_number": 14
+  },
+  {
+    "team_name": "Panama",
+    "player_name": "Eric Davis",
+    "position": "Defender",
+    "club": "Plaza Amador",
+    "jersey_number": 15
+  },
+  {
+    "team_name": "Panama",
+    "player_name": "Andrés Andrade",
+    "position": "Defender",
+    "club": "LASK",
+    "jersey_number": 16
+  },
+  {
+    "team_name": "Panama",
+    "player_name": "José Fajardo",
+    "position": "Forward",
+    "club": "Universidad Católica",
+    "jersey_number": 17
+  },
+  {
+    "team_name": "Panama",
+    "player_name": "Cecilio Waterman",
+    "position": "Forward",
+    "club": "Universidad de Concepción",
+    "jersey_number": 18
+  },
+  {
+    "team_name": "Panama",
+    "player_name": "Alberto Quintero",
+    "position": "Midfielder",
+    "club": "Plaza Amador",
+    "jersey_number": 19
+  },
+  {
+    "team_name": "Panama",
+    "player_name": "Aníbal Godoy",
+    "position": "Midfielder",
+    "club": "San Diego FC",
+    "jersey_number": 20
+  },
+  {
+    "team_name": "Panama",
+    "player_name": "César Yanis",
+    "position": "Midfielder",
+    "club": "Cobresal",
+    "jersey_number": 21
+  },
+  {
+    "team_name": "Panama",
+    "player_name": "Orlando Mosquera",
+    "position": "Goalkeeper",
+    "club": "Al-Fayha",
+    "jersey_number": 22
+  },
+  {
+    "team_name": "Panama",
+    "player_name": "Michael Amir Murillo",
+    "position": "Defender",
+    "club": "Beşiktaş",
+    "jersey_number": 23
+  },
+  {
+    "team_name": "Panama",
+    "player_name": "Azarias Londoño",
+    "position": "Forward",
+    "club": "Universidad Católica",
+    "jersey_number": 24
+  },
+  {
+    "team_name": "Panama",
+    "player_name": "Roderick Miller",
+    "position": "Defender",
+    "club": "Turan Tovuz",
+    "jersey_number": 25
+  },
+  {
+    "team_name": "Panama",
+    "player_name": "Jorge Gutiérrez",
+    "position": "Defender",
+    "club": "Deportivo La Guaira",
+    "jersey_number": 26
+  }
+]

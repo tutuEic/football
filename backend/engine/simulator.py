@@ -21,12 +21,12 @@ from scipy.stats import poisson
 CONTEXT_FACTORS = {
     "league":          {"goal_mult": 1.00, "draw_shift": 0.00, "label": "League match"},
     "derby":           {"goal_mult": 1.08, "draw_shift": -0.02, "label": "Derby / Rivalry"},
-    "title_decider":   {"goal_mult": 0.92, "draw_shift": 0.03, "label": "Title decider"},
+    "title_decider":   {"goal_mult": 0.92, "draw_shift": -0.03, "label": "Title decider"},
     "relegation":      {"goal_mult": 1.05, "draw_shift": -0.01, "label": "Relegation battle"},
-    "cup_ko":          {"goal_mult": 0.88, "draw_shift": 0.04, "label": "Cup knockout"},
-    "cup_final":       {"goal_mult": 0.82, "draw_shift": 0.06, "label": "Cup final"},
-    "cl_knockout":     {"goal_mult": 0.85, "draw_shift": 0.05, "label": "CL knockout"},
-    "cl_final":        {"goal_mult": 0.80, "draw_shift": 0.07, "label": "Champions League final"},
+    "cup_ko":          {"goal_mult": 0.88, "draw_shift": -0.04, "label": "Cup knockout"},
+    "cup_final":       {"goal_mult": 0.82, "draw_shift": -0.06, "label": "Cup final"},
+    "cl_knockout":     {"goal_mult": 0.85, "draw_shift": -0.05, "label": "CL knockout"},
+    "cl_final":        {"goal_mult": 0.80, "draw_shift": -0.07, "label": "Champions League final"},
     "friendly":        {"goal_mult": 1.10, "draw_shift": -0.03, "label": "Friendly"},
 }
 

@@ -1,4 +1,4 @@
-"""
+﻿"""
 Live Match Service — 实时比分采集 + 推送
 =========================================
 Phase 1: TheSportsDB free API (10 leagues, 100 req/day)
@@ -270,25 +270,34 @@ def poll_live_scores():
 
 
 def check_and_update_status(fixture_id, home_score, away_score, minute, status):
-    """Update a single fixture's live status using connection pool."""
-    execute("""
-        UPDATE fixtures SET
-            home_score = %s, away_score = %s, minute = %s, status = %s,
-            updated_at = NOW()
-        WHERE id = %s
-    """, [home_score, away_score, minute, status, fixture_id])
-
-    # Also insert/update live_matches for detailed stats
-    execute("""
-        INSERT INTO live_matches (fixture_id, home_score, away_score, minute, status, last_updated)
-        VALUES (%s, %s, %s, %s, %s, NOW())
-        ON DUPLICATE KEY UPDATE
-            home_score = VALUES(home_score),
-            away_score = VALUES(away_score),
-            minute = VALUES(minute),
-            status = VALUES(status),
-            last_updated = NOW()
-    """, [fixture_id, home_score, away_score, minute, status])
+    """Update a single fixture's live status in a single transaction."""
+    from data.mysql_client import get_connection
+    conn = get_connection(db=DB)
+    try:
+        cursor = conn.cursor()
+        cursor.execute("""
+            UPDATE fixtures SET
+                home_score = %s, away_score = %s, minute = %s, status = %s,
+                updated_at = NOW()
+            WHERE id = %s
+        """, [home_score, away_score, minute, status, fixture_id])
+        cursor.execute("""
+            INSERT INTO live_matches (fixture_id, home_score, away_score, minute, status, last_updated)
+            VALUES (%s, %s, %s, %s, %s, NOW())
+            ON DUPLICATE KEY UPDATE
+                home_score = VALUES(home_score),
+                away_score = VALUES(away_score),
+                minute = VALUES(minute),
+                status = VALUES(status),
+                last_updated = NOW()
+        """, [fixture_id, home_score, away_score, minute, status])
+        conn.commit()
+        cursor.close()
+    except Exception:
+        conn.rollback()
+        raise
+    finally:
+        conn.close()
 
 
 # ============================================================

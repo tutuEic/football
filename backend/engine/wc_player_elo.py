@@ -432,7 +432,7 @@ def calculate_elo_for_team(country_name, top_n=35):
     
     This is the main entry point for the WC prediction engine.
     """
-    from engine.wc_data import get_national_squad, _country_name
+    from engine.wc_data import get_national_squad
     
     # Get squad from wc_data
     squad = get_national_squad(country_name, top_n=top_n)

@@ -1,9 +1,8 @@
 """SoFIFA player data client with caching."""
 import sys, os
+import pandas as pd
 sys.path.insert(0, os.path.dirname(os.path.dirname(__file__)))
 from config import SOFIFA_CACHE
-import pandas as pd
-import json
 import glob
 import re
 import time

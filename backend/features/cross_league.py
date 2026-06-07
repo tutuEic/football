@@ -12,9 +12,6 @@ Features:
 Reference: "Total Football" (2024) - holistic data approach
 """
 import sys, os, json, math
-from pathlib import Path
-from collections import defaultdict
-
 sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 from data.mysql_client import query
 
@@ -23,8 +20,11 @@ from data.mysql_client import query
 # 1. League-Level Statistics
 # ============================================================
 
-# Cache for league stats
+# Cache for league stats (thread-safe)
+import threading as _threading
 _league_stats_cache = {}
+_league_stats_lock = _threading.Lock()
+_MAX_CACHE = 100
 
 def get_league_stats(league_code, seasons=None):
     """
@@ -79,6 +79,8 @@ def get_league_stats(league_code, seasons=None):
         "seasons": seasons,
     }
     
+    if len(_league_stats_cache) >= _MAX_CACHE:
+        _league_stats_cache.clear()
     _league_stats_cache[league_code] = stats
     return stats
 
@@ -242,7 +244,7 @@ def build_global_elo():
     Build a global Elo system that includes European competition results.
     This allows cross-league team comparison.
     """
-    from engine.elo import EloSystem
+    from features.elo import EloSystem
     
     elo = EloSystem()
     
@@ -251,7 +253,7 @@ def build_global_elo():
     for lg in leagues:
         try:
             elo.build_from_history(lg)
-        except:
+        except Exception:
             pass
     
     # Then, update with European competition results

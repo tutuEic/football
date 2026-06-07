@@ -6,18 +6,17 @@ Computes all features for a given match and caches results.
 import sys
 import os
 import time
-import math
 import hashlib
 import json
-from pathlib import Path
-
 sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 from data.mysql_client import query
-from features.elo import get_elo_rating, get_elo_diff, LEAGUE_AVG_ELO
-from features.cross_league import compute_cross_league_features, get_league_stats
+from features.elo import get_elo_rating
+from features.cross_league import compute_cross_league_features
 
-# Feature cache (in-memory, TTL=1h)
+# Feature cache (in-memory, TTL=1h, thread-safe)
+import threading as _threading
 _cache: dict[str, tuple[float, dict]] = {}
+_cache_lock = _threading.Lock()
 CACHE_TTL = 3600  # seconds
 
 
@@ -27,10 +26,11 @@ def _cache_key(*args):
 
 
 def _get_cached(key):
-    if key in _cache:
-        ts, data = _cache[key]
-        if time.time() - ts < CACHE_TTL:
-            return data
+    with _cache_lock:
+        if key in _cache:
+            ts, data = _cache[key]
+            if time.time() - ts < CACHE_TTL:
+                return data
         del _cache[key]
     return None
 
@@ -162,11 +162,12 @@ def get_h2h_stats(home: str, away: str, league: str, n: int = 10) -> dict:
 
     for r in rows:
         total_goals += r["fthg"] + r["ftag"]
-        if r["ftr"] == "H":
-            # Check if home team in this match is our 'home' team
-            h_wins += 1
-        elif r["ftr"] == "D":
+        home_is_home = (r["home_team"] == home)
+        ftr = r["ftr"]
+        if ftr == "D":
             draws += 1
+        elif (ftr == "H" and home_is_home) or (ftr == "A" and not home_is_home):
+            h_wins += 1
         else:
             a_wins += 1
 

@@ -11,7 +11,6 @@ Reference: App Sci 2024 "Predicting Football Match Results Using Poisson Regress
 """
 import math
 import numpy as np
-from scipy.optimize import minimize
 from scipy.stats import poisson
 
 

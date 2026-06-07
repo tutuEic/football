@@ -14,6 +14,7 @@ export default function Fixtures({ onSimulate }) {
   const [league, setLeague] = useState('');
   const [editingOdds, setEditingOdds] = useState(null);
   const [oddsForm, setOddsForm] = useState({ home: '', draw: '', away: '' });
+  const [toast, setToast] = useState(null);
 
   async function loadFixtures() {
     setLoading(true);
@@ -41,7 +42,8 @@ export default function Fixtures({ onSimulate }) {
       setEditingOdds(null);
       loadFixtures();
     } catch (e) {
-      alert('保存失败: ' + e.message);
+      setToast('保存失败: ' + e.message);
+      setTimeout(() => setToast(null), 4000);
     }
   }
 
@@ -67,6 +69,7 @@ export default function Fixtures({ onSimulate }) {
 
   return (
     <div>
+      {toast && <div style={{ position: 'fixed', top: 16, right: 16, zIndex: 9999, background: 'var(--red)', color: '#fff', padding: '10px 16px', borderRadius: 8, fontSize: 13, boxShadow: '0 4px 12px rgba(0,0,0,0.3)' }}>{toast}</div>}
       <div style={{ display: 'flex', alignItems: 'center', gap: 12, marginBottom: 20 }}>
         <h2 style={{ color: 'var(--fg-primary)', fontSize: 20, margin: 0 }}>{'赛程'} + {'预测'} + {'盘口'}</h2>
         <select value={league} onChange={e => setLeague(e.target.value)}

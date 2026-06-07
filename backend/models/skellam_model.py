@@ -19,8 +19,8 @@ Reference: BJB 2025 "Probabilistic model based on the Skellam distribution"
 """
 import math
 import numpy as np
-from scipy.special import iv  # Modified Bessel function of the first kind
 from scipy.stats import poisson
+from scipy.special import iv
 
 
 class SkellamModel:

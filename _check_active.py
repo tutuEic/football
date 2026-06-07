@@ -1,10 +1,9 @@
 """Check tm_games structure for active player filtering."""
-import mysql.connector
+import sys, os
+sys.path.insert(0, os.path.join(os.path.dirname(__file__), "backend"))
+from data.mysql_client import get_connection
 
-conn = mysql.connector.connect(
-    host='127.0.0.1', port=3306, user='root', password='123456',
-    database='football_pred', charset='utf8mb4'
-)
+conn = get_connection(db="football_pred")
 cur = conn.cursor(dictionary=True)
 
 cur.execute('DESCRIBE tm_games')

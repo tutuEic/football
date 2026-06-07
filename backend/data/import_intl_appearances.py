@@ -5,12 +5,12 @@ Import international player appearances from Transfermarkt game_events.
 Builds tm_appearances records from game_events.csv for international matches.
 Extracts goals, assists, cards from event data.
 """
-import pandas as pd
 import sys
 import os
 import time
 
 sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+import pandas as pd
 from data.mysql_client import query, execute
 
 DATA_DIR = os.getenv("TRANSFERMARKT_DATA_DIR", os.path.join(os.path.dirname(__file__), "..", "..", "data", "transfermarkt"))

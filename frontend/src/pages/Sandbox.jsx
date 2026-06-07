@@ -139,7 +139,7 @@ export default function Sandbox({ prefill, onPrefillUsed }) {
       {showAnim && <SimAnimation onComplete={onAnimComplete} />}
 
       {/* Results */}
-      {result && !result.error && <SimResult data={result} teamA={playersA[0]?.name || '主队'} teamB={playersB[0]?.name || '客队'} />}
+      {result && !result.error && <SimResult data={result} sims={sims} teamA={playersA[0]?.name || '主队'} teamB={playersB[0]?.name || '客队'} />}
       {result?.error && (
         <div style={{ color: 'var(--red)', padding: 12, background: 'rgba(248,81,73,0.1)', borderRadius: 6 }}>{result.error}</div>
       )}
@@ -206,7 +206,10 @@ function TeamPanel({ label, formation, players, setPlayers, onChangeForm, format
       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 8 }}>
         <span style={{ color: 'var(--fg-primary)', fontWeight: 'bold', fontSize: 14 }}>{label}</span>
         <select value={formation} onChange={e => onChangeForm(e.target.value)} style={{ ...selectStyle, width: 100 }}>
-          {formations.map(f => <option key={f} value={f}>{f}</option>)}
+          {formations.map(f => {
+            const name = typeof f === 'string' ? f : f.name;
+            return <option key={name} value={name}>{name}</option>;
+          })}
         </select>
       </div>
 
@@ -255,7 +258,7 @@ function TeamPanel({ label, formation, players, setPlayers, onChangeForm, format
               <div key={c.club_id || c.name} onClick={() => selectClub(c)}
                 style={{ padding: '6px 8px', cursor: 'pointer', borderBottom: '1px solid var(--border)', display: 'flex', justifyContent: 'space-between' }}>
                 <span style={{ color: 'var(--fg-body)' }}>{c.name}</span>
-                <span style={{ color: 'var(--fg-muted)' }}>{c.squad_size || c.source === 'fixtures' ? '🏟' : ''}</span>
+                <span style={{ color: 'var(--fg-muted)' }}>{(c.squad_size || c.source === 'fixtures') ? '🏟' : ''}</span>
               </div>
             ))}
           </div>
@@ -284,7 +287,7 @@ function TeamPanel({ label, formation, players, setPlayers, onChangeForm, format
 }
 
 
-function SimResult({ data, teamA, teamB }) {
+function SimResult({ data, sims, teamA, teamB }) {
   if (!data || data.error) {
     return <div style={{ color: 'var(--red)', fontSize: 12 }}>Error: {data?.error || 'Unknown'}</div>;
   }

@@ -9,6 +9,7 @@ This fills the gap for World Cup qualifiers, Euro qualifiers, and other
 international tournaments needed by the WC prediction engine.
 """
 import csv
+import hashlib
 import sys
 import os
 import time
@@ -126,24 +127,23 @@ def import_to_tm_games(matches):
     for i, m in enumerate(matches):
         # Generate a unique game_id for international matches
         # Use a large offset to avoid collision with existing TM game_ids
-        # Format: 900000000 + hash of (date + home + away)
         date_str = m["date"]
         home = m["home_team"]
         away = m["away_team"]
 
-        # Deterministic hash for unique ID (hash() is randomized in Python 3.3+)
-        hash_str = f"{date_str}_{home}_{away}".encode('utf-8')
-        hash_val = int(hashlib.md5(hash_str).hexdigest(), 16) % 10000000
-        game_id = 900000000 + hash_val
-
-        # Check if already exists
+        # Check if match already exists by date + teams (idempotent, avoids hash collision)
         existing = query(
-            "SELECT game_id FROM tm_games WHERE game_id = %s",
-            [game_id], db="football_pred"
+            "SELECT game_id FROM tm_games"
+            " WHERE date=%s AND home_club_name=%s AND away_club_name=%s AND competition_id=%s",
+            [date_str, home, away, m["competition_id"]], db="football_pred"
         )
         if existing:
             skipped += 1
             continue
+
+        # Deterministic ID: hash only used for uniqueness, collision handled by INSERT IGNORE
+        hash_str = f"{date_str}_{home}_{away}".encode('utf-8')
+        game_id = 900000000 + int(hashlib.md5(hash_str).hexdigest(), 16) % 10_000_000
 
         # Determine round/season from date
         year = int(date_str[:4])

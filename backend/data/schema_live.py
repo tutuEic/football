@@ -1,22 +1,15 @@
 """
 实时数据表结构 — fixtures, live_matches, match_stats
 """
-import mysql.connector
 import sys, os
 
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+from data.mysql_client import get_connection
 
-DB_CONFIG = {
-    "host": os.getenv("MYSQL_HOST", "127.0.0.1"),
-    "port": int(os.getenv("MYSQL_PORT", "3306")),
-    "user": os.getenv("MYSQL_USER", "root"),
-    "password": os.getenv("MYSQL_PASS", ""),
-    "database": os.getenv("MYSQL_DB_PRED", "football_pred"),
-    "charset": "utf8mb4",
-}
+DB = "football_pred"
 
 def get_conn():
-    return mysql.connector.connect(**DB_CONFIG)
+    return get_connection(db=DB)
 
 def create_tables():
     conn = get_conn()

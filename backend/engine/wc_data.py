@@ -132,20 +132,244 @@ def _pos_category(pos):
 
 
 # ============================================================
-# 1. Query national squad 閳?ACTIVE players only (2024+ appearances)
+# 1. Query national squad
 # ============================================================
+
+def _get_official_squad(fifa_country_name):
+    """Check wc_official_squads for FIFA official squad data."""
+    try:
+        rows = query(
+            "SELECT player_name, position, club, jersey_number "
+            "FROM wc_official_squads WHERE team_name = %s ORDER BY jersey_number",
+            [fifa_country_name], db="football_pred"
+        )
+        if not rows or len(rows) < 10:  # Need at least 10 players to be valid
+            return None
+
+        # Convert to same format as tm_players-based squad
+        squad = []
+        for r in rows:
+            pos = r.get("position", "")
+            pos_cat = _pos_category(pos)
+            squad.append({
+                "player_id": None,  # No tm_player_id for official squad
+                "name": r["player_name"],
+                "position": pos,
+                "sub_position": "",
+                "pos_category": pos_cat,
+                "current_club_name": r.get("club", ""),
+                "league": "",
+                "market_value": 0,
+                "height_cm": None,
+                "date_of_birth": None,
+                "strength": 50,  # Default, will be overridden by calc_player_strength
+                "elo": 0,
+                "age": None,
+                "goals": 0,
+                "assists": 0,
+                "minutes": 0,
+                "jersey_number": r.get("jersey_number"),
+                "source": "official",
+            })
+
+        # Try to match with tm_players for strength/elo data
+        _enrich_from_tm(squad, fifa_country_name)
+
+        # Load appearance stats for matched players
+        _load_appearance_stats(squad)
+
+        # Calculate player ELO using wc_player_elo system
+        _compute_player_elos(squad)
+
+        # Calculate strength for each player (uses ELO if available)
+        for p in squad:
+            p["strength"] = calc_player_strength(p)
+
+        return squad
+    except Exception:
+        return None
+
+
+def _enrich_from_tm(squad, fifa_country_name):
+    """Enrich official squad with Transfermarkt data (strength, elo, market_value, age, league)."""
+    import unicodedata
+    country = _country_name(fifa_country_name)
+
+    # Get all tm_players for this country with club info
+    tm_rows = query(
+        "SELECT p.player_id, p.name, p.position, p.sub_position, p.current_club_name, "
+        "p.market_value_in_eur, p.date_of_birth, p.height_in_cm, "
+        "c.domestic_competition_id AS league "
+        "FROM tm_players p LEFT JOIN tm_clubs c ON p.current_club_id = c.club_id "
+        "WHERE p.country_of_citizenship = %s",
+        [country], db="football_pred"
+    )
+    
+    # Build map: normalized_name -> list of players (handle duplicates)
+    def normalize(s):
+        """Normalize name: strip, lowercase, remove accents."""
+        s = s.strip().lower()
+        # Remove accents (Théo -> Theo, Hernandez stays)
+        nfkd = unicodedata.normalize('NFKD', s)
+        return ''.join(c for c in nfkd if not unicodedata.combining(c))
+    
+    tm_map = {}
+    for r in tm_rows:
+        normalized = normalize(r["name"])
+        if normalized not in tm_map:
+            tm_map[normalized] = []
+        tm_map[normalized].append(r)
+
+    today = date.today()
+    for p in squad:
+        normalized = normalize(p["name"])
+        candidates = tm_map.get(normalized, [])
+        
+        # If multiple matches, prefer position match
+        tm = None
+        if len(candidates) == 1:
+            tm = candidates[0]
+        elif len(candidates) > 1:
+            p_pos = (p.get("position") or "").lower()
+            p_cat = p.get("pos_category", "")
+            for c in candidates:
+                c_pos = (c.get("position") or "").lower()
+                # Match GK with Goalkeeper, Defender with Defender, etc.
+                if p_cat == "GK" and "goal" in c_pos:
+                    tm = c
+                    break
+                elif p_cat == "DF" and ("defend" in c_pos or "back" in c_pos):
+                    tm = c
+                    break
+                elif p_cat == "FW" and ("forward" in c_pos or "winger" in c_pos or "attack" in c_pos):
+                    tm = c
+                    break
+                elif p_cat == "MF" and "midfield" in c_pos:
+                    tm = c
+                    break
+            # Fallback: highest market value
+            if not tm:
+                tm = max(candidates, key=lambda x: int(x.get("market_value_in_eur", 0) or 0))
+        
+        if tm:
+            p["player_id"] = tm["player_id"]
+            p["market_value"] = int(tm.get("market_value_in_eur", 0) or 0)
+            p["date_of_birth"] = tm.get("date_of_birth")
+            p["height_cm"] = tm.get("height_in_cm")
+            p["league"] = tm.get("league") or ""
+            if tm.get("current_club_name") and not p["current_club_name"]:
+                p["current_club_name"] = tm["current_club_name"]
+            if tm.get("sub_position"):
+                p["sub_position"] = tm["sub_position"]
+            # Compute age from date_of_birth
+            dob = tm.get("date_of_birth")
+            if dob:
+                try:
+                    p["age"] = today.year - dob.year - ((today.month, today.day) < (dob.month, dob.day))
+                except Exception:
+                    p["age"] = None
+
+
+def _load_appearance_stats(squad):
+    """Load appearance stats (goals, assists, minutes) for squad players."""
+    player_ids = [p["player_id"] for p in squad if p.get("player_id")]
+    if not player_ids:
+        return
+
+    placeholders = ",".join(["%s"] * len(player_ids))
+    stats_rows = query(f"""
+        SELECT a.player_id,
+               SUM(a.goals) AS total_goals,
+               SUM(a.assists) AS total_assists,
+               SUM(a.minutes_played) AS total_mins,
+               COUNT(*) AS total_apps
+        FROM tm_appearances a
+        WHERE a.player_id IN ({placeholders})
+        GROUP BY a.player_id
+    """, player_ids, db="football_pred")
+
+    stats_map = {r["player_id"]: r for r in stats_rows}
+    for p in squad:
+        pid = p.get("player_id")
+        if pid and pid in stats_map:
+            s = stats_map[pid]
+            p["goals"] = int(s["total_goals"] or 0)
+            p["assists"] = int(s["total_assists"] or 0)
+            p["minutes"] = int(s["total_mins"] or 0)
+            p["total_apps"] = int(s["total_apps"] or 0)
+            p["total_mins"] = int(s["total_mins"] or 0)
+            p["total_goals"] = int(s["total_goals"] or 0)
+            p["total_assists"] = int(s["total_assists"] or 0)
+            mins = int(s["total_mins"] or 1)
+            p["goals_per_90"] = float(s["total_goals"] or 0) * 90 / mins if mins > 0 else 0
+            p["assists_per_90"] = float(s["total_assists"] or 0) * 90 / mins if mins > 0 else 0
+
+
+def _compute_player_elos(squad):
+    """Compute player ELO ratings using wc_player_elo system."""
+    try:
+        from engine.wc_player_elo import calculate_player_elo, load_player_appearances, load_player_metadata
+        
+        # Get player IDs that have TM data
+        player_ids = [p["player_id"] for p in squad if p.get("player_id")]
+        if not player_ids:
+            return
+        
+        # Load appearances for all players in one query
+        all_appearances = load_player_appearances(player_ids=player_ids)
+        
+        # Group appearances by player_id
+        from collections import defaultdict
+        player_apps = defaultdict(list)
+        for app in all_appearances:
+            pid = app.get("player_id")
+            if pid:
+                player_apps[pid].append(app)
+        
+        # Load metadata
+        meta_map = load_player_metadata(player_ids)
+        
+        # Compute ELO for each player
+        for p in squad:
+            pid = p.get("player_id")
+            if not pid:
+                continue
+            
+            appearances = player_apps.get(pid, [])
+            meta = meta_map.get(pid, {})
+            
+            elo_result = calculate_player_elo(pid, appearances, meta)
+            if elo_result:
+                p["elo"] = elo_result["elo"]
+                p["league_elo"] = elo_result.get("league_elo")
+                p["intl_elo"] = elo_result.get("intl_elo")
+                p["total_apps"] = elo_result.get("total_apps", 0)
+                p["total_mins"] = elo_result.get("total_minutes", 0)
+                p["total_goals"] = elo_result.get("total_goals", 0)
+                p["total_assists"] = elo_result.get("total_assists", 0)
+                p["goals_per_90"] = elo_result.get("goals_per_90", 0)
+                p["assists_per_90"] = elo_result.get("assists_per_90", 0)
+                p["avg_score"] = elo_result.get("avg_score", 0)
+    except Exception as e:
+        print(f"[WARN] Player ELO computation failed: {e}")
+
+
 def get_national_squad(fifa_country_name, top_n=35):
     """
-    Query tm_players for a national team.
-    Two-step approach for performance:
-      Step 1: Get players from tm_players (fast, filtered by country + market_value)
-      Step 2: Batch-query tm_appearances stats for those players (single query)
-    Filters: active players preferred (2024+ appearances), age < 42.
-    Returns top N players by market_value.
+    Get national team squad. Prioritizes official FIFA WC squad data.
+    Falls back to Transfermarkt data if no official squad exists.
     """
+    # First check if we have official WC squad data
+    official = _get_official_squad(fifa_country_name)
+    if official:
+        return official
+
+    # Fallback: query tm_players by nationality + market value
     country = _country_name(fifa_country_name)
 
     # Step 1: Get candidate players (fast query, no JOIN with appearances)
+    from datetime import timedelta
+    _max_age_cutoff = (date.today() - timedelta(days=42*365)).strftime('%Y-%m-%d')
     rows = query("""
         SELECT p.player_id, p.name, p.position, p.sub_position,
                p.current_club_id, p.current_club_name,
@@ -157,10 +381,10 @@ def get_national_squad(fifa_country_name, top_n=35):
         LEFT JOIN tm_clubs c ON p.current_club_id = c.club_id
         WHERE p.country_of_citizenship = %s
           AND p.market_value_in_eur > 0
-          AND p.date_of_birth >= '1988-06-01'
+          AND p.date_of_birth >= %s
         ORDER BY p.market_value_in_eur DESC
         LIMIT %s
-    """, [country, top_n], db="football_pred")
+    """, [country, _max_age_cutoff, top_n], db="football_pred")
 
     if not rows:
         return []
@@ -266,15 +490,13 @@ def get_national_squad(fifa_country_name, top_n=35):
 def calc_player_strength(player):
     """
     Composite strength for a single player.
-    Uses position base + market value + per-90 performance stats.
-    Range: 0-99
-
-    Formula:
-      base = position_default_attack/defense average
-      mv_bonus = log10(market_value) * 2 - 10  (capped at +15)
-      perf_bonus = goals_per_90 * 8 + assists_per_90 * 6  (capped at +15)
-      strength = base + mv_bonus + perf_bonus
+    If player has ELO from wc_player_elo system, use that directly (0-99).
+    Otherwise fallback to formula: position base + market value + per-90 stats.
     """
+    # If player has real ELO rating, use it
+    elo = player.get("elo")
+    if elo is not None and elo > 0:
+        return float(elo)
     pos = player.get("position", "Midfield")
     base = POSITION_BASE.get(pos, POSITION_BASE["Midfield"])
 
@@ -290,19 +512,19 @@ def calc_player_strength(player):
         pos_overall = base["attack"] * 0.25 + base["defense"] * 0.15 + base["passing"] * 0.25
 
     # Market value bonus: log10 scale (capped at +20)
-    mv = player.get("market_value", 0)
+    mv = int(player.get("market_value", 0) or 0)
     if mv > 0:
         mv_bonus = max(min(math.log10(mv) * 2.5 - 12, 20), 0)
     else:
         mv_bonus = 0
 
     # Performance bonus from actual stats (goals + assists per 90)
-    goals_90 = player.get("goals_per_90", 0)
-    assists_90 = player.get("assists_per_90", 0)
+    goals_90 = player.get("goals_per_90") or 0
+    assists_90 = player.get("assists_per_90") or 0
     perf_bonus = min(goals_90 * 8 + assists_90 * 6, 15)
 
     # Minutes bonus: sustained high minutes = consistent performer
-    mins = player.get("total_mins", 0)
+    mins = player.get("total_mins") or 0
     if mins >= 3000:
         mins_bonus = 5
     elif mins >= 2000:
@@ -313,7 +535,7 @@ def calc_player_strength(player):
         mins_bonus = 0
 
     # Appearance weight: more appearances = more reliable rating
-    apps = player.get("total_apps", 0)
+    apps = player.get("total_apps") or 0
     if apps >= 40:
         app_weight = 1.0
     elif apps >= 25:
@@ -436,7 +658,7 @@ def calc_age_profile(squad):
     age_factor = 0.0
     ages = []
     for p in squad:
-        age = p.get("age", 25)
+        age = p.get("age") or 25
         ages.append(age)
         if 26 <= age <= 29:
             age_factor += 1.0
@@ -534,7 +756,7 @@ def calc_set_piece_strength(squad):
 
     outfield = [p for p in squad if p.get("pos_category") != "GK"]
     if outfield:
-        avg_height = sum(p.get("height_cm", 178) for p in outfield) / len(outfield)
+        avg_height = sum(p.get("height_cm") or 178 for p in outfield) / len(outfield)
         height_score = max(min((avg_height - 178) / 10, 1.5), -0.5)
     else:
         height_score = 0.0
@@ -575,7 +797,7 @@ def analyze_squad(fifa_country_name):
     if fifa_country_name in _squad_analysis_cache:
         return _squad_analysis_cache[fifa_country_name]
 
-    squad = get_national_squad(fifa_country_name, top_n=35)
+    squad = get_national_squad(fifa_country_name, top_n=50)
     if not squad:
         return _empty_analysis(fifa_country_name)
 
@@ -621,6 +843,8 @@ def analyze_squad(fifa_country_name):
         "top_players":        top_display,
         "squad":              squad,
     }
+    if len(_squad_analysis_cache) >= 100:
+        _squad_analysis_cache.clear()
     _squad_analysis_cache[fifa_country_name] = result
     return result
 

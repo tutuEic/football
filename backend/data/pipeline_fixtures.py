@@ -3,7 +3,6 @@ Fixtures & Results Pipeline - football-data.co.uk
 
 Fetches live match data from football-data.co.uk and upserts into the fixtures table.
 """
-import requests
 from data.http_utils import safe_get
 import csv
 import sys, os
@@ -16,8 +15,7 @@ PROJECT_ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 sys.path.insert(0, PROJECT_ROOT)
 
 from data.mysql_client import query, execute
-import mysql.connector
-from config import MYSQL_HOST, MYSQL_PORT, MYSQL_USER, MYSQL_PASS, CURRENT_SEASON
+from config import CURRENT_SEASON
 
 DB = "football_pred"
 
@@ -60,14 +58,8 @@ HEADERS = None
 
 
 def get_conn():
-    return mysql.connector.connect(
-        host=MYSQL_HOST,
-        port=MYSQL_PORT,
-        user=MYSQL_USER,
-        password=MYSQL_PASS,
-        database=DB,
-        charset="utf8mb4",
-    )
+    from data.mysql_client import get_connection
+    return get_connection(db=DB)
 
 
 def safe_float(val, default=None):
@@ -263,30 +255,17 @@ def refresh_all(leagues=None):
     print(f"\nDone in {elapsed:.1f}s. {total_inserted} inserted, {total_updated} updated, {len(errors)} errors")
 
     # Log to data_refresh_log
-    conn = mysql.connector.connect(
-        host=MYSQL_HOST,
-        port=MYSQL_PORT,
-        user=MYSQL_USER,
-        password=MYSQL_PASS,
-        database=DB,
-        charset="utf8mb4",
-    )
-    try:
-        cur = conn.cursor()
-        log_status = "ok" if not errors else f"partial-{len(errors)}-errors"
-        cur.execute("""
-            INSERT INTO data_refresh_log (source, action, records_affected, status, finished_at)
-            VALUES (%s, %s, %s, %s, NOW())
-        """, (
-            "football-data.co.uk",
-            "refresh_all",
-            total_inserted + total_updated,
-            log_status[:200]
-        ))
-        conn.commit()
-        cur.close()
-    finally:
-        conn.close()
+    from data.mysql_client import execute as db_execute
+    log_status = "ok" if not errors else f"partial-{len(errors)}-errors"
+    db_execute("""
+        INSERT INTO data_refresh_log (source, action, records_affected, status, finished_at)
+        VALUES (%s, %s, %s, %s, NOW())
+    """, (
+        "football-data.co.uk",
+        "refresh_all",
+        total_inserted + total_updated,
+        log_status[:200]
+    ), db=DB)
 
     return total_inserted, total_updated
 

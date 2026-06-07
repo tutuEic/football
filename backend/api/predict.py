@@ -1,4 +1,4 @@
-# -*- coding: utf-8 -*-
+﻿# -*- coding: utf-8 -*-
 """Prediction API v3 with caching and confidence scores."""
 from fastapi import APIRouter, Query
 from pydantic import BaseModel
@@ -71,8 +71,10 @@ def _cl_predict(home_team, away_team):
 
 router = APIRouter()
 
-# Simple in-memory cache (TTL=5min)
+# Simple in-memory cache (TTL=5min, thread-safe)
+import threading as _threading
 _cache: dict[str, tuple[float, dict]] = {}
+_cache_lock = _threading.Lock()
 CACHE_TTL = 300  # seconds
 
 

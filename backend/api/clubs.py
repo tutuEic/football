@@ -3,8 +3,9 @@ from fastapi import APIRouter, Query
 import sys, os
 sys.path.insert(0, os.path.dirname(os.path.dirname(__file__)))
 from data.mysql_client import query
-from data.tm_repo import search_club, get_club, get_club_squad, FBD_LEAGUE_TO_TM
+from data.tm_repo import search_club, get_club, FBD_LEAGUE_TO_TM
 from engine.player_ratings import get_club_squad_rated
+
 
 router = APIRouter()
 
@@ -85,7 +86,7 @@ def clubs_by_league(competition_id: str = Query(...), limit: int = 50):
     if tm_rows:
         for r in tm_rows:
             r["source"] = "transfermarkt"
-        return {"competition_id": competition_id, "clubs": tm_rows, "source": "transfermarkt"}
+        return {"status": "ok", "competition_id": competition_id, "clubs": tm_rows, "source": "transfermarkt"}
 
     # TM 娌℃湁 鈫?鏌?fixtures
     from data.tm_repo import FBD_LEAGUE_TO_TM
@@ -109,20 +110,10 @@ def clubs_by_league(competition_id: str = Query(...), limit: int = 50):
                 "average_age": 0, "stadium_name": "", "coach_name": "",
                 "source": "fixtures"
             })
-        return {"competition_id": competition_id, "clubs": clubs, "source": "fixtures"}
+        return {"status": "ok", "competition_id": competition_id, "clubs": clubs, "source": "fixtures"}
 
-    return {"competition_id": competition_id, "clubs": [], "source": "none"}
+    return {"status": "ok", "competition_id": competition_id, "clubs": [], "source": "none"}
 
-
-@router.get("/clubs/search")
-def search_club_endpoint(q: str = Query(...), limit: int = 10):
-    """鎼滅储淇变箰閮紙TM + fixtures 鍙屾簮锛"""
-    results = search_club(q, limit)
-    # 琛ュ厖鑱旇禌涓枃鍚?
-    for r in results:
-        tm_id = r.get("domestic_competition_id", "")
-        r["league_name"] = LEAGUE_NAMES_TM.get(tm_id, "") or LEAGUE_NAMES_FBD.get(r.get("league_code", ""), "")
-    return {"query": q, "count": len(results), "clubs": results}
 
 
 # ---- 鍔ㄦ€佽矾鐢辨斁鏈€鍚?----
@@ -158,44 +149,6 @@ def club_squad(club_id: int, name: str = None):
 
 
 # ===== 鏃燭M鏁版嵁鐨勯€氱敤闃靛 =====
-
-def _generate_generic_squad(club_name):
-    """涓烘病鏈?TM 鏁版嵁鐨勪勘涔愰儴鐢熸垚鍗犱綅鐞冨憳"""
-    players = []
-    tmpl = [
-        ("Goalkeeper 1", "Goalkeeper", "GK", 65, 15, 75),
-        ("Goalkeeper 2", "Goalkeeper", "GK", 60, 15, 70),
-        ("Centre-Back 1", "Centre-Back", "DF", 68, 25, 80),
-        ("Centre-Back 2", "Centre-Back", "DF", 66, 25, 78),
-        ("Centre-Back 3", "Centre-Back", "DF", 64, 25, 76),
-        ("Left-Back 1", "Left-Back", "DF", 65, 45, 70),
-        ("Right-Back 1", "Right-Back", "DF", 65, 45, 70),
-        ("Central Mid 1", "Central Midfield", "MF", 70, 60, 60),
-        ("Central Mid 2", "Central Midfield", "MF", 68, 58, 58),
-        ("Central Mid 3", "Central Midfield", "MF", 66, 55, 55),
-        ("Defensive Mid 1", "Defensive Midfield", "MF", 67, 40, 72),
-        ("Attacking Mid 1", "Attacking Midfield", "MF", 69, 75, 35),
-        ("Left Winger 1", "Left Winger", "FW", 68, 78, 25),
-        ("Right Winger 1", "Right Winger", "FW", 68, 78, 25),
-        ("Forward 1", "Centre-Forward", "FW", 72, 85, 20),
-        ("Forward 2", "Centre-Forward", "FW", 68, 80, 20),
-        ("Forward 3", "Centre-Forward", "FW", 65, 78, 20),
-    ]
-    for i, (sfx, pos, cat, ovr, atk, df) in enumerate(tmpl):
-        players.append({
-            "id": f"gen:{club_name}:{i}",
-            "name": f"{club_name} {sfx}",
-            "position": pos, "category": cat,
-            "club": club_name, "overall": ovr,
-            "attack_rating": atk, "defense_rating": df,
-            "att": None, "market_value": "N/A",
-            "goals_per_90": 0, "assists_per_90": 0,
-            "appearances": 0, "source": "generic",
-        })
-    return players
-
-
-# ===== 鏈€杩戞瘮璧涢樀瀹?=====
 
 @router.get("/clubs/{club_id}/recent-lineup")
 def club_recent_lineup(club_id: int, name: str = None):
@@ -274,3 +227,13 @@ def club_recent_lineup(club_id: int, name: str = None):
             # for r in fixtures
         ],
     }
+
+@router.get("/clubs/search")
+def search_club_endpoint(q: str = Query(...), limit: int = 10):
+    """鎼滅储淇变箰閮紙TM + fixtures 鍙屾簮锛"""
+    results = search_club(q, limit)
+    # 琛ュ厖鑱旇禌涓枃鍚?
+    for r in results:
+        tm_id = r.get("domestic_competition_id", "")
+        r["league_name"] = LEAGUE_NAMES_TM.get(tm_id, "") or LEAGUE_NAMES_FBD.get(r.get("league_code", ""), "")
+    return {"status": "ok", "query": q, "count": len(results), "clubs": results}

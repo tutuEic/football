@@ -6,7 +6,7 @@ from datetime import date, timedelta
 def main():
     conn = mysql.connector.connect(
         host=os.getenv("MYSQL_HOST", "127.0.0.1"),
-        user=os.getenv("MYSQL_USER", "root"),
+        user=os.getenv("MYSQL_USER", "football_app"),
         password=os.getenv("MYSQL_PASS", ""),
         database=os.getenv("MYSQL_DB_PRED", "football_pred"),
         charset="utf8mb4",

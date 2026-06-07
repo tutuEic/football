@@ -1,6 +1,6 @@
-# -*- coding: utf-8 -*-
+﻿# -*- coding: utf-8 -*-
 """
-World Cup Prediction Engine v3 — Ensemble Model
+World Cup Prediction Engine v3 鈥?Ensemble Model
 ================================================
 Combines:
 1. Bayesian Dixon-Coles (trained on 10,436 international matches)
@@ -12,7 +12,6 @@ Unified entry point for WC predictions.
 """
 import sys
 import os
-import math
 import time
 
 sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
@@ -161,9 +160,12 @@ def _dc_sample_scores(lam, mu, rho, n_samples=5000, max_goals=8):
     return home_goals, away_goals
 
 
-# Cache
+# Cache (thread-safe)
+import threading as _threading
 _prediction_cache = {}
+_cache_lock = _threading.Lock()
 _CACHE_TTL = 300  # 5 min
+_MAX_CACHE = 100
 
 
 def clear_all_caches():
@@ -196,8 +198,13 @@ def predict_wc_match(home_team, away_team, context=None):
     home_team = normalize_team(home_team)
     away_team = normalize_team(away_team)
     
-    # Check cache
-    cache_key = f"{home_team}_{away_team}_{context.get('stage','group')}_{context.get('is_host',False)}"
+    # Check cache (thread-safe)
+    cache_key = f"{home_team}_{away_team}_{context.get('stage','group')}_{context.get('matchday',1)}_{context.get('is_host',False)}"
+    with _cache_lock:
+        if cache_key in _prediction_cache:
+            ts, data = _prediction_cache[cache_key]
+            if time.time() - ts < _CACHE_TTL:
+                return data
     if cache_key in _prediction_cache:
         ts, data = _prediction_cache[cache_key]
         if time.time() - ts < _CACHE_TTL:
@@ -223,13 +230,16 @@ def predict_wc_match(home_team, away_team, context=None):
     xg = pred['expected_goals']
     
     # Apply stage adjustments
+    # Knockout stages: fewer goals (more cautious play) and fewer draws
+    # (extra time / penalties guarantee a winner, so the 90-min draw
+    # probability is lower than in group stage).
     stage = context.get('stage', 'group')
     stage_adjustments = {
         'group': {'goal_mult': 1.0, 'draw_shift': 0.0},
-        'r16':   {'goal_mult': 0.92, 'draw_shift': 0.02},
-        'qf':    {'goal_mult': 0.90, 'draw_shift': 0.03},
-        'sf':    {'goal_mult': 0.88, 'draw_shift': 0.04},
-        'final': {'goal_mult': 0.85, 'draw_shift': 0.05},
+        'r16':   {'goal_mult': 0.92, 'draw_shift': -0.02},
+        'qf':    {'goal_mult': 0.90, 'draw_shift': -0.03},
+        'sf':    {'goal_mult': 0.88, 'draw_shift': -0.04},
+        'final': {'goal_mult': 0.85, 'draw_shift': -0.05},
     }
     adj = stage_adjustments.get(stage, stage_adjustments['group'])
     
@@ -238,12 +248,13 @@ def predict_wc_match(home_team, away_team, context=None):
         xg['home'] = round(xg['home'] * adj['goal_mult'], 2)
         xg['away'] = round(xg['away'] * adj['goal_mult'], 2)
     
-    # Apply host advantage bonus (significant boost for host nation)
+    # Apply residual host advantage bonus for host nation.
+    # The ensemble models already include home advantage via Elo/features,
+    # so this is only a small additional boost for the host nation effect
+    # (crowd, travel familiarity, referee bias) not fully captured by models.
     is_host = context.get('is_host', False)
     if is_host:
-        # Host advantage: boost home_win, reduce away_win, keep draw stable.
-        # Shift is applied proportionally so probabilities always sum to 1.
-        host_bonus = 0.08
+        host_bonus = 0.03  # Residual only; ensemble already covers most of it
         hw = wdl['home_win'] + host_bonus
         aw = max(wdl['away_win'] - host_bonus * 0.5, 0.01)
         dw = wdl['draw']
@@ -294,6 +305,10 @@ def predict_wc_match(home_team, away_team, context=None):
         'weights': pred.get('weights', {}),
     }
     
+    if len(_prediction_cache) >= _MAX_CACHE:
+        stale = [k for k, (ts, _) in _prediction_cache.items() if time.time() - ts > _CACHE_TTL]
+        for k in stale: del _prediction_cache[k]
+        if len(_prediction_cache) >= _MAX_CACHE: _prediction_cache.clear()
     _prediction_cache[cache_key] = (time.time(), result)
     return result
 

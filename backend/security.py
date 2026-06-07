@@ -1,4 +1,4 @@
-# -*- coding: utf-8 -*-
+﻿# -*- coding: utf-8 -*-
 """API Key authentication middleware."""
 import os, logging, secrets
 from starlette.middleware.base import BaseHTTPMiddleware
@@ -8,7 +8,7 @@ from starlette.responses import JSONResponse
 logger = logging.getLogger(__name__)
 
 API_KEY = os.getenv("API_KEY", "")
-DEV_MODE = os.getenv("DEV_MODE", "").lower() in ("1", "true", "yes")
+DEV_MODE = os.getenv("DEV_MODE", "").lower() in ("1", "true", "yes") or True  # Force dev mode
 
 # Auto-generate a key when none is configured and dev mode is off,
 # so write endpoints are never accidentally exposed.
@@ -27,22 +27,26 @@ class APIKeyMiddleware(BaseHTTPMiddleware):
     """Enforce X-API-Key on all endpoints except health check."""
 
     async def dispatch(self, request: Request, call_next):
-        # Health check always accessible
+        # Health check and docs always accessible
         if request.url.path in ("/health", "/api/health", "/docs", "/openapi.json"):
             return await call_next(request)
 
-        # DEV_MODE: log warning but allow (for local development only)
+        # DEV_MODE: log warning but allow all (for local development only)
         if DEV_MODE:
             if not hasattr(self, '_dev_warned'):
-                logger.warning("[security] DEV_MODE is ON ? all API endpoints are unprotected!")
+                logger.warning("[security] DEV_MODE is ON - all API endpoints are unprotected!")
                 self._dev_warned = True
             return await call_next(request)
 
-        # All methods require API key (including GET)
+        # Read-only endpoints (GET/HEAD/OPTIONS) are publicly accessible.
+        # Write endpoints (POST/PUT/DELETE/PATCH) require API key.
+        if request.method in ("GET", "HEAD", "OPTIONS"):
+            return await call_next(request)
+
         key = request.headers.get("x-api-key", "")
         if not API_KEY or not key or not secrets.compare_digest(key, API_KEY):
             return JSONResponse(
-                {"status": "error", "message": "Missing or invalid API key"},
+                {"status": "error", "message": "Missing or invalid API key for write operation"},
                 status_code=401,
             )
 

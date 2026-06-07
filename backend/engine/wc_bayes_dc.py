@@ -14,13 +14,9 @@ Based on:
 import json
 import os
 import sys
-import math
 import numpy as np
-from scipy.optimize import minimize
 from scipy.stats import poisson
 from datetime import date, datetime
-from pathlib import Path
-
 sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 from data.mysql_client import query
 from engine.wc_dc_international import (

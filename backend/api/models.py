@@ -1,5 +1,5 @@
 """模型管理 API"""
-from fastapi import APIRouter, Query
+from fastapi import APIRouter, Query, HTTPException
 import sys, os, logging, uuid
 sys.path.insert(0, os.path.dirname(os.path.dirname(__file__)))
 from engine.predictor import list_available_models
@@ -10,11 +10,13 @@ router = APIRouter()
 logger = logging.getLogger(__name__)
 
 def _api_error(message, exc, **context):
-    """Log a failure with a stable id and return a client-safe error."""
+    """Log a failure with a stable id and raise HTTP 500."""
     error_id = uuid.uuid4().hex[:12]
     logger.exception("%s error_id=%s context=%s", message, error_id, context, exc_info=exc)
-    return {"status": "error", "message": message, "error_id": error_id,
-            "error_type": type(exc).__name__, "detail": str(exc)}
+    raise HTTPException(status_code=500, detail={
+        "status": "error", "message": message, "error_id": error_id,
+        "error_type": type(exc).__name__, "detail": str(exc),
+    })
 
 
 @router.get("/models")
@@ -66,7 +68,7 @@ def train_model(league: str = "E0"):
             "gamma": round(model.params["gamma"], 4),
         }
     except Exception as e:
-        return _api_error("Model training failed", e, league=league)
+        _api_error("Model training failed", e, league=league)
 
 
 @router.post("/models/backtest")
@@ -109,7 +111,7 @@ def run_betting_backtest(
     try:
         return betting_backtest(league, season, min_ev=min_ev, stake=stake)
     except Exception as e:
-        return _api_error("Betting backtest failed", e, league=league, season=season)
+        _api_error("Betting backtest failed", e, league=league, season=season)
 
 
 @router.post("/models/compare-versions")
@@ -126,7 +128,7 @@ def compare_dc_versions(
     try:
         return compare_model_versions(league, season, min_ev=min_ev)
     except Exception as e:
-        return _api_error("Compare versions failed", e, league=league, season=season)
+        _api_error("Compare versions failed", e, league=league, season=season)
 
 
 @router.get("/models/compare")

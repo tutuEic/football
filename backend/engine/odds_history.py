@@ -7,7 +7,9 @@ sys.path.insert(0, os.path.dirname(os.path.dirname(__file__)))
 import time as _time
 from data.mysql_client import query
 
+import threading as _threading
 _odds_cache = {}
+_odds_cache_lock = _threading.Lock()
 _ODDS_TTL = 600  # 10 minutes
 
 
